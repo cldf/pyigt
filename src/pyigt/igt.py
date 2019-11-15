@@ -2,7 +2,10 @@ import lingpy
 from tabulate import tabulate
 from collections import defaultdict
 from clldutils.path import Path
-from pyclts import CLTS
+try:
+    from pyclts import CLTS
+except:
+    print('Warning CLTS missing')
 from cldfcatalog import Catalog
 from segments.tokenizer import Tokenizer
 from clldutils.text import strip_chars
@@ -22,9 +25,9 @@ class mlists(lingpy.basictypes.lists):
             self.n[i] = lingpy.basictypes.lists(self.n[i], self.sepB)
 
     def __getitem__(self, idx):
-        if len(idx) == 2:
+        if isinstance(idx, (list, tuple)) and len(idx) == 2:
             return self.n[idx[0]].n[idx[1]]
-        return self[idx]
+        return self.n[idx]
 
 
 class Glosses(lingpy.basic.wordlist.Wordlist):
@@ -40,14 +43,27 @@ class Glosses(lingpy.basic.wordlist.Wordlist):
             self[idx, self._gloss] = mlists(gloss, sep, sepB)
             self[idx, self._phrase] = mlists(phrase, sep, sepB)
 
+    def get_stats(self, tablefmt='pipe'):
+
+        # count morphemes
+        wordc, morpc = 0, 0
+        for idx in self:
+            words = self[idx, 'phrase']
+            for word in words.n:
+                wordc += 1
+                for morpheme in word.n:
+                    morpc += 1
+        table = [['words', 'morphemes'], [wordc, morpc]]
+        print(tabulate(table, tablefmt=tablefmt))
+
     def get_text(self, text, entry=False):
+        """Shortcut to retrieve the entries of a given text."""
         idxs = self.get_list(row=text, flat=True)
         if not entry:
             return idxs
         return [self[idx, entry] for idx in idxs]
 
-    def print_text(self, text, *entries, chunk=5):
-
+    def print_text(self, text, *entries, chunk=5, tablefmt='pipe'):
         idxs = self.get_list(row=text, flat=True)
         table = []
         for idx in idxs:
@@ -67,7 +83,7 @@ class Glosses(lingpy.basic.wordlist.Wordlist):
                 for j in range(len(entries)):
                     table += [tmp[j][i]]
                 table += [['']]
-        print(tabulate(table))
+        print(tabulate(table, tablefmt=tablefmt))
 
     def check_glosses(self, phrase='phrase', gloss='gloss', level=2):
 
@@ -291,12 +307,19 @@ class Glosses(lingpy.basic.wordlist.Wordlist):
                     subset=True, cols=export_columns)
         self.wordlist = wl
 
-    def get_profile(self, phrase='phrase', gloss='gloss', context=True, 
-            filename='orthography.tsv', clts=True):
+    def get_profile(self,
+            phrase='phrase',
+            gloss='gloss',
+            context=True,
+            filename='orthography.tsv',
+            clts=True,
+            clts_dir=None):
+        """Compute an orthography profile with LingPy's function."""
         if clts:
-            clts_ = CLTS(
-                    Catalog.from_config('clts').dir)
+            clts_dir = Catalog.from_config('clts').dir or Path(clts_dir)
+            clts_ = CLTS(clts_dir)
             clts = clts_.bipa
+
         if not hasattr(self, 'concordance'):
             self.get_concordance(ctype='forms', phrase=phrase, gloss=gloss,
                     filename=False)
@@ -319,7 +342,7 @@ class Glosses(lingpy.basic.wordlist.Wordlist):
             for line in profile:
                 f.write('\t'.join([line[0], line[1], line[2], line[4], line[5]])+'\n')
 
-    def app(self, phrase='phrase', gloss='gloss', dest='app'):
+    def get_app(self, phrase='phrase', gloss='gloss', dest='app'):
         
         # idxs must be in index 2 of wordlist, form 0, and concept 1
         # concordance 0 is phrase, 1 is gloss

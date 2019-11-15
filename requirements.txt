@@ -1,0 +1,5 @@
+lingpy
+pyclts
+cldfcatalog
+segments
+pyconcepticon
