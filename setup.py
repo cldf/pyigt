@@ -25,7 +25,7 @@ setup(
             'pyconcepticon',
             'segments>=2.0.0',
             ],
-        url='https://github.com/lingpy/ilgt',
+        url='https://github.com/lingpy/pyigt',
         long_description=codecs.open('README.md', 'r', 'utf-8').read(),
         long_description_content_type='text/markdown',
         author='Johann-Mattis List',
