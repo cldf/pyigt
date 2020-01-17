@@ -1,5 +1,2 @@
-lingpy
-pyclts
-cldfcatalog
-segments
-pyconcepticon
+# development environment: install in development mode
+-e .[dev,test]

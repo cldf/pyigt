@@ -1,2 +1,1 @@
-from .igt import *
-from .igt_cldf import Corpus
+from .igt import Corpus  # noqa: F401
