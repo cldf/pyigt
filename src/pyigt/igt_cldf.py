@@ -14,9 +14,17 @@ from csvw.dsv import UnicodeWriter
 
 @attr.s
 class IGT(object):
+    """
+    Interlinear Glossed Text
+
+    The main trait of IGT is the alignment of words and glosses. Thus, we are mostly interested
+    in the two aligned "lines": the analyzed text and the glosses, rather than trying to support
+    any number of tiers, and alignment based on timestamps or similar.
+    """
     id = attr.ib()
     phrase = attr.ib(validator=attr.validators.instance_of(list))
     gloss = attr.ib(validator=attr.validators.instance_of(list))
+    properties = attr.ib(validator=attr.validators.instance_of(dict))
     morpheme_separator = attr.ib(default='-')
 
     def __attrs_post_init__(self):
@@ -24,6 +32,13 @@ class IGT(object):
         self.gloss_segmented = [nfilter(m.split(self.morpheme_separator)) for m in self.gloss]
 
     def __getitem__(self, item):
+        """
+        Provide access to individual (word, gloss) or (morpheme, gloss) pairs.
+
+        :param item: An `int` index to reference a (word, gloss) pair or a (`int`, `int`) tuple,\
+        referencing a (morpheme, gloss) pair.
+        :return: (word, gloss) or (morpheme, gloss) pair
+        """
         if not isinstance(item, tuple):
             return list(zip(self.phrase, self.gloss))[item]
         return list(zip(self.phrase_text, self.gloss_segmented))[item[0]][item[1]]
@@ -41,12 +56,15 @@ class IGT(object):
 
 
 class Corpus(object):
+    """
+    A Corpus is an ordered list of `IGT` instances.
+    """
     def __init__(self, cldf):
         _id = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#id'].name
         _phrase = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#analyzedWord'].name
         _gloss = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#gloss'].name
         self._igts = collections.OrderedDict([
-            (igt[_id], IGT(id=igt[_id], gloss=igt[_gloss], phrase=igt[_phrase]))
+            (igt[_id], IGT(id=igt[_id], gloss=igt[_gloss], phrase=igt[_phrase], properties=igt))
             for igt in cldf['ExampleTable']])
 
     def __getitem__(self, item):
@@ -72,6 +90,15 @@ class Corpus(object):
             concept_replace=(('.', ' '), ('†(', ''), ('†', '')),
             paradigm_marker=':',
     ):
+        """
+        Compute a morpheme- or gloss-level concordance of the corpus.
+
+        :param ctype:
+        :param markers:
+        :param concept_replace:
+        :param paradigm_marker:
+        :return:
+        """
         def _glosses(concept):
             op = operator.eq if ctype == 'grammar' else operator.ne
             return [cn for cn in concept.split(paradigm_marker) if op(cn.upper(), cn)]
@@ -135,9 +162,7 @@ class Corpus(object):
 
         for (form, c1, c2), occs in con.items():
             # get occurrence, and one example
-            if not form:
-                print('----->', c1, c2)
-                raise ValueError
+            assert form
             concepts[c1].append((form, c2, len(occs)))
 
         return concepts, con
