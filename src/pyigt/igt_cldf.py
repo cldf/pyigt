@@ -40,7 +40,7 @@ class IGT(object):
         return ' '.join(self.gloss)
 
 
-class Glosses2(object):
+class Corpus(object):
     def __init__(self, cldf):
         _id = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#id'].name
         _phrase = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#analyzedWord'].name
@@ -52,6 +52,8 @@ class Glosses2(object):
     def __getitem__(self, item):
         if not isinstance(item, tuple):
             return self._igts[item]
+        if len(item) == 2:
+            return self._igts[item[0]][item[1]]
         return self._igts[item[0]][tuple(item[1:])]
 
     def get_stats(self, tablefmt='pipe'):
@@ -83,6 +85,8 @@ class Glosses2(object):
                     continue
                 for j, (morpheme, concept) in enumerate(zip(w, m)):
                     morpheme = strip_chars(markers, morpheme)
+                    if not morpheme:
+                        continue
                     ref = (idx, i, j)
                     if ctype == 'grammar':
                         if paradigm_marker in concept:
@@ -131,6 +135,9 @@ class Glosses2(object):
 
         for (form, c1, c2), occs in con.items():
             # get occurrence, and one example
+            if not form:
+                print('----->', c1, c2)
+                raise ValueError
             concepts[c1].append((form, c2, len(occs)))
 
         return concepts, con
@@ -211,10 +218,14 @@ class Glosses2(object):
                 for form, cis, freq in entries:
                     # retrieve the concordance
                     pidx, sA, sB = concordance[form, concept, cis][0]
-                    txt = self._igts[pidx].phrase
-                    gls = self._igts[pidx].gloss
-                    word, fgls = txt[sA - 1, :], gls[sA - 1, :]
-                    tokens = tokenize(form)
+                    txt = self[pidx].phrase
+                    gls = self[pidx].gloss
+                    word, fgls = self[pidx, sA]
+                    try:
+                        tokens = tokenize(form)
+                    except:
+                        print(form)
+                        raise
                     references = ' '.join(
                         ['{0}:{1}:{2}'.format(a, b, c)
                          for a, b, c in concordance[form, concept, cis]])
@@ -278,7 +289,7 @@ class Glosses2(object):
         if not filename:
             print(w.read())
 
-    def get_app(self, dest='app'):
+    def write_app(self, dest='app'):
         # idxs must be in index 2 of wordlist, form 0, and concept 1
         # concordance 0 is phrase, 1 is gloss
 

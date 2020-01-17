@@ -1,2 +1,2 @@
 from .igt import *
-from .igt_cldf import Glosses2
+from .igt_cldf import Corpus
