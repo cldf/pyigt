@@ -1,18 +1,17 @@
 """
 Describe the IGTs in  a CLDF dataset
 """
-from pycldf.cli_util import add_dataset, get_dataset
 from clldutils.clilib import Table
 
-from pyigt import Corpus
+from pyigt.cli_util import add_corpus, get_corpus
 
 
 def register(parser):
-    add_dataset(parser)
+    add_corpus(parser)
 
 
 def run(args):
-    corpus = Corpus(get_dataset(args))
+    corpus = get_corpus(args)
 
     with Table('type', 'count') as t:
         e, w, m = corpus.get_stats()

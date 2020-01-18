@@ -1,16 +1,63 @@
+import re
 import json
 import pathlib
 import operator
 import collections
 
+from tabulate import tabulate
 import lingpy
 import segments
 import attr
-from clldutils.text import strip_chars
 from clldutils.misc import nfilter
-from csvw.dsv import UnicodeWriter
+from clldutils.lgr import ABBRS
+from csvw.dsv import UnicodeWriter, reader
+from csvw.metadata import Link
+from pycldf import Dataset
+import pycldf
 
-__all__ = ['IGT', 'Corpus']
+__all__ = ['IGT', 'Corpus', 'CorpusSpec']
+
+
+@attr.s
+class CorpusSpec(object):
+    punctuation = attr.ib(
+        validator=attr.validators.instance_of(list),
+        default=list(',;.”“"()'))
+    concept_replace = attr.ib(
+        validator=attr.validators.instance_of(dict),
+        default={'.': ' ', '†(': '', '†': ''})
+    paradigm_marker = attr.ib(
+        validator=attr.validators.instance_of(str),
+        default=':')
+    morpheme_separator = attr.ib(
+        validator=attr.validators.instance_of(str),
+        default='-')
+    label_pattern = attr.ib(default=re.compile('([A-Z]+|([1-3](dl|pl|sg|DL|PL|SG)))$'))
+
+    def strip_punctuation(self, s):
+        for p in self.punctuation:
+            s = s.replace(p, '')
+        return s
+
+    def is_grammatical_gloss_label(self, s):
+        return bool((s in ABBRS) or self.label_pattern.match(s))
+
+    def clean_concept(self, c):
+        for k, v in self.concept_replace.items():
+            c = c.replace(k, v)
+        return c.strip()
+
+    def _glosses(self, concept, ctype):
+        return [
+            g for g in nfilter(self.clean_concept(cn) for cn in concept.split(self.paradigm_marker))
+            if (ctype == 'grammar' and self.is_grammatical_gloss_label(g))
+            or (ctype == 'lexicon' and not self.is_grammatical_gloss_label(g))]
+
+    def lexical_gloss(self, concept):
+        return ' // '.join(self._glosses(concept, 'lexicon'))
+
+    def grammatical_glosses(self, concept):
+        return self._glosses(concept, 'grammar')
 
 
 @attr.s
@@ -32,6 +79,10 @@ class IGT(object):
         self.phrase_segmented = [nfilter(m.split(self.morpheme_separator)) for m in self.phrase]
         self.gloss_segmented = [nfilter(m.split(self.morpheme_separator)) for m in self.gloss]
 
+    def __str__(self):
+        return '{0}\n{1}'.format(
+            self.primary_text, tabulate([self.gloss], self.phrase, tablefmt='plain'))
+
     def __getitem__(self, item):
         """
         Provide access to individual (word, gloss) or (morpheme, gloss) pairs.
@@ -42,7 +93,8 @@ class IGT(object):
         """
         if not isinstance(item, tuple):
             return list(zip(self.phrase, self.gloss))[item]
-        return list(zip(self.phrase_text, self.gloss_segmented))[item[0]][item[1]]
+        res = list(zip(self.phrase_segmented, self.gloss_segmented))[item[0]]
+        return (res[0][item[1]], res[1][item[1]])
 
     def is_valid(self):
         return len(self.phrase) == len(self.gloss)
@@ -50,6 +102,10 @@ class IGT(object):
     @property
     def phrase_text(self):
         return ' '.join(self.phrase)
+
+    @property
+    def primary_text(self):
+        return self.phrase_text.replace(self.morpheme_separator, '')
 
     @property
     def gloss_text(self):
@@ -60,13 +116,67 @@ class Corpus(object):
     """
     A Corpus is an ordered list of `IGT` instances.
     """
-    def __init__(self, cldf):
+    def __init__(self, igts, spec=None):
+        self.spec = spec or CorpusSpec()
+        self.igts = collections.OrderedDict([(igt.id, igt) for igt in igts])
+
+    @classmethod
+    def from_cldf(cls, cldf, spec=None):
+        """
+        A corpus of IGT examples provided with a CLDF dataset.
+
+        :param cldf: a `pycldf.Dataset` instance.
+        :param spec: a `CorpusSpec` instance, specifying how to interpret markup in the corpus.
+        """
+        spec = spec or CorpusSpec()
         _id = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#id'].name
         _phrase = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#analyzedWord'].name
         _gloss = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#gloss'].name
-        self.igts = collections.OrderedDict([
-            (igt[_id], IGT(id=igt[_id], gloss=igt[_gloss], phrase=igt[_phrase], properties=igt))
-            for igt in cldf['ExampleTable']])
+        igts = [
+            IGT(
+                id=igt[_id],
+                gloss=igt[_gloss],
+                phrase=igt[_phrase],
+                properties=igt,
+                morpheme_separator=spec.morpheme_separator,
+            )
+            for igt in cldf['ExampleTable']]
+        return cls(igts, spec=spec)
+
+    @classmethod
+    def from_path(cls, path, spec=None):
+        """
+        Instantiate a corpus from a file path.
+
+        :param path: Either a path to a CLDF dataset's metadata file or to a CLDF Examples \
+        component as CSV file. Note that in the latter case, the file must use the default \
+        column names, as defined in the CLDF ontology.
+        :return: `Corpus` instance.
+        """
+        if isinstance(path, str):
+            path = pathlib.Path(path)
+        if path.suffix == '.json':
+            return cls.from_cldf(Dataset.from_metadata(path), spec=spec)
+        # We are given only an ExampleTable. Let's create the appropriate dataset:
+        header = None
+        for d in reader(path, dicts=True):
+            header = list(d.keys())
+            break
+        ds = Dataset.from_metadata(
+            pathlib.Path(pycldf.__file__).parent / 'modules' / 'Generic-metadata.json')
+        ds.tablegroup._fname = path.parent / 'cldf-metadata.json'
+        t = ds.add_component('ExampleTable')
+        t.url = Link(path.name)
+        default_cols = [col.name for col in t.tableSchema.columns]
+        ds.remove_columns(t, *list(set(default_cols) - set(header)))
+        ds.add_columns(t, *list(set(header) - set(default_cols)))
+        return cls.from_cldf(ds, spec=spec)
+
+    def __len__(self):
+        return len(self.igts)
+
+    def __iter__(self):
+        return iter(self.igts.values())
 
     def __getitem__(self, item):
         if not isinstance(item, tuple):
@@ -83,26 +193,13 @@ class Corpus(object):
                 morpc += len(word)
         return len(self.igts), wordc, morpc
 
-    def get_concordance(
-            self,
-            ctype='grammar',
-            markers=',;.”“"()',
-            concept_replace=(('.', ' '), ('†(', ''), ('†', '')),
-            paradigm_marker=':',
-    ):
+    def get_concordance(self, ctype='grammar'):
         """
         Compute a morpheme- or gloss-level concordance of the corpus.
 
         :param ctype:
-        :param markers:
-        :param concept_replace:
-        :param paradigm_marker:
         :return:
         """
-        def _glosses(concept):
-            op = operator.eq if ctype == 'grammar' else operator.ne
-            return [cn for cn in concept.split(paradigm_marker) if op(cn.upper(), cn)]
-
         con = collections.defaultdict(list)
         for idx, igt in self.igts.items():
             if not igt.is_valid():
@@ -111,32 +208,15 @@ class Corpus(object):
                 if len(w) != len(m):
                     continue
                 for j, (morpheme, concept) in enumerate(zip(w, m)):
-                    morpheme = strip_chars(markers, morpheme)
+                    morpheme = self.spec.strip_punctuation(morpheme)
                     if not morpheme:
                         continue
                     ref = (idx, i, j)
                     if ctype == 'grammar':
-                        if paradigm_marker in concept:
-                            for g in _glosses(concept):
-                                g_deriv = g
-                                for src, trg in concept_replace:
-                                    g_deriv = g_deriv.replace(src, trg)
-                                if g_deriv.strip():
-                                    con[morpheme, g_deriv, g].append(ref)
-                        elif concept.upper() == concept:
-                            con[morpheme, concept, concept].append(ref)
+                        for g in self.spec.grammatical_glosses(concept):
+                            con[morpheme, g, concept].append(ref)
                     elif ctype == 'lexicon':
-                        if paradigm_marker in concept:
-                            bare_gloss = ' // '.join(_glosses(concept))
-                            for src, trg in concept_replace:
-                                bare_gloss = bare_gloss.replace(src, trg)
-                            if bare_gloss.strip():
-                                con[morpheme, bare_gloss, concept] .append(ref)
-                        elif concept.upper() != concept:
-                            new_gloss = concept
-                            for src, trg in concept_replace:
-                                new_gloss = new_gloss.replace(src, trg)
-                            con[morpheme, new_gloss, concept].append(ref)
+                        con[morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
                     else:
                         con[morpheme, concept, concept].append(ref)
         return con

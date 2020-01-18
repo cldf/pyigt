@@ -6,8 +6,13 @@ from pycldf import Dataset
 
 
 @pytest.fixture
-def metadata_path():
-    return pathlib.Path(__file__).parent / 'fixtures' / 'cldf-metadata.json'
+def fixtures():
+    return pathlib.Path(__file__).parent / 'fixtures'
+
+
+@pytest.fixture
+def metadata_path(fixtures):
+    return fixtures / 'cldf-metadata.json'
 
 
 @pytest.fixture
