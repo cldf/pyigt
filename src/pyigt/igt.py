@@ -1,7 +1,6 @@
 import re
 import json
 import pathlib
-import operator
 import collections
 
 from tabulate import tabulate
@@ -79,6 +78,14 @@ class IGT(object):
         self.phrase_segmented = [nfilter(m.split(self.morpheme_separator)) for m in self.phrase]
         self.gloss_segmented = [nfilter(m.split(self.morpheme_separator)) for m in self.gloss]
 
+    @property
+    def glossed_words(self):
+        return list(zip(self.phrase, self.gloss))
+
+    @property
+    def glossed_morphemes(self):
+        return [list(zip(p, g)) for p, g in zip(self.phrase_segmented, self.gloss_segmented)]
+
     def __str__(self):
         return '{0}\n{1}'.format(
             self.primary_text, tabulate([self.gloss], self.phrase, tablefmt='plain'))
@@ -92,9 +99,8 @@ class IGT(object):
         :return: (word, gloss) or (morpheme, gloss) pair
         """
         if not isinstance(item, tuple):
-            return list(zip(self.phrase, self.gloss))[item]
-        res = list(zip(self.phrase_segmented, self.gloss_segmented))[item[0]]
-        return (res[0][item[1]], res[1][item[1]])
+            return self.glossed_words[item]
+        return self.glossed_morphemes[item[0]][item[1]]
 
     def is_valid(self):
         return len(self.phrase) == len(self.gloss)
@@ -114,11 +120,33 @@ class IGT(object):
 
 class Corpus(object):
     """
-    A Corpus is an ordered list of `IGT` instances.
+    A Corpus is an immutable, ordered list of `IGT` instances.
     """
     def __init__(self, igts, spec=None):
         self.spec = spec or CorpusSpec()
-        self.igts = collections.OrderedDict([(igt.id, igt) for igt in igts])
+        self._igts = collections.OrderedDict([(igt.id, igt) for igt in igts])
+        self._concordances = {
+            'grammar': collections.defaultdict(list),
+            'lexicon': collections.defaultdict(list),
+            'form': collections.defaultdict(list),
+        }
+        # Since changing the IGTs in the corpus is not allowed, we can compute concordances right
+        # away.
+        for idx, igt in self._igts.items():
+            if not igt.is_valid():
+                continue
+            for i, (w, m) in enumerate(zip(igt.phrase_segmented, igt.gloss_segmented)):
+                if len(w) != len(m):
+                    continue
+                for j, (morpheme, concept) in enumerate(zip(w, m)):
+                    morpheme = self.spec.strip_punctuation(morpheme)
+                    if not morpheme:
+                        continue
+                    ref = (idx, i, j)
+                    for g in self.spec.grammatical_glosses(concept):
+                        self._concordances['grammar'][morpheme, g, concept].append(ref)
+                    self._concordances['lexicon'][morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
+                    self._concordances['form'][morpheme, concept, concept].append(ref)
 
     @classmethod
     def from_cldf(cls, cldf, spec=None):
@@ -173,59 +201,31 @@ class Corpus(object):
         return cls.from_cldf(ds, spec=spec)
 
     def __len__(self):
-        return len(self.igts)
+        return len(self._igts)
 
     def __iter__(self):
-        return iter(self.igts.values())
+        return iter(self._igts.values())
 
     def __getitem__(self, item):
         if not isinstance(item, tuple):
-            return self.igts[item]
+            return self._igts[item]
         if len(item) == 2:
-            return self.igts[item[0]][item[1]]
-        return self.igts[item[0]][tuple(item[1:])]
+            return self._igts[item[0]][item[1]]
+        return self._igts[item[0]][tuple(item[1:])]
 
     def get_stats(self):
         wordc, morpc = 0, 0
-        for igt in self.igts.values():
+        for igt in self:
             for word in igt.phrase_segmented:
                 wordc += 1
                 morpc += len(word)
-        return len(self.igts), wordc, morpc
+        return len(self._igts), wordc, morpc
 
-    def get_concordance(self, ctype='grammar'):
-        """
-        Compute a morpheme- or gloss-level concordance of the corpus.
-
-        :param ctype:
-        :return:
-        """
-        con = collections.defaultdict(list)
-        for idx, igt in self.igts.items():
-            if not igt.is_valid():
-                continue
-            for i, (w, m) in enumerate(zip(igt.phrase_segmented, igt.gloss_segmented)):
-                if len(w) != len(m):
-                    continue
-                for j, (morpheme, concept) in enumerate(zip(w, m)):
-                    morpheme = self.spec.strip_punctuation(morpheme)
-                    if not morpheme:
-                        continue
-                    ref = (idx, i, j)
-                    if ctype == 'grammar':
-                        for g in self.spec.grammatical_glosses(concept):
-                            con[morpheme, g, concept].append(ref)
-                    elif ctype == 'lexicon':
-                        con[morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
-                    else:
-                        con[morpheme, concept, concept].append(ref)
-        return con
-
-    def write_concordance(self, con, filename=None):
+    def write_concordance(self, ctype, filename=None):
         with UnicodeWriter(filename, delimiter='\t') as w:
             w.writerow(['ID', 'FORM', 'GLOSS', 'GLOSS_IN_SOURCE', 'OCCURRENCE', 'REF'])
             for i, (k, v) in enumerate(
-                    sorted(con.items(), key=lambda x: (-len(x[1]), x[0])), start=1):
+                    sorted(self._concordances[ctype].items(), key=lambda x: (-len(x[1]), x[0])), start=1):
                 w.writerow([
                     i,
                     k[0],
@@ -238,16 +238,17 @@ class Corpus(object):
 
     def get_concepts(self, ctype='lexicon'):
         concepts = collections.defaultdict(list)
-        con = self.get_concordance(ctype=ctype)
+        con = self._concordances[ctype]
 
         for (form, c1, c2), occs in con.items():
             # get occurrence, and one example
             assert form
             concepts[c1].append((form, c2, len(occs)))
 
-        return concepts, con
+        return concepts
 
-    def write_concepts(self, concepts, con, filename=None):
+    def write_concepts(self, ctype, filename=None):
+        concepts = self.get_concepts(ctype)
         with UnicodeWriter(filename, delimiter='\t') as w:
             w.writerow(
                 ['ID', 'ENGLISH', 'OCCURRENCE', 'CONCEPT_IN_SOURCE', 'FORMS', 'PHRASE', 'GLOSS'])
@@ -259,17 +260,17 @@ class Corpus(object):
                     sum([f[2] for f in forms]),
                     ' // '.join(sorted(set([f[1] for f in forms]))),
                     ' // '.join(sorted(set([f[0] for f in forms]))),
-                    self[con[forms[0][0], concept, forms[0][1]][0][0]].phrase_text,
-                    self[con[forms[0][0], concept, forms[0][1]][0][0]].gloss_text,
+                    self[self._concordances[ctype][forms[0][0], concept, forms[0][1]][0][0]].phrase_text,
+                     self[self._concordances[ctype][forms[0][0], concept, forms[0][1]][0][0]].gloss_text,
                 ])
         if not filename:
             print(w.read().decode('utf8'))
 
     def check_glosses(self, level=2):
         count = 1
-        for idx, igt in self.igts.items():
+        for idx, igt in self._igts.items():
             if not igt.is_valid() and level >= 1:
-                print('[{0} : first level {1]]'.format(idx, count))
+                print('[{0} : first level {1}]'.format(idx, count))
                 print(igt.phrase)
                 print(igt.gloss_segmented)
                 print('---')
@@ -318,7 +319,8 @@ class Corpus(object):
         }
         idx = 1
         for ctype in ['lexicon', 'grammar']:
-            concepts, concordance = self.get_concepts(ctype=ctype)
+            concepts = self.get_concepts(ctype=ctype)
+            concordance = self._concordances[ctype]
             for concept, entries in concepts.items():
                 for form, cis, freq in entries:
                     # retrieve the concordance
@@ -373,7 +375,7 @@ class Corpus(object):
         if clts:
             clts = clts.bipa
 
-        concordance = self.get_concordance(ctype='forms')
+        concordance = self._get_concordance(ctype='forms')
 
         D = {0: ['doculect', 'concept', 'ipa']}
         for i, key in enumerate(concordance, start=1):

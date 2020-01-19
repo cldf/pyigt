@@ -1,3 +1,5 @@
+import pathlib
+
 import pytest
 
 from pyigt.igt import *
@@ -68,19 +70,58 @@ def test_Corpus_get_stats(corpus):
     e, w, m = corpus.get_stats()
     assert e == 5 and w == 17 and m == 36
 
+    c = Corpus([IGT(id=1, phrase=['a', 'b-c'], gloss=['A'], properties={})])
+    e, w, m = c.get_stats()
+    assert e == 1 and w == 2 and m == 3
 
-def test_Corpus_get_concordance_invalid():
+
+def test_Corpus_concordance_invalid():
+    # Non-matching word and gloss
     c = Corpus([IGT(id=1, phrase=['a'], gloss=['1', 'A'], properties={})])
-    assert not c.get_concordance()
+    assert not c._concordances['grammar']
 
+    # Non-matching morpheme and gloss
     c = Corpus([IGT(id=1, phrase=['a'], gloss=['A-B'], properties={})])
-    assert not c.get_concordance()
+    assert not c._concordances['grammar']
 
+    # Valid:
     c = Corpus([IGT(id=1, phrase=['a'], gloss=['A'], properties={})])
-    assert c.get_concordance()
+    assert c._concordances['grammar']
+
+    # Empty morpheme:
+    c = Corpus([IGT(id=1, phrase=['.'], gloss=['A'], properties={})])
+    assert not c._concordances['grammar']
 
 
-def test_Corpus_get_concepts(corpus):
-    concepts, concordance = corpus.get_concepts()
+def test_Corpus_write_concordance(corpus, capsys):
+    corpus.write_concordance('grammar')
+    out, _ = capsys.readouterr()
+    assert 'CAUS' in out
+
+
+def test_Corpus_concepts(corpus, capsys):
+    concepts = corpus.get_concepts()
     assert len(concepts) == 17
-    #assert len(concordance) == 17
+    corpus.write_concepts('lexicon')
+    out, _ = capsys.readouterr()
+    assert 'CAUS' in out
+
+
+def test_check_glosses(capsys):
+    corpus = Corpus([IGT(id=1, phrase=['a'], gloss=['1', 'A'], properties={})])
+    corpus.check_glosses(level=2)
+    out, _ = capsys.readouterr()
+
+    corpus = Corpus([IGT(id=1, phrase=['a'], gloss=['A-B'], properties={})])
+    corpus.check_glosses(level=2)
+    out, _ = capsys.readouterr()
+
+
+def test_get_wordlist(corpus):
+    wl = corpus.get_wordlist()
+
+
+def test_write_app(corpus, tmpdir):
+    dest = pathlib.Path(str(tmpdir))
+    corpus.write_app(dest=dest)
+    assert dest.joinpath('script.js').exists()

@@ -18,8 +18,8 @@ def register(parser):
 
 def run(args):
     corpus = get_corpus(args)
-    for id, igt in corpus.igts.items():
+    for igt in corpus:
         if (not args.column) or (args.match in igt.properties.get(args.column)):
-            print('Example {0}:'.format(id))
+            print('Example {0}:'.format(igt.id))
             print(igt)
             print()
