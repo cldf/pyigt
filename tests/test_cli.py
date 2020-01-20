@@ -1,5 +1,3 @@
-import pytest
-
 from pyigt.__main__ import main
 
 

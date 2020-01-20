@@ -2,6 +2,7 @@ import re
 import json
 import pathlib
 import argparse
+import tempfile
 import collections
 
 from tabulate import tabulate
@@ -51,7 +52,7 @@ class CorpusSpec(object):
         return [
             g for g in nfilter(self.clean_concept(cn) for cn in concept.split(self.paradigm_marker))
             if (ctype == 'grammar' and self.is_grammatical_gloss_label(g))
-            or (ctype == 'lexicon' and not self.is_grammatical_gloss_label(g))]
+            or (ctype == 'lexicon' and not self.is_grammatical_gloss_label(g))]  # noqa: W503
 
     def lexical_gloss(self, concept):
         return ' // '.join(self._glosses(concept, 'lexicon'))
@@ -151,7 +152,8 @@ class Corpus(object):
                     ref = (idx, i, j)
                     for g in self.spec.grammatical_glosses(concept):
                         self._concordances.grammar[morpheme, g, concept].append(ref)
-                    self._concordances.lexicon[morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
+                    self._concordances.lexicon[
+                        morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
                     self._concordances.form[morpheme, concept, concept].append(ref)
 
     @classmethod
@@ -259,14 +261,16 @@ class Corpus(object):
                 ['ID', 'ENGLISH', 'OCCURRENCE', 'CONCEPT_IN_SOURCE', 'FORMS', 'PHRASE', 'GLOSS'])
             for i, (concept, forms) in enumerate(
                     sorted(concepts.items(), key=lambda x: x[1][0][-1], reverse=True), start=1):
+                # Get the IGT containing the first occurrence listed in the concordance as example:
+                igt = self[self._concordances[ctype][forms[0][0], concept, forms[0][1]][0][0]]
                 w.writerow([
                     i,
                     concept,
                     sum([f[2] for f in forms]),
                     ' // '.join(sorted(set([f[1] for f in forms]))),
                     ' // '.join(sorted(set([f[0] for f in forms]))),
-                    self[self._concordances[ctype][forms[0][0], concept, forms[0][1]][0][0]].phrase_text,
-                     self[self._concordances[ctype][forms[0][0], concept, forms[0][1]][0][0]].gloss_text,
+                    igt.phrase_text,
+                    igt.gloss_text,
                 ])
         if not filename:
             print(w.read().decode('utf8'))
@@ -374,8 +378,13 @@ class Corpus(object):
             wl.renumber('cog', ref)
         return wl
 
-    def get_profile(self, clts=None):
-        """Compute an orthography profile with LingPy's function."""
+    def get_profile(self, clts=None, filename=None):
+        """
+        Compute an orthography profile with LingPy's function.
+
+        :param filename: Write the computed profile to a file in addition to returning it.
+        :return: `segments.Profile` instance.
+        """
         clts = clts.bipa if clts else None
 
         D = {0: ['doculect', 'concept', 'ipa']}
@@ -383,15 +392,22 @@ class Corpus(object):
             D[i] = ['dummy', key[1], key[0]]
         wordlist = lingpy.basic.wordlist.Wordlist(D)
 
-        return list(lingpy.sequence.profile.context_profile(wordlist, ref='ipa', clts=clts))
-
-    def write_profile(self, profile, filename=None):
-        with UnicodeWriter(filename, delimiter='\t') as w:
-            w.writerow(['Grapheme', 'IPA', 'Example', 'Count', 'Unicode'])
-            for line in profile:
-                w.writerow([line[0], line[1], line[2], line[4], line[5]])
         if not filename:
-            print(w.read())
+            with tempfile.NamedTemporaryFile(delete=FileExistsError) as fp:
+                pass
+            p = pathlib.Path(fp.name)
+        else:
+            p = pathlib.Path(filename)
+
+        with UnicodeWriter(p, delimiter='\t') as w:
+            w.writerow(['Grapheme', 'IPA', 'Example', 'Count', 'Unicode'])
+            for line in lingpy.sequence.profile.context_profile(wordlist, ref='ipa', clts=clts):
+                w.writerow([line[0], line[1], line[2], line[4], line[5]])
+
+        res = segments.Profile.from_file(p)
+        if not filename:
+            p.unlink()
+        return res
 
     def write_app(self, dest='app'):
         # idxs must be in index 2 of wordlist, form 0, and concept 1

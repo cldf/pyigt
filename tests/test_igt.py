@@ -1,7 +1,5 @@
 import pathlib
 
-from segments import Profile
-
 import pytest
 
 from pyigt.igt import *
@@ -123,14 +121,11 @@ def test_get_wordlist(corpus, tmpdir, capsys):
     _ = corpus.get_wordlist()
 
     profile_path = pathlib.Path(str(tmpdir)) / 'profile.tsv'
-    profile = corpus.get_profile()
-    corpus.write_profile(profile)
-    out, _ = capsys.readouterr()
-    assert out
-    corpus.write_profile(profile, profile_path)
-    corpus.get_wordlist(profile=Profile.from_file(profile_path))
+    profile = corpus.get_profile(filename=profile_path)
+    assert profile_path.exists()
+    corpus.get_wordlist(profile=profile)
 
-    _ = corpus.get_wordlist(lexstat=False)
+    _ = corpus.get_wordlist(lexstat=False, profile=corpus.get_profile())
 
 
 def test_write_app(corpus, tmpdir):
