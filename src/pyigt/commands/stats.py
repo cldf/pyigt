@@ -21,5 +21,7 @@ def run(args):
 
     if e:
         print('\nExample properties:')
-        for k in list(corpus.igts.values())[0].properties.keys():
-            print('  ' + k)
+        for igt in corpus:
+            for k in igt.properties.keys():
+                print('  ' + k)
+            break

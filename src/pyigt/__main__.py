@@ -7,7 +7,7 @@ from clldutils.loglib import Logging
 import pyigt.commands
 
 
-def main(args=None, catch_all=False, parsed_args=None, log=None):
+def main(args=None, catch_all=False, parsed_args=None):
     parser, subparsers = get_parser_and_subparsers('igt')
     register_subcommands(subparsers, pyigt.commands)
 
@@ -18,10 +18,7 @@ def main(args=None, catch_all=False, parsed_args=None, log=None):
         return 1
 
     with contextlib.ExitStack() as stack:
-        if not log:  # pragma: no cover
-            stack.enter_context(Logging(args.log, level=args.log_level))
-        else:
-            args.log = log
+        stack.enter_context(Logging(args.log, level=args.log_level))
         try:
             return args.main(args) or 0
         except KeyboardInterrupt:  # pragma: no cover

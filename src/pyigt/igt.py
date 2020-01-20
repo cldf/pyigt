@@ -1,6 +1,7 @@
 import re
 import json
 import pathlib
+import argparse
 import collections
 
 from tabulate import tabulate
@@ -118,6 +119,11 @@ class IGT(object):
         return ' '.join(self.gloss)
 
 
+class Concordances(argparse.Namespace):
+    def __getitem__(self, item):
+        return vars(self)[item]
+
+
 class Corpus(object):
     """
     A Corpus is an immutable, ordered list of `IGT` instances.
@@ -125,11 +131,11 @@ class Corpus(object):
     def __init__(self, igts, spec=None):
         self.spec = spec or CorpusSpec()
         self._igts = collections.OrderedDict([(igt.id, igt) for igt in igts])
-        self._concordances = {
-            'grammar': collections.defaultdict(list),
-            'lexicon': collections.defaultdict(list),
-            'form': collections.defaultdict(list),
-        }
+        self._concordances = Concordances(
+            grammar=collections.defaultdict(list),
+            lexicon=collections.defaultdict(list),
+            form=collections.defaultdict(list),
+        )
         # Since changing the IGTs in the corpus is not allowed, we can compute concordances right
         # away.
         for idx, igt in self._igts.items():
@@ -144,9 +150,9 @@ class Corpus(object):
                         continue
                     ref = (idx, i, j)
                     for g in self.spec.grammatical_glosses(concept):
-                        self._concordances['grammar'][morpheme, g, concept].append(ref)
-                    self._concordances['lexicon'][morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
-                    self._concordances['form'][morpheme, concept, concept].append(ref)
+                        self._concordances.grammar[morpheme, g, concept].append(ref)
+                    self._concordances.lexicon[morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
+                    self._concordances.form[morpheme, concept, concept].append(ref)
 
     @classmethod
     def from_cldf(cls, cldf, spec=None):
@@ -224,8 +230,8 @@ class Corpus(object):
     def write_concordance(self, ctype, filename=None):
         with UnicodeWriter(filename, delimiter='\t') as w:
             w.writerow(['ID', 'FORM', 'GLOSS', 'GLOSS_IN_SOURCE', 'OCCURRENCE', 'REF'])
-            for i, (k, v) in enumerate(
-                    sorted(self._concordances[ctype].items(), key=lambda x: (-len(x[1]), x[0])), start=1):
+            for i, (k, v) in enumerate(sorted(
+                    self._concordances[ctype].items(), key=lambda x: (-len(x[1]), x[0])), start=1):
                 w.writerow([
                     i,
                     k[0],
@@ -238,9 +244,8 @@ class Corpus(object):
 
     def get_concepts(self, ctype='lexicon'):
         concepts = collections.defaultdict(list)
-        con = self._concordances[ctype]
 
-        for (form, c1, c2), occs in con.items():
+        for (form, c1, c2), occs in self._concordances[ctype].items():
             # get occurrence, and one example
             assert form
             concepts[c1].append((form, c2, len(occs)))
@@ -288,7 +293,6 @@ class Corpus(object):
             self,
             doculect='base',
             profile=False,
-            filename=False,
             ref='crossid',
             lexstat=True,
             threshold=0.4):
@@ -336,7 +340,7 @@ class Corpus(object):
                     try:
                         lingpy.tokens2class(tokens, 'sca')
                         check = True
-                    except:  # noqa: E722
+                    except:  # noqa: E722, # pragma: no cover
                         check = False
                     if concept.strip() and check:
                         D[idx] = [
@@ -372,17 +376,14 @@ class Corpus(object):
 
     def get_profile(self, clts=None):
         """Compute an orthography profile with LingPy's function."""
-        if clts:
-            clts = clts.bipa
-
-        concordance = self._get_concordance(ctype='forms')
+        clts = clts.bipa if clts else None
 
         D = {0: ['doculect', 'concept', 'ipa']}
-        for i, key in enumerate(concordance, start=1):
+        for i, key in enumerate(self._concordances.form, start=1):
             D[i] = ['dummy', key[1], key[0]]
         wordlist = lingpy.basic.wordlist.Wordlist(D)
 
-        return lingpy.sequence.profile.context_profile(wordlist, ref='ipa', clts=clts)
+        return list(lingpy.sequence.profile.context_profile(wordlist, ref='ipa', clts=clts))
 
     def write_profile(self, profile, filename=None):
         with UnicodeWriter(filename, delimiter='\t') as w:
