@@ -33,7 +33,7 @@ class CorpusSpec(object):
     morpheme_separator = attr.ib(
         validator=attr.validators.instance_of(str),
         default='-')
-    label_pattern = attr.ib(default=re.compile('([A-Z]+|([1-3](dl|pl|sg|DL|PL|SG)))$'))
+    label_pattern = attr.ib(default=re.compile('^([A-Z]+|([1-3](DL|PL|SG)))$'))
 
     def strip_punctuation(self, s):
         for p in self.punctuation:
@@ -362,12 +362,14 @@ class Corpus(object):
                             references]
                         idx += 1
                     else:
-                        print('[!] Problem with {0} / [{1}] / {2} {3} {4}'.format(
+                        print('[!] Problem with "{0}" / [{1}] [{2}] / {3} {4} {5}'.format(
                             concept,
+                            form,
                             tokens,
                             pidx,
                             sA,
-                            sB))
+                            sB,
+                            ))
         wl = lingpy.Wordlist(D)
 
         if lexstat:
