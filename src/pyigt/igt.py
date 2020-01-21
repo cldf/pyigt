@@ -369,7 +369,7 @@ class Corpus(object):
                             pidx,
                             sA,
                             sB,
-                            ))
+                        ))
         wl = lingpy.Wordlist(D)
 
         if lexstat:
