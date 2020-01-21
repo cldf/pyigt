@@ -15,7 +15,7 @@ def corpus_spec():
     return CorpusSpec()
 
 
-@pytest.mark.parametrize('gg', ['ABL', '1pl', '2DL', 'ZZZ'])
+@pytest.mark.parametrize('gg', ['ABL', '2DL', 'ZZZ'])
 def test_CorpusSpec_is_grammatical_gloss_label1(gg, corpus_spec):
     assert corpus_spec.is_grammatical_gloss_label(gg)
 
