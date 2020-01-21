@@ -7,19 +7,20 @@ from pyigt.cli_util import add_corpus, get_corpus
 def register(parser):
     add_corpus(parser)
     parser.add_argument(
-        '-c', '--column', help='column name to use for filter', default=None)
-    parser.add_argument(
-        '-m',
-        '--match',
-        metavar='PATTERN',
-        default='',
-        help='the string to search for')
+        'filter',
+        nargs='*',
+        help='filter condition in the form "COLUMN NAME=PATTERN". '
+             'Run "igt stats" for a list of available column names.',
+        metavar='FILTER',
+    )
 
 
 def run(args):
     corpus = get_corpus(args)
+    filters = [f.split('=', maxsplit=1) for f in args.filter]
+
     for igt in corpus:
-        if (not args.column) or (args.match in igt.properties.get(args.column)):
+        if (not filters) or all(p in str(igt.properties.get(c)) for c, p in filters):
             print('Example {0}:'.format(igt.id))
             print(igt)
             print()

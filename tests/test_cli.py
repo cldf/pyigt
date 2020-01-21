@@ -12,7 +12,7 @@ def test_ls(metadata_path, capsys):
     out, _ = capsys.readouterr()
     assert len(out.split('\n')) == 26
 
-    main(['ls', str(metadata_path), '-c', 'Text_ID', '-m', '2'])
+    main(['ls', str(metadata_path), 'Text_ID=2'])
     out, _ = capsys.readouterr()
     assert len(out.split('\n')) == 11
 

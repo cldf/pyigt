@@ -44,7 +44,15 @@ available commands:
 
 ```python
 >>> from pyigt import Corpus
->>> corpus = Corpus('tests/fixtures/cldf-metadata.json')
->>> corpus.igts
-
+>>> corpus = Corpus.from_path('tests/fixtures/cldf-metadata.json')
+>>> len(corpus)
+>>> len(corpus)
+5
+>>> for igt in corpus:
+...     print(igt)
+...     break
+... 
+zəple: ȵike: peji qeʴlotʂuʁɑ,
+zəp-le:       ȵi-ke:       pe-ji       qeʴlotʂu-ʁɑ,
+earth-DEF:CL  WH-INDEF:CL  become-CSM  in.the.past-LOC
 ```
