@@ -39,6 +39,38 @@ available commands:
 
 ```
 
+The `igt ls` command allows inspecting IGTs from the commandline, formatted using the
+four standard lines described in the Leipzig Glossing Rules, where analyzed text and
+glosses are aligned, e.g.
+```shell script
+$ igt ls tests/fixtures/examples.csv 
+Example 1:
+zəple: ȵike: peji qeʴlotʂuʁɑ,
+zəp-le:       ȵi-ke:       pe-ji       qeʴlotʂu-ʁɑ,
+earth-DEF:CL  WH-INDEF:CL  become-CSM  in.the.past-LOC
+
+...
+
+Example 5:
+zuɑməɸu oʐgutɑ ipiχuɑȵi,
+zuɑmə-ɸu      o-ʐgu-tɑ    i-pi-χuɑ-ȵi,
+cypress-tree  one-CL-LOC  DIR-hide-because-ADV
+
+IGT corpus at tests/fixtures/examples.csv
+```
+
+`igt ls` can be chained with other commandline tools such as commands from the 
+[csvkit](https://csvkit.readthedocs.io/en/latest/) package for filtering:
+```shell script
+$ csvgrep -c Primary_Text -m"ȵi"  tests/fixtures/examples.csv | csvgrep -c Gloss -m"ADV" |  igt ls -
+Example 5:
+zuɑməɸu oʐgutɑ ipiχuɑȵi,
+zuɑmə-ɸu      o-ʐgu-tɑ    i-pi-χuɑ-ȵi,
+cypress-tree  one-CL-LOC  DIR-hide-because-ADV
+
+```
+
+
 
 ### Python API
 

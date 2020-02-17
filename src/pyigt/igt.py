@@ -129,7 +129,8 @@ class Corpus(object):
     """
     A Corpus is an immutable, ordered list of `IGT` instances.
     """
-    def __init__(self, igts, spec=None):
+    def __init__(self, igts, spec=None, fname=None):
+        self.fname = fname
         self.spec = spec or CorpusSpec()
         self._igts = collections.OrderedDict([(igt.id, igt) for igt in igts])
         self._concordances = Concordances(
@@ -177,6 +178,31 @@ class Corpus(object):
                 morpheme_separator=spec.morpheme_separator,
             )
             for igt in cldf['ExampleTable']]
+        return cls(
+            igts,
+            spec=spec,
+            fname=cldf.tablegroup._fname.parent / str(cldf['ExampleTable'].url))
+
+    @classmethod
+    def from_stream(cls, stream, spec=None):
+        from csvw.metadata import TableGroup
+        cldf = Dataset(TableGroup(fname=pathlib.Path('tmp.json')))
+        cldf.add_component('ExampleTable')
+
+        spec = spec or CorpusSpec()
+        _id = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#id'].name
+        _phrase = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#analyzedWord'].name
+        _gloss = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#gloss'].name
+
+        igts = [
+            IGT(
+                id=igt[_id],
+                gloss=igt[_gloss].split('\\t'),
+                phrase=igt[_phrase].split('\\t'),
+                properties=igt,
+                morpheme_separator=spec.morpheme_separator,
+            )
+            for igt in reader(stream.read().splitlines(), dicts=True)]
         return cls(igts, spec=spec)
 
     @classmethod

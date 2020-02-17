@@ -24,3 +24,6 @@ def run(args):
             print('Example {0}:'.format(igt.id))
             print(igt)
             print()
+
+    if corpus.fname:
+        print('IGT corpus at {0}'.format(corpus.fname))
