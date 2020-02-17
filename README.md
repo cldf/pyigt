@@ -88,3 +88,8 @@ zəple: ȵike: peji qeʴlotʂuʁɑ,
 zəp-le:       ȵi-ke:       pe-ji       qeʴlotʂu-ʁɑ,
 earth-DEF:CL  WH-INDEF:CL  become-CSM  in.the.past-LOC
 ```
+
+
+## See also
+
+- [interlineaR](https://cran.r-project.org/web/packages/interlineaR/index.html) - an R package with similar functionality, but support for more input formats.
