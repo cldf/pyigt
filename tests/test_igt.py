@@ -132,3 +132,4 @@ def test_write_app(corpus, tmpdir):
     dest = pathlib.Path(str(tmpdir))
     corpus.write_app(dest=dest)
     assert dest.joinpath('script.js').exists()
+    assert dest.joinpath('index.html').exists()

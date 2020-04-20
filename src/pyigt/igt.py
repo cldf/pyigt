@@ -1,5 +1,6 @@
 import re
 import json
+import shutil
 import pathlib
 import argparse
 import tempfile
@@ -458,6 +459,11 @@ class Corpus(object):
                     igt.gloss,
                 ]
                 # FIXME: must add additional IGT data from ExampleTable row!
-        with pathlib.Path(dest).joinpath('script.js').open('w', encoding='utf8') as f:
+        dest = pathlib.Path(dest)
+        assert dest.is_dir()
+        with dest.joinpath('script.js').open('w', encoding='utf8') as f:
             f.write('var WORDLIST = ' + json.dumps(WL, indent=2) + ';\n')
             f.write('var CONC = ' + json.dumps(CN, indent=2) + ';\n')
+        index = dest / 'index.html'
+        if not index.exists():
+            shutil.copy(str(pathlib.Path(__file__).parent.joinpath('index.html')), str(index))
