@@ -20,6 +20,31 @@ import pycldf
 __all__ = ['IGT', 'Corpus', 'CorpusSpec']
 
 
+def iter_morphemes(s):
+    """
+    Split word into morphemes following the Leipzig Glossing Rules:
+    - `-` and `=` (for clitics) separate morphemes, see LGR rule 2.
+    - `<` and `>` enclose infixes, see LGR rule 9.
+    - `~` splits reduplicated morphemes, see LGR rule 10.
+    """
+    morpheme, in_infix = [], False
+
+    for c in s:
+        if c in {'-', '=', '~', '<', '>'}:
+            if in_infix and c != '>':
+                raise ValueError('Invalid morpheme nesting: "{}"'.format(s))
+            yield ''.join(morpheme)
+            morpheme = []
+            if c == '<':
+                in_infix = True
+            elif c == '>':
+                in_infix = False
+        else:
+            morpheme.append(c)
+
+    yield ''.join(morpheme)
+
+
 @attr.s
 class CorpusSpec(object):
     punctuation = attr.ib(
@@ -31,10 +56,17 @@ class CorpusSpec(object):
     paradigm_marker = attr.ib(
         validator=attr.validators.instance_of(str),
         default=':')
+    # A "simple" `CorpusSpec`, only recognizing one single-character morpheme separator, can be
+    # constructed by setting `morpheme_separator`.
     morpheme_separator = attr.ib(
-        validator=attr.validators.instance_of(str),
-        default='-')
+        validator=attr.validators.optional(attr.validators.instance_of(str)),
+        default=None)
     label_pattern = attr.ib(default=re.compile('^([A-Z]+|([1-3](DL|PL|SG)))$'))
+
+    def split_morphemes(self, s):
+        if self.morpheme_separator:
+            return s.split(self.morpheme_separator)
+        return list(iter_morphemes(s))
 
     def strip_punctuation(self, s):
         for p in self.punctuation:
@@ -75,11 +107,11 @@ class IGT(object):
     phrase = attr.ib(validator=attr.validators.instance_of(list))
     gloss = attr.ib(validator=attr.validators.instance_of(list))
     properties = attr.ib(validator=attr.validators.instance_of(dict))
-    morpheme_separator = attr.ib(default='-')
+    spec = attr.ib(default=CorpusSpec())
 
     def __attrs_post_init__(self):
-        self.phrase_segmented = [nfilter(m.split(self.morpheme_separator)) for m in self.phrase]
-        self.gloss_segmented = [nfilter(m.split(self.morpheme_separator)) for m in self.gloss]
+        self.phrase_segmented = [nfilter(self.spec.split_morphemes(m)) for m in self.phrase]
+        self.gloss_segmented = [nfilter(self.spec.split_morphemes(m)) for m in self.gloss]
 
     @property
     def glossed_words(self):
@@ -114,7 +146,7 @@ class IGT(object):
 
     @property
     def primary_text(self):
-        return self.phrase_text.replace(self.morpheme_separator, '')
+        return ' '.join(''.join(self.spec.split_morphemes(w)) for w in self.phrase)
 
     @property
     def gloss_text(self):
@@ -176,7 +208,7 @@ class Corpus(object):
                 gloss=igt[_gloss],
                 phrase=igt[_phrase],
                 properties=igt,
-                morpheme_separator=spec.morpheme_separator,
+                spec=spec,
             )
             for igt in cldf['ExampleTable']]
         return cls(
@@ -201,7 +233,7 @@ class Corpus(object):
                 gloss=igt[_gloss].split('\\t'),
                 phrase=igt[_phrase].split('\\t'),
                 properties=igt,
-                morpheme_separator=spec.morpheme_separator,
+                spec=spec,
             )
             for igt in reader(stream.read().splitlines(), dicts=True)]
         return cls(igts, spec=spec)

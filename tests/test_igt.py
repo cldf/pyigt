@@ -15,6 +15,28 @@ def corpus_spec():
     return CorpusSpec()
 
 
+@pytest.mark.parametrize(
+    'word,morphemes',
+    [
+        ('yerak~rak-im', 'yerak rak im'),
+        ('b<um>i~bili', 'b um i bili'),
+        ('palasi=lu', 'palasi lu'),
+        ('abur-u-n', 'abur u n'),
+    ]
+)
+def test_CorpusSpec_split_morphemes(word, morphemes):
+    assert ' '.join(CorpusSpec().split_morphemes(word)) == morphemes
+
+
+def test_CorpusSpec_split_morphemes_invalid():
+    with pytest.raises(ValueError):
+        CorpusSpec().split_morphemes('a<b-c>d')
+
+
+def test_CorpusSpec_split_morphemes_simple():
+    assert CorpusSpec(morpheme_separator='#').split_morphemes('a#d') == ['a', 'd']
+
+
 @pytest.mark.parametrize('gg', ['ABL', '2DL', 'ZZZ'])
 def test_CorpusSpec_is_grammatical_gloss_label1(gg, corpus_spec):
     assert corpus_spec.is_grammatical_gloss_label(gg)
