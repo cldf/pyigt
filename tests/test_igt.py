@@ -24,6 +24,8 @@ def corpus_spec():
         ('palasi=lu', 'palasi lu'),
         ('abur-u-n', 'abur u n'),
         ('2DU>3SG-FUT-poke', '2DU>3SG FUT poke'),
+        ('a-kolo<mu>ne=ta', 'a kolone mu ta'),
+        ('1>3-see<2>=ERG', '1>3 see 2 ERG'),
     ]
 )
 def test_CorpusSpec_split_morphemes(word, morphemes):
