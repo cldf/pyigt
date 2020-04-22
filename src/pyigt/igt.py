@@ -33,6 +33,9 @@ def iter_morphemes(s):
         if c in {'-', '=', '~', '<', '>'}:
             if in_infix and c != '>':
                 raise ValueError('Invalid morpheme nesting: "{}"'.format(s))
+            if not in_infix and c == '>':  # See Rule 4E.
+                morpheme.append(c)
+                continue
             yield ''.join(morpheme)
             morpheme = []
             if c == '<':

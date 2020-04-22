@@ -22,6 +22,7 @@ def corpus_spec():
         ('b<um>i~bili', 'b um i bili'),
         ('palasi=lu', 'palasi lu'),
         ('abur-u-n', 'abur u n'),
+        ('2DU>3SG-FUT-poke', '2DU>3SG FUT poke'),
     ]
 )
 def test_CorpusSpec_split_morphemes(word, morphemes):
