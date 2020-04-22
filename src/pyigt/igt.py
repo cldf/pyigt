@@ -20,6 +20,30 @@ import pycldf
 __all__ = ['IGT', 'Corpus', 'CorpusSpec']
 
 
+def _morpheme_and_infixes(m):
+    assert not m.startswith('<')
+    morpheme, infixes, infix, in_infix = [], [], [], False
+
+    for c in m:
+        if c == '<':
+            in_infix = True
+            continue
+        elif c == '>' and in_infix:
+            infixes.append(''.join(infix))
+            infix = []
+            in_infix = False
+            continue
+
+        if in_infix:
+            infix.append(c)
+        else:
+            morpheme.append(c)
+
+    if in_infix:
+        raise ValueError('infix without closing tag')
+    return [''.join(morpheme)] + infixes
+
+
 def iter_morphemes(s):
     """
     Split word into morphemes following the Leipzig Glossing Rules:
@@ -27,25 +51,18 @@ def iter_morphemes(s):
     - `<` and `>` enclose infixes, see LGR rule 9.
     - `~` splits reduplicated morphemes, see LGR rule 10.
     """
-    morpheme, in_infix = [], False
+    morpheme = []
 
     for c in s:
-        if c in {'-', '=', '~', '<', '>'}:
-            if in_infix and c != '>':
-                raise ValueError('Invalid morpheme nesting: "{}"'.format(s))
-            if not in_infix and c == '>':  # See Rule 4E.
-                morpheme.append(c)
-                continue
-            yield ''.join(morpheme)
+        if c in {'-', '=', '~'}:
+            for m in _morpheme_and_infixes(''.join(morpheme)):
+                yield m
             morpheme = []
-            if c == '<':
-                in_infix = True
-            elif c == '>':
-                in_infix = False
         else:
             morpheme.append(c)
 
-    yield ''.join(morpheme)
+    for m in _morpheme_and_infixes(''.join(morpheme)):
+        yield m
 
 
 @attr.s

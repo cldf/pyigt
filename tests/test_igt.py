@@ -19,7 +19,8 @@ def corpus_spec():
     'word,morphemes',
     [
         ('yerak~rak-im', 'yerak rak im'),
-        ('b<um>i~bili', 'b um i bili'),
+        ('b<um>i~bili', 'bi um bili'),
+        ('reli<n>qu-ere', 'reliqu n ere'),
         ('palasi=lu', 'palasi lu'),
         ('abur-u-n', 'abur u n'),
         ('2DU>3SG-FUT-poke', '2DU>3SG FUT poke'),
