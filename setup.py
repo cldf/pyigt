@@ -5,13 +5,14 @@ import codecs
 setup(
     name='pyigt',
     description="A Python library for handling inter-linear-glossed text.",
-    version='1.0.1.dev0',
+    version='1.1.0',
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
