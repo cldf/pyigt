@@ -164,7 +164,7 @@ def test_write_app(corpus, tmpdir):
 def test_multilingual(multilingual_dataset, capsys):
     corpus = Corpus.from_cldf(multilingual_dataset)
     assert not corpus.monolingual
-    assert len(set(igt.language for igt in corpus)) == 5
+    assert len(set(igt.language for igt in corpus)) == 14
 
     corpus.write_concordance('lexicon')
     out, _ = capsys.readouterr()
@@ -172,4 +172,4 @@ def test_multilingual(multilingual_dataset, capsys):
 
     corpus.write_concepts('grammar')
     out, _ = capsys.readouterr()
-    assert 'enap1235: jah' in out
+    assert 'macu1259: ' in out

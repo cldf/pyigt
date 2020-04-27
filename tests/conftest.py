@@ -22,4 +22,4 @@ def dataset(metadata_path):
 
 @pytest.fixture
 def multilingual_dataset(fixtures):
-    return Dataset.from_metadata(fixtures / 'multilingual' / 'linking_data.json')
+    return Dataset.from_metadata(fixtures / 'multilingual' / 'cldf-metadata.json')
