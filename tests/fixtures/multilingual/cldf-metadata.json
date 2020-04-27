@@ -1,0 +1,72 @@
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {
+            "@language": "en"
+        }
+    ],
+    "dc:conformsTo": "http://cldf.clld.org/v1.0/terms.rdf#Generic",
+    "dialect": {
+        "commentPrefix": null
+    },
+    "tables": [
+        {
+            "url": "examples.csv",
+            "dc:conformsTo": "http://cldf.clld.org/v1.0/terms.rdf#ExampleTable",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "name": "ID",
+                        "required": true,
+                        "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#id",
+                        "datatype": {
+                            "base": "string",
+                            "format": "[a-zA-Z0-9_\\-]+"
+                        }
+                    },
+                    {
+                        "name": "Language_ID",
+                        "required": true,
+                        "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#languageReference",
+                        "datatype": "string"
+                    },
+                    {
+                        "datatype": "string",
+                        "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#primaryText",
+                        "required": true,
+                        "name": "Primary_Text"
+                    },
+                    {
+                        "name": "Analyzed_Word",
+                        "required": true,
+                        "datatype": "string",
+			 		   	"propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#analyzedWord",
+						"separator": "\t"
+                    },
+                    {
+                        "name": "Gloss",
+                        "required": true,
+                        "datatype": "string",
+			 		   	"propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#gloss",
+						"separator": "\t"
+                    },
+                    {
+                        "name": "Translated_Text",
+                        "required": true,
+                        "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#description",
+                        "datatype": "string",
+						"titles": "Translation"
+                    },
+                    {
+                        "name": "Source",
+                        "required": false,
+                        "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#source",
+                        "datatype": {
+                            "base": "string"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

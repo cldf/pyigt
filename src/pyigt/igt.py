@@ -127,6 +127,7 @@ class IGT(object):
     phrase = attr.ib(validator=attr.validators.instance_of(list))
     gloss = attr.ib(validator=attr.validators.instance_of(list))
     properties = attr.ib(validator=attr.validators.instance_of(dict))
+    language = attr.ib(default=None)
     spec = attr.ib(default=CorpusSpec())
 
     def __attrs_post_init__(self):
@@ -205,10 +206,26 @@ class Corpus(object):
                         continue
                     ref = (idx, i, j)
                     for g in self.spec.grammatical_glosses(concept):
-                        self._concordances.grammar[morpheme, g, concept].append(ref)
+                        self._concordances.grammar[morpheme, g, concept, igt.language].append(ref)
                     self._concordances.lexicon[
-                        morpheme, self.spec.lexical_gloss(concept), concept].append(ref)
-                    self._concordances.form[morpheme, concept, concept].append(ref)
+                        morpheme, self.spec.lexical_gloss(concept), concept, igt.language
+                    ].append(ref)
+                    self._concordances.form[morpheme, concept, concept, igt.language].append(ref)
+        self.monolingual = len(set(igt.language for igt in self._igts.values())) == 1
+
+    @staticmethod
+    def get_column_names(cldf):
+        # We lookup local column names by ontology term:
+        lookup = [
+            ('id', 'id'),
+            ('phrase', 'analyzedWord'),
+            ('gloss', 'gloss'),
+            ('language', 'languageReference'),
+        ]
+        names = collections.namedtuple('colnames', [k for k, v in lookup])
+        return names(**{
+            k: cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#' + v].name
+            for k, v in lookup})
 
     @classmethod
     def from_cldf(cls, cldf, spec=None):
@@ -219,14 +236,13 @@ class Corpus(object):
         :param spec: a `CorpusSpec` instance, specifying how to interpret markup in the corpus.
         """
         spec = spec or CorpusSpec()
-        _id = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#id'].name
-        _phrase = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#analyzedWord'].name
-        _gloss = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#gloss'].name
+        cols = cls.get_column_names(cldf)
         igts = [
             IGT(
-                id=igt[_id],
-                gloss=igt[_gloss],
-                phrase=igt[_phrase],
+                id=igt[cols.id],
+                gloss=igt[cols.gloss],
+                phrase=igt[cols.phrase],
+                language=igt.get(cols.language),
                 properties=igt,
                 spec=spec,
             )
@@ -243,15 +259,13 @@ class Corpus(object):
         cldf.add_component('ExampleTable')
 
         spec = spec or CorpusSpec()
-        _id = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#id'].name
-        _phrase = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#analyzedWord'].name
-        _gloss = cldf['ExampleTable', 'http://cldf.clld.org/v1.0/terms.rdf#gloss'].name
-
+        cols = cls.get_column_names(cldf)
         igts = [
             IGT(
-                id=igt[_id],
-                gloss=igt[_gloss].split('\\t'),
-                phrase=igt[_phrase].split('\\t'),
+                id=igt[cols.id],
+                gloss=igt[cols.gloss].split('\\t'),
+                phrase=igt[cols.phrase].split('\\t'),
+                language=igt.get(cols.language),
                 properties=igt,
                 spec=spec,
             )
@@ -310,30 +324,43 @@ class Corpus(object):
 
     def write_concordance(self, ctype, filename=None):
         with UnicodeWriter(filename, delimiter='\t') as w:
-            w.writerow(['ID', 'FORM', 'GLOSS', 'GLOSS_IN_SOURCE', 'OCCURRENCE', 'REF'])
+            h = ['ID', 'FORM', 'GLOSS', 'GLOSS_IN_SOURCE', 'OCCURRENCE', 'REF']
+            if not self.monolingual:
+                h.insert(1, 'LANGUAGE_ID')
+            w.writerow(h)
+
             for i, (k, v) in enumerate(sorted(
                     self._concordances[ctype].items(), key=lambda x: (-len(x[1]), x[0])), start=1):
-                w.writerow([
+                c = [
                     i,
                     k[0],
                     k[1],
                     k[2],
                     len(v),
-                    ' '.join(['{0}:{1}:{2}'.format(x, y, z) for x, y, z in v])])
+                    ' '.join(['{0}:{1}:{2}'.format(x, y, z) for x, y, z in v])]
+                if not self.monolingual:
+                    c.insert(1, k[3])
+                w.writerow(c)
+
         if not filename:
             print(w.read().decode('utf8'))
 
     def get_concepts(self, ctype='lexicon'):
         concepts = collections.defaultdict(list)
 
-        for (form, c1, c2), occs in self._concordances[ctype].items():
+        for (form, c1, c2, l), occs in self._concordances[ctype].items():
             # get occurrence, and one example
             assert form
-            concepts[c1].append((form, c2, len(occs)))
+            concepts[c1].append((form, l, c2, len(occs)))
 
         return concepts
 
     def write_concepts(self, ctype, filename=None):
+        def format_form(f):
+            if self.monolingual:
+                return f[0]
+            return '{}: {}'.format(f[1], f[0])
+
         concepts = self.get_concepts(ctype)
         with UnicodeWriter(filename, delimiter='\t') as w:
             w.writerow(
@@ -341,13 +368,20 @@ class Corpus(object):
             for i, (concept, forms) in enumerate(
                     sorted(concepts.items(), key=lambda x: x[1][0][-1], reverse=True), start=1):
                 # Get the IGT containing the first occurrence listed in the concordance as example:
-                igt = self[self._concordances[ctype][forms[0][0], concept, forms[0][1]][0][0]]
+                igt = self[
+                    self._concordances[ctype][
+                        forms[0][0],
+                        concept,
+                        forms[0][2],
+                        forms[0][1],
+                    ][0][0]
+                ]
                 w.writerow([
                     i,
                     concept,
-                    sum([f[2] for f in forms]),
-                    ' // '.join(sorted(set([f[1] for f in forms]))),
-                    ' // '.join(sorted(set([f[0] for f in forms]))),
+                    sum([f[3] for f in forms]),
+                    ' // '.join(sorted(set([f[2] for f in forms]))),
+                    ' // '.join(sorted(set([format_form(f) for f in forms]))),
                     igt.phrase_text,
                     igt.gloss_text,
                 ])
@@ -409,16 +443,16 @@ class Corpus(object):
             concepts = self.get_concepts(ctype=ctype)
             concordance = self._concordances[ctype]
             for concept, entries in concepts.items():
-                for form, cis, freq in entries:
+                for form, lid, cis, freq in entries:
                     # retrieve the concordance
-                    pidx, sA, sB = concordance[form, concept, cis][0]
+                    pidx, sA, sB = concordance[form, concept, cis, lid][0]
                     txt = self[pidx].phrase
                     gls = self[pidx].gloss
                     word, fgls = self[pidx, sA]
                     tokens = tokenize(form)
                     references = ' '.join(
                         ['{0}:{1}:{2}'.format(a, b, c)
-                         for a, b, c in concordance[form, concept, cis]])
+                         for a, b, c in concordance[form, concept, cis, lid]])
                     # check tokens
                     try:
                         lingpy.tokens2class(tokens, 'sca')
@@ -427,7 +461,7 @@ class Corpus(object):
                         check = False
                     if concept.strip() and check:
                         D[idx] = [
-                            doculect,
+                            doculect if self.monolingual else lid,
                             concept,
                             cis,
                             ctype,
