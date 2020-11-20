@@ -1,6 +1,6 @@
 # pyigt: Handling interlinear glossed text with Python
 
-[![Build Status](https://travis-ci.org/cldf/pyigt.svg?branch=master)](https://travis-ci.org/cldf/pyigt)
+[![Build Status](https://github.com/cldf/pyigt/workflows/tests/badge.svg)](https://github.com/cldf/pyigt/actions?query=workflow%3Atests)
 [![codecov](https://codecov.io/gh/cldf/pyigt/branch/master/graph/badge.svg)](https://codecov.io/gh/cldf/pyigt)
 [![PyPI](https://img.shields.io/pypi/v/pyigt.svg)](https://pypi.org/project/pyigt)
 
