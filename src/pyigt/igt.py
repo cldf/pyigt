@@ -21,7 +21,7 @@ import pycldf
 __all__ = ['IGT', 'Corpus', 'CorpusSpec', 'is_standard_abbr', 'expand_standard_abbr']
 
 STANDARD_ABBR_PATTERN = pattern()
-NON_OVERT_ELEMENT = 'Ø'
+NON_OVERT_ELEMENT = '∅'
 
 
 def is_standard_abbr(label):
@@ -150,7 +150,7 @@ def parse_phrase(p):
     return p
 
 
-@attr.s(eq=False)
+@attr.s
 class IGT(object):
     """
     Interlinear Glossed Text
@@ -207,25 +207,16 @@ class IGT(object):
         for word, word_gloss in zip(self.phrase_segmented2, self.gloss_segmented2):
             morpheme_glosses = []
             for (_, m), (_, g) in zip(word, word_gloss):
-                if '[' in g and g.endswith(']'):
-                    # A gloss for a non-overt object language element!
-                    g, _, g_non_overt = g[:-1].strip().partition('[')
-                    morpheme_glosses.extend([(m, g), (NON_OVERT_ELEMENT, g_non_overt)])
-                else:
-                    morpheme_glosses.append((m, g))
+                morpheme_glosses.append((m, g))
             res.append(morpheme_glosses)
         return res
-
-    def __eq__(self, other):
-        return (self.glossed_morphemes, self.translation, self.language) == \
-               (other.glossed_morphemes, other.translation, other.language)
 
     @property
     def gloss_abbrs(self):
         res = collections.OrderedDict()
         for word in self.glossed_morphemes:
             for m, g in word:
-                for element in re.split(r'[.;:\\<>()]', g):
+                for element in re.split(r'[.;:\\<>()\[\]]', g):
                     if element:
                         if self.spec.is_grammatical_gloss_label(element):
                             if element in self.abbrs:

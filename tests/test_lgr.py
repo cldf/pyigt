@@ -135,9 +135,9 @@ def test_rule5():
 
 def test_rule6():
     igt1 = assert_is_valid('puer', 'boy[NOM.SG]')
-    igt2 = assert_is_valid('puer-Ø', 'boy-NOM.SG')
+    assert 'NOM' in igt1.gloss_abbrs
+    igt2 = assert_is_valid('puer-∅', 'boy-NOM.SG')
     assert igt2.primary_text == 'puer'
-    assert igt1 == igt2
 
 
 def test_rule7():
