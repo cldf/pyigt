@@ -27,10 +27,12 @@ def test_rule1():
     assert len(igt.gloss) == 4
 
 
-def test_rule2():
-    assert_is_valid(
+def test_rule2(capsys):
+    igt = assert_is_valid(
         "Gila abur-u-n ferma hamišaluǧ güǧüna amuq’-da-č.",
         "now they-OBL-GEN farm forever behind stay-FUT-NEG")
+    igt.pprint()
+    assert 'oblique' in capsys.readouterr()[0]
 
     igt = assert_is_valid("palasi=lu niuirtur=lu", "priest=and shopkeeper=and")
     assert len(igt.glossed_morphemes[0][0]) == 2
