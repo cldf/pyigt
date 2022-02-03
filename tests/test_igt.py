@@ -33,8 +33,7 @@ def test_CorpusSpec_split_morphemes(word, morphemes):
 
 
 def test_CorpusSpec_split_morphemes_invalid():
-    with pytest.raises(ValueError):
-        CorpusSpec().split_morphemes('a<b-c>d')
+    assert CorpusSpec().split_morphemes('a<b-c>d') == ['a<b', 'c>d']
 
 
 def test_CorpusSpec_split_morphemes_simple():

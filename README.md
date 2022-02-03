@@ -74,6 +74,8 @@ cypress-tree  one-CL-LOC  DIR-hide-because-ADV
 
 ### Python API
 
+You can read all IGT examples provided with an CLDF dataset
+
 ```python
 >>> from pyigt import Corpus
 >>> corpus = Corpus.from_path('tests/fixtures/cldf-metadata.json')
@@ -87,6 +89,35 @@ cypress-tree  one-CL-LOC  DIR-hide-because-ADV
 zəple: ȵike: peji qeʴlotʂuʁɑ,
 zəp-le:       ȵi-ke:       pe-ji       qeʴlotʂu-ʁɑ,
 earth-DEF:CL  WH-INDEF:CL  become-CSM  in.the.past-LOC
+```
+
+or instantiate individual IGT examples, e.g. to check for validity:
+```python
+>>> from pyigt import IGT
+>>> ex = IGT(phrase="palasi=lu", gloss="priest-and")
+>>> ex.check(strict=True, verbose=True)
+palasi=lu
+priest-and
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "/home/robert_forkel/projects/cldf/pyigt/src/pyigt/igt.py", line 287, in check
+    raise ValueError(
+ValueError: Rule 2 or 10 violated: Mismatch of element separators in word and gloss! 
+```
+or to expand known gloss abbreviations:
+```python
+>>> ex = IGT(phrase="Gila abur-u-n ferma hamišaluǧ güǧüna amuq’-da-č.",
+...          gloss="now they-OBL-GEN farm forever behind stay-FUT-NEG", 
+...          translation="Now their farm will not stay behind forever.")
+>>> ex.pprint()
+Gila aburun ferma hamišaluǧ güǧüna amuq’dač.
+Gila    abur-u-n      ferma    hamišaluǧ    güǧüna    amuq’-da-č.
+now     they-OBL-GEN  farm     forever      behind    stay-FUT-NEG
+‘Now their farm will not stay behind forever.’
+  OBL = oblique
+  GEN = genitive
+  FUT = future
+  NEG = negation, negative
 ```
 
 
