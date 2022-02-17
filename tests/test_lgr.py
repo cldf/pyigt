@@ -12,6 +12,12 @@ def test_standard_abbrs():
 def assert_is_valid(phrase, gloss, **kw):
     igt = IGT(phrase=phrase, gloss=gloss, **kw)
     assert igt.is_valid(strict=True)
+    for gw in igt.glossed_word_objects:
+        # Make sure we can roundtrip the string representations, thereby checking the parsing.
+        assert str(gw.word_morphemes) == gw.word
+        assert str(gw.gloss_morphemes) == gw.gloss
+        assert all(str(m.gloss_elements) == str(m) for m in gw.word_morphemes)
+        assert all(str(m.gloss_elements) == str(m) for m in gw.gloss_morphemes)
     return igt
 
 
@@ -57,12 +63,12 @@ def test_invalid(capsys):
 def test_rule3():
     igt = assert_is_valid(
         'My  s       Marko   poexa-l-i   avtobus-om  v   Peredelkino.',
-        '1PL COM     Marko   go-PST-PL   bus-INS     All Peredelkino.')
+        '1PL COM     Marko   go-PST-PL   bus-INS     All Peredelkino')
     assert igt.gloss_abbrs['1PL'] == 'first person plural'
 
     igt = assert_is_valid(
         'My  s       Marko   poexa-l-i   avtobus-om  v   Peredelkino.',
-        '1PL COM     Marko   go-PST-PL   bus-INS     All Peredelkino.',
+        '1PL COM     Marko   go-PST-PL   bus-INS     All Peredelkino',
         translation="'Marko and I went to Perdelkino by bus.' (COM=whatever)")
     assert igt.gloss_abbrs['COM'] == 'whatever'
 
