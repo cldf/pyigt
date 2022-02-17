@@ -13,14 +13,16 @@ __all__ = [
     'GlossElement', 'Infix', 'DistinctGlossElement', 'HiddenMorphemeGlossElement',
     'MorphophonologicalChange', 'PatientlikeArgument', 'NonovertElement', 'InherentCategory',
     # Types of morphemes:
-    'Morpheme', 'Clitic', 'MorphologicallyBoundWord',
+    'Morpheme', 'Clitic', 'Reduplication',
     # Wrapper
     'GlossedWord',
 ]
 
 
 class GlossElement(str):
-    # Rule 4. Separated by "."
+    """
+    Rule 4. Gloss elements are separated by ".".
+    """
     start = '.'
     end = None
     in_gloss_only = True
@@ -47,45 +49,65 @@ class GlossElement(str):
 
 
 class Infix(GlossElement, str):
-    # Rule 9. Enclosed in angle brackets.
+    """
+    Rule 9. Infixes are enclosed in angle brackets.
+    """
     start = '<'
     end = '>'
     in_gloss_only = False
 
 
 class DistinctGlossElement(GlossElement):
-    # Rule 4B. Separated by ";"
+    """
+    Rule 4B. Distinct gloss elements can be separated by ";".
+    """
     start = ';'
 
 
 class HiddenMorphemeGlossElement(GlossElement):
-    # Rule 4C. Separated by ":"
+    """
+    Rule 4C. Gloss element corresponding to "hidden" object language elements are separated by ":".
+    """
     start = ':'
 
 
 class MorphophonologicalChange(GlossElement):
-    # Rule 4D. Separated by "\"
+    """
+    Rule 4D. Morphophonological change is marked with a leading "\".
+    """
     start = '\\'
 
 
 class PatientlikeArgument(GlossElement):
-    # Rule 4E, Separated by ">". Note: Must distinguish from infixes!
+    """
+    Rule 4E. Patient-like arguments are marked with a leading ">".
+
+    Note: Infer the agent-like argument by looking up the `prev` property.
+    """
     start = '>'
 
 
 class NonovertElement(GlossElement):
-    # Rule 6. Enclosed in square brackets.
+    """
+    Rule 6. Non-overt elements can be enclosed in square brackets.
+    """
     start = '['
     end = ']'
 
 
 class InherentCategory(GlossElement):
-    # Rule 7. Enclosed in round brackets
+    """
+    Rule 7. Inherent categories can be enclosed in round brackets.
+    """
     start = '('
     end = ')'
 
 
 class GlossElements(list):
+    """
+    A container class for a list of `GlossElement` instances, together with functionality to
+    round-trip from `str`.
+    """
     def __str__(self):
         s, prev_enclosed = '', False
         for ge in self:
@@ -139,6 +161,9 @@ class GlossElements(list):
 
 
 class Morpheme(str):
+    """
+    Rule 2. Morphemes are separated by "-".
+    """
     sep = '-'
 
     def __new__(cls, content):
@@ -155,12 +180,16 @@ class Morpheme(str):
 
 
 class Clitic(Morpheme):
-    # Rule 2. Separated by "="
+    """
+    Rule 2. Clitics are separated by "=".
+    """
     sep = '='
 
 
-class MorphologicallyBoundWord(Morpheme):
-    # Rule 2A. Separated by " -" in the object language line, by "-" in the gloss.
+class Reduplication(Morpheme):
+    """
+    Rule 10. Reduplication is separated by "~".
+    """
     sep = '~'
 
 
