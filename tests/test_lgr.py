@@ -1,7 +1,7 @@
 import pytest
 
 from pyigt import IGT
-from pyigt.igt import is_standard_abbr
+from pyigt.util import is_standard_abbr
 
 
 def test_standard_abbrs():
