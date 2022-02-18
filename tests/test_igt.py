@@ -78,8 +78,10 @@ def test_IGT():
 
 def test_IGT_words():
     igt = IGT(phrase='a=bcd -e', gloss='a=bcd-e', strict=True)
-    assert igt.prosodic_words[0].word == 'a=bcd' and igt.prosodic_words[1].word == 'e'
-    assert igt.morphosyntactic_words[0].word == 'a' and igt.morphosyntactic_words[1].word == 'bcd -e'
+    assert igt.prosodic_words[0].word == 'a=bcd' == igt.prosodic_words[0].gloss
+    assert igt.prosodic_words[1].word == 'e'
+    assert igt.morphosyntactic_words[0].word == 'a' == igt.morphosyntactic_words[0].gloss
+    assert igt.morphosyntactic_words[1].word == 'bcd -e'
 
 
 def test_Corpus_from_path(fixtures):

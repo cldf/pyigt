@@ -47,7 +47,7 @@ class GlossElement(str):
 
     @property
     def is_category_label(self):
-        return re.fullmatch('[A-Z]+', self)
+        return re.fullmatch('[A-Z0-9]+', self)
 
 
 class Infix(GlossElement, str):
@@ -179,17 +179,45 @@ class Morpheme(str):
     """
     sep = '-'
 
-    def __new__(cls, content):
-        res = str.__new__(cls, content)
-        res.type = None
-        return res
+    def __init__(self, s):
+        self.type = None
+        self.prev = None
+        self.next = None
 
     def __repr__(self):
         return '<{} "{}">'.format(self.__class__.__name__, self.encode('ascii', 'replace').decode())
 
     @property
+    def first(self):
+        return not bool(self.prev)
+
+    @property
+    def last(self):
+        return not bool(self.next)
+
+    @property
     def gloss_elements(self):
         return GlossElements.from_morpheme(str(self), self.type)
+
+    @property
+    def lexical_concepts(self):
+        if self.type == 'gloss':
+            res = []
+            s = ''
+            for ge in self.gloss_elements:
+                if isinstance(ge, (GlossElementAfterColon, GlossElementAfterSemicolon)):
+                    # Something new is starting.
+                    if s:
+                        res.append(s)
+                    if not ge.is_category_label:
+                        s = str(ge)
+                else:
+                    if s:
+                        s += '_'
+                    s += str(ge)
+            if s:
+                res.append(s)
+            return res
 
 
 class MorphemeAfterEquals(Morpheme):
@@ -233,8 +261,13 @@ class MorphemeList(list):
                 e += t
         if e:
             res.append(c(e))
+        p = None
         for e in res:
             e.type = type_
+            e.prev = p
+            if p:
+                p.next = e
+            p = e
         return cls(res)
 
 
