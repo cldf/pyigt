@@ -239,9 +239,10 @@ class GlossedMorpheme(object):
                 if not ge.is_category_label:
                     s = str(ge)
             else:
-                if s:
-                    s += ' '
-                s += str(ge)
+                if not ge.is_category_label:
+                    if s:
+                        s += ' '
+                    s += str(ge)
         if s:
             res.append(s)
         return [s.replace('_', ' ') for s in res]
