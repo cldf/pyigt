@@ -1,8 +1,12 @@
 """
 Support for parsing the notation for morpheme/gloss structure proposed by the
 Leipzig Glossing Rules.
+
+According to LGR Rule 1, object language and gloss lines have to be word-aligned. Such aligned
+pairs of a word and a corresponding gloss are modeled via the `GlossedWord` class.
 """
 import re
+import itertools
 import unicodedata
 
 import attr
@@ -14,11 +18,19 @@ __all__ = [
     'GlossElement', 'Infix', 'GlossElementAfterSemicolon', 'GlossElementAfterColon',
     'GlossElementAfterBackslash', 'PatientlikeArgument', 'NonovertElement', 'InherentCategory',
     # Types of morphemes:
-    'Morpheme', 'MorphemeAfterEquals', 'MorphemeAfterTilde', 'MORPHEME_SEPARATORS',
-    'split_morphemes',
+    'Morpheme', 'MORPHEME_SEPARATORS', 'split_morphemes',
     # Wrapper
     'GlossedWord',
 ]
+MORPHEME_SEPARATORS = [
+    '-',  # Rule 2
+    '=',  # Rule 2, clitics
+    '~',  # Rule 10
+]
+
+
+def split_morphemes(s):
+    return re.split('({})'.format('|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)), s)
 
 
 class GlossElement(str):
@@ -181,11 +193,31 @@ class Morpheme(str):
 
     def __init__(self, s):
         self.type = None
-        self.prev = None
-        self.next = None
 
     def __repr__(self):
         return '<{} "{}">'.format(self.__class__.__name__, self.encode('ascii', 'replace').decode())
+
+    @property
+    def elements(self):
+        return GlossElements.from_morpheme(str(self), self.type)
+
+
+@attr.s
+class GlossedMorpheme(object):
+    """
+    A (morpheme, gloss) pair.
+    """
+    morpheme = attr.ib()
+    gloss = attr.ib()
+    sep = attr.ib()
+    prev = attr.ib(default=None)
+    next = attr.ib(default=None)
+
+    def __attrs_post_init__(self):
+        self.morpheme = Morpheme(self.morpheme)
+        self.morpheme.type = 'word'
+        self.gloss = Morpheme(self.gloss)
+        self.gloss.type = 'gloss'
 
     @property
     def first(self):
@@ -196,104 +228,74 @@ class Morpheme(str):
         return not bool(self.next)
 
     @property
-    def gloss_elements(self):
-        return GlossElements.from_morpheme(str(self), self.type)
-
-    @property
     def lexical_concepts(self):
-        if self.type == 'gloss':
-            res = []
-            s = ''
-            for ge in self.gloss_elements:
-                if isinstance(ge, (GlossElementAfterColon, GlossElementAfterSemicolon)):
-                    # Something new is starting.
-                    if s:
-                        res.append(s)
-                    if not ge.is_category_label:
-                        s = str(ge)
-                else:
-                    if s:
-                        s += ' '
-                    s += str(ge)
-            if s:
-                res.append(s)
-            return [s.replace('_', ' ') for s in res]
-
-
-class MorphemeAfterEquals(Morpheme):
-    """
-    Rule 2. Clitics are separated by "=".
-    """
-    sep = '='
-
-
-class MorphemeAfterTilde(Morpheme):
-    """
-    Rule 10. Reduplication is separated by "~".
-    """
-    sep = '~'
-
-
-class MorphemeList(list):
-    def __str__(self):
-        s = ''
-        for m in self:
-            if s:
-                s += m.sep
-            s += str(m)
-        return s
-
-    @classmethod
-    def from_string(cls, s, type_):
-        assert type_ in ['word', 'gloss']
-        classes = {Morpheme.sep: Morpheme}
-        for c in Morpheme.__subclasses__():
-            assert c.sep not in classes
-            classes[c.sep] = c
         res = []
-        e, c = '', Morpheme
-        for t in s:
-            if t in classes:
-                if c:
-                    res.append(c(e))
-                e, c = '', classes[t]
+        s = ''
+        for ge in self.gloss.elements:
+            if isinstance(ge, (GlossElementAfterColon, GlossElementAfterSemicolon)):
+                # Something new is starting.
+                if s:
+                    res.append(s)
+                if not ge.is_category_label:
+                    s = str(ge)
             else:
-                e += t
-        if e:
-            res.append(c(e))
-        p = None
-        for e in res:
-            e.type = type_
-            e.prev = p
-            if p:
-                p.next = e
-            p = e
-        return cls(res)
+                if s:
+                    s += ' '
+                s += str(ge)
+        if s:
+            res.append(s)
+        return [s.replace('_', ' ') for s in res]
 
 
 @attr.s
 class GlossedWord(object):
+    """
+    A (word, gloss) pair, corresponding to two aligned items from IGT according to LGR.
+
+    Provides list-like access to its `GlossedMorpheme`s.
+    """
     word = attr.ib()
     gloss = attr.ib()
-    word_morphemes = attr.ib(default=attr.Factory(list))
-    gloss_morphemes = attr.ib(default=attr.Factory(list))
-    strict = attr.ib(default=True)
+    glossed_morphemes = attr.ib(default=attr.Factory(list))
+    strict = attr.ib(default=False)
+    is_valid = attr.ib(default=True)
 
     def __attrs_post_init__(self):
-        ww, gg = split_morphemes(self.word), split_morphemes(self.gloss)
-        if self.strict and not len(ww) == len(gg):
-            raise ValueError(
-                'Morpheme separator mismatch: {} :: {}'.format(self.word, self.gloss))
-        for w, g in zip(ww, gg):
-            if w in MORPHEME_SEPARATORS and w != g:
+        mm, gg = split_morphemes(self.word), split_morphemes(self.gloss)
+        if len(mm) != len(gg):
+            if self.strict:
                 raise ValueError(
                     'Morpheme separator mismatch: {} :: {}'.format(self.word, self.gloss))
-        self.word_morphemes = MorphemeList.from_string(self.word, 'word')
-        self.gloss_morphemes = MorphemeList.from_string(self.gloss, 'gloss')
+            else:
+                self.is_valid = False
+        sep, prev = None, None
+        for m, g in zip(mm, gg):
+            if m in MORPHEME_SEPARATORS:
+                if m != g:
+                    if self.strict:
+                        raise ValueError(
+                            'Morpheme separator mismatch: {} :: {}'.format(self.word, self.gloss))
+                    else:
+                        self.is_valid = False
+                        break
+                sep = m
+            else:
+                assert m and g
+                gm = GlossedMorpheme(m, g, sep=sep)
+                self.glossed_morphemes.append(gm)
+                if prev:
+                    prev.next = gm
+                    gm.prev = prev
+                prev = gm
 
-    @property
-    def glossed_morphemes(self):
-        return list(zip(self.word_morphemes, self.gloss_morphemes))
+    def __iter__(self):
+        return iter(self.glossed_morphemes)
+
+    def __getitem__(self, item):
+        return self.glossed_morphemes[item]
+
+    def __len__(self):
+        return len(self.glossed_morphemes)
 
     @property
     def stripped_word(self):
@@ -301,10 +303,12 @@ class GlossedWord(object):
             c for c in self.word if
             unicodedata.category(c) not in {'Po', 'Pf', 'Ps', 'Pd', 'Pe', 'Sm'})
 
+    @property
+    def word_from_morphemes(self):
+        return ''.join(itertools.chain(
+            *[(gm.sep if gm.prev else '', str(gm.morpheme.elements)) for gm in self]))
 
-# Now we can define the list of morpheme separators:
-MORPHEME_SEPARATORS = [cls.sep for cls in [Morpheme] + Morpheme.__subclasses__()]
-
-
-def split_morphemes(s):
-    return re.split('({})'.format('|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)), s)
+    @property
+    def gloss_from_morphemes(self):
+        return ''.join(itertools.chain(
+            *[(gm.sep if gm.prev else '', str(gm.gloss.elements)) for gm in self]))

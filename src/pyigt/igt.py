@@ -222,8 +222,8 @@ class IGT(object):
     def gloss_abbrs(self):
         res = collections.OrderedDict()
         for gw in self.glossed_words:
-            for g in gw.gloss_morphemes:
-                for element in g.gloss_elements:
+            for gm in gw:
+                for element in gm.gloss.elements:
                     print(element)
                     if self.spec.is_grammatical_gloss_label(str(element)):
                         if element in self.abbrs:
@@ -256,9 +256,9 @@ class IGT(object):
         """
         if not isinstance(item, tuple):
             gw = self.glossed_words[item]
-            return (gw.word, gw.gloss)
-        gw = self.glossed_words[item[0]]
-        return (str(gw.word_morphemes[item[1]]), str(gw.gloss_morphemes[item[1]]))
+            return gw.word, gw.gloss
+        gm = self.glossed_words[item[0]][item[1]]
+        return gm.morpheme, gm.gloss
 
     def is_valid(self, strict=False):
         try:
@@ -298,7 +298,7 @@ class IGT(object):
     def primary_text(self):
         words = []
         for gw in self.glossed_words:
-            words.append(''.join(m for m in gw.word_morphemes if m != NON_OVERT_ELEMENT))
+            words.append(''.join(gm.morpheme for gm in gw if gm.morpheme != NON_OVERT_ELEMENT))
         return ' '.join(words)
 
     @property
@@ -330,10 +330,10 @@ class Corpus(object):
             if not igt.is_valid():
                 continue
             for i, gw in enumerate(igt.glossed_words):
-                if len(gw.word_morphemes) != len(gw.gloss_morphemes):
+                if not gw.is_valid:
                     continue
-                for j, (morpheme, concept) in enumerate(zip(gw.word_morphemes, gw.gloss_morphemes)):
-                    morpheme, concept = str(morpheme), str(concept)
+                for j, gm in enumerate(gw):
+                    morpheme, concept = str(gm.morpheme), str(gm.gloss)
                     morpheme = self.spec.strip_punctuation(morpheme)
                     if not morpheme:
                         continue

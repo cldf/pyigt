@@ -126,11 +126,15 @@ And you can go deeper, parsing morphemes and glosses according to the LGR
 (see module [pyigt.lgrmorphemes](src/pyigt/lgrmorphemes.py)):
 
 ```python
->>> igt = IGT(phrase="zəp-le: ȵi-ke: pe-ji qeʴlotʂu-ʁɑ,", gloss="earth-DEF:CL WH-INDEF:CL become-CSM in.the.past-LOC")
->>> igt.glossed_words[1].gloss_morphemes
-[<Morpheme "WH">, <Morpheme "INDEF:CL">]
->>> igt.glossed_words[1].gloss_morphemes[1].gloss_elements
-[<GlossElement "INDEF">, <GlossElementAfterColon "CL">]
+>> > igt = IGT(phrase="zəp-le: ȵi-ke: pe-ji qeʴlotʂu-ʁɑ,", gloss="earth-DEF:CL WH-INDEF:CL become-CSM in.the.past-LOC")
+>> > igt.glossed_words[1].gloss_morphemes
+[ < Morpheme
+"WH" >, < Morpheme
+"INDEF:CL" >]
+>> > igt.glossed_words[1].gloss_morphemes[1].elements
+[ < GlossElement
+"INDEF" >, < GlossElementAfterColon
+"CL" >]
 ```
 
 
