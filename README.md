@@ -124,15 +124,13 @@ now     they-OBL-GEN  farm     forever      behind    stay-FUT-NEG
 
 And you can go deeper, parsing morphemes and glosses according to the LGR 
 (see module [pyigt.lgrmorphemes](src/pyigt/lgrmorphemes.py)):
+
 ```python
 >>> igt = IGT(phrase="zəp-le: ȵi-ke: pe-ji qeʴlotʂu-ʁɑ,", gloss="earth-DEF:CL WH-INDEF:CL become-CSM in.the.past-LOC")
->>> gws = igt.glossed_word_objects
->>> gws[1].glossed_morphemes
-[(<Morpheme "?i">, <Morpheme "WH">), (<Morpheme "ke:">, <Morpheme "INDEF:CL">)]
->>> gws[1].glossed_morphemes[1][1].gloss_elements
-[<GlossElement "INDEF">, <HiddenMorphemeGlossElement "CL">]
->>> gws[1].glossed_morphemes[1][1].gloss_elements[0].is_standard_abbreviation
-False
+>>> igt.glossed_words[1].gloss_morphemes
+[<Morpheme "WH">, <Morpheme "INDEF:CL">]
+>>> igt.glossed_words[1].gloss_morphemes[1].gloss_elements
+[<GlossElement "INDEF">, <GlossElementAfterColon "CL">]
 ```
 
 

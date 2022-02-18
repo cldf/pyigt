@@ -3,6 +3,7 @@ Support for parsing the notation for morpheme/gloss structure proposed by the
 Leipzig Glossing Rules.
 """
 import re
+import unicodedata
 
 import attr
 
@@ -13,7 +14,8 @@ __all__ = [
     'GlossElement', 'Infix', 'GlossElementAfterSemicolon', 'GlossElementAfterColon',
     'GlossElementAfterBackslash', 'PatientlikeArgument', 'NonovertElement', 'InherentCategory',
     # Types of morphemes:
-    'Morpheme', 'MorphemeAfterEquals', 'MorphemeAfterTilde',
+    'Morpheme', 'MorphemeAfterEquals', 'MorphemeAfterTilde', 'MORPHEME_SEPARATORS',
+    'split_morphemes',
     # Wrapper
     'GlossedWord',
 ]
@@ -111,12 +113,22 @@ class GlossElements(list):
     def __str__(self):
         s, prev_enclosed = '', False
         for ge in self:
-            if (s and not prev_enclosed) or ge.end:
-                s += ge.start
-            s += str(ge)
-            if ge.end:
+            if prev_enclosed and ge.end:
+                # Another enclosed element!
+                assert prev_enclosed == ge.end
+                if s:
+                    # Remove the prematurely appended end marker:
+                    s = s[:-1]
+                s += GlossElement.start
+                s += ge
                 s += ge.end
-            prev_enclosed = bool(ge.end)
+            else:
+                if (s and not prev_enclosed) or ge.end:
+                    s += ge.start
+                s += str(ge)
+                if ge.end:
+                    s += ge.end
+            prev_enclosed = ge.end
         return s
 
     @staticmethod
@@ -141,7 +153,8 @@ class GlossElements(list):
                     while cc != cls.end:
                         e += cc
                         cc = s.pop()
-                    yield cls(e)
+                    for ee in e.split(GlossElement.start):
+                        yield cls(ee)
                     e, cls = '', GlossElement
             else:
                 e += c
@@ -229,16 +242,36 @@ class MorphemeList(list):
 class GlossedWord(object):
     word = attr.ib()
     gloss = attr.ib()
+    strict = attr.ib(default=False)
     word_morphemes = attr.ib(default=attr.Factory(list))
     gloss_morphemes = attr.ib(default=attr.Factory(list))
 
     def __attrs_post_init__(self):
-        for sep in '-=~':
-            # Rule 2 and 10.
-            assert self.word.count(sep) == self.gloss.count(sep)
+        ww, gg = split_morphemes(self.word), split_morphemes(self.gloss)
+        if self.strict and not len(ww) == len(gg):
+            raise ValueError(
+                'Morpheme separator mismatch: {} :: {}'.format(self.word, self.gloss))
+        for w, g in zip(ww, gg):
+            if w in MORPHEME_SEPARATORS and w != g:
+                raise ValueError(
+                    'Morpheme separator mismatch: {} :: {}'.format(self.word, self.gloss))
         self.word_morphemes = MorphemeList.from_string(self.word, 'word')
         self.gloss_morphemes = MorphemeList.from_string(self.gloss, 'gloss')
 
     @property
     def glossed_morphemes(self):
         return list(zip(self.word_morphemes, self.gloss_morphemes))
+
+    @property
+    def stripped_word(self):
+        return ''.join(
+            c for c in self.word if
+            unicodedata.category(c) not in {'Po', 'Pf', 'Ps', 'Pd', 'Pe', 'Sm'})
+
+
+# Now we can define the list of morpheme separators:
+MORPHEME_SEPARATORS = [cls.sep for cls in [Morpheme] + Morpheme.__subclasses__()]
+
+
+def split_morphemes(s):
+    return re.split('({})'.format('|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)), s)

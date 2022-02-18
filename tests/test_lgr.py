@@ -12,7 +12,7 @@ def test_standard_abbrs():
 def assert_is_valid(phrase, gloss, **kw):
     igt = IGT(phrase=phrase, gloss=gloss, **kw)
     assert igt.is_valid(strict=True)
-    for gw in igt.glossed_word_objects:
+    for gw in igt.glossed_words:
         # Make sure we can roundtrip the string representations, thereby checking the parsing.
         assert str(gw.word_morphemes) == gw.word
         assert str(gw.gloss_morphemes) == gw.gloss
@@ -41,7 +41,7 @@ def test_rule2(capsys):
     assert 'oblique' in capsys.readouterr()[0]
 
     igt = assert_is_valid("palasi=lu niuirtur=lu", "priest=and shopkeeper=and")
-    assert len(igt.glossed_morphemes[0][0]) == 2
+    assert len(igt.glossed_words[0].word_morphemes) == 2
 
     assert_is_valid("a-nii -láay", "3SG-laugh-FUT")
 
@@ -92,7 +92,7 @@ def test_rule4():
     assert_is_valid('nanggayan   guny-bi-yarluga?', 'who         2DU.A.3SG.P-FUT-poke')
 
     igt = assert_is_valid('çık-mak', 'come_out-INF')
-    assert igt.glossed_morphemes[0][0][1] == 'come_out'
+    assert str(igt.glossed_words[0].gloss_morphemes[0]) == 'come_out'
 
     igt = assert_is_valid('insul-arum', 'island-GEN;PL')
     assert 'PL' in igt.gloss_abbrs

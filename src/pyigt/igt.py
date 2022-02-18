@@ -19,7 +19,7 @@ from pycldf import Dataset
 import pycldf
 
 from pyigt.util import expand_standard_abbr
-from pyigt.lgrmorphemes import GlossedWord
+from pyigt.lgrmorphemes import GlossedWord, split_morphemes, MORPHEME_SEPARATORS
 
 __all__ = ['IGT', 'Corpus', 'CorpusSpec']
 
@@ -29,7 +29,7 @@ NON_OVERT_ELEMENT = '∅'
 def _morpheme_and_infixes(m):
     morpheme, infixes, infix, in_infix = [], [], [], False
 
-    if m.startswith('<'):
+    if m.startswith('<'):  # pragma: no cover
         morpheme.append('')
 
     for c in m:
@@ -54,15 +54,12 @@ def _morpheme_and_infixes(m):
 
 def iter_morphemes(s, split_infixes=True):
     """
-    Split word into morphemes following the Leipzig Glossing Rules:
-    - `-` and `=` (for clitics) separate morphemes, see LGR rule 2.
-    - `~` splits reduplicated morphemes, see LGR rule 10.
-    - `<` and `>` enclose infixes, see LGR rule 9.
+    Split word into morphemes following the Leipzig Glossing Rules.
     """
     morpheme, separator = [], None
 
     for c in s:
-        if c in {'-', '=', '~'}:
+        if c in MORPHEME_SEPARATORS:
             if split_infixes:
                 yield from _morpheme_and_infixes(''.join(morpheme))
             else:
@@ -128,6 +125,10 @@ class CorpusSpec(object):
 
 
 def parse_phrase(p):
+    """
+    We must take LGR Rule 2A into account, i.e. attach morphemes separated by " -" to the
+    preceding word.
+    """
     if isinstance(p, str):
         rule2a = re.compile(r'([^\s]+) -')
         return [
@@ -158,14 +159,9 @@ class IGT(object):
     translation = attr.ib(default=None)
     spec = attr.ib(default=CorpusSpec())
     abbrs = attr.ib(validator=attr.validators.instance_of(dict), default=attr.Factory(dict))
+    strict = attr.ib(default=False)
 
     def __attrs_post_init__(self):
-        self.phrase_segmented = [nfilter(self.spec.split_morphemes(m)) for m in self.phrase]
-        self.gloss_segmented = [nfilter(self.spec.split_morphemes(m)) for m in self.gloss]
-        self.phrase_segmented2 = [
-            nfilter(self.spec.split_morphemes(m, split_infixes=False)) for m in self.phrase]
-        self.gloss_segmented2 = [
-            nfilter(self.spec.split_morphemes(m, split_infixes=False)) for m in self.gloss]
         if self.translation:
             p = re.compile(r'\((?P<abbrs>((\s*,\s*)?[A-Z][A-Z0-9]*\s*=\s*[^,)]+)+)\)')
             abbrs = p.search(self.translation)
@@ -184,34 +180,56 @@ class IGT(object):
 
     @property
     def glossed_words(self):
-        return list(zip(self.phrase, self.gloss))
+        return [GlossedWord(w, g, strict=self.strict) for w, g in zip(self.phrase, self.gloss)]
 
     @property
-    def glossed_word_objects(self):
-        return [GlossedWord(w, g) for w, g in self.glossed_words]
-
-    @property
-    def glossed_morphemes(self):
+    def prosodic_words(self):
+        """
+        1. Split prosodically free elements marked with " -" separator.
+        2. Conflate clitics.
+        """
         res = []
-        for word, word_gloss in zip(self.phrase_segmented2, self.gloss_segmented2):
-            morpheme_glosses = []
-            for (_, m), (_, g) in zip(word, word_gloss):
-                morpheme_glosses.append((m, g))
-            res.append(morpheme_glosses)
+        for w, g in zip(self.phrase, self.gloss):
+            word, gloss = '', ''
+            morphemes = split_morphemes(w)
+            morpheme_glosses = split_morphemes(g)
+            for wm, gm in zip(morphemes, morpheme_glosses):
+                if wm == '-' and word and word[-1] == ' ':
+                    assert gm == '-'
+                    res.append(GlossedWord(word.strip(), gloss, strict=self.strict))
+                    word, gloss = '', ''
+                else:
+                    word += wm
+                    gloss += gm
+            if word:
+                res.append(GlossedWord(word, gloss, strict=self.strict))
+        return res
+
+    @property
+    def morphosyntactic_words(self):
+        """
+        1. Conflate prosodically free elements marked with " -" separator.
+        2. Split clitics into separate words.
+        """
+        res = []
+        for w, g in zip(self.phrase, self.gloss):
+            res.extend([
+                GlossedWord(ww, gg, strict=self.strict)
+                for ww, gg in zip(w.split('='), g.split('='))])
         return res
 
     @property
     def gloss_abbrs(self):
         res = collections.OrderedDict()
-        for word in self.glossed_morphemes:
-            for m, g in word:
-                for element in re.split(r'[.;:\\<>()\[\]]', g):
-                    if element:
-                        if self.spec.is_grammatical_gloss_label(element):
-                            if element in self.abbrs:
-                                res[element] = self.abbrs[element]
-                            else:
-                                res[element] = expand_standard_abbr(element)
+        for gw in self.glossed_words:
+            for g in gw.gloss_morphemes:
+                for element in g.gloss_elements:
+                    print(element)
+                    if self.spec.is_grammatical_gloss_label(str(element)):
+                        if element in self.abbrs:
+                            res[element] = self.abbrs[element]
+                        else:
+                            res[element] = expand_standard_abbr(element)
         return res
 
     def __str__(self):
@@ -237,8 +255,10 @@ class IGT(object):
         :return: (word, gloss) or (morpheme, gloss) pair
         """
         if not isinstance(item, tuple):
-            return self.glossed_words[item]
-        return self.glossed_morphemes[item[0]][item[1]]
+            gw = self.glossed_words[item]
+            return (gw.word, gw.gloss)
+        gw = self.glossed_words[item[0]]
+        return (str(gw.word_morphemes[item[1]]), str(gw.gloss_morphemes[item[1]]))
 
     def is_valid(self, strict=False):
         try:
@@ -259,20 +279,16 @@ class IGT(object):
             raise ValueError(
                 'Rule 1 violated: Number of words does not match number of word glosses!')
         if strict:
-            for i, (m, g) in enumerate(zip(self.phrase_segmented2, self.gloss_segmented2)):
-                if len(m) != len(g):
+            for i, (m, g) in enumerate(zip(self.phrase, self.gloss)):
+                try:
+                    GlossedWord(m, g, strict=True)
+                except ValueError:
                     if verbose:
                         print(self.phrase[i])
                         print(self.gloss[i])
                     raise ValueError(
                         'Rule 2 violated: Number of morphemes does not match number of morpheme '
                         'glosses!')
-                if [mm[0] for mm in m] != [gg[0] for gg in g]:
-                    if verbose:
-                        print(self.phrase[i])
-                        print(self.gloss[i])
-                    raise ValueError(
-                        'Rule 2 or 10 violated: Mismatch of element separators in word and gloss!')
 
     @property
     def phrase_text(self):
@@ -280,8 +296,10 @@ class IGT(object):
 
     @property
     def primary_text(self):
-        return ' '.join(''.join(
-            m[0] for m in w if m[0] != NON_OVERT_ELEMENT) for w in self.glossed_morphemes)
+        words = []
+        for gw in self.glossed_words:
+            words.append(''.join(m for m in gw.word_morphemes if m != NON_OVERT_ELEMENT))
+        return ' '.join(words)
 
     @property
     def gloss_text(self):
@@ -311,10 +329,11 @@ class Corpus(object):
         for idx, igt in self._igts.items():
             if not igt.is_valid():
                 continue
-            for i, (w, m) in enumerate(zip(igt.phrase_segmented, igt.gloss_segmented)):
-                if len(w) != len(m):
+            for i, gw in enumerate(igt.glossed_words):
+                if len(gw.word_morphemes) != len(gw.gloss_morphemes):
                     continue
-                for j, (morpheme, concept) in enumerate(zip(w, m)):
+                for j, (morpheme, concept) in enumerate(zip(gw.word_morphemes, gw.gloss_morphemes)):
+                    morpheme, concept = str(morpheme), str(concept)
                     morpheme = self.spec.strip_punctuation(morpheme)
                     if not morpheme:
                         continue
@@ -433,9 +452,9 @@ class Corpus(object):
     def get_stats(self):
         wordc, morpc = 0, 0
         for igt in self:
-            for word in igt.phrase_segmented:
+            for word in igt.phrase:
                 wordc += 1
-                morpc += len(word)
+                morpc += len(self.spec.split_morphemes(word))
         return len(self._igts), wordc, morpc
 
     def write_concordance(self, ctype, filename=None):
@@ -510,12 +529,14 @@ class Corpus(object):
             if not igt.is_valid() and level >= 1:
                 print('[{0} : first level {1}]'.format(idx, count))
                 print(igt.phrase)
-                print(igt.gloss_segmented)
+                print(igt.gloss)
                 print('---')
                 count += 1
             if level >= 2:
-                for i, (w, m) in enumerate(zip(igt.phrase_segmented, igt.gloss_segmented), start=1):
-                    if len(w) != len(m):
+                for i, (w, m) in enumerate(zip(igt.phrase, igt.gloss), start=1):
+                    try:
+                        GlossedWord(w, m, strict=True)
+                    except ValueError:
                         print('[{0}:{1} : second level {2}]'.format(idx, i, count))
                         print(w)
                         print(m)

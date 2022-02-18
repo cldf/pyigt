@@ -19,5 +19,6 @@ def test_agentlikeargument():
 
 
 def test_GlossedWord():
-    gw = GlossedWord('insul-arum', 'island-GEN;PL')
+    gw = GlossedWord('insul-ar(u)m.', 'island-GEN;PL')
     assert len(gw.glossed_morphemes) == 2
+    assert gw.stripped_word == 'insularum'
