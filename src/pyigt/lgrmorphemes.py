@@ -10,10 +10,10 @@ from pyigt.util import is_standard_abbr
 
 __all__ = [
     # Types of morpheme gloss elements:
-    'GlossElement', 'Infix', 'DistinctGlossElement', 'HiddenMorphemeGlossElement',
-    'MorphophonologicalChange', 'PatientlikeArgument', 'NonovertElement', 'InherentCategory',
+    'GlossElement', 'Infix', 'GlossElementAfterSemicolon', 'GlossElementAfterColon',
+    'GlossElementAfterBackslash', 'PatientlikeArgument', 'NonovertElement', 'InherentCategory',
     # Types of morphemes:
-    'Morpheme', 'Clitic', 'Reduplication',
+    'Morpheme', 'MorphemeAfterEquals', 'MorphemeAfterTilde',
     # Wrapper
     'GlossedWord',
 ]
@@ -57,21 +57,21 @@ class Infix(GlossElement, str):
     in_gloss_only = False
 
 
-class DistinctGlossElement(GlossElement):
+class GlossElementAfterSemicolon(GlossElement):
     """
     Rule 4B. Distinct gloss elements can be separated by ";".
     """
     start = ';'
 
 
-class HiddenMorphemeGlossElement(GlossElement):
+class GlossElementAfterColon(GlossElement):
     """
     Rule 4C. Gloss element corresponding to "hidden" object language elements are separated by ":".
     """
     start = ':'
 
 
-class MorphophonologicalChange(GlossElement):
+class GlossElementAfterBackslash(GlossElement):
     """
     Rule 4D. Morphophonological change is marked with a leading "\".
     """
@@ -179,14 +179,14 @@ class Morpheme(str):
         return GlossElements.from_morpheme(str(self), self.type)
 
 
-class Clitic(Morpheme):
+class MorphemeAfterEquals(Morpheme):
     """
     Rule 2. Clitics are separated by "=".
     """
     sep = '='
 
 
-class Reduplication(Morpheme):
+class MorphemeAfterTilde(Morpheme):
     """
     Rule 10. Reduplication is separated by "~".
     """
