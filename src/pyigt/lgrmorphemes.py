@@ -213,11 +213,11 @@ class Morpheme(str):
                         s = str(ge)
                 else:
                     if s:
-                        s += '_'
+                        s += ' '
                     s += str(ge)
             if s:
                 res.append(s)
-            return res
+            return [s.replace('_', ' ') for s in res]
 
 
 class MorphemeAfterEquals(Morpheme):
@@ -275,9 +275,9 @@ class MorphemeList(list):
 class GlossedWord(object):
     word = attr.ib()
     gloss = attr.ib()
-    strict = attr.ib(default=False)
     word_morphemes = attr.ib(default=attr.Factory(list))
     gloss_morphemes = attr.ib(default=attr.Factory(list))
+    strict = attr.ib(default=True)
 
     def __attrs_post_init__(self):
         ww, gg = split_morphemes(self.word), split_morphemes(self.gloss)

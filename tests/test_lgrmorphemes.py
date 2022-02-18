@@ -11,7 +11,7 @@ def test_Morpheme_lexical_concepts():
     m = Morpheme('to.run;to_walk')
     assert m.lexical_concepts is None
     m.type = 'gloss'
-    assert m.lexical_concepts == ['to_run', 'to_walk']
+    assert m.lexical_concepts == ['to run', 'to walk']
 
 
 def test_agentlikeargument():
