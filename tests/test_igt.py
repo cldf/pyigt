@@ -3,6 +3,7 @@ import pathlib
 import pytest
 
 from pyigt.igt import *
+from pyigt.igt import iter_morphemes
 
 
 @pytest.fixture
@@ -33,8 +34,7 @@ def test_CorpusSpec_split_morphemes(word, morphemes):
 
 
 def test_CorpusSpec_split_morphemes_invalid():
-    with pytest.raises(ValueError):
-        CorpusSpec().split_morphemes('a<b-c>d')
+    assert CorpusSpec().split_morphemes('a<b-c>d') == ['a<b', 'c>d']
 
 
 def test_CorpusSpec_split_morphemes_simple():
@@ -74,6 +74,14 @@ def test_IGT():
     assert igt.primary_text == 'a1 b2 c3'
     assert igt.gloss_text == 'A-1 B-2 C-3'
     assert not IGT(id=1, phrase=[], gloss=['1'], properties={}).is_valid()
+
+
+def test_IGT_words():
+    igt = IGT(phrase='a=bcd -e', gloss='a=bcd-e', strict=True)
+    assert igt.prosodic_words[0].word == 'a=bcd' == igt.prosodic_words[0].gloss
+    assert igt.prosodic_words[1].word == 'e'
+    assert igt.morphosyntactic_words[0].word == 'a' == igt.morphosyntactic_words[0].gloss
+    assert igt.morphosyntactic_words[1].word == 'bcd -e'
 
 
 def test_Corpus_from_path(fixtures):
@@ -173,3 +181,8 @@ def test_multilingual(multilingual_dataset, capsys):
     corpus.write_concepts('grammar')
     out, _ = capsys.readouterr()
     assert 'macu1259: ' in out
+
+
+def test_iter_morphemes():
+    assert list(iter_morphemes('<a>-b=c~d', split_infixes=False)) == [
+        (None, '<a>'), ('-', 'b'), ('=', 'c'), ('~', 'd')]
