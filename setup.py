@@ -5,7 +5,7 @@ import codecs
 setup(
     name='pyigt',
     description="A Python library for handling inter-linear-glossed text.",
-    version='1.2.0',
+    version='1.2.1.dev0',
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
