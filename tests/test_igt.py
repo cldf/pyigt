@@ -84,6 +84,11 @@ def test_IGT_words():
     assert igt.morphosyntactic_words[1].word == 'bcd -e'
 
 
+def test_IGT_malformed():
+    igt = IGT(phrase='a--b', gloss='A--B')
+    assert str(igt).startswith('ab')
+
+
 def test_Corpus_from_path(fixtures):
     assert len(Corpus.from_path(fixtures / 'cldf-metadata.json')) == len(
         Corpus.from_path(str(fixtures / 'examples.csv')))

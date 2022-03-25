@@ -18,7 +18,7 @@ __all__ = [
     'GlossElement', 'Infix', 'GlossElementAfterSemicolon', 'GlossElementAfterColon',
     'GlossElementAfterBackslash', 'PatientlikeArgument', 'NonovertElement', 'InherentCategory',
     # Types of morphemes:
-    'Morpheme', 'MORPHEME_SEPARATORS', 'split_morphemes',
+    'Morpheme', 'MORPHEME_SEPARATORS', 'split_morphemes', 'remove_morpheme_separators',
     # Wrapper
     'GlossedWord',
 ]
@@ -31,6 +31,10 @@ MORPHEME_SEPARATORS = [
 
 def split_morphemes(s):
     return re.split('({})'.format('|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)), s)
+
+
+def remove_morpheme_separators(s):
+    return ''.join(ss for ss in split_morphemes(s) if ss not in MORPHEME_SEPARATORS)
 
 
 class GlossElement(str):

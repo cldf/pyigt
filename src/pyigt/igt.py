@@ -19,7 +19,9 @@ from pycldf import Dataset
 import pycldf
 
 from pyigt.util import expand_standard_abbr
-from pyigt.lgrmorphemes import GlossedWord, split_morphemes, MORPHEME_SEPARATORS
+from pyigt.lgrmorphemes import (
+    GlossedWord, split_morphemes, MORPHEME_SEPARATORS, remove_morpheme_separators,
+)
 
 __all__ = ['IGT', 'Corpus', 'CorpusSpec']
 
@@ -296,10 +298,13 @@ class IGT(object):
 
     @property
     def primary_text(self):
-        words = []
-        for gw in self.glossed_words:
-            words.append(''.join(gm.morpheme for gm in gw if gm.morpheme != NON_OVERT_ELEMENT))
-        return ' '.join(words)
+        try:
+            words = []
+            for gw in self.glossed_words:
+                words.append(''.join(gm.morpheme for gm in gw if gm.morpheme != NON_OVERT_ELEMENT))
+            return ' '.join(words)
+        except AssertionError:
+            return remove_morpheme_separators(self.phrase_text)
 
     @property
     def gloss_text(self):
