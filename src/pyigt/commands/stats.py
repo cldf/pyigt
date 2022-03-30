@@ -8,6 +8,7 @@ from pyigt.cli_util import add_corpus, get_corpus
 
 def register(parser):
     add_corpus(parser)
+    parser.add_argument('--verbose', action='store_true', default=False)
 
 
 def run(args):
@@ -25,3 +26,8 @@ def run(args):
             for k in igt.properties.keys():
                 print('  ' + k)
             break
+
+    if args.verbose:
+        print('\nLGR Conformance:')
+        for k, v in corpus.get_lgr_conformance_stats().most_common():
+            print(k, v)

@@ -164,9 +164,9 @@ class GlossElements(list):
                     # That is required for infixes, but otherwise not mentioned in LGR.
                     yield cls(e)
                 e, cls = '', classes[c]
-                if cls.end:  # Consume the characters up to the end marker.
+                if s and cls.end:  # Consume the characters up to the end marker.
                     cc = s.pop()
-                    while cc != cls.end:
+                    while s and (cc != cls.end):
                         e += cc
                         cc = s.pop()
                     for ee in e.split(GlossElement.start):

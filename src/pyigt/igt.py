@@ -1,4 +1,5 @@
 import re
+import enum
 import json
 import shutil
 import pathlib
@@ -23,9 +24,16 @@ from pyigt.lgrmorphemes import (
     GlossedWord, split_morphemes, MORPHEME_SEPARATORS, remove_morpheme_separators,
 )
 
-__all__ = ['IGT', 'Corpus', 'CorpusSpec']
+__all__ = ['IGT', 'Corpus', 'CorpusSpec', 'LGRConformance']
 
 NON_OVERT_ELEMENT = '∅'
+
+
+@enum.unique
+class LGRConformance(enum.IntEnum):
+    MORPHEME_ALIGNED = 2
+    WORD_ALIGNED = 1
+    UNALIGNED = 0
 
 
 def _morpheme_and_infixes(m):
@@ -226,12 +234,13 @@ class IGT(object):
         for gw in self.glossed_words:
             for gm in gw:
                 for element in gm.gloss.elements:
-                    print(element)
-                    if self.spec.is_grammatical_gloss_label(str(element)):
+                    # We disregard "I".
+                    if element != 'I' and self.spec.is_grammatical_gloss_label(str(element)):
                         if element in self.abbrs:
                             res[element] = self.abbrs[element]
                         else:
-                            res[element] = expand_standard_abbr(element)
+                            desc = expand_standard_abbr(element)
+                            res[element] = desc if desc != element else None
         return res
 
     def __str__(self):
@@ -262,11 +271,19 @@ class IGT(object):
         gm = self.glossed_words[item[0]][item[1]]
         return gm.morpheme, gm.gloss
 
+    @property
+    def conformance(self):
+        if self.is_valid(strict=True):
+            return LGRConformance.MORPHEME_ALIGNED
+        if self.is_valid():
+            return LGRConformance.WORD_ALIGNED
+        return LGRConformance.UNALIGNED
+
     def is_valid(self, strict=False):
         try:
             self.check(strict=strict)
             return True
-        except ValueError:
+        except (ValueError, AssertionError):
             return False
 
     def check(self, strict=False, verbose=False):
@@ -332,11 +349,11 @@ class Corpus(object):
         # Since changing the IGTs in the corpus is not allowed, we can compute concordances right
         # away.
         for idx, igt in self._igts.items():
-            if not igt.is_valid():
+            if not igt.is_valid(strict=True):
                 continue
             for i, gw in enumerate(igt.glossed_words):
                 if not gw.is_valid:
-                    continue
+                    continue  # pragma: no cover
                 for j, gm in enumerate(gw):
                     morpheme, concept = str(gm.morpheme), str(gm.gloss)
                     morpheme = self.spec.strip_punctuation(morpheme)
@@ -461,6 +478,9 @@ class Corpus(object):
                 wordc += 1
                 morpc += len(self.spec.split_morphemes(word))
         return len(self._igts), wordc, morpc
+
+    def get_lgr_conformance_stats(self):
+        return collections.Counter([igt.conformance for igt in self])
 
     def write_concordance(self, ctype, filename=None):
         with UnicodeWriter(filename, delimiter='\t') as w:

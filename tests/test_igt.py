@@ -76,6 +76,12 @@ def test_IGT():
     assert not IGT(id=1, phrase=[], gloss=['1'], properties={}).is_valid()
 
 
+def test_IGT_conformance():
+    assert IGT(phrase='a b', gloss='a').conformance == LGRConformance.UNALIGNED
+    assert IGT(phrase='a b', gloss='a b-c').conformance == LGRConformance.WORD_ALIGNED
+    assert IGT(phrase='a b=c', gloss='a b=c').conformance == LGRConformance.MORPHEME_ALIGNED
+
+
 def test_IGT_words():
     igt = IGT(phrase='a=bcd -e', gloss='a=bcd-e', strict=True)
     assert igt.prosodic_words[0].word == 'a=bcd' == igt.prosodic_words[0].gloss
@@ -112,6 +118,11 @@ def test_Corpus_get_stats(corpus):
     c = Corpus([IGT(id=1, phrase=['a', 'b-c'], gloss=['A'], properties={})])
     e, w, m = c.get_stats()
     assert e == 1 and w == 2 and m == 3
+
+
+def test_Corpus_invalid_igts():
+    c = Corpus([IGT(id=1, phrase='a b-c', gloss='a b--c')])
+    assert not c.get_concepts()
 
 
 def test_Corpus_concordance_invalid():

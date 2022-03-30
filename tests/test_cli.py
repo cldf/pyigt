@@ -34,3 +34,6 @@ def test_stats(metadata_path, capsys):
     main(['stats', str(metadata_path)])
     out, _ = capsys.readouterr()
     assert 'Text_ID' in out
+    main(['stats', str(metadata_path), '--verbose'])
+    out, _ = capsys.readouterr()
+    assert 'LGR Conformance' in out
