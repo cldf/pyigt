@@ -71,7 +71,6 @@ cypress-tree  one-CL-LOC  DIR-hide-because-ADV
 ```
 
 
-
 ### Python API
 
 You can read all IGT examples provided with an CLDF dataset
@@ -127,14 +126,16 @@ And you can go deeper, parsing morphemes and glosses according to the LGR
 
 ```python
 >>> igt = IGT(phrase="zəp-le: ȵi-ke: pe-ji qeʴlotʂu-ʁɑ,", gloss="earth-DEF:CL WH-INDEF:CL become-CSM in.the.past-LOC")
->>> igt.glossed_words[1].gloss_morphemes
-[ < Morpheme
-"WH" >, < Morpheme
-"INDEF:CL" >]
->>> igt.glossed_words[1].gloss_morphemes[1].elements
-[ < GlossElement
-"INDEF" >, < GlossElementAfterColon
-"CL" >]
+>>> igt.conformance
+<LGRConformance.MORPHEME_ALIGNED: 2>
+>>> igt.glossed_words[1].glossed_morphemes[1].gloss
+<Morpheme "INDEF:CL">
+>>> igt.glossed_words[1].glossed_morphemes[1].gloss.elements
+[<GlossElement "INDEF">, <GlossElementAfterColon "CL">]
+>>> igt.glossed_words[1].glossed_morphemes[1].morpheme
+<Morpheme "ke:">
+>>> print(igt.glossed_words[1].glossed_morphemes[1].morpheme)
+ke:
 ```
 
 
