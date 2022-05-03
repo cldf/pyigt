@@ -18,6 +18,18 @@ def test_ls(metadata_path, capsys):
     out, _ = capsys.readouterr()
     assert len(out.split('\n')) == 12
 
+    main(['ls', '-r', str(metadata_path), 'Text_ID=^2$'])
+    out, _ = capsys.readouterr()
+    assert len(out.split('\n')) == 12
+
+    main(['ls', str(metadata_path), 'Gloss=INS'])
+    out, _ = capsys.readouterr()
+    assert len(out.split('\n')) == 2
+
+    main(['ls', '-r', str(metadata_path), 'Gloss=INS'])
+    out, _ = capsys.readouterr()
+    assert len(out.split('\n')) == 2
+
 
 def test_ls_from_stdin(metadata_path, capsys, monkeypatch):
     monkeypatch.setattr(
