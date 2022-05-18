@@ -30,7 +30,7 @@ MORPHEME_SEPARATORS = [
 
 
 def split_morphemes(s):
-    return re.split('({})'.format('|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)), s)
+    return re.split('({})'.format('|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)), s or '')
 
 
 def remove_morpheme_separators(s):
