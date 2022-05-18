@@ -12,10 +12,17 @@ to the [Leipzig Glossing Rules](https://www.eva.mpg.de/lingua/resources/glossing
 
 Installing `pyigt` via pip
 
-```shell script
+```shell
 pip install pyigt
 ```
 will install the Python package along with a command line interface `igt`.
+
+Note: The methods `Corpus.get_wordlist` and `Corpus.get_profile`, to extract a wordlist and an orthography profile
+from a corpus, require the `lingpy` package. To make sure it is installed, install `pyigt` as
+```shell
+pip install pyigt[lingpy]
+```
+
 
 ## Usage
 

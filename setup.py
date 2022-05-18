@@ -9,7 +9,6 @@ setup(
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -25,7 +24,6 @@ setup(
         'csvw',
         'clldutils',
         'pycldf',
-        'lingpy>=2.6.5',
         'segments>=2.0.0',
         'tabulate',
     ],
@@ -42,7 +40,9 @@ setup(
             'pytest-mock',
             'pytest-cov',
             'coverage>=4.2',
+            'lingpy>=2.6.5',
         ],
+        'lingpy': ['lingpy>=2.6.5']
     },
     entry_points={
         'console_scripts': [

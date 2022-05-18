@@ -9,7 +9,6 @@ import collections
 import unicodedata
 
 from tabulate import tabulate
-import lingpy
 import segments
 import attr
 from clldutils.misc import nfilter
@@ -19,6 +18,11 @@ from csvw.metadata import Link
 from pycldf import Dataset
 import pycldf
 
+try:
+    import lingpy
+except ImportError:  # pragma: no cover
+    lingpy = False
+
 from pyigt.util import expand_standard_abbr
 from pyigt.lgrmorphemes import (
     GlossedWord, split_morphemes, MORPHEME_SEPARATORS, remove_morpheme_separators,
@@ -27,6 +31,13 @@ from pyigt.lgrmorphemes import (
 __all__ = ['IGT', 'Corpus', 'CorpusSpec', 'LGRConformance']
 
 NON_OVERT_ELEMENT = '∅'
+
+
+def with_lingpy():
+    if not lingpy:
+        raise ValueError('pyigt must be installed with lingpy support for this functionality! '
+                         'Run `pip install pyigt[lingpy]`')
+    return lingpy
 
 
 @enum.unique
@@ -582,7 +593,7 @@ class Corpus(object):
             profile = segments.Tokenizer(profile)
             tokenize = lambda x: profile('^' + x + '$', column='IPA').split()  # noqa: E731
         else:
-            tokenize = lingpy.ipa2tokens
+            tokenize = with_lingpy().ipa2tokens
 
         D = {
             0: [
@@ -617,7 +628,7 @@ class Corpus(object):
                          for a, b, c in concordance[form, concept, cis, lid]])
                     # check tokens
                     try:
-                        lingpy.tokens2class(tokens, 'sca')
+                        with_lingpy().tokens2class(tokens, 'sca')
                         check = True
                     except:  # noqa: E722, # pragma: no cover
                         check = False
@@ -645,10 +656,10 @@ class Corpus(object):
                             sA,
                             sB,
                         ))
-        wl = lingpy.Wordlist(D)
+        wl = with_lingpy().Wordlist(D)
 
         if lexstat:
-            wl = lingpy.LexStat(D)
+            wl = with_lingpy().LexStat(D)
             wl.cluster(method='sca', threshold=threshold, ref=ref)
         else:
             wl.add_entries('cog', 'concept,form', lambda x, y: x[y[0]] + '-' + x[y[1]])
@@ -667,7 +678,7 @@ class Corpus(object):
         D = {0: ['doculect', 'concept', 'ipa']}
         for i, key in enumerate(self._concordances.form, start=1):
             D[i] = ['dummy', key[1], key[0]]
-        wordlist = lingpy.basic.wordlist.Wordlist(D)
+        wordlist = with_lingpy().basic.wordlist.Wordlist(D)
 
         if not filename:
             with tempfile.NamedTemporaryFile(delete=FileExistsError) as fp:
@@ -678,7 +689,8 @@ class Corpus(object):
 
         with UnicodeWriter(p, delimiter='\t') as w:
             w.writerow(['Grapheme', 'IPA', 'Example', 'Count', 'Unicode'])
-            for line in lingpy.sequence.profile.context_profile(wordlist, ref='ipa', clts=clts):
+            for line in with_lingpy().sequence.profile.context_profile(
+                    wordlist, ref='ipa', clts=clts):
                 w.writerow([line[0], line[1], line[2], line[4], line[5]])
 
         res = segments.Profile.from_file(p)

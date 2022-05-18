@@ -167,7 +167,7 @@ def test_check_glosses(capsys):
     out, _ = capsys.readouterr()
 
 
-def test_get_wordlist(corpus, tmpdir, capsys):
+def test_get_wordlist(corpus, tmpdir, capsys, mocker):
     _ = corpus.get_wordlist()
 
     profile_path = pathlib.Path(str(tmpdir)) / 'profile.tsv'
@@ -176,6 +176,10 @@ def test_get_wordlist(corpus, tmpdir, capsys):
     corpus.get_wordlist(profile=profile)
 
     _ = corpus.get_wordlist(lexstat=False, profile=corpus.get_profile())
+
+    mocker.patch('pyigt.igt.lingpy', None)
+    with pytest.raises(ValueError):
+        _ = corpus.get_wordlist()
 
 
 def test_write_app(corpus, tmpdir):
