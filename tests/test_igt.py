@@ -206,3 +206,9 @@ def test_multilingual(multilingual_dataset, capsys):
 def test_iter_morphemes():
     assert list(iter_morphemes('<a>-b=c~d', split_infixes=False)) == [
         (None, '<a>'), ('-', 'b'), ('=', 'c'), ('~', 'd')]
+
+
+def test_pkg_data():
+    import pyigt
+
+    assert pathlib.Path(pyigt.__file__).parent.joinpath('index.html').exists()
