@@ -79,7 +79,7 @@ def iter_morphemes(s, split_infixes=True):
     """
     morpheme, separator = [], None
 
-    for c in s:
+    for c in (s or ''):
         if c in MORPHEME_SEPARATORS:
             if split_infixes:
                 yield from _morpheme_and_infixes(''.join(morpheme))
@@ -191,13 +191,13 @@ class IGT(object):
                     abbr, _, label = abbr.partition('=')
                     self.abbrs[abbr.strip()] = label.strip()
                 self.translation = p.sub('', self.translation).strip()
-                if self.translation[0] == "'" or unicodedata.category(self.translation[0]) == 'Pi':
-                    # Punctuation, Initial quote
-                    self.translation = self.translation[1:].strip()
-                if self.translation[-1] == "'" or \
-                        unicodedata.category(self.translation[-1]) == 'Pf':
-                    # Punctuation, Final quote
-                    self.translation = self.translation[:-1].strip()
+            if self.translation[0] == "'" or unicodedata.category(self.translation[0]) == 'Pi':
+                # Punctuation, Initial quote
+                self.translation = self.translation[1:].strip()
+            if self.translation[-1] == "'" or \
+                    unicodedata.category(self.translation[-1]) == 'Pf':
+                # Punctuation, Final quote
+                self.translation = self.translation[:-1].strip()
 
     @property
     def glossed_words(self):
@@ -322,7 +322,7 @@ class IGT(object):
 
     @property
     def phrase_text(self):
-        return ' '.join(self.phrase)
+        return ' '.join([w or '' for w in self.phrase])
 
     @property
     def primary_text(self):
