@@ -3,9 +3,11 @@
 [![Build Status](https://github.com/cldf/pyigt/workflows/tests/badge.svg)](https://github.com/cldf/pyigt/actions?query=workflow%3Atests)
 [![codecov](https://codecov.io/gh/cldf/pyigt/branch/master/graph/badge.svg)](https://codecov.io/gh/cldf/pyigt)
 [![PyPI](https://img.shields.io/pypi/v/pyigt.svg)](https://pypi.org/project/pyigt)
+[![Documentation Status](https://readthedocs.org/projects/pyigt/badge/?version=latest)](https://pyigt.readthedocs.io/en/latest/?badge=latest)
 
 This library provides easy access to **I**nterlinear **G**lossed **T**ext (IGT) according
-to the [Leipzig Glossing Rules](https://www.eva.mpg.de/lingua/resources/glossing-rules.php), stored as [CLDF examples](https://github.com/cldf/cldf/tree/master/components/examples).
+to the [Leipzig Glossing Rules](https://www.eva.mpg.de/lingua/resources/glossing-rules.php), stored as 
+[CLDF examples](https://github.com/cldf/cldf/tree/master/components/examples).
 
 
 ## Installation
@@ -15,7 +17,7 @@ Installing `pyigt` via pip
 ```shell
 pip install pyigt
 ```
-will install the Python package along with a command line interface `igt`.
+will install the Python package along with a [command line interface `igt`](#cli).
 
 Note: The methods `Corpus.get_wordlist` and `Corpus.get_profile`, to extract a wordlist and an orthography profile
 from a corpus, require the `lingpy` package. To make sure it is installed, install `pyigt` as
@@ -23,10 +25,7 @@ from a corpus, require the `lingpy` package. To make sure it is installed, insta
 pip install pyigt[lingpy]
 ```
 
-
-## Usage
-
-### CLI
+## CLI
 
 ```shell script
 $ igt -h
@@ -78,14 +77,16 @@ cypress-tree  one-CL-LOC  DIR-hide-because-ADV
 ```
 
 
-### Python API
+## Python API
 
-You can read all IGT examples provided with an CLDF dataset
+The Python API is documented in detail at [readthedocs](https://pyigt.readthedocs.io/en/latest/).
+Below is a quick overview.
+
+You can read all IGT examples provided with a CLDF dataset
 
 ```python
 >>> from pyigt import Corpus
 >>> corpus = Corpus.from_path('tests/fixtures/cldf-metadata.json')
->>> len(corpus)
 >>> len(corpus)
 5
 >>> for igt in corpus:
@@ -104,11 +105,8 @@ or instantiate individual IGT examples, e.g. to check for validity:
 >>> ex.check(strict=True, verbose=True)
 palasi=lu
 priest-and
-Traceback (most recent call last):
-  File "<input>", line 1, in <module>
-  File "/home/robert_forkel/projects/cldf/pyigt/src/pyigt/igt.py", line 287, in check
-    raise ValueError(
-ValueError: Rule 2 or 10 violated: Mismatch of element separators in word and gloss! 
+...
+ValueError: Rule 2 violated: Number of morphemes does not match number of morpheme glosses!
 ```
 or to expand known gloss abbreviations:
 ```python
@@ -126,8 +124,6 @@ now     they-OBL-GEN  farm     forever      behind    stay-FUT-NEG
   NEG = negation, negative
 ```
 
-### Morpheme parsing
-
 And you can go deeper, parsing morphemes and glosses according to the LGR 
 (see module [pyigt.lgrmorphemes](src/pyigt/lgrmorphemes.py)):
 
@@ -135,13 +131,13 @@ And you can go deeper, parsing morphemes and glosses according to the LGR
 >>> igt = IGT(phrase="zəp-le: ȵi-ke: pe-ji qeʴlotʂu-ʁɑ,", gloss="earth-DEF:CL WH-INDEF:CL become-CSM in.the.past-LOC")
 >>> igt.conformance
 <LGRConformance.MORPHEME_ALIGNED: 2>
->>> igt.glossed_words[1].glossed_morphemes[1].gloss
+>>> igt[1, 1].gloss
 <Morpheme "INDEF:CL">
->>> igt.glossed_words[1].glossed_morphemes[1].gloss.elements
+>>> igt[1, 1].gloss.elements
 [<GlossElement "INDEF">, <GlossElementAfterColon "CL">]
->>> igt.glossed_words[1].glossed_morphemes[1].morpheme
+>>> igt[1, 1].morpheme
 <Morpheme "ke:">
->>> print(igt.glossed_words[1].glossed_morphemes[1].morpheme)
+>>> print(igt[1, 1].morpheme)
 ke:
 ```
 

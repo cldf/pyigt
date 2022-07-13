@@ -67,9 +67,17 @@ def test_CorpusSpec_lexical_gloss(corpus_spec):
 
 
 def test_IGT():
+    from pyigt.lgrmorphemes import GlossedWord
     igt = IGT(id='1', phrase=['a-1', 'b-2', 'c-3'], gloss=['A-1', 'B-2', 'C-3'], properties={})
-    assert igt[1] == ('b-2', 'B-2')
-    assert igt[0, 1] == ('1', '1')
+    assert len(igt) == 3
+    for gw in igt:
+        assert gw.word == 'a-1'
+        break
+    assert igt[1] == GlossedWord('b-2', 'B-2')
+    assert 'B-2' in repr(igt[1])
+    assert igt[0, 1].morpheme == '1'
+    assert igt[0, 1].gloss == '1'
+    assert [[repr(i) for i in l] for l in igt[2:, 1:]]
     assert igt.phrase_text == 'a-1 b-2 c-3'
     assert igt.primary_text == 'a1 b2 c3'
     assert igt.gloss_text == 'A-1 B-2 C-3'
@@ -88,6 +96,8 @@ def test_IGT_words():
     assert igt.prosodic_words[1].word == 'e'
     assert igt.morphosyntactic_words[0].word == 'a' == igt.morphosyntactic_words[0].gloss
     assert igt.morphosyntactic_words[1].word == 'bcd -e'
+    assert len(igt) != len(igt.as_prosodic())
+    assert len(igt) != len(igt.as_morphosyntactic())
 
 
 def test_IGT_malformed():
@@ -107,8 +117,11 @@ def test_Corpus_iter(corpus):
 
 def test_Corpus_getitem(corpus):
     assert isinstance(corpus['1'], IGT)
-    assert corpus['1', 0] == ('zəp-le:', 'earth-DEF:CL')
-    assert corpus['1', 0, 1] == ('le:', 'DEF:CL')
+    gw = corpus['1', 0]
+    assert gw.word == 'zəp-le:' and gw.gloss == 'earth-DEF:CL'
+    assert isinstance(corpus['1', 0:2], list)
+    gm = corpus['1', 0, 1]
+    assert gm.morpheme == 'le:' and gm.gloss == 'DEF:CL'
 
 
 def test_Corpus_get_stats(corpus):
@@ -149,12 +162,33 @@ def test_Corpus_write_concordance(corpus, capsys):
     assert 'CAUS' in out
 
 
-def test_Corpus_concepts(corpus, capsys):
-    concepts = corpus.get_concepts()
-    assert len(concepts) == 17
+def test_Corpus_write_concepts(corpus, capsys):
     corpus.write_concepts('lexicon')
     out, _ = capsys.readouterr()
     assert 'CAUS' in out
+
+
+@pytest.mark.parametrize(
+    'phrase,gloss,ctype,count,key',
+    [
+        ('a-b c', 'AB.CD.name-stuff other', 'lexicon', 3, 'name'),
+        ('a-b c', 'AB.the_name-stuff other', 'lexicon', 3, 'the name'),
+        ('a-b c', 'AB.CD.name-stuff other', 'grammar', 1, 'AB.CD'),
+        ('a-b c', 'AB:CD.name-stuff other', 'grammar', 2, 'AB'),
+        ('insul-arum', 'island-GEN;PL', 'grammar', 2, 'PL'),
+        ('bhris-is', r'PST\break-2SG', 'grammar', 2, 'PST'),
+        ('bhris-is', r'PST\break-2SG', 'lexicon', 2, 'break'),
+        ('', '', 'lexicon', 17, 'burn'),
+    ]
+)
+def test_Corpus_get_concepts(phrase, gloss, ctype, count, key, corpus):
+    from pyigt.lgrmorphemes import GlossedMorpheme
+    if phrase and gloss:
+        corpus = Corpus([IGT(phrase=phrase.split(), gloss=gloss.split())])
+    concepts = corpus.get_concepts(ctype)
+    assert len(concepts) == count
+    assert key in concepts
+    assert isinstance(corpus[list(concepts.values())[0][0].refs[0]], GlossedMorpheme)
 
 
 def test_check_glosses(capsys):

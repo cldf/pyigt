@@ -1,8 +1,11 @@
+import re
+
 from clldutils.lgr import ABBRS, PERSONS, pattern
 
-__all__ = ['is_standard_abbr', 'expand_standard_abbr']
+__all__ = ['is_standard_abbr', 'expand_standard_abbr', 'GENERIC_ABBR_PATTERN']
 
 STANDARD_ABBR_PATTERN = pattern()
+GENERIC_ABBR_PATTERN = re.compile('^([A-Z][A-Z0-9]*|([1-3](DL|PL|SG|DU))|[1-3]/[1-3])$')
 
 
 def is_standard_abbr(label):

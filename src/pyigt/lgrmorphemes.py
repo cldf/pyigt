@@ -1,17 +1,24 @@
 """
-Support for parsing the notation for morpheme/gloss structure proposed by the
-Leipzig Glossing Rules.
+`pyigt` supports the notation for morpheme/gloss structure proposed by the
+`Leipzig Glossing Rules <https://www.eva.mpg.de/lingua/resources/glossing-rules.php>`_.
 
 According to LGR Rule 1, object language and gloss lines have to be word-aligned. Such aligned
-pairs of a word and a corresponding gloss are modeled via the `GlossedWord` class.
+pairs of a word and a corresponding gloss are modeled via the :class:`GlossedWord` class.
+
+If an IGT conforms to Rule 2, glossed words are lists of aligned
+:class:`~pyigt.lgrmorphemes.GlossedMorpheme` pairs.
+
+The provisions of Rule 4 (and following), i.e. the structure of morpheme glosses, is implemented
+as subclasses of :class:`GlossElement`.
 """
 import re
 import itertools
+import typing
 import unicodedata
 
 import attr
 
-from pyigt.util import is_standard_abbr
+from pyigt.util import is_standard_abbr, GENERIC_ABBR_PATTERN
 
 __all__ = [
     # Types of morpheme gloss elements:
@@ -20,7 +27,7 @@ __all__ = [
     # Types of morphemes:
     'Morpheme', 'MORPHEME_SEPARATORS', 'split_morphemes', 'remove_morpheme_separators',
     # Wrapper
-    'GlossedWord',
+    'GlossedWord', 'GlossedMorpheme',
 ]
 MORPHEME_SEPARATORS = [
     '-',  # Rule 2
@@ -40,6 +47,8 @@ def remove_morpheme_separators(s):
 class GlossElement(str):
     """
     Rule 4. Gloss elements are separated by ".".
+
+    :ivar start: Specifies the separator to use when combining a `GlossElement` with another.
     """
     start = '.'
     end = None
@@ -63,7 +72,7 @@ class GlossElement(str):
 
     @property
     def is_category_label(self):
-        return re.fullmatch('[A-Z0-9]+', self)
+        return GENERIC_ABBR_PATTERN.fullmatch(self)
 
 
 class Infix(GlossElement, str):
@@ -91,7 +100,7 @@ class GlossElementAfterColon(GlossElement):
 
 class GlossElementAfterBackslash(GlossElement):
     """
-    Rule 4D. Morphophonological change is marked with a leading "\".
+    Rule 4D. Morphophonological change is marked with a leading "\\".
     """
     start = '\\'
 
@@ -206,22 +215,32 @@ class Morpheme(str):
         return GlossElements.from_morpheme(str(self), self.type)
 
 
-@attr.s
+@attr.s(repr=False)
 class GlossedMorpheme(object):
     """
     A (morpheme, gloss) pair.
+
+    :ivar morpheme: The morpheme form.
+    :ivar gloss: The literal gloss.
+    :ivar sep: The morpheme separator preceding this morpheme.
+    :ivar prev: Points to the previous `GlossedMorpheme` in a word, or `None`.
+    :ivar next: Points to the next `GlossedMorpheme` in a word, or `None`.
     """
     morpheme = attr.ib()
     gloss = attr.ib()
     sep = attr.ib()
-    prev = attr.ib(default=None)
-    next = attr.ib(default=None)
+    prev = attr.ib(default=None, eq=False)
+    next = attr.ib(default=None, eq=False)
 
     def __attrs_post_init__(self):
         self.morpheme = Morpheme(self.morpheme)
         self.morpheme.type = 'word'
         self.gloss = Morpheme(self.gloss)
         self.gloss.type = 'gloss'
+
+    def __repr__(self):
+        return '<{} morpheme={} gloss={}>'.format(
+            self.__class__.__name__, self.morpheme, self.gloss)
 
     @property
     def first(self):
@@ -232,38 +251,71 @@ class GlossedMorpheme(object):
         return not bool(self.next)
 
     @property
-    def lexical_concepts(self):
-        res = []
+    def grammatical_concepts(self) -> typing.List[str]:
+        """
+        Grammatical concepts, referenced with category labels according to Rule 3, used in morpheme
+        gloss.
+
+        .. note::
+
+            Gloss element separators according to Rule 4B and 4C are interpreted as signaling a
+            separate concept.
+
+        .. code-block:: python
+
+            >>> from pyigt.lgrmorphemes import GlossedMorpheme
+            >>> gm = GlossedMorpheme(morpheme='abc', gloss='ABC.DEF:GHI;JKL', sep='.')
+            >>> gm.grammatical_concepts
+            ['ABC.DEF', 'GHI', 'JKL']
+        """
+        return list(self._glosses('grammatical'))
+
+    @property
+    def lexical_concepts(self) -> typing.List[str]:
+        """
+        Gloss elements not recognized as category labels are interpreted as lexical concepts.
+
+       .. code-block:: python
+
+            >>> from pyigt.lgrmorphemes import GlossedMorpheme
+            >>> gm = GlossedMorpheme(morpheme='çık', gloss='come_out', sep='.')
+            >>> gm.lexical_concepts
+            ['come out']
+        """
+        return list(self._glosses('lexical'))
+
+    def _glosses(self, type_):
         s = ''
         for ge in self.gloss.elements:
             if isinstance(ge, (GlossElementAfterColon, GlossElementAfterSemicolon)):
                 # Something new is starting.
                 if s:
-                    res.append(s)
-                if not ge.is_category_label:
+                    yield s.replace('_', ' ')
+                if (type_ == 'lexical' and not ge.is_category_label) or \
+                        (type_ == 'grammatical' and ge.is_category_label):
                     s = str(ge)
             else:
-                if not ge.is_category_label:
+                if (type_ == 'lexical' and not ge.is_category_label) or \
+                        (type_ == 'grammatical' and ge.is_category_label):
                     if s:
-                        s += ' '
+                        s += ge.start if ge.is_category_label else ' '
                     s += str(ge)
         if s:
-            res.append(s)
-        return [s.replace('_', ' ') for s in res]
+            yield s.replace('_', ' ')
 
 
-@attr.s
+@attr.s(repr=False)
 class GlossedWord(object):
     """
     A (word, gloss) pair, corresponding to two aligned items from IGT according to LGR.
 
-    Provides list-like access to its `GlossedMorpheme`s.
+    Provides list-like access to its :class:`GlossedMorpheme` s.
     """
     word = attr.ib()
     gloss = attr.ib()
-    glossed_morphemes = attr.ib(default=attr.Factory(list))
-    strict = attr.ib(default=False)
-    is_valid = attr.ib(default=True)
+    glossed_morphemes = attr.ib(default=attr.Factory(list), eq=False)
+    strict = attr.ib(default=False, eq=False)
+    is_valid = attr.ib(default=True, eq=False)
 
     def __attrs_post_init__(self):
         mm, gg = split_morphemes(self.word), split_morphemes(self.gloss)
@@ -293,6 +345,9 @@ class GlossedWord(object):
                     gm.prev = prev
                 prev = gm
 
+    def __repr__(self):
+        return '<{} word={} gloss={}>'.format(self.__class__.__name__, self.word, self.gloss)
+
     def __iter__(self):
         return iter(self.glossed_morphemes)
 
@@ -303,7 +358,17 @@ class GlossedWord(object):
         return len(self.glossed_morphemes)
 
     @property
-    def stripped_word(self):
+    def stripped_word(self) -> str:
+        """
+        Removes sentence-level markup and morpheme separators from `.word`.
+
+        .. code-block:: python
+
+            >>> from pyigt.lgrmorphemes import GlossedWord
+            >>> gw = GlossedWord(word='"An-fangs', gloss="a-b")
+            >>> gw.stripped_word
+            'Anfangs'
+        """
         return ''.join(
             c for c in self.word if
             unicodedata.category(c) not in {'Po', 'Pf', 'Ps', 'Pd', 'Pe', 'Sm'})

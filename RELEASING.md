@@ -13,9 +13,18 @@ tox -r
 flake8 src
 ```
 
+- Make sure docs can be created:
+```shell
+cd docs
+make clean html
+cd ..
+```
+
 - Update the version number, by removing the trailing `.dev0` in:
   - `setup.cfg`
   - `src/pyigt/__init__.py`
+  - `docs/conf.py`
+  - edit `CHANGELOG.md`
 
 - Create the release commit:
 ```shell
@@ -43,6 +52,7 @@ git push --tags
 - Change version for the next release cycle, i.e. incrementing and adding .dev0
   - `setup.cfg`
   - `src/pyigt/__init__.py`
+  - `docs/conf.py`
 
 - Commit/push the version change:
 ```shell
