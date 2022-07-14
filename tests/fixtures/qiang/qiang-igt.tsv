@@ -1,0 +1,998 @@
+ID	TEXT	SENTENCE_ID	PHRASE_ID	PHRASE	GLOSS
+1	Text 1	1	1	zəp-le: ȵi-ke: pe-ji	earth-DEF:CL WH-INDEF:CL become-CSM
+2	Text 1	1	2	qeʴlotʂu-ʁɑ, mutu-lɑ mujuqů ʐguə-zi	in.the.past-LOC heaven-LOC sun nine-CL
+3	Text 1	1	3	we-i, zəp-le: ə-tɕhəqhɑ-ʐ-əi. mə ȵɑ ɣlu	exist-HS earth-DEF:CL DIR-burn-CAUS-HS older.brother COM younger.sister
+4	Text 1	2	4	jə-tʂ-ŋuəȵi, zuɑmə-ɸu o-ʐgu-tɑ	two-CL-TOP cypress-tree one-CL-LOC
+5	Text 1	2	5	i-pi-χuɑ-ȵi, ɦo-mu-xtɕu-wei. steke-tɑ mi peʴʐə-s	DIR-hide-because-ADV DIR-NEG-burn-HS later-LOC people raise(child)-NOM
+6	Text 1	3	6	ŋuə-χuɑ-ȵi, mə ȵɑ ɣlu lə-zi	COP-because-ADV older.brother COM younger.sister DEF-CL
+7	Text 1	3	7	i-dʐi-tɕi, ȵutɕuku dzuɑʁl e-xʂe	DIR-discuss-3pl each stone.mill one-CL
+8	Text 1	3	8	ɦei-bi-ȵi, ʁu-q-tɑ-wu	DIR-carry.on.back-ADV mountain-head-LOC-ABL
+9	Text 1	3	9	ɦo-ɣlu, dzuɑʁl jə-xʂe	DIR-roll stone.mill two-CL
+10	Text 1	3	10	e-tʂetup-tu, ȵizzi oqpi	DIR-bump.into-LNK 3dl one:family
+11	Text 1	3	11	pə-s, dzuɑʁl jə-xʂe	do-NOM stone.mill two-CL
+12	Text 1	3	12	ɦo-ɣlu-s-tɑ, qhuɑt	DIR-roll-NOM-LOC as.it.happens
+13	Text 1	3	13	e-tʂetup-wei,	DIR-bump.into-HS
+14	Text 1	3	14	ɦɑ-tsəi-ȵike, mə ȵɑ ɣlu lə-zi oqpi ɦo-pə-i. ə-jə-p	INT-this.manner-after older.brother COM younger.sister DEF-CL one:family DIR-do-HS one-two-year
+15	Text 1	4	15	pe-ȵi, ɣlu-le: mi qes mɑ-ŋ̥u̥ə̥ ke: i-ɕi. mə-le:	become-ADV younger.sister-DEF:CL people form NEG-COP INDEF:CL DIR-release older.brother-DEF:CL
+16	Text 1	5	16	tə-khueq, duɑʁl-le:-wu sə-xte-ȵi tɕetɕi-lɑ da-ʁů. steke	DIR-angry scythe-DEF:CL-INST DIR-chop-LNK everywhere-LOC DIR-throw(away) later
+17	Text 1	6	17	lɑ-s-ʁɑ, tɕetɕi-lɑ-wu mufů	DEF:one-day-LOC everywhere-LOC-ABL smoke
+18	Text 1	6	18	tə-lɑ-ji,	DIR-come-CSM
+19	Text 1	6	19	ɦɑ-tsəi-ȵike, mi lu-ji.	INT-this.manner-after people come-CSM
+19	Text 5	1	1	lɑn-thə-m ke: məʴʂ qe:ʴ-qe:ʴ	lazy-AUX-NOM INDEF:CL story before-before
+20	Text 5	1	2	ŋuə-tu, tsisatʂů jə-zi	COP-LNK sisters two-CL
+21	Text 5	1	3	ŋuə-kəi-wɑ, tsisatʂů jə-zi	COP-NAR-EMPH sisters two-CL
+22	Text 5	1	4	ŋuə-kəi-tu, sawu-le:-tɕ-te:-ŋuəȵi	COP-NAR-LNK older.sister-DEF:CL-GEN-DEF:CL-TOP
+23	Text 5	1	5	tɕiuʂə, sawu-le: wutɕupu-ŋuəȵi ʐmətʂi. (qe:ʴ	†(that.is) older.sister-DEF:CL husband-TOP emperor before
+24	Text 5	2	6	ŋuə-tu, “juɑnʁuɑi”	COP-LNK emperor
+25	Text 5	2	7	ʂpə-k-tɕi-wɑ, pitɕi-ŋuəȵi “ʐmətʂi”	call-INF-3pl-EMPH now-TOP emperor
+26	Text 5	2	8	ʂpəʴ, qe:ʴ	call:1pl before
+27	Text 5	2	9	ŋuə-tu, juɑnʁuɑi.109) ɦɑ-tu satʂů-te:-tɕ-tʂi-le:-ŋuəȵi tʂi ou	COP-LNK emperor INT-RESULT younger.sister-DEF:CL-GEN-man-DEF:CL-TOP son one:CL
+28	Text 5	2	10	ʐi-kui, ɦɑ-tu kən lɑn-thɑ-le:	exist-NAR INT-RESULT very lazy-AUX-DEF:CL
+29	Text 5	2	11	ŋuə-kəi-wɑ, lɑn-thə-le:	COP-NAR-EMPH lazy-AUX-DEF:CL
+30	Text 5	2	12	ŋuə-kəi-tu, ɦɑlɑ mɑ:-le:-wu ɑ-s-məqɑ-ŋuəȵi ɦɑthɑ ȵiu-ŋuəȵi ɑ-s pɑntɕin-wu pɑntɕin tə-tʂhə-ȵi ɦɑ-tsəi de-lde-ȵi110 ȵiu pɑtʂ de-lde-ȵi	COP-NAR-LNK INT Mama-DEF:CL-AGT one-day-each-TOP INT sheep.wool-TOP one-day half.catty-INST half.catty DIR-weigh-ADV INT-this.manner DIR-spin-ADV sheep.wool ball DIR-spin-ADV
+31	Text 5	2	13	ɦɑlɑ, ȵiu pɑtʂ de-lde-ȵi χaiʂə ɦɑlɑ-ŋuəȵi ɦɑlɑ tʂi-le:	INT sheep.wool ball DIR-spin-ADV †(still.is) INT-TOP INT son-DEF:CL
+32	Text 5	2	14	lɑn-thə-le:-ŋuəȵi, ɦɑlɑ tʂhɑq-tɑ sə-ʁ-ȵi ɕi topu-wa-le:	lazy-AUX-DEF:CL-TOP INT market-LOC DIR-go-ADV wine like-very-DEF:CL
+33	Text 5	2	15	ŋuə-kəi, ɕi topu-le:	COP-NAR wine like-DEF:CL
+34	Text 5	2	16	ŋuə-kəi-tu, χaiʂə ɦɑlə sə-ʁ-ȵi ɕi sə-tɕ-ȵi	COP-NAR-LNK †(still.is) INT DIR-go-ADV wine DIR-drink-ADV
+35	Text 5	2	17	nu-lu-kəpə-kəi, ɦɑ-tu mɑ:-le:-tɕ-ŋuəȵi χaiʂə ɕi-ŋuəȵi χaiʂə ɦɑ-tsəi pɑntɕin lie-kəpə-kui-wɑ. ɦɑ-tə sawu-le: tɕiu a! ɦɑlɑ satʂů-le:-tɑ	DIR-come-HABIT-NAR INT-RESULT mama-DEF:CL-BEN-TOP †(still.is) wine-TOP †(still.is) INT-this.manner half.catty carry-HABIT-NAR-EMPH INT-RESULT older.sister-DEF:CL †(then) EXCL INT younger.sister-DEF:CL-LOC
+36	Text 5	4	18	zə-lɑ-kəi, satʂů-le:-tɑ	DIR-come-NAR younger.sister-DEF:CL-LOC
+37	Text 5	4	19	zə-lɑ-kəi-tu,	DIR-come-NAR-LNK
+38	Text 5	4	20	χaiʂə, a! satʂů-le:-tɑ	†(still.is) EXCL younger.sister-DEF:CL-LOC
+39	Text 5	5	21	zə-lɑ-kəi-tu, kɑ-hɑn ŋuə-tu. ɦɑ-tu ɑ-s-ʁɑ	DIR-come-NAR-LNK INDEF:one-kind COP-LNK INT-RESULT one-day-LOC
+40	Text 5	6	22	ŋuə-tu, sawu-le:-ŋuəȵi ɦɑ-thɑ	COP-LNK older.sister-DEF:CL-TOP INT-there
+41	Text 5	6	23	pethɑu-pə-kui-wɑ, ɦɑ-tu satʂu-le: tɕiu “qɑ-tɕ-tʂi-le: ɦɑ-kə	chat-do-NAR-EMPH INT-RESULT younger.sister-DEF:CL †(then) 1sg-GEN-son-DEF:CL INT-thus
+42	Text 5	6	24	lɑn-thɑ, lɑn-thə-le:	lazy-AUX lazy-AUX-DEF:CL
+43	Text 5	6	25	ŋuə-ʂ,” jə-ȵi ɦɑ-kə pethiɑu-pu-kui. ɦɑ-tu	COP-LNK say-ADV INT-thus chat-do-NAR INT-RESULT
+44	Text 5	7	26	ɑ-s-ʁɑ-tu, tse: satʂů tʂi-le:-ŋuəȵi ɦɑlɑ	one-day-LOC-LNK this:CL younger.sister son-DEF:CL-TOP INT
+45	Text 5	7	27	tɕiu-lɑ,	home-LOC
+46	Text 5	7	28	ɑ-s-ʁɑ-tu, tʂhaq-tɑ sə-ʁə ʂpaqtɑ-ȵi ɦɑ-ke dʑy-le: wəstɑ he-ʐi-kui-wɑ. ɦɑ-tu sawu-le: ȵɑ satʂů-le: ɦɑlɑ ə-dʐə-ȵi	one-day-LOC-LNK market-LOC DIR-go pretend-ADV INT-thus door-DEF:CL behind DIR-exist-NAR-EMPH INT-RESULT older.sister-DEF:CL COM younger.sister-DEF:CL INT DIR-face.to.face-ADV
+47	Text 5	8	29	pethiɑu-pə-kəi, ɦɑlɑ	chat-do-NAR INT
+48	Text 5	8	30	pethiɑu-pə-kəi-tu, pethiɑu-pə-kəi-tu ɦɑlɑ	chat-do-NAR-LNK chat-do-NAR-LNK INT
+49	Text 5	8	31	meʴx, ɦɑlɑ	pitiful INT
+50	Text 5	8	32	pethiɑu-pə-kəi-tu,	chat-do-NAR-LNK
+51	Text 5	8	33	tʂi-le:-ŋuəȵi, satʂů-le: tʂi-le:-ŋuəȵi ɦɑlɑ dʑy-le: wəstɑ u-xʂuɕtɕu-kui.	son-DEF:CL-TOP younger.sister-DEF:CL son-DEF:CL-TOP INT door-DEF:CL behind DIR-listen-NAR
+52	Text 5	9	34	u-xʂuɕtɕu-kui-tu, ɦɑlɑ tʂi-le:	DIR-listen-NAR-LNK INT son-DEF:CL
+53	Text 5	9	35	dʑe-kəi, tʂi-le:	discuss-NAR son-DEF:CL
+54	Text 5	9	36	dʑe-kəi-tu, ɦɑ-tu tʂi-le:-ŋuəȵi tʂhɑq-tɑ sə-mə-qɑ-tɕi ŋuəȵi dʑy-le: wəstɑ xʂuɕtɕu-kui. “qɑ tʂi-le: lɑn-thɑ”	say-NAR-LNK INT-RESULT son-DEF:CL-TOP market-LOC DIR-NEG-go-NAR INT door-DEF:CL behind listen-NAR 1sg son-DEF:CL laxy-AUX
+55	Text 5	10	37	jə-ȵi, ɦɑ-thɑ-ŋuəȵi ɦɑ-thɑ-hɑn dʑe-kui. ɦɑ-tu	say-ADV INT-there-TOP INT-that:one-kind say-NAR INT-RESULT
+56	Text 5	11	38	tʂi-le:-ŋuəȵi, ɦɑ-tu	son-DEF:CL-TOP INT-RESULT
+57	Text 5	11	39	“pəs-ŋuəȵi, a! mɑ:-ŋuəȵi qɑ pəs-ŋuəȵi	today-TOP EXCL mama-TOP 1sg today-TOP
+58	Text 5	12	40	i-pə-l-jy, qɑ-ŋuəȵi pəs-ŋuəȵi pənsə ɑ-χən	DIR-arrive-come-ASP 1sg-TOP today-TOP ability one-kind
+59	Text 5	12	41	u-su-ɑ-wɑ,” jə-kui. “ha! pənsə ɑ-χən	DIR-learn-1sg-EMPH say-NAR EXCL ability one-kind
+60	Text 5	14	42	u-su-ɑ-wɑ,” jə-kui. “ha! qɑ-tɕ-tʂi ȵiɣi pənsə u-su-n-ɑ?” jə-kui. “ha! ʔile pəs tɕəu-lɑ ȵiɣi dʑe-jə-wɑ?”	DIR-learn-1sg-EMPH say-NAR EXCL 1sg-GEN-son what ability DIR-learn-2sg-Q say-NAR EXCL 2pl today home-LOC what say-CSM-Q
+61	Text 5	20	43	jə-kui, “qɑ ɦɑlɑ tʂhə-ʐeků-tɑ kuɑntsə	say-NAR 1sg INT market-center-LOC restaurant
+62	Text 5	20	44	ɦɑ-ka:-ʁɑ, ʐi-s-tɑ-ŋuəȵi qɑ	INT-INDEF:one:CL-LOC exist-NOM-LOC-TOP 1sg
+63	Text 5	20	45	ə-mɑ-ʂ, ɦɑ-tu ʔile-ŋuəȵi ɦɑ-kɑ-hɑn	DIR-hear:1sg-LNK INT-RESULT 2pl-TOP INT-INDEF:one-kind
+64	Text 5	20	46	dʑe-ji, ɦɑ-kə	say-CSM INT-thus
+65	Text 5	20	47	dʑe-ji-tu, ɦɑtɑ qɑ	say-CSM-LNK INT 1sg
+66	Text 5	20	48	ə-mɑ-ʂ, qɑ ɦɑ-kɑ-hɑn-ŋuəȵi pənsə ɦɑ-kɑ-hɑn	DIR-hear:1sg-LNK 1sg INT-one-kind-TOP ability INT-one-kind
+67	Text 5	20	49	u-su-ɑ-wɑ, ɦɑ-kə	DIR-learn-1sg-EMPH INT-thus
+68	Text 5	20	50	ə-m, ɦɑ-kə ʔile-wu ɦe-dʑe lɑ-hɑn-neʴwu ə-m	DIR-hear INT-thus 2pl-AGT DIR-say DEF:one-kind-all DIR-hear
+69	Text 5	20	51	ɣʐə-tɕ, ɦɑ-kɑ-hɑn	able-NOM INT-INDEF:one-kind
+70	Text 5	20	52	u-su-ɑ-wɑ,” jə-kui-tɕu. ɦɑ-kə	DIR-learn-1sg-EMPH say-NAR-PART INT-thus
+71	Text 5	21	53	jə-kui-tu, ɦɑ-tu “ȵiɣi ȵiɣi ɦe-dʑe:ʴ”	say-NAR-LNK INT-RESULT what what DIR-say:1pl
+72	Text 5	21	54	jə-kui, sawu-le: ȵɑ	say-NAR older.siser-DEF:CL COM
+73	Text 5	21	55	satʂů-le:, ɦɑtɑ “ɦɑ-kə dʑe ɦɑ-kə dʑe qɑ	younger.sister-DEF:CL INT INT-thus say INT-thus say 1sg
+74	Text 5	21	56	ɑ-mɑ-wɑ, tʂhaq-tɑ kuɑntsɑ ʐi-s-tɑ	DIR-hear:1sg-EMPH market-LOC restaurant exist-NOM-LOC
+75	Text 5	21	57	ɑ-mɑ-wɑ,” ɦɑ-kə jə-kui-tu. “a! ʁɑt	DIR-hear:1sg-EMPH INT-thus say-NAR-LNK EXCL truly
+76	Text 5	23	58	ŋuə-k-ȵi,	COP-INF-ADV
+77	Text 5	23	59	qɑ-tɕ-tʂi,” jə-kui. ɦɑ-tu	1sg-GEN-son say-NAR INT-RESULT
+78	Text 5	24	60	sawu-le:-tɕ, sawu-le: wutɕupu-ŋuəȵi juanʁuai-ŋuəȵi ɦɑ-ke ŋuə-kəi. ɦɑ-tu pitɕ-ŋuəȵi	oldr.sistr-DEF:CL-GEN oldr.sistr-DEF:CL husband-TOP emperor-TOP INT-thus COP-NAR INT-RESULT now-TOP
+79	Text 5	25	61	ʐmətʂi, qe:ʴ	emperor before
+80	Text 5	25	62	ŋuə-tu, ʐmətʂi lɑχ “juɑnʁuɑi”	COP-LNK emperor DEF:one:kind emperor
+81	Text 5	25	63	ʂpə-x-ʂ, ɦɑ-ke	call-INF-LNK INT-thus
+82	Text 5	25	64	ŋuə, ɦɑ-tu “a! ʁɑtɕhi qɑ-tɕ-tʂi-le: pənsə ɑ-χən	COP INT-RESULT EXCL truly 1sg-GEN-son-DEF:CL ability one-kind
+83	Text 5	26	65	u-su-k-ȵi, ke:	DIR-learn-INF-ADV INDEF:CL
+84	Text 5	26	66	ŋuə-tu, ʐə	COP-if thing
+85	Text 5	26	67	hɑ-sɑ,” jə-kəi. ɦɑ-tu	DIR-make.sound say-NAR INT-RESULT
+86	Text 5	27	68	kə-jə-kəi-tu, ɦɑlɑ	thus-say-NAR-LNK INT
+87	Text 5	27	69	ɦɑ-tsɑ-χui,	INT-this:one-time
+88	Text 5	27	70	sawu-le:, sawu-le: wutɕupu-ŋuəȵi sənʐə bələ-s	older.sister-DEF:CL older.sister-DEF:CL husband-TOP birthday do-NOM
+89	Text 5	27	71	pe-kui-wɑ, sənʐə bələ-s kɑ-hɑn	become-NAR-EMPH birthday do-NOM INDEF:one-kind
+90	Text 5	27	72	ŋuə-kui-tu, ʐbə-ŋuəȵi xsə-zi zə-p-ȵi tɕaʁa-lɑ ɦɑ-ʑdʑy-ȵi ʐi-ʐə-kui-tɕu. ɦɑ-tu tɕaʁa-lɑ ɦɑ-ʑdʑy-ȵi	COP-NAR-LNK yak-TOP three-CL DIR-buy-ADV cowpen-LOC DIR-tether-ADV exist-CAUS-NAR-PART INT-RESULT cowpen-LOC DIR-tether-ADV
+91	Text 5	28	73	ʐi-ʐə-kui-tu,	exist-CAUS-NAR-LNK
+92	Text 5	28	74	thɑ-hɑn, ɦɑlɑ-ŋuəȵi ɦɑ-tu satʂů-le:-tʂi-le:-wu “pənsə u-su-ɑ-ʂə” jə-m-le:-wu,111 gəs dɑ-qɑ-ȵi	that:one-kind INT-TOP INT-RESULT younger-sister-DEF:CL-son-DEF:CL-AGT ability DIR-learn-1sg-LNK say-NOM-DEF:CL-AGT night DIR-go-ADV
+93	Text 5	28	75	tə-χquɑtʂ-ȵiɑntɕi, məq-tɑ tuŋtuŋ ʐo:puɑ-lɑ ʁu dɑ-χlɑ-jə-s-tɑ ɦɑ-ʑdʑy-ȵi i-ɕi-kui-wɑ. ʁu dɑ-χlɑ-jə-s-tɑ ɦɑ-ʑdʑy-ȵi i-ɕi-kui-tu. ɦɑlɑ “sənʐə bələ-ŋuəȵi ɦe-me-se” jə-kui. ɦe-me-se kɑ-hɑn	DIR-steal-after above-LOC cave cave-LOC mountain DIR-cross-CSM-NOM-LOC DIR-tether-ADV DIR-put-NAR-EMPH mountain DIR-cross-CSM-NOM-LOC DIR-tether-LNK DIR-put-NAR-LNK INT birthday do-TOP DIR-NEG-allow say-NAR DIR-NEG-allow INDEF:one-kind
+94	Text 5	31	76	ŋuə-kui-tu, sawu-le:-ŋuəȵi ɦɑlɑ wutɕupu-le:-tɑ-ŋuəȵi	COP-NAR-LNK older.sister-DEF:CL-TOP INT husband-DEF:CL-LOC-TOP
+95	Text 5	31	77	pethiɑu-ɦo-pů-kə-kui, “qɑ-satʂů-te:-tʂi-ŋuəȵi ɦɑ-kə	chat-DIR-do-go-NAR 1sg-younger.sister-DEF:CL-son-TOP INT-thus
+96	Text 5	31	78	he-the, u-ʐmu-ȵi i-tʂi-ʐ	DIR-able DIR-dream-ADV DIR-represent-CAUS
+97	Text 5	31	79	dʐə, u-xʂuɕtɕu ə-m	able DIR-listen DIR-hear
+98	Text 5	31	80	dʐə,	able
+99	Text 5	31	81	ɦɑ-kə, ɦɑ-kə	INT-thus INT-thus
+100	Text 5	31	82	ɣʐə-wɑ,” ikə jə-kui-stũ. ɦɑ-tu tse: juɑnʁuɑi-le:-ŋuəȵi gueʴ	able-EMPH thus say-NAR-PART INT-RESULT this:CL emperor-DEF:CL-TOP soldier
+101	Text 5	32	83	ʐi-ʐə-kəi-ʂə, gueʴ he-ɕi-ȵi ɦɑ-tsəi-ŋuəȵi “meʴʐə-k	exist-CAUS-NAR-LNK soldier DIR-send-ADV DIR-this.manner-TOP seek-go
+102	Text 5	32	84	tɕhe,” jə-tu. tə-meʴʐ-ȵi	want say-LNK DIR-seek-ADV
+103	Text 5	33	85	dɑ-tɕ-kə-kui, dɑ-tɕ-kə kɑ-hɑn	DIR-find-go-NAR DIR-find-go INDEF:one-kind
+104	Text 5	33	86	ŋuə-tu,	COP-LNK
+105	Text 5	33	87	χaiʂə,	†(still.is)
+106	Text 5	33	88	dɑ-tɕ-kə-ku-tu,	DIR-find-go-NAR-LNK
+107	Text 5	33	89	ɦɑ-tse:-ŋuəȵi, χaiʂə ȵi:-wu ɦɑlɑ ɦɑ-ʑdʑy-ȵi tə-χquatʂ-ȵi ɦɑlɑ ɦɑ-ʑdʑy-ȵi tuŋtuŋ ʐo:puɑ i-ɕi ŋuə-ku-tu. χaiʂə thɑ-χui	INT-this:CL-TOP †(still.is) 3sgREFL-AGT INT DIR-tether-ADV DIR-steal-ADV INT DIR-tether-ADV cliff.cave cave DIR-put COP-NAR-LNK †(still.is) that:one-time
+108	Text 5	34	90	ŋuə-tu, ȵi: lə	COP-LNK 3sgREFL also
+109	Text 5	34	91	dʐuků-le:-kə-ʂ, tɑntɑ-ke:	knowledge-exist-INF-LNK bold/daring-INDEF:CL
+110	Text 5	34	92	ʐi-kəi-wɑ, tɑntɑ-ke: ʐi-kəi-tu. ɦɑ-thu-ŋuəȵi “qhuɑ:	exist-NAR-EMPH †bold/daring-INDEF:CL exist-NAR-LNK DIR-there-TOP river.valley
+111	Text 5	35	93	dɑ-ʁə-ja, ɦɑ-thu-ŋuəȵi ɕi-la:	DIR-go-REP:1sg INT-there-TOP little-DEF:one:CL
+112	Text 5	35	94	ataʐ-ʂɑ, a. qe:ʴ ɑ-s jə-s-ŋuəȵi. kɑ-zə dɑ-tɕ ɦe-si-ŋuɑ ɦe-me-si?” jə-ȵi ɦɑ-kə ŋuə-kui-wɑ.	fast-HORT INT before one-day two-day-TOP INDEF:one-CL DIR-find DIR-allow-Q DIR-NEG-allow say-ADV INT-thus COP-NAR-EMPH
+113	Text 5	39	95	ɦɑ-tu, ʂputhuʂ lou	INT-RESULT bamboo.tube DEF:one:CL
+114	Text 5	39	96	tɕy-kəi-tu, ʂputhuʂ lou-ʁɑ hɑ-sə-m lə ȵi:	carry-NAR-LNK bamboo.tube DEF:one:CL-LOC DIR-make.sound-NOM also 3sgREFL
+115	Text 5	39	97	ŋuə-kəi-wɑ, keʴl-əm lə ȵi:	COP-NAR-EMPH ask-NOM also 3sgREFL
+116	Text 5	39	98	ŋuə-kəi, he-ʐgue-m lə ȵi:	COP-NAR DIR-answer-NOM also 3sgREFL
+117	Text 5	39	99	ŋuə-kəi, ɦɑ-tu ȵi: hɑ-sə-ȵi ȵi: he-ʐgue ɦɑ-ke: ʐi-kəpə-kəi.	COP-NAR INT-RESULT 3sgREFL DIR-make.sound-ADV 3sgREFL DIR-answer INT-INDEF:CL exist-HABIT-NAR
+118	Text 5	40	100	ɦɑ-tu, ɑ-s-ʁɑ	INT-RESULT one-day-LOC
+119	Text 5	40	101	ŋuə-tu,	COP-LNK
+120	Text 5	40	102	ɦɑ-tu, phɑwu-le:	INT-RESULT older.sister-DEF:CL
+121	Text 5	40	103	wutɕupu-le:-ŋuəȵi, qe:ʴ	husband-DEF:CL-TOP before
+122	Text 5	40	104	ŋuə-tu,	COP-LNK
+123	Text 5	40	105	“juɑnʁuɑi”, pitɕ-ŋuə-tu “ʐmətʂi” ʂpe:ʴ-ʂ.	emperor now-COP-LNK emperor call:1pl-LNK
+124	Text 5	41	106	ɦɑ-tu,	INT-RESULT,
+125	Text 5	41	107	“a, ɕi-la: ataʐ	EXCL little-DEF:one:CL fast
+126	Text 5	41	108	tɕhe, ɦɑ-tu a:-khuɑi-thɑ-ʂ	want INT-RESULT INDTV-fast-AUX-LNK
+127	Text 5	41	109	we-tu,”	exist-LNK
+128	Text 5	41	110	jə-ȵiɑntɕi, ɦɑ-kə	say-after INT-thus
+129	Text 5	41	111	jə-ku-tu, “otsůquɑ-ŋuəȵi dɑ-ʁ	say-NAR-LNK morning-TOP DIR-go
+130	Text 5	41	112	dʐə-m, uɬu dʐə-mə:ʴwu meʴʐ-kə	able-NOM fast able-NOM:all seek-go
+131	Text 5	41	113	tɕhe,” ɦɑ-kə jə-kui-wɑ.	want INT-thus say-NAR-EMPH
+132	Text 5	42	114	ɦɑ-tə, zət ɑ-s	INT-RESULT date one-day
+133	Text 5	42	115	ə-ʂ-kəi, zət ə-ʂ-kəi-ȵi	DIR-put-NAR date DIR-put-NAR-ADV
+134	Text 5	42	116	χaiʂə, ɦɑlɑ tɕetɕi-le: wu phə	†(still.is) INT everywhere-DEF:CL all message
+135	Text 5	42	117	hɑ-ɸə-s-tɑ-jɑntɕi, ɦɑ-tə-ŋuəȵi “dɑ-ʁə dʐə-m xʂuɕtɕu dʐə-m ɦɑ-lɑ-hɑn-neʴwu tsɑ	DIR-blow-NOM-LOC-after INT-RESULT-TOP DIR-go able-NOM hear able-NOM INT-DEF:one-kind-all here
+136	Text 5	42	118	zu-lů, tɕile-ŋuəȵi ʐmu	DIR-come 1pl-TOP meeting
+137	Text 5	42	119	tsu-ɑ:, zu-lů	hold-PRS DIR-come
+138	Text 5	42	120	tɕhe-wɑ,” jə-kui-wɑ. ɦɑ-tu tse: mi-tse:-ŋuəȵi ɦɑ-thɑ tʂhetsə-qu-tɑ sə-l-ȵi ʂputhuʂ tou-ʁɑ-ŋuəȵi	want-EMPH say-NAR-EMPH INT-RESULT this:CL person-this:CL-TOP INT-there cart-top-LOC DIR-look-ADV bamboo.tube DEF:one:CL-LOC-TOP
+139	Text 5	43	121	keʴl-jy,	ask-ASP
+140	Text 5	43	122	tə-keʴl-jɑntɕi, ɦɑ-tu	DIR-ask-after INT-RESULT
+141	Text 5	43	123	tə-keʴl-ȵi,	DIR-ask-ADV
+142	Text 5	43	124	tə-keʴl-jantɕi, ɦɑlɑ ʂputhuʂ tou-ʁɑ-ŋuəȵi mi ɦɑlɑ ʐmətʂi-le: ʐmu-tsu lɑ-s-ʁɑ-ŋuəȵi ɦɑ-thɑ tʂhetsə-qu-tɑ sə-l-ȵi ɦɑ-ke keʴl-kə-kui.	DIR-ask-after INT bamboo.tube DEF:one:CL-LOC-TOP person INT emperor-DEF:CL meeeting-hold DEF:one-day-LOC-TOP INT-there cart-top-LOC DIR-look-ADV INT-thus ask-go-NAR
+143	Text 5	44	125	ɦɑ-tu, “poquʂ-ŋuəȵi	INT-RESULT livestock-TOP
+144	Text 5	44	126	do-ɣʐu-n-tu, tɕɑ-lɑ ʐi? ɦɑlə ʐi ɦɑlə	DIR-lose-2sg-LNK where-LOC exist there exist there
+145	Text 5	45	127	ʐi-wɑ, ʂku-wu tə-χquɑtʂ-ȵi ɦɑlɑ tuŋtuŋ ʐo:pɑ ɦɑ-ʑdʑy-ȵi ʐi-ʐ. ʁu	exist-EMPH thief-AGT DIR-steal-ADV there cliff.cave cave DIR-tether-ADV exist-CAUS mountain
+146	Text 5	46	128	χɬɑ-ji-wɑ,” jə-ȵi ɦɑ-kə dʑe-ku. ɦɑ-kə ʂpəthuʂ-ta:-ʁa-ŋuəȵi ȵiȵi hɑ-sə ɦɑ-kə	cross-CSM-EMPH say-ADV INT-thus say-NAR INT-thus bamboo.tube-DEF:one:CL-LOC-TOP 3sgREFL DIR-make.sound INT-thus
+147	Text 5	47	129	keʴl-kə-ku, ɦɑ-kə keʴl kɑ-hɑn	ask-go-NAR INT-thus ask INDEF:one-kind
+148	Text 5	47	130	ŋuə-ku-tu, “ɑ-ʂ	COP-NAR-LNK one-time
+149	Text 5	47	131	tse-n-nɑ-ʂ,	look-2sg-IMP-LNK
+150	Text 5	47	132	ɦɑ-the-wu,	INT-that-ABL
+151	Text 5	47	133	a, ʂku-wu	INT thief-AGT
+152	Text 5	47	134	tə-χquɑtʂ-kə, ɦɑ-thɑ dɑ-χɬɑ:	DIR-steal-go INT-there DIR-cross:PRS
+153	Text 5	47	135	jəsai-wɑ, ɦɑlɑ-ŋuəȵi thɑ	fast-EMPH INT-TOP there
+154	Text 5	47	136	ʐi-wɑ,” jə-ku. ɦɑ-tu tsoqpi phɑwu-le:	exist-EMPH say-NAR INT-RESULT this:family older.sister-DEF:CL
+155	Text 5	48	137	tɕymi-le:, thoqpi-ŋuəȵi hɑ-qə-ȵi ȵi:-tɕ ɦɑlɑ gueʴ-ȵɑ thɑ-hɑn he-ɕi-ȵi	child-DEF:CL that:family-TOP DIR-go-ADV 3sgREFL-GEN INT army-COM that:one-kind DIR-put-ADV
+156	Text 5	48	138	tə-meʴʐ-s-tɑ, ʁɑtɕhi thɑ	DIR-seek-NOM-LOC truly there
+157	Text 5	48	139	ʐi-ku,	exist-NAR
+158	Text 5	48	140	ɦɑ-tsɑ-χui,	INT-this:one-time
+159	Text 5	48	141	tse:-ŋuəȵi,	this:CL-TOP
+160	Text 5	48	142	a, satʂů-le: tʂi-le:-ŋuəȵi minjy-tɕiəu-kɑulɑ. ɦɑ-tu phɑwu-le: wutɕupu-ȵɑ ȵiɣi dzə-ȵi ȵiɣi tɕhə-tɕ ɦɑ-tsəi ə-ʂ-jy ŋuə-ȵi ɦɑ-tsəi pəʴʐə-kui-wɑ.	INT younger.sister-DEF:CL son-DEF:CL-TOP †(reputation-then-higher) INT-RESULT older.sister-DEF:CL husband-COM what eat-ADV what drink-GEN INT-this.manner DIR-put-ASP COP-ADV INT-this.manner provide.for-NAR-EMPH
+161	Text 5	50	143	ɦɑ-tsɑ-χui-tu, tse:-tɕ-ʁɑ112 tɕiu tɕaitɕyelɑ. ɦɑ-tu	DIR-this:one-time-LNK this:CL-GEN-LOC †(then solved) INT-RESULT
+162	Text 5	51	144	steke-lɑ-χui-ʁɑ-tu, tɕiuʂə ʐmətʂi-le:-ŋuəȵi ɦɑ-thɑ nai-e-fən-ʁɑ-tɕ-ʐmətʂi-ke: dzin-le:	later-DEF:one-time-LOC-LNK †(that.is) emperor-DEF:CL-TOP INT-there other-one-place-LOC-GEN-emperor-INDEF:CL monk’s.robe113-DEF:CL
+163	Text 5	51	145	do-ɣʐu-kəi-hɑ, ʐmətʂi	DIR-lose-NAR-PART emperor
+164	Text 5	51	146	jən-le:, ʐmətʂi jən-le: do-ɣʐu kɑ-hɑn	monk’s.robe-DEF:CL emperor monk’s.robe-DEF:CL DIR-lose INDEF:one-kind
+165	Text 5	51	147	ŋuə-kui-tu, ɦɑ-tse:-wu	COP-NAR-LNK INT-this:CL-AGT
+166	Text 5	51	148	ɦɑ-thɑ, ɦɑ-lɑ-hɑn	INT-there INT-DEF:one-kind
+167	Text 5	51	149	ŋuə-kuɑ-ji, ɑ-lə-wu ɑ-lə114 pethiɑu-ɦo-pu-ȵi dʐuků le kɑ-hɑn	COP-NAR-HS one-CL-AGT one-CL chat-DIR-do-ADV knowledge exist INDEF:one-kind
+168	Text 5	51	150	ŋuə-kuɑ-ji, dʐuků	COP-NAR-HS knowledge
+169	Text 5	51	151	le-ku-tu, ɦɑ-tu dʐuků de-l kɑ-hɑn ŋuə-ku. ɦɑ-tse:-ŋuəȵi “meʴʐ-kə	exist-NAR-LNK INT-RESULT knowledge DIR-exist INDEF:one-kind COP-NAR INT-this:CL-TOP seek-go
+170	Text 5	52	152	tɕhe, meʴʐ-kə	want seek-go
+171	Text 5	52	153	tɕhe,” jə-ku. ɦɑ-tu “tə-meʴʐ-ȵi ɦɑ-tse:-ŋuəȵi ə-ʐmu ȵi: sə-tʂi ɦe-dʑi-ȵi ə-m dʐə-m ɦɑ-kɑ-hɑn	want say-NAR INT-RESULT DIR-seek-ADV INT-this:CL-TOP DIR-dream 3sgREFL DIR-represent DIR-say-ADV DIR-hear able-NOM INT-INDEF:one-kind
+172	Text 5	53	154	ŋuə-ʂə, ɦɑ-tse:-ŋuəȵi ɦɑ-kə he-the-le:	COP-LNK INT-this:CL-TOP INT-thus DIR-able-DEF:CL
+173	Text 5	53	155	ʐi-wɑ,” jə-tu. ɦɑ-tsoqpi-wu phə	exist-EMPH say-LNK INT-this:family-AGT message
+174	Text 5	54	156	he-kue-ȵi, phə he-kue-ȵi ɦɑ-kɑ-hɑn tə-bələ-ku-wɑ.	DIR-take-ADV message DIR-take-ADV INT-INDEF:one-kind DIR-do-NAR-EMPH
+175	Text 5	55	157	ɦɑ-tsɑ-χui-tu, tsoqpi ʐmətʂi jən-le: do-ɣʐu-m	INT-this:one-time-LNK this:family emperor monk’s.robe-DEF:CL DIR-lose-NOM
+176	Text 5	55	158	tsoqpi-ŋuəȵi,	this:family-TOP
+177	Text 5	55	159	tse:-ŋuəȵi, ɦɑ-tse:-ŋuəȵi tʂɑutɑulɑ	this:CL-TOP INT-this:CL-TOP †(found)
+178	Text 5	55	160	dɑ-tɕ-ku-kui, ɦɑ-tsə-tse: dɑ-tɕ-kə. dɑ-tɕ-kə kɑ-hɑn	DIR-find-go-NAR INT-here-this:CL DIR-find-go DIR-find-go INDEF:one-kind
+179	Text 5	56	161	ŋuə-tu, χaiʂə	COP-LNK †(still.is)
+180	Text 5	56	162	ə-pəʴʐ-kui-wɑ, ʂətɕiɑn	DIR-provide.for-NAR-EMPH †time
+181	Text 5	56	163	ə-tin-thɑ-kəi, ə-tin-thɑ-jantɕi ɦɑlɑ ɕtɕə-s	DIR-set-AUX-NAR DIR-set-AUX-after INT seven-day
+182	Text 5	56	164	ə-ʂ-kəi, “ɕtɕə-s-ʁɑ-ŋuəȵi tse: ʐmətʂi jin-ne: ɑ-zə χqu ɦɑtə u-ʐmu-ȵi i-tʂi-s-le:	DIR-put-NAR seven-day-LOC-TOP this:CL emperor monk’s.robe-DEF:CL one-little difficult INT DIR-dream-ADV DIR-sign-NOM-DEF:CL
+183	Text 5	56	165	ŋuə-ʂ,	COP-LNK
+184	Text 5	56	166	ɦɑta, ke: tɕi-meʴʐ-əs-ji	INT INDEF:CL CON-seek-NOM-EXC
+185	Text 5	56	167	mɑ-ŋ̥u̥ə-ta, u-ʐmu-ȵi i-tʂi-s ʐmətʂi jin-le: ŋuə-ʂə ɑ-zə	NEG-COP-if DIR-dream-ADV DIR-sign-NOM emperor monk’s.robe-DEF:CL COP-LNK one-little
+186	Text 5	56	168	χqu-ʂə,”	difficult-LNK
+187	Text 5	56	169	jə-ȵi, ɦɑ-kə dʑe-jə-kui. ɦɑ-kə ʂətɕian	say-ADV INT-thus say-REP-NAR INT-thus time
+188	Text 5	57	170	ə-ʂə-kəi-tu, ɕtɕə-s ȵɑ ɕtɕə-jə	DIR-put-NAR-LNK seven-day COM seven-night
+189	Text 5	57	171	ŋuə-ȵi,	COP-ADV
+190	Text 5	57	172	ɦɑtɑ, ɦɑ-tsə ʐmətʂi-le:-tɑ-ŋuəȵi	INT INT-this emperor-DEF:CL-DAT-TOP
+191	Text 5	57	173	sə-dzi-ku-wɑ,	DIR-eat-NAR-EMPH
+192	Text 5	57	174	sə-dze-tu, ɑ-s-ʁɑ	DIR-eat-LNK one-day-LOC
+193	Text 5	57	175	ʐmətʂi-le:-ŋuəȵi,	emperor-DEF:CL-TOP
+194	Text 5	57	176	“a, qɑ-jin-le:-ŋuəȵi e:-wu nai-ɑ-ʂpəq-tɑ do-quq	EXCL 1sg-monk’s.robe-DEF:CL-TOP one:CL-AGT other-one-place-LOC DIR-move
+195	Text 5	57	177	ʁu-ʂ,” ɦɑ-tu ɦɑ-kə	willing-LNK INT-RESULT INT-thus
+196	Text 5	57	178	jə-ku,	say-NAR
+197	Text 5	57	179	ɦɑ-tu,	INT-RESULT
+198	Text 5	57	180	ɑ-s-ʁɑ-tu,	one-day-LOC-LNK
+199	Text 5	57	181	ɦɑ-tu, stuɑhɑ χaiʂə ba kə	INT-RESULT rice/food †(still.is) big thus
+200	Text 5	57	182	tɕhə-kəpə-k,	eat-HABIT-INF
+201	Text 5	57	183	ɦɑ-tu,	INT-RESULT
+202	Text 5	57	184	ɑ-s-ʁɑ-tu, mɑutshɑ sei-jə-kə hɑ-qə-kəi-tu. mɑutshə-le: dɑ-tɕ	one-day-LOC-LNK toilet relieve.oneself-REP-go DIR-go-NAR-LNK toilet-DEF:CL DIR-find
+203	Text 5	58	185	mɑ-lə-kəi, mɑutshə-le: dɑ-tɕ	NEG-able-NAR toilet-DEF:CL DIR-find
+204	Text 5	58	186	mɑ-lə-kəi-tu, ɦɑlɑ mɑutshɑ	NEG-able-NAR-LNK INT toilet
+205	Text 5	58	187	sei-kəi-wɑ, tu	relieve.oneself-NAR-EMPH RESULT
+206	Text 5	58	188	puȵi-le:-wu, puȵu-lɑpɑ:	cat-DEF:CL-AGT cat-flower
+207	Text 5	58	189	lou-wu,	DEF:one:CL-AGT
+208	Text 5	58	190	ɦɑtɑ, ʁɑ-ŋuəȵi ɦɑ-thɑ mɑutshə-le:-qu-tɑ ʁɑ sə-ʑdʑy la:-ʁɑ ɦɑ-thɑ ʐi-kui-wɑ. ɦɑ-tu tʂekəʐənla	INT roof.tile-TOP INT-there toilet-DEF:CL-top-LOC roof.tile DIR-put DEF:one:CL-LOC INT-there exist-NAR-EMPH INT-RESULT †(this.person)
+209	Text 5	59	191	mi-tse-ze-ŋuəȵi, “hai!	person-this-CL-TOP INT
+210	Text 5	60	192	pefutsə, tʂekə pefutsə məʴ ke guo zuo χɑu	†white.beard(cat) †(this white.beard cat give 1sg do good
+211	Text 5	60	193	sə,” jə-i-stu. ɦɑ-tu puȵu-le:-wu ɦɑ-thɑ ʐmətʂi jin-le:-tɑ ɦɑ-ʁdʐe-jantɕi ɦɑlɑ u-zu-ȵi	thing) say-HS-PART INT-RESULT cat-DEF:CL-AGT INT-there emperor monk’s.robe-DEF:CL-LOC DIR-bite-after there DIR-wait-ADV
+212	Text 5	61	194	ʐi-kui-hɑ, ɦɑlə u-zu-ȵi	exist-NAR-PART there DIR-wait-ADV
+213	Text 5	61	195	ʐi-kui-tu,	exist-NAR-LNK
+214	Text 5	61	196	“a, ʐɑ hɑ-sɑ,115 tse: puȵu-le:-wu qɑ-tɕ ʐɑ	INT thing DIR-make.sound this:CL cat-DEF:CL-AGT 1sg-GEN thing
+215	Text 5	61	197	hɑ-sɑ, hi qɑ-tɕ χɑusə	DIR-make.sound EXCL 1sg-GEN †good.thing
+216	Text 5	61	198	tə-bəl-ən-ʂə,”	DIR-do-2sg-LNK
+217	Text 5	61	199	jə-ȵi, ɦɑtɑ	say-ADV INT
+218	Text 5	61	200	ŋuə-jantɕi, ɦɑlɑ puȵu-le:-tɑ zə-ʐ-ȵiɑntɕi ɦɑlɑ ʁɑ-ŋuəȵi ɕtɕi-ɸi tə-ʂe.	COP-after there cat-DEF:CL-DAT DIR-bring-after INT roof.tile-TOP seven-CL DIR-count
+219	Text 5	62	201	ɦɑ-the-wu, ʁɑ-ŋuəȵi tə-tʂhɑtʂ ŋuəȵi	INT-that-ABL roof.tile-TOP DIR-vertically TOP
+220	Text 5	62	202	ɕtɕə-χtʂ, nai e-ɸi e-ɸi ŋuə-tu ɕtɕə-ɸi ɦɑlə-jɑntɕi ʐmətʂi jin-le: ɦɑ-thu tə-ʂuə-kəi-hɑ.	seven-row other one-CL one-CL COP-LNK seven-CL there-after emperor monk’s.robe-DEF:CL INT-there DIR-hide-NAR-PART
+221	Text 5	63	203	ɦɑ-tu, tə-ʂuə kɑ-hɑn	INT-RESULT DIR-hide INDEF:one-kind
+222	Text 5	63	204	ŋuə-kəi-tu,	COP-NAR-LNK
+223	Text 5	63	205	ɦɑ-tsɑ-χui-tu,	INT-this:one-time-LNK
+224	Text 5	63	206	ʐmətʂi-le:-ŋuəȵi,	emperor-DEF:CL-TOP
+225	Text 5	63	207	“a, ɑ-zə-ŋuəȵi	INT one-little-TOP
+226	Text 5	63	208	ʂqu-ʂ-un, qɑ nai-ɑ-ʂpɑq-tɑ do-quq	difficult-too-2sg 1sg other-one-place-LOC DIR-move
+227	Text 5	63	209	ʁu-ȵi, ȵi: ŋuə-ŋuəi?” ɦɑtɑ tə-keʴl-kə-kui. ɦɑ-thɑ	willing-ADV what COP-Q INT DIR-ask-go-NAR INT-there
+228	Text 5	65	210	tə-keʴl-kə-kui-tu,	DIR-ask-go-NAR-LNK
+229	Text 5	65	211	“a,	EXCL
+230	Text 5	65	212	soqho-ȵi-ŋuəȵi,” (“təp-ȵi” jə lə	tomorrow-ADV-TOP tomorrow-ADV say also
+231	Text 5	65	213	khuoji,	†(be.possible)
+232	Text 5	65	214	ɦe-se, “soqho-ȵi” jə lə	DIR-allow tomorrow-ADV say also
+233	Text 5	65	215	khuoji),	†(be.possible)
+234	Text 5	65	216	“tɕile-tɑ, ɑ-s ɑ-s	1pl-LOC one-day one-day
+235	Text 5	65	217	lɑ-hɑn-ʁɑ,” ɦɑ-kə jə-kui-tu.	DEF:one-kind-LOC that.manner say-NAR-LNK
+236	Text 5	66	218	“a, ɦe-se.”	EXCL DIR-allow
+237	Text 5	67	219	tse:-ŋuəȵi, χaiʂə “qɑ pəmaha ȵi:-le:	this:CL-TOP †(still.is) 1sg tonight what-DEF:CL
+238	Text 5	67	220	tə-suɑ, ɦɑ-tu ɕi-lɑ:	DIR-divine(v.) INT-RESULT little-DEF:one:CL
+239	Text 5	67	221	i-tʂi-s-tɑ-tu, pəmaha i-tʂi-lɑ-wɑ. otsůquɑ-ŋuəȵi thuntʂə	DIR-sign-NOM-LOC-LNK tonight DIR-sign-INDTV:1sg-EMPH morning-TOP notify
+240	Text 5	68	222	tu-pu-n-pɑ, dɑ-ʁ	DIR-do-2sg-DTV DIR-go
+241	Text 5	68	223	dʐə-m, ə-m	able-NOM DIR-hear
+242	Text 5	68	224	dʐə-m, sei dʐə-meʴwu lu	able-NOM walk able-NOM:all come
+243	Text 5	68	225	tɕhe, ɦɑ-tsɑ-hɑ-ŋuəȵi i-pə-l	want INT-this:one-pl-TOP DIR-arrive-come
+244	Text 5	68	226	tɕhe-wɑ,” jə-kui. ʐmu tʂu-s-ŋuəȵi ʐmətʂi-le:-tɑ-ŋuəȵi ɦɑ-kə jə-kui-wɑ.	want-EMPH say-NAR meeting hold-NOM-TOP emperor-DEF:CL-DAT-TOP INT-thus say-NAR-EMPH
+245	Text 5	70	227	ɦɑtɑ,	INT
+246	Text 5	70	228	“ɑ, thuntʂə-tu-pů-ȵi mi ɦɑlɑ dɑ-ʁə	EXCL notify-DIR-do-ADV person INT DIR-go
+247	Text 5	70	229	dʐə-m, de-sei dʐə-m-le:ʴwu lu-jə-kui.” ɦɑtɑ meʴʂ-tɑ-s-ʁɑ ʐmu ɦo-tsu. tu ɦɑ-tsu ʂputhuʂ	able-NOM DIR-walk able-NOM-all come-REP-NAR INT next-DEF:one-day-LOC meeting DIR-hold RESULT INT-here bamboo.tube
+248	Text 5	72	230	tou-ʁɑ, ɦɑ-tsou-ʁɑ keʴl-əm lə ȵi: hɑ-sə-m lə ȵi:-ŋuəȵi ɦɑ-ke	DEF:one:CL-LOC INT-this:one:CL-LOC ask-NOM also 3sgREFL DIR-make.sound-NOM also 3sgREFL-TOP INT-thus
+249	Text 5	72	231	ʐi-kəi-wɑ, ɦɑtɑ tɕɑ-lɑ	exist-NAR-EMPH INT where-LOC
+250	Text 5	72	232	ʂə, tɕɑ-lə mɑutshə-le:-ŋuəȵi ɦɑlɑ ʁɑ-ŋuəȵi	exist where-LOC toilet-DEF:CL-TOP INT roof.tile-TOP
+251	Text 5	72	233	ȵa-χtʂ, ɦɑ-thɑ ȵe-ɸi ŋuə	WH:one-row INT-there WH:one-CL COP
+252	Text 5	72	234	tə-ʂe-ȵiɑntɕi, ɦɑ-thu	DIR-count-after INT-there
+253	Text 5	72	235	ʂə-wɑ, jə-kui. ɦɑ-tse:-ŋuəȵi ȵim	exist-EMPH say-NAR INT-this:CL-TOP notice(n.)
+254	Text 5	73	236	hɑ-qə-stun, ȵim	DIR-go-PART notice(n.)
+255	Text 5	73	237	hɑ-qɑ,	DIR-go
+256	Text 5	73	238	ɦɑ-tsɑ-χui,	INT-this:one-time
+257	Text 5	73	239	dɑ-tɕ-kə-stun, tsɑ-χui	DIR-find-go-PART this:one-time
+258	Text 5	73	240	ŋuə-tu, ɦɑ-tu tse:-wu ȵim tə-s,116 ɦɑ-tu ʐmətʂi tse:-ŋuəȵi mi χaiʂə	COP-LNK INT-RESULT this:CL-AGT notice(n.) DIR-make.sound INT-RESULT emperor this:CL-TOP INT †(still.is)
+259	Text 5	73	241	kə-jə-ku, “qɑ ȵiɣi dzə-ȵi ȵiɣi	thus-say-NAR 1sg what eat-ADV what
+260	Text 5	73	242	dzə, qɑ o-zů-ȵi	eat 1sg DIR-sit-ADV
+261	Text 5	73	243	o-zů, qɑ tu-jů-ȵi tu-jů.	DIR-sit 1sg DIR-stand-ADV DIR-stand
+262	Text 5	74	244	ɦɑ-tsəi-ŋuəȵi,	this.manner-TOP
+263	Text 5	74	245	ɦɑ-thɑ, ɦɑ-ke hɑ-ŋueʴ-wɑ.”	INT-there INT-thus DIR-COP:1pl-EMPH
+264	Text 5	75	246	jə-kui-ʂə, mi χaisə ɦɑ-tsəi ɦɑ-tse:-ŋuəȵi kənʂə tə-pəʴʐ-ȵi ɦɑ-ke ŋuə-ʐ-kui-hɑ. ɦɑ-tu nai	say-NAR-LNK person †(still) INT-this.manner INT-this:CL-TOP †even.more DIR-provide.for-ADV INT-thus COP-CAUS-NAR-PART INT-RESULT other
+265	Text 5	76	247	ŋuə-tu, ʐmətʂi nai-e:	COP-LNK emperor other-one:CL
+266	Text 5	76	248	ŋuə-tu, gənkuo wətshi-ŋuəȵi gən phulu χaiʂə pɑufu-le: ŋuə-s kɑ-hɑn	COP-LNK parrot bird-TOP very expensive †(still.is) retaliation-DEF:CL COP-NOM INDEF:one-kind
+267	Text 5	76	249	ŋuə-kuɑ-ji, ɦɑ-ke	COP-NAR-HS INT-thus
+268	Text 5	76	250	do-ɣʐu-kəi-wɑ, genkuo iʂə wətshi kɑ-hɑn	DIR-lose-NAR-EMPH parrot †(is) bird INDEF:one-kind
+269	Text 5	76	251	ʐi-ku-ʂə, ɦɑ-kɑ-hɑn	exist-NAR-LNK INT-INDEF:one-kind
+270	Text 5	76	252	ʐi-kui-tu, do-ɣʐu-kəi.	exist-NAR-LNK DIR-lose-NAR
+271	Text 5	77	253	tu, ɦɑ-tsu tse-xʂepi ʐmətʂi jin do-ɣʐu-m-le:-wu ɦɑ-thɑ the-xʂepi-ʁɑ khuə-ŋuəȵi thɑ	RESULT INT-here this-side emperor monk’s.robe DIR-lose-NOM-DEF:CL-AGT INT-that that-side-LOC dog-TOP there
+272	Text 5	77	254	dɑ-l-ʐə-kui, “ɦɑ-thɑ-hɑn	DIR-look-CAUS-NAR INT-that:one-kind
+273	Text 5	77	255	do-ɣʐu-n-tu, qɑ-tɑ ɦɑ-ke:	DIR-lose-2sg-LNK 1sg-DAT INT-INDEF:CL
+274	Text 5	77	256	ʐi-wɑ,” jə-kui. ɦɑ-tu χaiʂə ɑ-tɑu tə-meʴʐ-ȵi mi-le: thɑ	exist-EMPH say-NAR INT-RESULT †(still.is) one-time DIR-seek-ADV person-DEF:CL there
+275	Text 5	78	257	i-pə-l-ȵi, ɦɑ-tu ʂətɕiɑn ə-tin-thɑ-ȵi ɦɑ-tsəi	DIR-arrive-come-ADV INT-RESULT †time DIR-agree.on-AUX-ADV INT-this.manner
+276	Text 5	78	258	ə-pəʴʐ-kə-kui,	DIR-provide.for-go-NAR
+277	Text 5	78	259	ɦɑ-tu, ə-pəʴʐ-ȵi kɑ-hɑn	INT-RESULT DIR-provide.for-ADV INDEF:one-kind
+278	Text 5	78	260	ŋuə-tu,	COP-LNK
+279	Text 5	78	261	ɑ,	EXCL
+280	Text 5	78	262	ɦɑ-tu,	INT-RESULT
+281	Text 5	78	263	χaiʂə,	†(still.is)
+282	Text 5	78	264	“a, qɑ tse: tsəpɑu-le: mɑ-ŋ̥u̥ə-ʂə χuopɑu-le: ŋuə. χuopɑu ŋuə-ʂə ɦe-ʂue-ȵi ɑ-ʂpɑ-lɑ die-ʂe-kə ʁu.” ɦɑ-thə-ŋuəȵi ʂətɕiɑn-ŋuəȵi	EXCL 1sg this:CL inanimate.treasure-DEF:CL NEG-COP-LNK live.treasure-DEF:CL COP live.treasure COP-LNK DIR-be.hungry-ADV one-place-LOC DIR-die-INF may DIR-that-TOP †time-TOP
+283	Text 5	80	265	ɕtɕə-s-ŋuəȵi, “a tsə-s ɑz-ŋuəȵi ɕi-lɑ: ataʐ-ȵi u-ʐmu ȵɑ u-tɕu-s-le: ə-mə-s	seven-day-TOP EXCL this-COMP one:CL-TOP small-DEF:CL fast-ADV DIR-dream COM DIR-see-NOM-DEF:CL DIR-hear-NOM
+284	Text 5	80	266	xu-tu, qɑ-tɕ-ŋuəȵi ɕi-lɑ: ataʐə-s-lɑ:	exist-LNK 1sg-GEN-TOP small-DEF:CL fast-NOM-DEF:CL
+285	Text 5	80	267	ɕɑ:-ŋuɑ,	INDTV-COP:1sg
+286	Text 5	80	268	ɦɑ-tu,	INT-RESULT
+287	Text 5	80	269	a, tʂentʂen qɑ tse: genkuo-le: dɑ-tɕə-s kɑ-hɑn	EXCL †really 1sg this:CL parrot-DEF:CL DIR-find-NOM INDEF:one-kind
+288	Text 5	80	270	ŋuə-tu, ɦɑ-thɑ genkuo-le:	COP-LNK INT-there parrot-DEF:CL
+289	Text 5	80	271	dɑ-tɕi-n-tu, qɑ-ȵike	DIR-find-2sg-LNK 1sg-COM:thus
+290	Text 5	80	272	phin-tɕhi-phin-tsuo, χaiʂə qɑ ȵiɣi dzə-ȵi	†(equal-stand-equal-sit) †(still.is) 1sg what eat-ADV
+291	Text 5	80	273	dzə, ɦɑtɑ qɑ tu-jů-ȵi	eat INT 1sg DIR-stand-ADV
+292	Text 5	80	274	tu-jů, qɑ o-zu-ȵi	DIR-stand 1sg DIR-sit-ADV
+293	Text 5	80	275	o-zu, ɦɑtɑ qɑ ȵiɣi dzə-ȵi ȵiɣi dzə χaiʂə ɦɑ-tsəi	DIR-sit INT 1sg what eat-ADV what eat †(still.is) INT-this.manner
+294	Text 5	80	276	hɑ-ŋueʴ-wɑ,” jə-ȵi ŋuə-kui-tu. mi χaiʂə ɦɑ-tu ʂətɕiɑn-ŋuəȵi χaiʂə ɦɑ-tu	DIR-COP:1pl-EMPH say-ADV COP-NAR-LNK person †(still.is) INT-RESULT †time-TOP †(still.is) INT-RESULT
+295	Text 5	81	277	tə-meʴʐ-lɑ-s-ʁɑ-tu, sei-kə hɑ-qə-kəi-wɑ. sei-kə	DIR-seek-DEF:one-day-LOC-LNK relieve.oneself-go DIR-go-NAR-EMPH relieve.oneself-go
+296	Text 5	82	278	hɑ-qə-kei-tu, ɦɑ-tu	DIR-go-NAR-LNK INT-RESULT
+297	Text 5	82	279	ɑ-s-ʁɑ-tu, thɑ-hɑn sei-kə hɑ-qə-kei-tu.	one-day-LOC-LNK that:one-kind relieve.oneself-go DIR-go-NAR-LNK
+298	Text 5	83	280	ɦɑlɑ, ʁəʴ-tɑ-ŋuəȵi kaijuɑn-ʁɑ ʂpə me-we-m	INT Han.person-DAT-TOP †street.edge-LOC bamboo NEG-exist-NOM
+299	Text 5	83	281	me-ʐi,	NEG-exist
+300	Text 5	83	282	ɦɑtɑ, kaijuɑn-ʁɑ ʂpə	INT †street.edge-LOC bamboo
+301	Text 5	83	283	we-wu-ʂə, ɑ-χtʂ ɑ-χtʂ tɑ-hɑn	exist-VIS-LNK one-row one-row DEF:one-kind
+302	Text 5	83	284	we-wu-tu, ʂpə i-phi-ȵi ɑ-χtʂ ɑ-χtʂ tɑ-hɑn	exist-VIS-LNK bamboo DIR-grow-ADV one-row one-row DEF:one-kind
+303	Text 5	83	285	we-ku-tu, ɦɑ-thɑ genkuo-le:-ŋuəȵi ɣzəifɑ qə-tɑ-ŋuəȵi xʂul lou tə-χʂə-ȵi wet lou ɦɑ-ke tə-tʂhe-le:	exist-NAR-LNK INT-there parrot-DEF:CL-TOP wing top-LOC-TOP rope DEF:one:CL DIR-tie-ADV stick DEF:one:CL INT-thus DIR-support-DEF:CL
+304	Text 5	83	286	we-kui-wɑ, tu ɦɑlɑ xʂul-le:-ŋuəȵi ʂpə χqa-lɑ hɑ-jə-kui.	exist-NAR-EMPH RESULT INT rope-DEF:CL-TOP bamboo among-LOC DIR-stick/be.caught-NAR
+305	Text 5	84	287	hɑ-jə-kui-tu,	DIR-stick-NAR-LNK
+306	Text 5	84	288	ɦɑlɑ, mɑutshə dɑ-tɕ mɑ-lə-kəi-tu. ɦɑlɑ	INT toilet DIR-find NEG-able-NAR-LNK there
+307	Text 5	85	289	sei-kəi-wɑ, tu	relieve.oneself-NAR-EMPH RESULT
+308	Text 5	85	290	ɦɑlɑ,	INT
+309	Text 5	85	291	sei-kəi-tu, genkuo-le: ʐɑχuɑ-lɑ ɕtɕeʴpɕtɕeʴp-le: thɑ	relieve.oneself-NAR-LNK parrot-DEF:CL inside-LOC (birdcall)-DEF:CL there
+310	Text 5	85	292	sɑ-kui-hɑ, “tsɑ-χui tse: genkuo-le: qɑ-tɕ ʐɑ	make.sound-NAR-PART this:one-time this:CL parrot-DEF:CL 1sg-GEN matter/affair
+311	Text 5	85	293	hɑ-sə-ʂə,” jə-ȵi ɦɑlɑ ɦɑ-ke ʐə-kəi.	DIR-make.sound-LNK say-ADV INT INT-thus exist-NAR
+312	Text 5	86	294	ɦɑ-tu,	INT-RESULT
+313	Text 5	86	295	ɦɑlɑ, the:	INT 3sg
+314	Text 5	86	296	tə-tsəqɑ-jantɕi, genkuo-le:	DIR-grab-after parrot-DEF:CL
+315	Text 5	86	297	tə-tsəqɑ-jantɕi,	DIR-grab-after
+316	Text 5	86	298	ɦɑtɑ, ʂpə-ŋuəȵi ɑ-χtʂ ɑ-χtʂ	INT bamboo-TOP one-row one.row
+317	Text 5	86	299	tə-ʂə-jantɕi,	DIR-count-after
+318	Text 5	86	300	ɦɑ-the-wu, ɦɑ-tsəi	INT-that-ABL INT-this.manner
+319	Text 5	86	301	ŋuə-jantɕi, ɦɑ-thu i-ɕi	COP-after INT-there DIR-put
+320	Text 5	86	302	ɦɑ-tsɑ-χui-tu,	INT-this:one-time-LNK
+321	Text 5	86	303	a,	EXCL
+322	Text 5	86	304	ɦɑ-tu, ʐmətʂi-le:-ŋuəȵi	INT-RESULT emperor-DEF:CL-TOP
+323	Text 5	86	305	tu,	RESULT
+324	Text 5	86	306	“ɑ, qɑ-χuopɑu-le:-ŋuəȵi	EXCL 1sg-live.treasure-DEF:CL-TOP
+325	Text 5	86	307	ʂkupɑ-mo-ʁu, χuopɑu-le: ŋuə-ʂə ɑ-ʂpɑ-lɑ die-ʂe-kə	disaster-NEG-willing live.treasure-DEF:CL COP-LNK one-place-LOC DIR-die-go
+326	Text 5	86	308	ʁu,	may
+327	Text 5	86	309	ɦe-ʂue-ȵi,”	DIR-be.hungry-ADV
+328	Text 5	86	310	jə-ȵi, “ɑ ataʐə-s-lɑ: dzə-ȵi kɑ-hɑn	say-ADV INT fast-NOM-DEF:CL eat-ADV INDEF:one-kind
+329	Text 5	86	311	ŋuə-ʂɑ,	COP-HORT
+330	Text 5	86	312	qɑ, ʔũ χaiʂə qɑ ȵiɣi dzə-ȵi ȵiɣi	1sg 2sg †(still.is) 1sg what eat-ADV what
+331	Text 5	86	313	dzə-tɕ, ɦɑ-tsəi-ŋuəȵi ȵiɣi ʂətɕiɑn ɦɑ-tsə-ŋuəȵi tu-wu-ȵi ɦɑ-kə ə-ʂə-kəi-hɑ.” ɦɑ-tu tʂekəʐənla χaiʂə ʂputhuʂ lou	eat-NOM INT-this.manner-TOP what †time INT-this-TOP DIR-discuss-ADV INT-thus DIR-put-NAR-PART INT-RESULT †(this.person) †(still.is) bamboo.tube DEF:one:CL
+332	Text 5	87	314	he-tɕy-ȵi,	DIR-carry-LNK
+333	Text 5	87	315	ɦɑ-tu-ŋuəȵi, ɦa-ka:-ʁɑ stuɑhɑ tɕhə-s ɦɑ-kɑ-hɑn lez tə-ʁə-s-le: we-kuai.	INT-RESULT-TOP INT-INDEF:one:CL-LOC food eat-NOM INT-INDEF:one-kind fate/destiny DIR-go-NOM-DEF:CL exist-NAR
+334	Text 5	88	316	ɦɑ-tu, ɦɑ-tsə χuɑn tɕhiɑnmeʴ	INT-RESULT INT-this Huang Qianmen
+335	Text 5	88	317	ɦɑ-tse:-ŋuəȵi, χaiʂə	INT-this:CL-TOP †(still.is)
+336	Text 5	88	318	genkuo-le:, genkuo-le:	parrot-DEF:CL parrot-DEF:CL
+337	Text 5	88	319	dɑ-tɕ-kə-kuai-stun, ɦɑ-tsu-ŋuəȵi ȵi ke guo	DIR-find-go-NAR-PART INT-here-TOP †(2sg give 1sg
+338	Text 5	88	320	sɑn-jɑn, ɦɑ-thu xsə-hɑn thuntʂə	three-kind) INT-there three-kinds notify
+339	Text 5	88	321	tu-p-ʐə-ku-ʂə, ɦɑ-tu ʐmətʂi-le: ȵiɣi dzə-ȵi ȵiɣi	DIR-do-CAUS-NAR-LNK INT-RESULT emperor-DEF:CL what eat-ADV what
+340	Text 5	88	322	dzə, ɦɑ-tu ɦɑ-kɑ-hɑn ŋuə. χuɑn-tɕhiɑnmeʴ-le: thɑ-hɑn ɦɑ-ke ŋuə-kuə-wɑ. ɦɑ-tu	eat INT-RESULT INT-INDEF:one-kind COP Huang-Qianmen-DEF:CL that:one-kind INT-thus COP-NAR-EMPH INT-RESULT
+341	Text 5	90	323	ʐmətʂi-ŋuəȵi, “ɦɑ-tse: genkuo-le: dɑ-tɕə-m-ŋuəȵi	emperor-TOP INT-this:CL parrot-DEF:CL DIR-find-NOM-TOP
+342	Text 5	90	324	ɦɑ-thɑ-ŋuəȵi,	INT-there-TOP
+343	Text 5	90	325	qɑ-tsi-le:-ŋuəȵi, qɑ-luq-te:-ŋuəȵi ʔũ	1sg-daughter-DEF:CL-TOP 1sg-seat-DEF:CL-TOP 2sg
+344	Text 5	90	326	o-zu-n,” ɦɑ-kə jə-ji ŋuə-wɑ. (ɦɑ-tsu	DIR-sit-2sg INT-thus say-CSM COP-EMPH INT-here
+345	Text 5	91	327	χuɑn-tɕhiɑnmeʴ, ɦɑ-tsu qɑ-wu dʑe-tɕ	Huang-Qianmen DIR-here 1sg-AGT say-NOM
+346	Text 5	91	328	kopu-le:-ŋuəȵi, qɑ tɕiq dʑe-s-tɑ-ŋuəȵi ʐmə-lɑ-sɑ	root-DEF:CL-TOP 1sg inside say-NOM-LOC-TOP name-DEF:one-CL
+347	Text 5	91	329	dɑ-m-ɑ, ɦɑlɑ χuɑn-tɕhiɑnmeʴ ʐmə-w-wɑ. χuɑn-tɕhiɑnmeʴ ʐmə-w kɑ-hɑn ŋuə-w-tu.) ʐmətʂi-le:-ŋuəȵi tɕi-steke-lɑ	DIR-forget-1sg INT Huang-Qianmen call-VIS-EMPH Huang-Qianmen call-VIS INDEF:one-kind COP-VIS-LNK emperor-DEF:CL-TOP most-back-LOC
+348	Text 5	92	330	ŋuə-tu, ɦɑtɑ genkuo-le: dɑ-tɕ-ȵi ɦɑ-kɑ-hɑn	COP-LNK INT parrot-DEF:CL DIR-find-ADV INT-INDEF:one-kind
+349	Text 5	92	331	ŋuə-w-tu, ɦɑ-tu ʐmətʂi-le:-tɕ tsi-le:-ŋuəȵi χuɑn-tɕhiɑnmeʴ-tɑ	COP-VIS-LNK INT-RESULT emperor-DEF:CL-GEN daughter-DEF:CL-TOP Huang-Qianmen-DAT
+350	Text 5	92	332	ɣʐə-s, χuɑn-tɕhiɑnmeʴ-ŋuəȵi ʐmətʂi	marry-NOM Huang-Qianmen-TOP emperor
+351	Text 5	92	333	dzu-s, ʐmətʂi-le: tsi-le:-ŋuəȵi χaiʂə ɦɑ-thɑ	sit-NOM emperor-DEF:CL daughter-DEF:CL-TOP †(still.is) INT-there
+352	Text 5	92	334	de-l-əs, ɦɑ-kə ŋuə-ku-tu.	DIR-give-NOM INT-thus COP-NAR-LNK
+352	Text 3	1	1	kɑpətttʂ kou qe:ʴ-qe:ʴ-tu ɦɑlɑ kɑpətʂ kou	orphan INDEF:one:CL before-before-LNK INT orphan INDEF:one:CL
+353	Text 3	1	2	ŋuə-kei-tɕu, ep lə me-ʐi ew lə me-ʐi ke:	COP-NAR-PART father also NEG-exist mother also NEG-exist INDEF:CL
+354	Text 3	1	3	ŋuə-kəi-tɕu, tu ɦɑlɑ ʂkup-le:-ŋuəȵi ɦɑ-tsu kɑpətʂ tou dzə	COP-NAR-PART RESULT INT orangutan-DEF:CL-TOP INT-here orphan DEF:one:CL eat
+355	Text 3	1	4	kɑntɕhi-kui-tɕu, kɑpətʂ lou dzə	think/want-NAR-PART orphan DEF:one:CL eat
+356	Text 3	1	5	kɑntɕi:-tu,	think/want-LNK
+357	Text 3	1	6	ɦɑlɑ, kɑpətʂ tou gəs-tɑ ɦɑ-xtʂə-pɑ:-jə-tu	INT orphan DEF:one:CL night-LOC DIR-get.dark-become:PRS-REP-LNK
+358	Text 3	1	7	qu-kəpə-kəi-ʂ, tɕəu-lɑ kə	ɦe-afraid-HABIT-NAR-LNK home-LOC go
+359	Text 3	1	8	ʁza-ʁɑ, zei ɦe-zei-ȵi	when-LOC cry DIR-cry-ADV
+360	Text 3	1	9	kə-kəpə-kəi-tɕu, tu ɦɑlɑ dɑ-qɑ dɑ-qɑ-tu gue:ʴ-tɑ	go-HABIT-NAR-PART RESULT INT DIR-go DIR-go-LNK road-LOC
+361	Text 3	1	10	ɦɑ-qɑ, χa-le:-ȵɑ e-tʂepe-kəi-tɕu. χa-le:-wu	DIR-go needle-DEF:CL-COM DIR-encounter-NAR-PART needle-DEF:CL-AGT
+362	Text 3	2	11	tə-keʴl-kui-tɕu,	DIR-ask-NAR-PART
+363	Text 3	2	12	“ha, ȵi:-pe-wɑ,105	EXCL WH-become-Q
+364	Text 3	2	13	ȵi:-pe-wɑ,” jə-tu. ɦɑ kɑpətʂ tou	WH-become-Q say-LNK INT orphan DEF:one:CL
+365	Text 3	3	14	hɑ-sə-kəi-ʂə, “hi! ʂkup-te:-wu maha qɑ dzə	DIR-make.sound-NAR-LNK EXCL orangutan-DEF:CL-AGT night 1sg eat
+366	Text 3	4	15	lɑ:,”	come:PRS
+367	Text 3	4	16	jə-ʂə, “qɑ tɕəu-lɑ o-zů-ȵi qɑ ou-stu je	say-LNK 1sg home-LOC DIR-sit-ADV 1sg one:CL-alone live/stay
+368	Text 3	4	17	qu-ɑ-wɑ,” jə-kui-tɕu. tu	afraid-1sg-EMPH say-NAR-PART RESULT
+369	Text 3	5	18	χa-le:-ŋuəȵi, “ha qu	needle-DEF:CL-TOP EXCL afraid
+370	Text 3	5	19	me-tɕhi-wɑ, maha-ȵi-ŋuəȵi qɑ ʔũ-gul	NEG-want-DTV night-ADV-TOP 1sg 2sg-companion
+371	Text 3	5	20	zu-lu-ɑ:-wɑ,” jə-kui-tɕu. tu ɦala	DIR-come-1sg:PRS-EMPH say-NAR-PART RESULT INT
+372	Text 3	6	21	ɦe-zei, ɦe-zei-ȵi	DIR-cry, DIR-cry-ADV
+373	Text 3	6	22	dɑ-qə-kəi,	DIR-go-NAR
+374	Text 3	6	23	dɑ-qə-kəi-tu, ɦɑlɑ qusɑp-te:-ȵɑ	DIR-go-NAR-LNK INT scissors-DEF:CL-COM
+375	Text 3	6	24	e-tʂepe-kəi-tɕu, qusɑp-te:-wu “a ʔũ ȵiɣi-pe-wɑ? ȵi-χuɑ-ȵi kə-zei-n-ɑ?” jə-kui-tɕu. ɦɑ “qɑ tɕəu-lɑ ou-tɕi	DIR-encounter-NAR-PART scissors-DEF:CL-AGT EXCL 2sg what-become-Q WH-because-ADV thus-cry-2sg-Q say-NAR-PART INT 1sg home-LOC one:CL-EXC
+376	Text 3	9	25	me-ʐa-wɑ, ʂkup-te: qɑ	NEG-exist:1sg-EMPH orangutan-DEF:CL 1sg
+377	Text 3	9	26	dzɑ:,”	eat:PRS
+378	Text 3	9	27	jə-kəpə-ʂə, “maha-ȵi	say-HABIT-LNK night-ADV
+379	Text 3	9	28	ɦo-lu-kəpə-wɑ,” jə-kui-tɕu. “a: ke:-jə mɑ-ŋ̥u̥ə-ta ʐə	DIR-come-HABIT-EMPH say-NAR-PART EXCL INDEF:CL-EXC NEG-COP-if matter
+380	Text 3	10	29	me-w, maha qɑ ʔũ gul	NEG-exist night 1sg 2sg companion
+381	Text 3	10	30	zu-lu-ɑ:-wɑ,”	DIR-come-1sg:PRS-EMPH
+382	Text 3	10	31	jə-kui-tɕu, “ʔũ-gul	say-NAR-PART 2sg-friend
+383	Text 3	10	32	zu-lu-ɑ:-wɑ,” jə-kui-tu. ɦɑ-the-wu χaiʂə ɦe-zei ɦe-zei-ȵi dɑ-qə-jə ɦe-zei ɦe-zei-ȵi	DIR-come-1sg:PRS-EMPH say-NAR-LNK INT-that-ABL †(still.is) DIR-cry DIR-cry-ADV DIR-go-REP DIR-cry DIR-cry-ADV
+384	Text 3	11	33	dɑ-qə-jə-kəi-tu, χaiʂə xsə ɕtɕiɕtɕiɑq tou-ȵɑ	DIR-go-REP-NAR-LNK †(still.is) new(again) magpie DEF:one:CL-COM
+385	Text 3	11	34	e-tʂepe-kə-jə-kei-tɕu, ɕtɕiɕtɕɑq tou-ȵɑ	DIR-encounter-go-REP-NAR-PART magpie DEF:one:CL-COM
+386	Text 3	11	35	e-tʂepe-kəi-tu, “a: ʔũ ȵi-χuɑ-ȵi kə-zei-n-ɑ?” jə-kui. “qɑ-ŋuəȵi tɕəu-lɑ ou-jə	DIR-encounter-NAR-LNK EXCL 2sg WH-because-ADV thus-cry-2sg-Q say-NAR 1sg-TOP home-LOC one:CL-EXC
+387	Text 3	13	36	me-ʐa-wɑ, tɑtə lə	NEG-exist:1sg-EMPH father also
+388	Text 3	13	37	me-ʐi, mɑ lə	NEG-exist mother also
+389	Text 3	13	38	me-ʐi, ep-ew me-ʐi ɦɑ-kou	NEG-exist father-mother NEG-exist INT-INDEF:one:CL
+390	Text 3	13	39	ŋuɑ-ʂə, tɕəu-lɑ	COP:1sg-LNK home-LOC
+391	Text 3	13	40	ɦɑ-xtʂəp-ȵike, ʂkup-le:-wu qɑ	DIR-get.dark-after orangutan-DEF:CL-AGT 1sg
+392	Text 3	13	41	dzɑ:,”	eat:PRS
+393	Text 3	13	42	jə-kəpə-ʂə, “qɑ tɕəu-lɑ je	say-HABIT-LNK 1sg home-LOC live/stay
+394	Text 3	13	43	qu-ɑ-wɑ,” jə-kui-tɕu. “hi! qu	afraid-1sg-EMPH say-NAR-PART EXCL afraid
+395	Text 3	15	44	me-tɕhi-wɑ, maha-ȵi qɑ ʔũ-gul	NEG-want-EMPH night-ADV 1sg 2sg-companion
+396	Text 3	15	45	zu-lu-ɑ:-wɑ,” jə-kui-tɕu. xsə dɑ-qə	DIR-come-1sg:PRS-EMPH say-NAR-PART new(again) DIR-go
+397	Text 3	16	46	dɑ-qə-jə-kəi, dɑ-qɑ	DIR-go-REP-NAR DIR-go
+398	Text 3	16	47	dɑ-qə-jə-kəi-tu, ɦɑlɑ noʁu-le:-ȵɑ	DIR-go-REP-NAR-LNK INT crow-DEF:CL-COM
+399	Text 3	16	48	e-tʂepe-kəi-tɕu, noʁu-le:-ȵɑ	DIR-encounter-NAR-PART crow-DEF:CL-COM
+400	Text 3	16	49	e-tʂepe-kəi-tu, “ha! ʔũ ȵi-χuɑ-ȵi kə-zei-n-ɑ?” jə-kui. tu χaiʂə “qɑ ɦɑlɑ ep lə me-ʐi əw lə	DIR-encounter-NAR-LNK EXCL 2sg WH-because-ADV thus-cry-2sg-Q say-NAR RESULT †(still.is) 1sg INT father also NEG-exist mother also
+401	Text 3	19	50	me-ʐi, kɑpətʂ kou-jə	NEG-exist orphan DEF:one:CL-EXC
+402	Text 3	19	51	mɑ-ŋuɑ-ʂə, tu ɦɑlɑ gəs-tɑ-ŋuəȵi je	NEG-COP:1sg-LNK RESULT INT night-LOC-TOP live/stay
+403	Text 3	19	52	qu-ɑ-wɑ, ʂkup-le:-ŋuəȵi qɑ	afraid-1sg-EMPH orangutan-DEF:CL-TOP 1sg
+404	Text 3	19	53	dzɑ:-wɑ,” jə-kui-tɕu.	eat:PRS-EMPH say-NAR-PART
+405	Text 3	20	54	“ha, ta ke:	EXCL if INDEF:CL
+406	Text 3	20	55	ŋuə-ta, ʐə	COP-if matter
+407	Text 3	20	56	me-w, qɑ-ŋuəȵi maha	NEG-exist 1sg-TOP night
+408	Text 3	20	57	zu-lů-ȵi, ʔũ-gul	DIR-come-ADV 2sg-companion
+409	Text 3	20	58	i-jə-lɑ-wɑ,” jə-kui-tɕu. xsə dɑ-qɑ	DIR-live-INDTV:1sg-EMPH say-NAR-PART new(again) DIR-go
+410	Text 3	21	59	dɑ-qə-jə-kəi, ɦɑ	DIR-go-REP-NAR INT
+411	Text 3	21	60	dɑ-qə-kəi-tu, χsutsqhɑ-le:-ȵɑ	DIR-go-NAR-LNK stomach-DEF:CL-COM
+412	Text 3	21	61	e-tʂepe-kəi, χsutsqhɑ-le:-ȵɑ	DIR-encounter-NAR stomach-DEF:CL-COM
+413	Text 3	21	62	e-tʂepe-kəi-tu, χsutsqhɑ-le:-wu	DIR-encounter-NAR-LNK stomach-DEF:CL-AGT
+414	Text 3	21	63	tə-keʴl-kui, “ha! ʔũ ȵi-χuɑ-ȵi kə-zei-n-ɑ?”	DIR-ask-NAR EXCL 2sg WH-because-ADV thus-cry-2sg-Q
+415	Text 3	23	64	jə-kui, “ȵi-χuɑ-ȵi kə-zei-n-ɑ?” jə-kui-tu. kɑpətʂ tou	say-NAR WH-because-ADV thus-cry-2sg-Q say-NAR-LNK orphan DEF:one:CL
+416	Text 3	25	65	he-ʐgue-kəi, “qɑ-ŋuəȵi ep lə me-ʐə-i əw lə	DIR-answer-NAR 1sg-TOP father also NEG-exist-CSM mother also
+417	Text 3	25	66	me-ʐə-i, gəs-ȵi ɦɑ-xtʂəp-ȵiɑufu ʂkup-le: qɑ	NEG-exist-CSM night-ADV DIR-get.dark-LNK(as.soon.as) orangutan-DEF:CL 1sg
+418	Text 3	25	67	dzə-lɑ:,”	eat-come:PRS
+419	Text 3	25	68	jə-kəpə-ʂə, “qɑ	say-HABIT-LNK 1sg
+420	Text 3	25	69	qu-ɑ-wɑ,” jə-kui. “ha! ke:-ji	afraid-1sg-EMPH say-NAR EXCL INDEF:CL-EXC
+421	Text 3	27	70	mɑ-ŋ̥u̥ə-ta, ʐə	NEG-COP-if matter
+422	Text 3	27	71	me-w-wɑ, qɑ-ŋuəȵi ʔũ-gul	NEG-exist-EMPH 1sg-TOP 2sg-companion
+423	Text 3	27	72	hɑ-ŋ̥u̥ə-lɑ-wɑ, maha-ŋuəȵi qɑ ʔũ-gul	DIR-COP-INDTV:1sg-EMPH night-TOP 1sg 2sg-companion
+424	Text 3	27	73	zu-lu-ɑ:-wɑ,” jə-kui. ɦɑ-tsɑ-tɑu	DIR-come-1sg:PRS-EMPH say-NAR INT-this:one-time
+425	Text 3	28	74	ŋuə-tu, ɦɑlɑ ɦe-zei ɦe-zei-ȵi	COP-LNK INT DIR-cry DIR-cry-ADV
+426	Text 3	28	75	dɑ-qə-jə-kəi, dɑ-qɑ dɑ-qɑ-tu ɦɑlɑ thəl-le:-ȵɑ	DIR-go-REP-NAR DIR-go DIR-go-LNK INT stone.pestle-DEF:CL-COM
+427	Text 3	28	76	e-tʂepe-kəi-stu, thəl-le:-ȵɑ	DIR-encounter-NAR-PART stone.pestle-DEF:CL-COM
+428	Text 3	28	77	e-tʂepe-kəi-tu, “ha! ʔũ ȵi-χuɑ-ȵi kə-zei-n-ɑ?”	DIR-encounter-NAR-LNK EXCL 2sg WH-because-ADV thus-cry-2sg-Q
+429	Text 3	30	78	jə-kui, tə-keʴl-kui.	say-NAR DIR-ask-NAR
+430	Text 3	31	79	“ɦa, qɑ-ŋuəȵi ep lə me-ʐə-i əw lə	EXCL 1sg-TOP father also NEG-exist-CSM mother also
+431	Text 3	31	80	me-ʐə-i, ɦɑ-xtʂəpɑ:	NEG-exist-CSM DIR-get.dark:PRS
+432	Text 3	31	81	ququ, pəs lə	afraid today also
+433	Text 3	31	82	ɦɑ-xtʂəp-ja, ʂkup-le:-ŋuəȵi maha qɑ	DIR-get.dark-REP orangutan-DEF:CL-TOP night 1sg
+434	Text 3	31	83	dzə-lɑ:,”	eat-come:PRS
+435	Text 3	31	84	jə-kəpə-wɑ, jə-kui.	say-HABIT-EMPH say-NAR
+436	Text 3	32	85	ɦɑ-tu-ŋuəȵi, “ke:-ji	INT-RESULT-TOP INDEF:CL-EXC
+437	Text 3	32	86	mɑ-ŋ̥u̥ə-ta, ʐə	NEG-COP-if matter
+438	Text 3	32	87	me-w, qɑ-ŋuəȵi ʔũ-gul	NEG-exist 1sg-TOP 2sg-companion
+439	Text 3	32	88	zu-lu-ɑ:, maha-ȵi qɑ ʔũ-gul	DIR-come-1sg:PRS night-ADV 1sg 2sg-companion
+440	Text 3	32	89	zu-lů-lɑ-wɑ,” jə-kui-tɕu. ɦɑ	DIR-come-INDTV:1sg-EMPH say-NAR-PART INT
+441	Text 3	33	90	tsɑ-tɑu-tu-ŋuəȵi, kɑpətʂ tou-ŋuəȵi ɦɑ-tsɑ-χsaʴwu gul ɦe-se-kei-stu. gul	this:one-time-LNK-TOP orphan DEF:one:CL-TOP INT-this:one-few:all companion DIR-make-NAR-PART companion
+442	Text 3	34	91	ɦe-se-kəi-tu, maha	DIR-make(friends)-NAR-LNK night
+443	Text 3	34	92	pe-k-kui, tsɑ-χui-tu ɦɑ-xtʂəp-ji maha	become-go-NAR this:one-time-LNK DIR-get.dark-CSM night
+444	Text 3	34	93	i-pə-l-kui, qusɑp lə	DIR-arrive-come-NAR scissors also
+445	Text 3	34	94	i-pə-l-kui, ɕtɕəɕtɕɑq tou lə	DIR-arrive-come-NAR magpie DEF:one:CL also
+446	Text 3	34	95	i-pə-l-kui, noʁu lə	DIR-arrive-come-NAR crow also
+447	Text 3	34	96	i-pə-l-kui, ɦɑ	DIR-arrive-come-NAR INT
+448	Text 3	34	97	χsutsqhɑ,	stomach
+449	Text 3	34	98	thəl, jɑnkhui ʂəʂə:ʴwu i-pə-l-kui-tɕu.	stone.pestle stone.mortar exist:REDUP:all DIR-arrive-come-NAR-PART
+450	Text 3	35	99	tsɑ-χui-tu, ʐmə ɑ-lɑ	this:one-time-LNK meeting one-CL
+451	Text 3	35	100	ɦo-tsu-kəi, kɑpətʂ tou-ŋuəȵi ɕtɕi:-ků kən	DIR-hold-NAR orphan DEF:one:CL-TOP heart-inside very
+452	Text 3	35	101	ɦɑ-nə-kui,	DIR-good-NAR
+453	Text 3	35	102	“ɦa, pəmaha-ŋuəȵi qɑ gul lɑ-hɑ	EXCL tonight-TOP 1sg companion DEF:one-pl
+454	Text 3	35	103	i-pə-l-jy, pəmaha-ŋuəȵi ʂkup-te:	DIR-arrive-come-ASP tonight-TOP orangutan-DEF:CL
+455	Text 3	35	104	mo-qu-ɑ-wɑ, ɦɑ-kə mo-qu-ja-wɑ ike ʐi-kəi.” thɑ-χsɑ	NEG-afraid-1sg-EMPH INT-thus NEG-afraid-CSM:1sg-EMPH thus exist-NAR that:one-few
+456	Text 3	36	105	i-pə-l-ku-tu, “maha	DIR-arrive-come-NAR-LNK night
+457	Text 3	36	106	tɕo-qu-n-pɑ,	NEG.IMP-be.afraid-2sg-DTV
+458	Text 3	36	107	do-tɕu-qu-n-pɑ, tɕile tsɑ-χsəʴwu	DIR-NEG.IMP-be.afraid-2sg-DTV 1pl this:one-few:all
+459	Text 3	36	108	gul-pɑ-ʂ, ʂkup-le: i-me-pə-l-ȵi mɑ-ŋ̥u̥ə-tɕi.	companion-do-LNK orangutan-DEF:CL DIR-NEG-arrive-come-ADV NEG-COP-EXC
+460	Text 3	37	109	i-pə-l-tu, tɕile pəmaha tse:	DIR-arrive-come-LNK 2pl tonight this:CL
+461	Text 3	37	110	qəta:-wa,” jə-kui-tɕu. tu skup-le: lə mo-qu-ke:	beat.to.death:PRS-EMPH say-NAR-PART RESULT orangutan-DEF:CL also NEG-afraid-INDEF:CL
+462	Text 3	38	111	ɦɑ-lə-kəi, kɑpətʂ tou-ŋuəȵi ɦɑ-tsəi mo-qu-ke: ʐi-kəi. tu the-maha-ŋuəȵi tɕiu ʂəʂe:ʴwu ȵiɑntɕi	DIR-come-NAR orphan DEF:one:CL-TOP INT-this.manner NEG-afraid-INDEF:CL exist-NAR RESULT that-night-TOP †(then) exist:REDUP:all together
+463	Text 3	39	112	gɑnphai-tu-pů-kəi-stu, χa-le:-ŋuəȵi tɕɑ-lə je-s	arrange-DIR-do-NAR-PART needle-DEF:CL-TOP where-LOC live/stay-NOM
+464	Text 3	39	113	ŋuə, tɕɑ-lə tɕɑ-lə nə-s	COP where-LOC where-LOC sleep-NOM
+465	Text 3	39	114	ŋuə, tɕɑ-lə tɕɑ-lə ȵiɣi ŋuə-s	COP where-LOC where-LOC what COP-NOM
+466	Text 3	39	115	ŋuə, ɦɑ-tsəi gɑnphai-tu-pů-kəi-tɕu. χa-le:-ŋuəȵi ɦɑlɑ dʑy-le:-ʁɑ ə-tʂə-ȵi ɦɑlɑ dʑy-le:-ʁɑ	COP INT-this:manner arrange-DIR-do-NAR-PART needle-DEF:CL-TOP INT door-DEF:CL-LOC DIR-stab-ADV INT door-DEF:CL-LOC
+467	Text 3	40	116	ʐi-kəi, qusɑp-tou-ŋuəȵi ɦɑlɑ kɑpətʂ-tou-pienɑ-lɑ nəʂ-te:-pienɑ thɑ	exist-NAR scissors-DEF:one:CL-TOP INT orphan-DEF:one:CL-beside-LOC bed-DEF:CL-beside there
+468	Text 3	40	117	ɦɑ-nə-kəi, ɕtɕiɕtɕaq-tou-ŋuəȵi ɦɑlɑ mə-lɑw-ʐɑχuɑ	DIR-sleep-NAR magpie-DEF:one:CL-TOP INT fire-DEF:one:pile-inside
+469	Text 3	40	118	ɦɑ-nə-kui-tɕu, noʁu-le:-ŋuəȵi ɦɑlɑ ʂuətʂhuɑ ʐɑχuɑ	DIR-sleep-NAR-PART crow-DEF:CL-TOP INT water.jar inside
+470	Text 3	40	119	ɦɑ-nə-kui, ɦɑ	DIR-sleep-NAR INT
+471	Text 3	40	120	tsəi-ŋuəȵi, χsutsqhɑ-le:-ŋuəȵi buzd-te:-qəpɑtʂɑ:	this.manner-TOP stomach-DEF:CL-TOP plank.stairs-DEF:CL-head:LOC
+472	Text 3	40	121	ɦɑ-nə-kui-tɕu, jankhui-le:-ŋuəȵi buzd-le:-ku-tɑ	DIR-sleep-NAR-PART stone.mortar-DEF:CL-TOP plank.stairs-DEF:CL-base-LOC
+473	Text 3	40	122	ɦɑ-nə-kui-tɕu, ɦɑ thəl-le:-ŋuəȵi buzd-le:-qəpɑtʂɑ: i-jə-kui-tɕu.	DIR-sleep-NAR-PART INT stone.pestle-DEF:CL-TOP plank.stairs-DEF:CL-head:LOC DIR-live/stay-NAR-PART
+474	Text 3	41	123	hi, ɦɑ-xtʂəp ʂkup-te:	EXCL DIR-get.dark orangutan-DEF:CL
+475	Text 3	41	124	zə-lɑ-jə-kui, tsou tɕymi-lou-tɑ	DIR-come-REP-NAR this:one:CL child-DEF:one:CL-DAT
+476	Text 3	41	125	zə-lɑ-kui-tu, dʑy-la:-ʁa qeʴ ʂpɑʂpɑ dʑy-le:-tɑ dzeke	DIR-come-NAR-LNK door-DEF:CL-LOC before like/as door-DEF:CL-LOC (onomatopoeia)
+477	Text 3	41	126	i-ɕtɕi-kəi-tɕu, dʑy-le:	DIR-push-NAR-PART door-DEF:CL
+478	Text 3	41	127	i-ɕtɕi, χa-lɑ-hɑ thɑ	DIR-push needle-DEF:one-pl there
+479	Text 3	41	128	ʐi-kui-ȵiɑu, χa-lɑ-hɑ jɑpə-le:-tɑ ə-tʂə-ȵiɑufu sɑq-phi-ke:	exist-NAR-PART needle-DEF:one-pl hand-DEF:CL-LOC DIR-stab-LNK(as.soon.as) blood-flow-INDEF:CL
+480	Text 3	41	129	ə-ʂə-kui-tɕu, tu χaiʂə tɕəu-lɑ ə-ʁə ɕtɕɑq	DIR-put-NAR-PART RESULT †(still.is) home-LOC DIR-go heart
+481	Text 3	41	130	tɕo-lu-kui-ʂə,	CON-come-NAR-LNK
+482	Text 3	41	131	ə-qɑ-jə-kui, ə-qɑ-ȵiɑufu kɑpətʂ-tou nəʂ-ta:-ʁa	DIR-go-REP-NAR DIR-go-LNK(as.soon.as) orphan-DEF:one:CL bed-DEF:CL-LOC
+483	Text 3	41	132	mo-thɑ-jə-kui, χaiʂə tɕɑ-lə nə	grope.for-AUX-REP-NAR †(still.is) where-LOC sleep
+484	Text 3	41	133	meʴʐ-kəi, kɑpətʂ tou	seek-NAR orphan DEF:one:CL
+485	Text 3	41	134	nəʂ-ta:-ʁa-ŋuəȵi, kɑpətʂ-tou meʴʐ kɑntɕhi qusɑp-te:-wu jɑpə-le:-xʂe	bed-DEF:CL-LOC-TOP orphan-DEF:one:CL seek think/want scissors-DEF:CL-AGT hand-DEF:CL-CL
+486	Text 3	41	135	tu-tuɑ-kui, thɑ-χui	DIR-cut-NAR that:one-time
+487	Text 3	41	136	tu, χtʂɑp-ke:	RESULT black-INDEF:CL
+488	Text 3	41	137	ŋuə-kui-ȵiɑu, qusɑp-te:-wu jɑpə-le:	COP-NAR-PART scissors-DEF:CL-AGT hand-DEF:CL
+489	Text 3	41	138	tu-tuɑ, sɑ tuetue-ke:-tɕi	DIR-cut blood driping-INDEF:CL-ADV
+490	Text 3	41	139	dɑ-qɑ-jɑntɕi, mə-lɑw	DIR-go-after fire-DEF:one:pile
+491	Text 3	41	140	qhəʴqhəʴ-kəi, mə-lɑw i-ʂue-ȵi ȵiɣi-lɑ-hɑ	open-NAR fire-DEF:one:pile DIR-set.fire-ADV what-DEF:one-pl
+492	Text 3	41	141	kə-ʐi, ɑ-ʂ tse	thus-exist one-time see
+493	Text 3	41	142	kɑntɕhi-kəi, mə-lɑw da-qheʴ kɑntɕhi	think/want-NAR fire-DEF:one.pile DIR-open think/want
+494	Text 3	41	143	me-pe-ȵiɑufu, xsə ɕtɕiɕtɕɑq-lɑ-hɑ	NEG-correct-LNK(as.soon.as) new(again) magpie-DEF:one-pl
+495	Text 3	41	144	da-ʂp-jə-kui-stu, tʂhəqtʂhɑqtʂhəqtʂhɑq-lɑ-hɑ dɑ-ʂp-ȵiɑufu mi:	DIR-explode-REP-NAR-PART (onomatopoeia)-DEF:one-pl DIR-explode-LNK(as.soon.as) eyes
+496	Text 3	41	145	dɑ-qə-kui, mi:	DIR-go-NAR eyes
+497	Text 3	41	146	dɑ-qə-kui, ɦɑ	DIR-go-NAR INT
+498	Text 3	41	147	tsɑ-χui-tu, mi:	this:one-time-LNK eyes
+499	Text 3	41	148	dɑ-qɑ, mi:	DIR-go eyes
+500	Text 3	41	149	dɑ-qə-tu, ʂuətʂhuɑ-la:-ʁa	DIR-go-LNK water.jar-DEF:CL-LOC
+501	Text 3	41	150	sə-l-ȵiɑntɕi, tsə-lo-qu	DIR-see-after water-DEF:one-CL
+502	Text 3	41	151	ŋuə-ȵiantɕi, quaha-lo-qu χuəlɑ	COP-after face-DEF:one-CL wash
+503	Text 3	41	152	kɑntɕhi-kəi-wɑ, quaha χuəlɑ kɑntɕhi ʂuətʂhuɑ-la:-ʁa	think/want-NAR-EMPH face wash think/want water.jar-DEF:CL-LOC
+504	Text 3	41	153	su-tʂhu, noʁu-le-tɕi thɑ	DIR-reach.out crow-DEF-CL there
+505	Text 3	41	154	ʐi-jə-kui-stu, noʁu-le-tɕi-wu tshuɑq tshuɑq	exist-REP-NAR-PART crow-DEF-CL-AGT peck peck
+506	Text 3	41	155	dɑ-sə-ʐ, miɑuʁdʐue-la:-ʁa i-tshuete-kui-stu.	DIR-make.sound-CAUS eye-DEF:CL-LOC DIR-peck-NAR-PART
+507	Text 3	42	156	ɦɑ-tsɑ-χui-tu, miɑuʁdʐue lə	INT-this:one-time-LNK eye also
+508	Text 3	42	157	me-le-jy, japə e-xʂe lə me-we̊-jy. ɦɑlɑ sɑq tuetue-ke:-tɕi du-ɸu-ȵi hɑ-ʁ	NEG-exist-ASP hand one-CL also NEG-exist-ASP INT blood driping-INDEF:CL-ADV DIR-run.away-ADV DIR-go
+509	Text 3	43	158	kɑntɕhi-kəi, du-ɸu-ȵi buzd-qə-tɑ hɑ-ʁ	think/want-NAR DIR-run.away-ADV plank.stairs-head-LOC DIR-go
+510	Text 3	43	159	kɑntɕhi-kei-tu,	think/want-NAR-LNK
+511	Text 3	43	160	sə-qɑ,	DIR-go
+512	Text 3	43	161	sə-qɑ-ȵiɑufu, χsutsqhɑ-la:-ʁa	DIR-go-LNK(as.soon.as) stomach-DEF:CL-LOC
+513	Text 3	43	162	ɦe-tʂßhue, χsutsqhɑ-la:-ʁa	DIR-step.on stomach-DEF:CL-LOC
+514	Text 3	43	163	ɦe-tʂhue, dɑ-ɬɑ buzd-le:-tɑ dʑiq ɦɑ-qə-i-stu. dʑiq ɦɑ-qə-ȵiɑufu tʂhə-lɑ buzd-kuə-tɑ jɑnkhui-le:-ʐɑχuɑ	DIR-step.on DIR-slip plank.stairs-DEF:CL-LOC floor DIR-go-HS-PART floor DIR-go-LNK(as.soon.as) ground.floor-LOC plank.stair-foot-LOC stone.mortar-DEF:CL-inside
+515	Text 3	44	164	ɦɑ-qɑ, xsə thəl-le: qəpɑtʂɑ:	DIR-go new(again) stone.pestle-DEF:CL head:LOC
+516	Text 3	44	165	ʂə,	exist
+517	Text 3	44	166	ɦɑ-lɑ, thəl-le:-wu ɦe-tɕite	DIR-come stone.pestle-DEF:CL-AGT DIR-pound
+518	Text 3	44	167	ɦe-tɕite,	DIR-pound
+519	Text 3	44	168	ɦe-tɕite-ȵiɑufu, ɦɑ-tsu ʂkup-te:-ŋuəȵi ȵi-qəti-ȵi da-ʁu-kui-wɑ.	DIR-pound-LNK(as.soon.as) INT-here orangutan-DEF:CL-TOP DIR-beat.to.death-ADV DIR-throw-NAR-EMPH
+519	Text 2	1	1	mutsitʂu ȵɑ tugantʂu mutsitʂu ȵɑ tugantʂu zəpəq-tɑ ɦo-lu-ɑ:-ji. ɑpə	Mutsitʂu COM Tugantʂu Mutsitʂu COM Tugantʂu earth-LOC DIR-come-PRS-CSM father(god)
+520	Text 2	2	2	mupithɑ-ŋuəȵi, thəzzi-tɑ	Mupitha-TOP 3dl-LOC
+521	Text 2	2	3	kə-ji, “ʔizzi zəpəq-tɑ ɦa-ʁa-i-ta ɦɑ-ʁə-i.” thizzi kə	thus-say 2dl earth-LOC DIR-go-2pl-if DIR-go-2pl 3dl go
+522	Text 2	3	4	ʁza-ʁa, ɑpə-xsə-ŋuəȵi themle lu-zu xsə-quɑt	time-LOC father-god-TOP 3pl China.fir-seed three-bushel
+523	Text 2	3	5	de-l-wei, ɦɑ-ʁə-ȵi ʁopu ɦe-gi-s-tɑ	DIR-give-HS DIR-go-ADV mountain DIR-low(short)-NOM-LOC
+524	Text 2	3	6	i-phi-kəi, nai tshəmɑ we-tɕ səɸ-zu xsə-quɑt	DIR-plant-NAR other thorn exist-GEN tree-seed three-bushel
+525	Text 2	3	7	de-tɕi-le-wei, ʁopu ti-wi-s-tɑ	DIR-CON-give-HS mountain DIR-high-NOM-LOC
+526	Text 2	3	8	i-phi-kəi, nai poquʂ e-khe-χan	DIR-plant-NAR other livestock one-hundred-kind
+527	Text 2	3	9	de-tɕi-le, thizzi	DIR-CON-give 3dl
+528	Text 2	3	10	tə-wɑʁ, ɑ-stu-χɑn phuxʂu-ŋuəȵi themle-steke ɑ-dzɑ-ʐ-ȵi.	DIR-drive.ahead one-thousand-kind wild.creatures-TOP 3pl-behind DIR-follow-CAUS-ADV
+529	Text 2	4	11	qala-ʁa, thizzi-tɑ	separate/divide/leave-LOC 3dl-LOC
+530	Text 2	4	12	kə-ji-wei, “ʔile gue:ʴ-tɑ-ŋuəȵi hɑ-l-ȵi mutu-lɑ tɕe-tse-ʂu.” mutsitʂu ȵɑ tugantʂu-ŋuəȵi ɕtɕi-ků	thus-say-HS 2pl road-LOC-TOP DIR-look-ADV heaven-LOC NEG.IMP-look-DTV Mutsitʂu COM Tugantʂu-TOP heart/mind-inside
+531	Text 2	5	13	tə-nɑ-wei, gue:ʴ-tɑ kə ʁza-ʁɑ zəm	DIR-good-HS road-LOC go time-LOC song
+532	Text 2	5	14	ɦɑ-tshuə-ȵi, zəm tu-χsu-ȵi lu-ji. thizzi-ŋuəȵi qe:ʴ-tɑ ɑpə mupithɑ thizzi oqpi pə-ʐ	DIR-sing-ADV song DIR-jump/dance-LNK come-CSM 3dl-TOP before-LOC god Mupitha 3dl one:family do-CAUS
+533	Text 2	6	15	mo-ʁu-χuɑ-ȵi, hɑ-l-ȵi mutu-lɑ tə-lə-ȵi	NEG-willing-because-ADV DIR-look-ADV heaven-LOC DIR-look-LNK
+534	Text 2	6	16	tse-i,	see-HS
+535	Text 2	6	17	thəpɑktɑ, ȵile-steke ɑ-stu-χɑn phuxʂu doqu-ʐ-ək tɕetɕi-lɑ	as.a.result 3plREFL-behind one-thousand-kind wild.animals frighten-CAUS-INF everywhere-LOC
+536	Text 2	6	18	du-fu-wei,	DIR-flee-HS
+537	Text 2	6	19	ɦɑ-tsəi-ȵi, pitɕ phu-ʁɑ ʐi-m phuxʂu pe-wei. themle zəpəq-tɑ	INT-this.manner-ADV now forest-LOC exist-NOM wild.animals become-HS 3pl earth-LOC
+538	Text 2	7	20	i-pə-l-ȵike, e-tʂequɑ de-tshe-ȵi lu-zu-lɑ-hɑ ʁopu ti-wi-s-tɑ	DIR-arrive-come-after DIR-remember DIR-wrong-ADV China.fir-seed-DEF:one-pl mountain DIR-high-NOM-LOC
+539	Text 2	7	21	de-se-ku, tshəmɑ we-tɕ səɸ-zu-lɑ-hɑ-ŋuəȵi ʁopu ɦe-gi-s-tɑ	DIR-sow-NAR thorn exist-GEN tree-seed-DEF:one-pl-TOP mountain DIR-short-NOM-LOC
+540	Text 2	7	22	de-se-ku, ɦɑ-tsəi	DIR-sow-NAR INT-this.manner
+541	Text 2	7	23	ŋuə-χuɑ-ȵi, ɦe-gi-s-tɑ-ŋuəȵi tshəmɑ tə-ʂ-jy ŋuə. thizzi zɑ-ʁə	COP-because-ADV DIR-short-NOM-LOC-TOP thorn DIR-grow-ASP COP 3dl earth-LOC
+542	Text 2	8	24	bəl-dʐə-wa-χuɑ-ȵi, lu te-x-ȵi104 tɕiʁuɑ	do-able-very-because-ADV China.fir DIR-cut-ADV house
+543	Text 2	8	25	tə-ɬi, tshəmɑ ɦa-xte-ȵi zə	DIR-build thorn DIR-cut.down-ADV land
+544	Text 2	8	26	tə-ʐge, ʐmə tɕhe-tɕ ʐguə i-ɸi-ji.	DIR-open humankind want-GEN grain DIR-plant-CSM
+544	Text 4	1	1	upu bəs	uncle snake
+545	Text 4	1	2	i-tse, pəs-ŋuəȵi ʁoʁu lɑmpə	DIR-look today-TOP ram’s.horn flower
+546	Text 4	1	3	lie-tu,	carry-LNK
+547	Text 4	1	4	lie,	bring
+548	Text 4	1	5	lie-tu,	carry-LNK
+549	Text 4	1	6	lie-ȵi,	carry-LNK
+550	Text 4	1	7	a:,	INT
+551	Text 4	1	8	upu-bəs-ŋuəȵi, “ʔũ tsi-lɑ-hɑn qɑ e:	uncle-snake-TOP 2sg daugher-DEF:one-kind 1sg one:CL
+552	Text 4	1	9	de-mə-l-əs-te:-wu, qɑ-wu ʔũ-jɑpə-le:	DIR-NEG-give-NOM-DEF:CL-LNK 1sg-AGT 2sg-hand-DEF:CL
+553	Text 4	1	10	da-g-ʐɑ-wɑ,” ikə jə-kui-tɕu. ɦɑ-kə	DIR-broken-CAUS:1sg-EMPH thus say-NAR-PART INT-thus
+554	Text 4	2	11	jə-kui-tu, tsi	say-NAR-LNK daugher
+555	Text 4	2	12	tɕi-χtʂɑ-le:-ŋuəȵi,	most-small-DEF:CL-TOP
+556	Text 4	2	13	“ha, tɑtə ke:	EXCL father INDEF:CL
+557	Text 4	2	14	ŋuə-k-ta, qɑ ȵi: ŋuə lə	COP-INF-if 1sg what COP also
+558	Text 4	2	15	ɕa:-ŋ̥u̥ə, ʔũ-jɑpə-le:	INDTV-COP 2sg-hand-DEF:CL
+559	Text 4	2	16	da-g-ʐ̥ə-qəstɑ, qɑ the:-sətsim	DIR-break-CAUS-not.as.good.as 1sg 3sg-wife
+560	Text 4	2	17	hɑ-ŋ̥u̥ə-lɑ,” jə-kui-tɕu. ɦɑ-kə	DIR-COP-INDTV:1sg say-NAR-PART INT-thus
+561	Text 4	3	18	jə-kəi-tu, ɦɑlɑ qhɑl a-g̥u̥ə	say-NAR-LNK INT momo(steamed.bread) one-basketful
+562	Text 4	3	19	u-lu-kui,	DIR-give.as.gift-NAR
+563	Text 4	3	20	“ɦa, upu-bəs-te:-steke	EXCL uncle-snake-DEF:CL-behind
+564	Text 4	3	21	dɑ-ʁə-n-bɑ,” jə-kui-tɕu. qhɑl a-g̥u̥ə	DIR-go-2sg-DTV say-NAR-PART momo(steamed.bread) one-basketful
+565	Text 4	4	22	ɦei-bi-ȵi, upu-bəs-te: tɕiqə:ʴ ʂua:m-ke:	DIR-carry.on.back-LNK uncle-snake-DEF:CL before very.long-INDEF:CL
+566	Text 4	4	23	sei-k-kui, ȵi:-ŋuəȵi ɦɑ steke steke ɦe-zei ɦe-zei ɦe-zei-ke: tse:-steke dɑ-qə-kəi-stũ.	walk-go-NAR 3sgREFL-TOP INT behind behind DIR-cry DIR-cry DIR-cry-INDEF:CL this:CL-behind DIR-go-NAR-PART
+567	Text 4	5	24	dɑ-qɑ,	DIR-go
+568	Text 4	5	25	dɑ-qɑ,	DIR-go
+569	Text 4	5	26	dɑ-qɑ-tu, upu-bəs-te: ɦɑ qhaʴʁue-lɑw-ʁɑ i-pə-k-	DIR-go-LNK uncle-snake-DEF:CL INT stone.pile-DEF:one:CL-LOC DIR-arrive-go-
+570	Text 4	5	27	tu, u-tɕu	LNK DIR-see
+571	Text 4	5	28	mɑ-lə-jy-tu, qhaʴʁue-lɑw χanχa:	NEG-able-ASP-LNK stone.pile-DEF:one:CL crevice
+572	Text 4	5	29	ɦɑ-qə-tu, ɦɑ-thu tsi-lou-ŋuəȵi ɦɑ ʁuɑχɑ-lɑ ɦe-zei ɦe-zei-ȵi thɑ	DIR-go-LNK INT-there girl-DEF:one:CL-TOP INT courtyard-LOC DIR-cry DIR-cry-ADV there
+573	Text 4	5	30	ʐi-kəi-stũ, qhaʴʁue-lɑw-pienɑ-lɑ.	exist-NAR-PART stone.pile-DEF:one:CL-beside-LOC
+574	Text 4	6	31	ɦɑ-thɑ-χui-tu, tɕiquɑ-lɑ hɑ-lə-ȵi ɦɑlɑ tɕiquɑ-lɑ ʁoi-kə-m he-ɕi-kui-tɕu. upu-bəs-te: xsə	INT-that:one-time-LNK inside-LOC DIR-come-ADV INT inside-LOC call-go-NOM DIR-send-NAR-PART uncle-snake-DEF:CL god
+575	Text 4	7	32	ŋuə-kui-ȵi, mi tɕiquɑ-lɑ-ŋuəȵi tɕy-le:-ŋuəȵi ʁoi-kə-m he-ɕi-kui-stũ. “entɕi qutaq. entɕi qutaq. entɕi	COP-NAR-ADV person inside-LOC-TOP chicken-DEF:CL-TOP call-go-NOM DIR-send-NAR-PART uncle’s.wife (sound.of.chicken) uncle’s.wife (sound.of.chicken) uncle’s.wife
+576	Text 4	10	33	qutaq,”	(sound.of.chicken)
+577	Text 4	10	34	jə-tu, xsə sɑ jə-kui-tɕu. xsə sɑ	say-LNK three sound say-NAR-PART three sound
+578	Text 4	11	35	jə-kui-tu, thou tə-χsɑ	say-NAR-LNK that:one:CL DIR-understand
+579	Text 4	11	36	mɑ-ɣʐə-kəi-ʂə, ɦɑ: tɕe-zei-kəi-stũ.	NEG-able-NAR-LNK INT CON-cry-NAR-PART
+580	Text 4	12	37	tu, tɕy-le:	RESULT chicken-DEF:CL
+581	Text 4	12	38	ə-qɑ-jə-kui, xsə khuə-le: hɑ-lə-jə-kui-stũ. khuə-le:	DIR-go-REP-NAR new(again) dog-DEF:CL DIR-come-REP-NAR-PART dog-DEF:CL
+582	Text 4	13	39	hɑ-lə-jə-kui-tu, ɦɑlɑ “ɦɑŋů ɦɑŋů entɕi	DIR-come-REP-LNK INT woof woof uncle’s.wife
+583	Text 4	13	40	qutaq, ɦɑŋů ɦɑŋů entɕi	cluck woof woof uncle’s.wife
+584	Text 4	13	41	qutaq,” jə-jə-kui-stũ. tə-χsɑ	cluck say-REP-NAR-PART DIR-understand
+585	Text 4	14	42	mɑ-ɣʐə-kəi-ʂə, ɦɑlɑ tɕe-zei-kəi-stũ.	NEG-able-NAR-LNK there CON-cry-NAR-PART
+586	Text 4	15	43	ɦɑ-tu,	INT-RESULT
+587	Text 4	15	44	tsu-ŋuəȵi, pie-le: hɑ-lə-jə-kui-stũ. pie-le: hɑ-lə-ȵi “ɦə̃ʴɦə̃ʴ entɕi	here-TOP pig-DEF:CL DIR-come-REP-NAR-PART pig-DEF:CL DIR-come-LNK oink.oink uncle’s.wife
+588	Text 4	16	45	qutaq, ɦə̃ʴɦə̃ʴ entɕi	cluck oink.oink uncle’s.wife
+589	Text 4	16	46	qutaq, ɦə̃ʴɦə̃ʴ entɕi lɑntɕi lu-ɑ:-ji.” tu ɦɑlɑ	cluck oink.oink uncle’s.wife flower come-PRS-CSM RESULT INT
+590	Text 4	17	47	tə-mə-χsɑ-kəi-ʂə, ə-mə-qɑ-kəi-stũ.	DIR-NEG-understand-NAR-LNK DIR-NEG-go-NAR-PART
+591	Text 4	18	48	ɦɑ-thɑ-χui-tu,	INT-that:one-time-LNK
+592	Text 4	18	49	ɦɑ, tɕiquɑ-lɑ qodu-le: hɑ-lə-kui-stũ. mɑ:-le: hɑ-lə-kui-stũ.	INT inside-LOC old.woman-DEF:CL DIR-come-NAR-PART mama-DEF:CL DIR-come-NAR-PART
+593	Text 4	20	50	ɦɑlɑ, bəs dʑel-pə-tɕ-mɑ:-le: hɑ-lə-kui-stũ. mɑ:-le:	INT snake feast106-do-GEN-mama-DEF:CL DIR-come-NAR-PART mama-DEF:CL
+594	Text 4	21	51	hɑ-lə-tu,	DIR-come-LNK
+595	Text 4	21	52	ɦɑ:, “qɑ-tsi ȵi:-le: zei-n-ɑ? zei	INT 1sg-girl what-DEF:CL cry-2sg-Q cry
+596	Text 4	22	53	me-tɕhe, qɑ ʁoi-kə-m kən	NEG-want 1sg call-go-NOM very(many)
+597	Text 4	22	54	he-ɕa-ȵi, ʔũ	DIR-send:1sg-LNK 2sg
+598	Text 4	22	55	ə-mə-lɑ-n-ʂə, qɑ	DIR-NEG-come-2sg-LNK 1sg
+599	Text 4	22	56	hɑ-lɑ-wɑ,” jə-kui-stũ.	DIR-come-EMPH say-NAR-PART
+600	Text 4	23	57	tu, ɦɑ	RESULT INT
+601	Text 4	23	58	tsi-lou-ŋuəȵi, “qɑ	girl-DEF:one:CL-TOP 1sg
+602	Text 4	23	59	tə-mə-χsɑ-wɑ,” jə-kui-stũ.	DIR-NEG-understand-EMPH say-NAR-PART
+603	Text 4	24	60	ɦɑ-tu,	INT-RESULT
+604	Text 4	24	61	“tə-mə-χsɑ-n-ʁɑ, qɑ-phusuluq-te:	DIR-NEG-understand-2sg-if 1sg-clothing-DEF:CL
+605	Text 4	24	62	ɦe-ge-n-bɑ, qɑ-phusuluq-te: tə-tsəqɑ-ȵi mi:	DIR-hold-2sg-DTV 1sg-clothing-DEF:CL DIR-grab-ADV eye
+606	Text 4	24	63	ɦɑ-tʂə-n-bɑ, qɑ-steke	DIR-close-2sg-DTV 1sg-behind
+607	Text 4	24	64	hɑ-ʐə-n-bɑ,” jə-kui-stũ. ɦɑ tsɑ-tɑu-ŋuəȵi ə-ʁ-ʁza:-ʁɑ-ŋuəȵi ʂkupu-ɑ-tɑu de-le-kui-stũ.	DIR-follow-2sg-DTV say-NAR-PART INT this:one-time-TOP DIR-go-time-LOC-TOP a.kind.of.thing-one-CL DIR-give-NAR-PART
+608	Text 4	26	65	tu, ɦɑlɑ tɕiquɑ	RESULT INT inside
+609	Text 4	26	66	ə-qɑ-kəi-tu, χaiʂə tsəusə-bəl ȵi-ke:	DIR-go-NAR-LNK †(still.is) marry-do WH-INDEF:CL
+610	Text 4	26	67	ŋuə-kui-ʂə, tɕiquɑ-lɑ upu-bəs-lɑ-hɑ-ŋuəȵi ɕi tʂhe107-kəi-stũ. qɑpə-lɑ-hɑ	COP-NAR-LNK inside-LOC uncle-snake-DEF:one-pl-TOP wine suck-NAR-PART old.man-DEF:one-pl
+611	Text 4	27	68	ɦɑ-tsəi-ŋuəȵi, tsi-lou-ŋuəȵi upu-bəs-le: zaʁue (sitsəm) pe-kui-wɑ.	INT-this.manner-TOP girl-DEF:one:CL-TOP uncle-snake-DEF:CL helpmate (wife) become-NAR-EMPH
+611	Text 6	1	1	tshəntɕɑ qɑpə qeʴ	Chen.family old.man long.ago
+612	Text 6	1	2	ŋuə-tu, tshəntɕɑ qɑpə ȵɑ e:	COP-LNK Chen.family old.man COM one:CL
+613	Text 6	1	3	ŋuə-tu, ɑ-sə-ʁɑ-ȵi khuə	COP-LNK one-day-LOC-ADV dog
+614	Text 6	1	4	ɕe-k, ɦɑ-tu khuə ɕe-kəi-tu,118 khuə	release-go INT-RESULT dog release-NAR-LNK dog
+615	Text 6	1	5	ɕe-kəi-tu, ɑ-sə-mɑqɑ khuə tə-ɕi-ȵi phɑntshə-ʁɑ khuə tə-ɕi-ȵi stuɑhɑ	release-NAR-LNK one-day-each dog DIR-release-ADV traveling.expenses-LOC dog DIR-release-ADV food
+616	Text 6	1	6	tɕhə-m,	eat-NOM
+617	Text 6	1	7	ɦɑ-tu, ɑ-s-ʁɑ-tu	INT-RESULT one-day-LOC-LNK
+618	Text 6	1	8	hɑ-qə-kəi-tu, iɣi	DIR-go-NAR-LNK anything
+619	Text 6	1	9	de-me-zde-kəi,	DIR-NEG-hit-NAR
+620	Text 6	1	10	ɦɑ-tu,	INT-RESULT
+621	Text 6	1	11	de-me-zde-kui-tu, ʐo:pu-le: ʂqəl-lɑ-ŋuəȵi bəs-le: u-tɕu-kəi-wɑ.	DIR-NEG-hit-NAR-LNK cave-DEF:CL below-LOC-TOP snake-DEF:CL DIR-see-NAR-EMPH
+622	Text 6	2	12	“hɑ, pəs-ŋuəȵi iɣi lə de-me-zde. ɦɑ-ke	EXCL today-TOP anything also DIR-NEG-hit INT-thus
+623	Text 6	3	13	kə-ʁza-ȵi, ɦɑ-kə xʂuɕtɕu-le:	go-ought:1sg-ADV INT-thus empty.handed-DEF:CL
+624	Text 6	3	14	kə-qəstɑ, u-tɕu-jɑ-ȵi ɑ-phɑu qhu-ʂɑ.” jə-kəi. ɑ-phɑu	go-not.as.good.as DIR-see-CSM:1sg-ADV one-shot shoot-HORT say-NAR one-shot
+625	Text 6	5	15	u-qhu-kəi-tu, ɦɑ-tu jɑutsan-le:	DIR-shoot-NAR-LNK INT-RESULT man.eating.demon-DEF:CL
+626	Text 6	5	16	ŋuə-kəi, jɑutsan-le: ŋuə-kəi-tu. ɦɑ-tu ɑ-phɑu	COP-NAR man.eating.demon-DEF:CL COP-NAR-LNK INT-RESULT one-shot
+627	Text 6	6	17	qhu-kəi-tu, jɑutsan-le:-ŋuəȵi gəz nə-qəti-kui. gəz nə-qəti-kui-tu. the:-ŋuəȵi	shoot-NAR-LNK man.eating.demon-DEF:CL-TOP strangle(n.) DIR-kill-NAR strangle(n.) DIR-kill-NAR-LNK 3sg-TOP
+628	Text 6	8	18	juɑnʁuɑi, (pitɕ-ŋuəȵi “ʐmətʂi” ʂpi-ʂ qə:ʴ-ŋuəȵi “juɑnʁuɑi”	emperor now-TOP emperor call-LNK before-TOP emperor
+629	Text 6	8	19	ʐmə, ʐmətʂi lɑχ-ʁɑ “juɑnʁuɑi”	call emperor DEF:one:kind-LOC emperor
+630	Text 6	8	20	ʂpu-ku-wɑ),	call-NAR-EMPH
+631	Text 6	8	21	ɦɑ-tu, jɑutsan-le:-ŋuəȵi tə-pian-thɑ-ji ŋuə-kui-wɑ. ...... ...... ʐmətʂi-le:-ŋuəȵi “meʴʐ kə	INT-RESULT man.eating.demon-DEF:CL-TOP DIR-change-AUX-CSM COP-NAR-EMPH ...... ...... emperor-DEF:CL-TOP seek go
+632	Text 6	11	22	tɕhe,” jə-ȵi he-ɕi-kui. ...... ...... “ȵiχuɑ ŋuə-ȵi (hɑtu) tə-ʑdʑi?” ʂpɑqtɑ	want say-ADV DIR-send-NAR ...... ...... why COP-ADV INT DIR-sick pretend
+633	Text 6	15	23	ɦo-pů-kəi, “ȵiɣi tə-ʑdʑi-n?”	DIR-do-NAR what DIR-sick-2sg
+634	Text 6	16	24	jə-ȵi, “ʑdʑi ɦo-tʂhup-ȵi ʑdʑi u-xʂu	say-ADV sick DIR-cure-ADV sick DIR-recover
+635	Text 6	16	25	mɑ-lə,	NEG-able
+636	Text 6	16	26	ɦɑ-tu, ʑdʑi u-xʂu mɑ-lə kɑ-hɑn	INT-RESULT sick DIR-recover NEG-able INDEF:one-kind
+637	Text 6	16	27	ŋuə-tu, ʔũ ȵiɣi ŋuə-s ŋuə-ŋuɑ?”	COP-LNK 2sg what COP-NOM COP-Q
+638	Text 6	17	28	ɦɑ-tu,	INT-RESULT
+639	Text 6	17	29	tə-keʴl-kə-kui,	DIR-ask-go-NAR
+640	Text 6	17	30	ʐmətʂi-le:-wu, ʐmətʂi-le:-wu tə-keʴl kɑ-hɑn	emperor-DEF:CL-AGT emperor-DEF:CL-AGT DIR-ask INDEF:one-kind
+641	Text 6	17	31	ŋuə-kui-tu,	COP-NAR-LNK
+642	Text 6	17	32	“ɦa, qɑ tshəntɕɑ qɑpə-tɕ ʂpəl ȵɑ ɕtɕi:mi	EXCL 1sg Chen.family old.man-GEN kidney COM heart
+643	Text 6	17	33	sə-dza-tu,	DIR-eat:1sg-LNK
+644	Text 6	17	34	dʐə-wɑ,” jə-kui.	able-EMPH say-NAR
+645	Text 6	18	35	ɦɑ-tu, ʐmətʂi-le:-ŋuəȵi gueʴ he-ɕi-ȵi tshəntɕɑ qɑpə meʴʐ he-ɕi-kui-stũ. he-ɕi-kui	INT-RESULT emperor-DEF:CL-TOP army DIR-send-ADV Chen.family old.man seek DIR-send-NAR-PART DIR-send
+646	Text 6	19	36	jɑ-tu,	INT-LNK
+647	Text 6	19	37	ɦɑ-tu, tse:-ŋuəȵi tshəntɕɑ qɑpə	INT-RESULT this:CL-TOP Chen.family old.man
+648	Text 6	19	38	tɕəu-thɑ-tɕ, tshəntɕɑ qɑpə-tɕ tʂi-ŋuəȵi	save-AUX-GEN(goal) Chen.family old.man male/son-TOP
+649	Text 6	19	39	tshəntitɕhən, ɦɑ-tu tshəntɕɑ qɑpə-ŋuəȵi suəsuɑ	Chen.Diqing INT-RESULT Chen.family old.man-TOP divine(the.future)
+650	Text 6	19	40	ɣʐə-jy, ɦɑlɑ tə-suɑ-ȵi dʐuků	able-ASP INT DIR-divine-ADV knowledge
+651	Text 6	19	41	de-le, ɦɑ-kə suəsuɑ ɣʐə-ȵi “qɑ ɦɑ-kə	DIR-exist INT-thus divine able-ADV 1sg INT-thus
+652	Text 6	19	42	meʴʐ,	seek
+653	Text 6	19	43	ɦɑtə-ŋuəȵi,	INT-TOP
+654	Text 6	19	44	a,	EXCL
+655	Text 6	19	45	qɑ-tʂi, ʔũ-ŋuəȵi	1sg-son 2sg-TOP
+656	Text 6	19	46	dɑ-ɣzə-n, qɑ-ŋuəȵi fɑntʂənʂə ʐmətʂi tsoqpi jəpɑ-q-tɑ-ŋuəȵi do-χlu	DIR-set.out-2sg 1sg-TOP †(anyway.is) emperor this:family hand-top-LOC-TOP DIR-escape
+657	Text 6	19	47	mɑ-lə-jya, ɦɑ-thɑ-s-ʁɑ bəs-le: jopu-le: ʂqə-lɑ u-tɕyɑ-pɑqtɑ ɦɑtɑ	NEG-able-ASP:1sg INT-that:one-day-LOC snake-DEF:CL cliff-DEF:CL below-LOC DIR-see:1sg-LNK(after) INT
+658	Text 6	19	48	tse:-ŋuəȵi, ɦɑ-tsoqpi-wu qɑ meʴʐ-lə	this:CL-TOP INT-this:family-AGT 1sg seek-come
+659	Text 6	19	49	tɕhe, qɑ ʂpəl ȵɑ ɕtɕi:mi	want 1sg kidney COM heart
+660	Text 6	19	50	sə-mə-dzə-s-te:-wu, ɦɑtɑ thɑ-hɑn	DIR-NEG-eat-NOM-DEF:CL-if INT that:one-kind
+661	Text 6	19	51	ŋuə-ʂ,	COP-LNK
+662	Text 6	19	52	ɦɑ-tsɑ-χui-ŋuəȵi, tshəntitɕhin ʔũ du-ɸu dʐə-tɕeʴwu	INT-this:one-time-TOP Chen.Diqing 2sg DIR-run.away able-AMP119:all
+663	Text 6	19	53	du-ɸu-n-pɑ, qɑ-ŋuəȵi tsoqpi jəpɑ-q ɦɑ-mə-ʁə-ʂə mɑ-l-jyɑ.” ikə jə-ȵi ɦɑlɑ	DIR-run.away-2sg-DTV 1sg-TOP this:family hand-top DIR-NEG-go-LNK NEG-able-ASP:1sg thus say-ADV INT
+664	Text 6	20	54	du-ɸu, tʂi-le:-ŋuəȵi du-ɸu-ȵi nai-e-tshin-ʁɑ	DIR-run.away son-DEF:CL-TOP run.away-ADV other-one-village-LOC
+665	Text 6	20	55	i-pə-kəi-wɑ, nai-e-tshin-ʁɑ	DIR-arrive-NAR-EMPH other-one-village-LOC
+666	Text 6	20	56	i-pə-kəi-tu, ɦɑlɑ dɑ-qɑ dɑ-qɑ	DIR-arrive-NAR-LNK INT DIR-go DIR-go
+667	Text 6	20	57	dɑ-qɑ-tu, ɦɑlə	DIR-go-LNK there
+668	Text 6	20	58	ŋuə-tu, dɑ-qɑ-tu ɦɑlɑ die-ʂe-m-le:	COP-LNK DIR-go-LNK INT DIR-die-NOM-DEF:CL
+669	Text 6	20	59	ʐi-kui, wutɕupu-le:-ŋuəȵi	exist-NAR husband-DEF:CL-TOP
+670	Text 6	20	60	die-ʂe-kui, wutɕupu-le:-ŋuəȵi	DIR-die-NAR husband-DEF:CL-TOP
+671	Text 6	20	61	die-ʂe-kui-tu,	DIR-die-NAR-LNK
+672	Text 6	20	62	ɦɑ-tu, lokun lokun phənjəu ɦe-se ŋuə. tɕɑ-lɑ tshɑ-lɑ-ʁɑ-ŋuəȵi “ɦɑ-tsəi lokun	INT-RESULT sworn.brother sworn.brother friend DIR-make(friends) COP where-LOC village-LOC-LOC-TOP INT-this.manner sworn.brother
+673	Text 6	21	63	ɦe-seʴ-ʂ, ɦɑ-tsəi ɦe-seʴ.” ɦɑ-tsəi-ŋuəȵi ɦe-se-kui-wɑ.	DIR-make(friends):1pl-LNK INT-this.manner DIR-make(friends):1pl INT-this.manner-TOP DIR-make(friends)-NAR-EMPH
+674	Text 6	23	64	“ha, tse: fɑntʂənʂə thɑ-hɑn shenʐə bələ-s	EXCL this:CL †(anyway.is) that:one-kind birthday make-NOM
+675	Text 6	23	65	ŋuə,” ikə	COP thus
+676	Text 6	23	66	jə-ȵi, ɦɑ-ke: tə-bəl-kui. ɦɑ-tu χu ȵɑ thɑ-hɑn kuɑn-thɑ-m əzzi ʐi-kui. ɦɑ-tu thɑ-hɑn afəʴali mɑ-tʂhə-tɕ lɑχuilai χu.	say-ADV INT-INDEF:CL DIR-make-NAR INT-RESULT goods COM that:one-kind manage-AUX-NOM a.few exist-NAR INT-RESULT that:one-kind †(least.amount) NEG-lack-GEN †(take.back) goods
+677	Text 6	26	67	ɦɑ-tu-ŋuəȵi, “kuȵɑtsə ȵɑ	INT-RESULT-TOP close.relatives COM
+678	Text 6	26	68	stumpətʂe120-ŋuəȵi, tsɑ ɑ-lɑ	relatives-TOP here DIR-come
+679	Text 6	26	69	tɕhe, ʔũ-ŋuəȵi ɑ-ʂpɑ kə lə	want 2sg-TOP one-place go also
+680	Text 6	26	70	ɦe-me-se,” jə-kui. ɦɑ-kə	DIR-NEG-allow say-NAR INT-thus
+681	Text 6	27	71	jə-kui-tu, ɦɑlə ə-lɑ-kəi-wɑ.	say-NAR-LNK there DIR-come-NAR-EMPH
+682	Text 6	28	72	ə-lɑ-kəi-tu, χaiʂə ɦɑlɑ-ŋuəȵi	DIR-come-NAR-LNK †(still.is) there-TOP
+683	Text 6	28	73	ə-lɑ-kəi-tu, tʂi-ŋuəȵi tshənpe-khunpe. ɦɑlɑ-ŋuəȵi χaiʂə tɑulə tɕi kuo jue ʂəχəu i-jə-ɕ	DIR-come-LNK son-TOP smart-capable there-TOP †(still.is arrive few CL month time/when) one-two-month
+684	Text 6	29	74	pe-tu, χaiʂə ɦɑ-tsɑ ʐmətʂi louqpi-wu meʴʐə-kui-wɑ. ʐmətʂi tsoqpi-wu	become-LNK †(still.is) INT-this emperor DEF:one:family-AGT seek-NAR-EMPH emperor this:family-AGT
+685	Text 6	30	75	meʴʐə-kui-tu, “a! qɑ-ŋuəȵi mɑ-k	seek-NAR-LNK EXCL 1sg-TOP NEG-go
+686	Text 6	31	76	ɦe-me-se,	DIR-NEG-allow
+687	Text 6	31	77	kɑ:,” ɦɑlɑ	go:PRS INT
+688	Text 6	31	78	sətsim-le:-tɑ-ŋuəȵi, “a! qɑ thɑ-hɑn	wife-DEF:CL-LOC-TOP EXCL 1sg that:one-kind
+689	Text 6	32	79	ŋuə-ʂ, qɑ-ŋuəȵi mɑ-k	COP-LNK 1sg-TOP NEG-go
+690	Text 6	32	80	ɦe-me-se-ʂ, ɦɑ-tu-ŋuəȵi tʂi pe-tu	DIR-NEG-allow-LNK INT-RESULT-TOP son become-LNK
+691	Text 6	32	81	ŋuə-tu, ɕtɕə-p le-ȵi ləɣz ɑ:-su-k-wɑ. tsi	COP-LNK seven-years exist-ADV book DIR:INDTV-study-go-DTV daughter
+692	Text 6	33	82	pe-tu, χaiʂə iɣi qɑ meʴʐə-lə	become-LNK †(still.is) anything 1sg seek-come
+693	Text 6	33	83	me-tɕhi, nai tʂi pe-tu ʂəʔəʴsui hani-p le-ȵi ɦɑ-tu qɑ	NEG-want other son become-LNK †(twelve.years.old) twelve-year exist-LNK INT-RESULT 1sg
+694	Text 6	33	84	tɑ:-meʴʐ-lə-wɑ,” jə-jy. ŋuəȵi sətsim-le:-tɑ-ŋuəȵi	INDTV-seek-come-DTV say-ASP TOP wife-DEF:CL-LOC-TOP
+695	Text 6	34	85	ə-χte-jy, ɦɑ-tu “ʐmə-ŋuəȵi thɑnkhemu	DIR-exhort-ASP INT-RESULT name-TOP Thɑnkhemu
+696	Text 6	34	86	ə-ʂpə-n-pɑ,”	DIR-call-2sg-DTV
+697	Text 6	34	87	jə-jy, “thɑnkhemu-ŋuəȵi ɦɑ-tsəi	say-ASP Thɑnkhemu-TOP INT-this.manner
+698	Text 6	34	88	ə-ʂpə-n-pɑ, ɦɑ-tu ləɣz u-su-ȵi ɕtɕə-p	DIR-call-2sg-DTV INT-RESULT book DIR-study-ADV seven-year
+699	Text 6	34	89	le-ȵi, kə-ŋuə-tu i-pə-l-ȵi qɑ ta:-meʴʐ-wɑ.”	exist-ADV thus-COP-LNK DIR-return-come-ADV 1sg DIR:INDTV-seek-DTV
+700	Text 6	35	90	ɦɑ-tu, xsə nai-e-fən-ʁɑ χaiʂə meʴʐə-lə-m-ŋuəȵi steke-lɑ ə-dzɑ-lu-kui.	INT-RESULT new(again) other-one-CL-LOC †(still.is) seek-come-NOM-TOP behind-LOC DIR-chase-come-NAR
+701	Text 6	36	91	ə-dzɑ-lu-kui-tu, χaiʂə du-ɸu-ȵi	DIR-chase-come-NAR-LNK †(still.is) DIR-run.away-ADV
+702	Text 6	36	92	kə-jə-kəi-tu,	go-REP-NAR-LNK
+703	Text 6	36	93	nai-ɑ-ʂpɑq-tɑ, χaiʂə ŋuəȵi wutɕupu	other-one-place-LOC †(still.is) TOP husband
+704	Text 6	36	94	die-ʂe-m-le:-tɑ, wutɕupu die-ʂe-m-le:-tɑ χaiʂə ɦɑ-ke:	DIR-die-NOM-DEF:CL-LOC husband DIR-die-NOM-DEF:CL-LOC †(still.is) INT-INDEF:CL
+705	Text 6	36	95	pe-ȵi, qe:ʴ ʂpaʂpa ɦɑ-ke: tu-tsu-jə-kəi. ɦɑ-ke:	become-ADV before same.way INT-INDEF:CL DIR-meet-REP-NAR INT-INDEF:CL
+706	Text 6	37	96	tu-tsu-jə-kəi-tu, ɦɑ-ŋuəȵi	DIR-meet-REP-NAR-LNK INT-TOP
+707	Text 6	37	97	χu-pɑn-thɑ-luo,	goods-manage-AUX-perhaps
+708	Text 6	37	98	ɦɑ-lɑ-hɑn-ŋuəȵi, χaiʂə thu ə-mə-lɑ-ʐ mo-ʁu-jə-kui. ɦɑ-thə	INT-DEF:one-kind-TOP †(still.is) there DIR-NEG-come-CAUS NEG-willing-REP-NAR INT-there
+709	Text 6	38	99	ə-lɑ-kəi-tu, xsə meʴʐə-lə-m i-pə-l-jə-kui “tʂi	DIR-come-NAR-LNK new(again) seek-come-NOM DIR-arrive-come-REP-NAR son
+710	Text 6	38	100	pe-tu, qɑ meʴʐ-lə	become-LNK 1sg seek-come
+711	Text 6	38	101	tɕhe-wɑ, tsi	want-DTV daughter
+712	Text 6	38	102	pe-tu, meʴʐ-lə	become-LNK seek-come
+713	Text 6	38	103	me-tɕhe-wɑ, tʂi	NEG-want-DTV son
+714	Text 6	38	104	pe-tu, ɦɑlɑ ɕtɕə-p le-ȵi ləɣz	become-LNK INT seven.years exist-ADV book
+715	Text 6	38	105	ɑ:-su-ku, hodʑy-p le-ȵi qɑ	DIR:INDTV-study-go:EMPH ten-year exist-ADV 1sg
+716	Text 6	38	106	ta:-meʴʐ-lə-wɑ,” ɦɑ-kə jə-kui-tu. ɦɑ-tu thɑnkhemu ȵɑ likhemu jə-ze wu tʂi	DIR:INDTV-seek-come-DTV INT-thus say-NAR-LNK INT-RESULT Thɑnkhemu COM Likhemu two-CL all son
+717	Text 6	39	107	pe-kui,	become-NAR
+718	Text 6	39	108	ɦɑ-tu, ɑ-s-ʁɑ-ŋuəȵi dɑ-ɣz-ȵi	INT-RESULT one-day-LOC-TOP DIR-set.out-ADV
+719	Text 6	39	109	χaiʂə, ɦɑ-thɑ “ep-te: meʴʐ	†(still.is) INT-there father-DEF:CL seek
+720	Text 6	39	110	kɑ:,”	go:PRS:1sg
+721	Text 6	39	111	jə-χuɑ, “ep-te: meʴʐ	say-because father-DEF:CL seek
+722	Text 6	39	112	kɑ:,” jə-χuɑ ŋuəȵi dɑ-qɑ	go:PRS:1sg say-because TOP DIR-go
+723	Text 6	39	113	dɑ-qɑ-kəi-tu, bɑ-la:-ʁɑ e-tʂepe-kəi. ɦɑ-tu tshəntitɕhin-ŋuəȵi ep	DIR-go-NAR-LNK flat.area.on.side.of.hill-DEF:CL-LOC DIR-encounter-NAR INT-RESULT Chen.Diqing-TOP father
+724	Text 6	40	114	ŋuə-w, ep-le: meʴʐə-k	COP-VIS father-DEF:CL seek-go
+725	Text 6	40	115	dɑ-qə-kəi-tu, ɦɑlɑ gue:ʴ-tɑ-ŋuəȵi e-tʂepe-kəi. thɑnkhemu-ŋuəȵi tə-keʴl-kəi. thɑnkhemu	DIR-go-NAR-LNK INT road-LOC-TOP DIR-encounter-NAR Thɑnkhemu-TOP DIR-ask-NAR Thɑnkhemu
+726	Text 6	42	116	tə-keʴl-kəi-tu, “ʔũ tɕɑ kɑ:-n-ɑ?”	DIR-ask-NAR-LNK 2sg where go:PRS-2sg-Q
+727	Text 6	43	117	jə-kui, “ʔũ tɕɑ kɑ:-n-ɑ?” jə-kui-tu.	say-NAR 2sg where go:PRS--2sg-Q say-NAR-LNK
+728	Text 6	45	118	“ha, qɑ ep meʴʐ kɑ:” jə-kui. “ʔũ ep ȵiɣi ʐmə-wɑ?”	EXCL 1sg father seek go:PRS:1sg say-NAR 2sg father what call-Q
+729	Text 6	47	119	jə-tu, “qɑ-ep tshəntitɕhin ŋuə-ŋuɑ,”121 jə-ji. thɑnkhemu ɦɑ-tsə “ep lə tshəntitɕhin	say-LNK 1sg-father Chen.Diqing COP-VIS:1sg say-CSM Thɑnkhemu INT-this father also Chen.Diqing
+730	Text 6	48	120	ŋuə, ʔũ qɑ	COP 2sg 1sg
+731	Text 6	48	121	mɑ-sun-ʂə,” ikə	NEG-consider-LNK thus
+732	Text 6	48	122	jə-kui, “qɑ mɑ-sun-ʂə”	say-NAR 1sg NEG-consider-LNK
+733	Text 6	48	123	jə-kui-tu, nə-quɑq-tɕə-i. hai	say-NAR-LNK DIR-fight-3pl-HS EXCL
+734	Text 6	49	124	ne-quɑq-kei-tu, thɑnkhemu-ŋuəȵi	DIR-fight-NAR-LNK Thɑnkhemu-TOP
+735	Text 6	49	125	“a, ʔũ ȵɑ qɑ quəquɑ	EXCL 2sg COM 1sg fight
+736	Text 6	49	126	ma-qaʴ, ʔũ ȵɑ qɑ quəquɑ	NEG-ought:1pl 2sg COM 1sg fight
+737	Text 6	49	127	ma-qaʴ, ə-zə	NEG-ought:1pl one-CL
+738	Text 6	49	128	ə-ʑdʑ-ʂɑ,” jə-kui. ɑ-zə	DIR-rest-HORT say-NAR one-CL
+739	Text 6	50	129	ə-ʑdʑ-tu, ɦɑlɑ ɑ-zə	DIR-rest-LNK INT one-CL
+740	Text 6	50	130	ə-ʑdʑ-ȵiantɕi, thɑnkhemu-jə	DIR-rest-after Thɑnkhemu-†(TOP)
+741	Text 6	50	131	ba-kəi-ʂə, ɦɑlɑ	big-NAR-LNK INT
+742	Text 6	50	132	tə-keʴl-kui, likhemu	DIR-ask-NAR Likhemu
+743	Text 6	50	133	tə-keʴl-kui-tu, ɦɑlɑ likhemu-ŋuəȵi “ȵi:tsəi ŋuə-ʐɑ:?” jə-kui-ʂə.	DIR-ask-NAR-LNK INT Likhemu-TOP WH.kind COP-CAUS:PRS:1pl say-NAR-LNK
+744	Text 6	52	134	thɑnkhemu-ŋuəȵi, “ʔũ ȵɑ qɑ jə-ze wu tsəi-ŋuəȵi thɑ-hɑn ep	Thɑnkhemu-TOP 2sg COM 1sg two-CL all this.manner-TOP that:one-kind father
+745	Text 6	52	135	meʴʐe:ʴ, ep-te: kənti e: ŋuə-k-ɑ:ʴ-tɕi?	seek:1pl father-DEF:CL jointly one:CL COP-INF-PRS:1pl-Q
+746	Text 6	53	136	ta, iɕtɕi-ŋuəȵi	INT together-TOP
+747	Text 6	53	137	kə-ʂɑ,” jə-kui.	go-HORT say-NAR
+748	Text 6	54	138	ɦɑ-thu-ŋuəȵi, quəquɑ a-χə-ȵi dɑ-qə-kəi-hɑ. dɑ-qɑ dɑ-qɑ	INT-there-TOP fight DIR-stop-LNK DIR-go-NAR-PART DIR-go DIR-go
+749	Text 6	55	139	dɑ-qə-tu, ɦɑlɑ xsə-tɕi-la:-ʁɑ ə-wəi-jə-kəi	DIR-go-LNK INT god-house(temple)-DEF:CL-LOC DIR-stay/live-REP-NAR
+750	Text 6	55	140	ha,	INT
+751	Text 6	55	141	ə-wəi-jə-kəi-tu, ɦɑ-tu “the: maha-ŋuəȵi tshəntɕɑ qɑpɑ ȵɑ tshəntitɕhin-tɕə	DIR-stay/live-REP-NAR-LNK INT-RESULT 3sg night-TOP Chen.family old.man COM Chen.Diqing-GEN
+752	Text 6	55	142	kuɑntɑusəje, ɦɑlɑ-ŋuəȵi ɦɑlɑ xsə-tɕi pienɑ	sword.and.bow INT-TOP INT god-house beside
+753	Text 6	55	143	tə-ʂuə-jə, ɦɑ-kə səɸů-le:-pienɑ tə-ʂuə-jə ke:	DIR-hide-REP that.manner tree-DEF:CL-beside DIR-hide-REP INDEF:CL
+754	Text 6	55	144	u-ʐmu-ɑ-wɑ,” jə-ji.	DIR-dream-1sg-EMPH say-HS
+755	Text 6	56	145	“ha,	EXCL
+756	Text 6	56	146	ʔũ, qɑ-tutʂ ȵi:-ke: u-ʐmu-n-ɑ?”	2sg 1sg-younger.brother WH-INDEF:CL DIR-dream-2sg-Q
+757	Text 6	57	147	jə-i-tu,	say-HS-LNK
+758	Text 6	57	148	“a, qɑ lə ɦɑ-kə u-ʐmu-ɑ.	EXCL 1sg also INT-thus DIR-dream-1sg
+759	Text 6	58	149	a,	EXCL
+760	Text 6	58	150	ta, ʔũ ȵɑ qɑ a-qəs we-k-ɑ:ʴ-tɕi? kuɑntɑusəje ɦɑ-tsəi-ke:	INT 2sg COM 1sg one-form exist-INF-PRS:1pl-Q sword.and.bow INT-this.manner-INDEF:CL
+761	Text 6	59	151	u-ʐmu-ɑ-ʂə, tshən-ŋuəȵi ɦɑ-thɑ xsə-tɕi-le:-pienɑ-ŋuəȵi ʐoʁu-pienɑ-lɑ wətshəi-le:-tɑ ɦɑ-l-ȵi ɦɑ-ke-ze ʐi-jə kə	DIR-dream-1sg-LNK Chen-TOP INT-there god-house-DEF:CL-beside-TOP courtyard-beside-LOC wild.prickly.ash-DEF:CL-LOC DIR-look-ADV INT-INDEF-CL exist-REP thus
+762	Text 6	59	152	u-ʐmu-ɑ-wɑ,” jə-ji. ɦɑ-tu	DIR-dream-1sg-EMPH say-CSM INT-RESULT
+763	Text 6	60	153	dɑ-qə-kəi-tu, ʁɑtɕhi ɦɑlɑ gue:ʴ-le:-pienɑ-ŋuəȵi səɸ-lə-jin-tʂɑ we-s-tɑ-ŋuəȵi ɦɑlɑ tsə-le:	DIR-go-NAR-LNK really INT road-DEF:CL-beside-TOP tree-DEF-few-CL exist-NOM-LOC-TOP INT water(river)-DEF:CL
+764	Text 6	60	154	lu-ji, tsə	come(flow)-HS water
+765	Text 6	60	155	ɦe-ɕpi-kei, a-i	DIR-thirsty-NAR one-time
+766	Text 6	60	156	dɑ-qə-kəi-tu, ɦɑ tsə	DIR-go-NAR-LNK INT water
+767	Text 6	60	157	ɦe-ɕpi-kəi-tu, ɦɑlɑ χqɑtsəimi-le: ɦɑ-lə-kui.	DIR-thirsty-NAR-LNK INT spring.water-DEF:CL DIR-come-NAR
+768	Text 6	61	158	ɦɑ-tu-ŋuəȵi, thɑnkhemu-ŋuəȵi tsə	INT-RESULT-TOP Thɑnkhemu-TOP water
+769	Text 6	61	159	tə-meʴʐ-kəi-tu, ɦɑlɑ tsə	DIR-seek-NAR-LNK there water
+770	Text 6	61	160	dɑ-tɕ-kəi, tsə	DIR-find-NAR water
+771	Text 6	61	161	dɑ-tɕ-kəi-tu,	DIR-find-NAR-LNK
+772	Text 6	61	162	“likhemu, ʔũ-ŋuəȵi tɕhə	Likhemu 2sg-TOP drink
+773	Text 6	61	163	ə-χə-n, qɑ tuwɑ-le:-ŋuəȵi qe:ʴ	DIR-stop-2sg 1sg older.brother-DEF:CL-TOP before
+774	Text 6	61	164	sə-tɕ-lɑ, ɦɑ-tu sə-tɕh-ȵi qɑ	DIR-drink-INDTV:1sg INT-RESULT DIR-drink-ADV 1sg
+775	Text 6	61	165	die-me-ʂa-tu,	DIR-NEG-die:1sg-LNK
+776	Text 6	61	166	ɦɑlə-ŋuəȵi, ʔũ lə ə-tɕhə-n-pɑ. nai qɑ	INT-TOP 2sg also DIR-drink-2sg-DTV other 1sg
+777	Text 6	62	167	die-ʂa-tu, ʔũ	DIR-die:1sg-LNK 2sg
+778	Text 6	62	168	tɕɑ-tɕhi-n-pɑ,” jə-kui-tɕu. ɦɑ-kə	NEG.IMP-drink-2sg-DVT say-NAR-PART INT-thus
+779	Text 6	63	169	jə-kui-tu,	say-NAR-LNK
+780	Text 6	63	170	thɑ-χui-tu, thɑnkhemu	that:one-time-LNK Thɑnkhemu
+781	Text 6	63	171	sə-tɕ-kəi, sə-tɕ-kəi-tu ɦɑlɑ ʐɑwɑ-ʂəpan-le: ɦa-que-ji-le:	DIR-drink-NAR DIR-drink-NAR-LNK INT stone-†stone.slab-DEF:CL DIR-cover-CSM-DEF:CL
+782	Text 6	63	172	tu-tsu-kəi, ɦɑ-tu e:! tshəntɕɑ qɑpɑ ȵɑ tshəntitɕhin kuɑntɑusəje ɦɑlɑ ɦe-le-ȵi ʂə-ʐə-kui	DIR-encouter-NAR INT-RESULT EXCL Chen.family old.man COM Chen.Diqing sword.and.bow INT DIR-pack-ADV exist-CAUS-NAR
+783	Text 6	64	173	ha, pɑnɑ quəqua-s	INT thing fight-NOM
+784	Text 6	64	174	pɑnɑ,	thing
+785	Text 6	64	175	kɑntɕhi, ɦɑ-thɑ	club INT-there
+786	Text 6	64	176	ʂə-ʐə-kui-tu,	exist-CAUS-NAR-LNK
+787	Text 6	64	177	thɑ-hɑn,	that:one-kind
+788	Text 6	64	178	ɦɑ-lɑ-χui-tu, thɑnkhemu-ŋuəȵi tsə o-qu	INT-DEF:one-time-LNK Thɑnkhemu-TOP water one-mouthful
+789	Text 6	64	179	sə-tɕ-kəi, ɦɑlɑ ʂəpɑn-le: ɕa-la: tə-qe-kəi-tu. ɕa-la:-ji tə-tsi	DIR-drink-NAR INT stone.slab-DEF:CL small-DEF:CL DIR-lift-NAR-LNK small-DEF:CL-EXC DIR-lift
+790	Text 6	65	180	mɑ-lə-kəi, ɦɑ-tu “likhemu lə ə-tɕhə-n qɑ-tutʂu	NEG-able-NAR INT-RESULT Likhemu also DIR-drink-2sg 1sg-little.brother
+791	Text 6	65	181	ə-tɕhə-n,”	DIR-drink-2sg
+792	Text 6	65	182	jə-kui-ʂə,	say-NAR-LNK
+793	Text 6	65	183	sə-tɕ-tu,	DIR-drink-LNK
+794	Text 6	65	184	ɦɑ-lɑ-χui-tu, jə-ze wu	INT-DEF:one-time-LNK two-CL all
+795	Text 6	65	185	u-χsu, u-χsu-ȵi ɑ-thɑn	DIR-jump DIR-jump-ADV one-trip
+796	Text 6	65	186	tə-tsi-kəi-tu, ɦɑlɑ ɕa-la:-ji	DIR-lift-NAR-LNK INT small-DEF:CL-EXC
+797	Text 6	65	187	tə-me-qe-kəi,	DIR-NEG-lift-NAR
+798	Text 6	65	188	ha, a-thən	EXCL one-time
+799	Text 6	65	189	sə-tɕi-tɕ-ʂɑ, ɑ-thən	DIR-CON-drink-LNK one-time
+800	Text 6	65	190	sə-tɕi-tɕ-kəi,	DIR-CON-drink-NAR
+801	Text 6	65	191	ɦɑ-lɑ-χui-tu,	INT-DEF:one-time-LNK
+802	Text 6	65	192	sə-tɕ, ʂəpɑn	DIR-drink stone.slab
+803	Text 6	65	193	tə-qe-ȵiɑufu, ɦɑ-thɑ tshəntɕɑ qɑpə ȵɑ tshəntitɕhin-wu pɑnə	DIR-turn.over-LNK(as.soon.as) INT-there Chen.family old.man COM Chen.Diqing-AGT thing
+804	Text 6	65	194	tə-ʂuə-jə, ɦɑ kuɑntɑusəje ɦɑ-lɑ-hɑn ɦɑlɑ i-le-ȵi	DIR-hide-CSM INT sword.and.bow INT-DEF:one-kind there DIR-pack-ADV
+805	Text 6	65	195	ʂə-kui, ɦɑ-tu	exist-NAR INT-RESULT
+806	Text 6	65	196	tə-xtʂe-kəi, tə-xtʂe-ȵi he-tɕy-ȵi dɑ-qə-kəi. a-i	DIR-take.out-NAR DIR-take.out-ADV DIR-carry-ADV DIR-go-NAR one-time
+807	Text 6	66	197	dɑ-qə-kəi-tu, ɦɑlɑ gue:ʴ-guχu-lɑ xsə-tɕi-le:-ʁɑ sin-le:-tɑ ɦɑ-l-ȵi	DIR-go-NAR-LNK INT road-upper.part-LOC god-house-DEF:CL-LOC lion-DEF:CL-LOC DIR-look-ADV
+808	Text 6	66	198	ʐi-kui-wɑ, ɦɑlə	exist-NAR-EMPH there
+809	Text 6	66	199	ʐi-kui-tu, “ha qɑ tshəntitɕhin ȵɑ tshəntɕɑ qɑpə-tɕ ɦɑ sin ŋuə-n-ʂɑ qap ɦa-ʁu-n,122 sin	exist-NAR-LNK INT 1sg Chen.Diqing COM Chen.family old.man-GEN INT lion COP-2sg-LNK head DIR-throw-2sg lion
+810	Text 6	66	200	mɑ-ŋuə-n-ʂɑ, tu qap	NEG-COP-2sg-LNK RESULT head
+811	Text 6	66	201	ɦa-tɕi-ʁu-n, tɕile	DIR-NEG.IMP-throw-2sg 1pl
+812	Text 6	66	202	dzɑ:-n-ʂɑ,	eat:PRS-2sg-LNK
+813	Text 6	66	203	ə-zə-n, nai tɕile-tɕ sin	DIR-eat-2sg other 1pl-GEN lion
+814	Text 6	66	204	ŋuə-n-tu, ɦɑlɑ qap	COP-2sg-LNK there head
+815	Text 6	66	205	ɦɑ-ʁu-n,” jə-kui. ɦɑlɑ	DIR-throw-2sg say-NAR there
+816	Text 6	67	206	ŋuə-ȵi, qap	COP-ADV head
+817	Text 6	67	207	ɦa-ʁu-kui, qap	DIR-throw-NAR head
+818	Text 6	67	208	ɦa-ʁu-kui-tu, ɦɑlə	DIR-throw-NAR-LNK there
+819	Text 6	67	209	ŋuə-tu, kuɑntɑusəje sin tə-qətʂi-ȵi dɑ-qə-kəi-wɑ. sin tə-qətʂi-ȵi	COP-LNK sword.and.bow lion DIR-ride-ADV DIR-go-NAR-EMPH lion DIR-ride-ADV
+820	Text 6	68	210	dɑ-qə-kəi-tu, ɦɑ-tu jautsan pe-m ɦɑ-tu	DIR-go-NAR-LNK INT-RESULT man.eating.demon become-NOM INT-RESULT
+821	Text 6	68	211	ʐmətʂi-le:-tɕə,	emperor-DEF:CL-GEN
+822	Text 6	68	212	ɦɑ-tse:-ŋuəȵi, ɦɑtɑ thɑnkhemu ȵɑ	INT-this:CL-TOP INT Thɑnkhemu COM
+823	Text 6	68	213	likhemu, the-wu tshəntɕɑ	Likhemu that-ABL Chen.family
+824	Text 6	68	214	qɑpə,	old.man
+825	Text 6	68	215	tshəntitɕhin-ŋuəȵi, tshəntɕɑ qɑpə-ŋuəȵi qe:ʴ jitɕin jautsan dʑemi pe-m-le:-wu ʂpəl ȵɑ ɕtɕi:mi ha-xtʂe-ȵi jitɕin the-xʂepi-ʁɑ ə-ʁɑ-s-tɑ ɦɑlɑ	Chen.Diqing-TOP Chen.family old.man-TOP before †(already) man.eating.demon Dʑemi become-NOM-DEF:CL-AGT kidney COM heart DIR-take.out-ADV †(already) that-side-LOC DIR-go-NOM-LOC INT
+826	Text 6	68	216	tə-pian-thɑ-kəi, thɑ	DIR-change-AUX-NAR there
+827	Text 6	68	217	tə-piɑn-thɑ-ȵiɑntɕi, gɑntsə χuɑ-m ɦɑlɑ ʐi-kəi. gɑntsə χuɑ-m thɑ	DIR-change-AUX-after saddle sell-NOM there exist-NAR saddle sell-NOM there
+828	Text 6	69	218	ʐi-kəi-tu, ɦɑlɑ thɑnkhemu ȵɑ likhemu-ŋuəȵi ɦɑ-thɑ meʴʐ-kə hɑ-qɑ. tshəntitɕhin meʴʐ-kə hɑ-qə-kə-wɑ. tɕhəntitɕhin meʴʐ	exist-NAR-LNK INT Thɑnkhemu COM Likhemu-TOP INT-there seek-go DIR-go Chen.Diqing seek-go DIR-go-INF-EMPH Chen.Diqing seek
+829	Text 6	71	219	hɑ-qɑ-tu, ɦɑlɑ tshəntɕɑ qɑpə-ŋuəȵi ɦɑlɑ	DIR-go-LNK INT Chen.family old.man-TOP there
+830	Text 6	71	220	tə-piɑn-thɑ,	DIR-change-AUX
+831	Text 6	71	221	tə-piɑn-thɑ-tu, ɦɑlɑ gɑntsə-ŋuəȵi ɦɑlɑ sin le-tue-tɑ	DIR-change-AUX-LNK INT saddle-TOP INT lion DEF-pair-LOC
+832	Text 6	71	222	ɦɑ-ʂə-tɕ, ɦo-ʂu kə ɦɑ-thə tə-bəl-ȵiɑntɕi gɑntsə χuɑ-m ɦɑlə	DIR-put-GEN DIR-wash.clean thus INT-there DIR-make-after saddle sell-NOM there
+833	Text 6	71	223	ə-tɕ-kəi, ɦɑ-tu thɑnkhemu ȵɑ likhemu	DIR-stop-NAR INT-RESULT Thɑnkhemu COM Likhemu
+834	Text 6	71	224	i-pə-k-tu, ɦɑlɑ ʁo-men ɦo-tsu-ji-la:-ʁɑ	DIR-arrive-go-LNK INT city-gate DIR-stand.up-CSM-DEF:CL-LOC
+835	Text 6	71	225	ɦɑlɑ, “ʔile tɕɑ: ka:-i-wɑ?”	there 2pl where:LOC go:PRS-2pl-Q
+836	Text 6	72	226	jə-tu, “tɕile tshəntitɕhin meʴʐ	say-LNK 1pl Chen.Diqing seek
+837	Text 6	72	227	leʴ-wɑ,” jə-kui.	come:1pl-EMPH say-NAR
+838	Text 6	73	228	“a, gantsə pɑ:-ji-ŋuɑ?” jə-kui-tu.	EXCL saddle buy:PRS-2pl-Q say-NAR-LNK
+839	Text 6	75	229	“a, tɕile sin-la:-ʁɑ χoʂu-ʂə ɦɑ-ʂ-ʂɑ. nai mo-χoʂu-tu	EXCL 1pl lion-DEF:CL-LOC fit-LNK DIR-put-HORT other NEG-fit-LNK
+840	Text 6	76	230	mɑ-pəʴ-wɑ,” jə-ji. ɦɑ-tu	NEG-buy:1pl-EMPH say-HS INT-RESULT
+841	Text 6	77	231	ɦɑ-ʂ-kəi,	DIR-put-NAR
+842	Text 6	77	232	ɦɑ-ʂ-kəi-tu, qhuɑt tə-ʂ-ȵike tu te-qe	DIR-put-NAR-LNK as.it.happens DIR-grow-after RESULT DIR-reveal
+843	Text 6	77	233	me-tɕhi, ɦɑ-tsəi tə-ʂ-ȵike ɦɑ-kə	NEG-want INT-this.manner DIR-grow-after INT-thus
+844	Text 6	77	234	pe-kui, ɦɑ-tu thɑnkhemu ȵɑ likhemu-ŋuəȵi sin tə-qtʂi-ȵi kuɑntɑusəje he-tɕy-ȵi ə-qɑ-kəi.	become-NAR INT-RESULT Thɑnkhemu COM Likhemu-TOP lion DIR-ride-ADV sword.and.bow DIR-carry-ADV DIR-go-NAR
+845	Text 6	78	235	ə-qɑ-tu, ɦɑ-tu jɑutsan dʑemi wutɕupu-ŋuəȵi ɦɑlɑ titɑu tə-xkue-ȵi ɦɑ-tsəi	DIR-go-LNK INT-RESULT man.eating.demon Dʑemi husband-TOP INT †tunnel DIR-dig-ADV INT-this.manner
+846	Text 6	78	236	ə-ʂ-jy-kui-wɑ, ɦɑ-tu tshəntitɕhin-tɕə gueʴ-ȵɑ	DIR-put-ASP-NAR-EMPH INT-RESULT Chen.Diqing-GEN army-COM
+847	Text 6	78	237	nə-quɑ-kui-ʂ, tʂi thɑnkhemu ȵɑ likhemu tshəntitɕhin ȵi:-epə-tɕ gueʴ-ȵɑ	DIR-fight-NAR-LNK male/son Thɑnkhemu COM Likhemu Chen.Diqing 3sgREFL-father-GEN army-COM
+848	Text 6	78	238	nə-quɑ-kəi-wɑ, ɦɑ-tu nə-quɑ-ȵi ɦɑlɑ	DIR-fight-NAR-EMPH INT-RESULT DIR-ʴght-ADV there
+849	Text 6	78	239	ŋuə-tu, steke ȵi:-epə-te:-tɕ gueʴ-ŋuəȵi nə-qəti dɑ-s. nə-qəti	COP-LNK behind 3sgREFL-father-DEF:CL-GEN army-TOP DIR-beat.to.death DIR-finish DIR-beat.to.death
+850	Text 6	79	240	dɑ-s-tu, ɦɑlɑ jɑutsan dʑemi ɦɑ-tsoqpi-tɕ ʐmətʂi ɦɑ-tse:-wu	DIR-finish-LNK there man.eating.demon Dʑemi INT-this:family-GEN emperor INT-this:CL-AGT
+851	Text 6	79	241	tɑitɑulɑ,	†(catch)
+852	Text 6	79	242	tə-ts̥əqɑ-ku, ɦɑ-tu tshəntitɕhin lə nə-χʂ-ku. nə-χʂ-ȵi	DIR-catch-NAR INT-RESULT Chen.Diqing also DIR-tie.up-NAR DIR-tie.up-ADV
+853	Text 6	80	243	ɦɑ-the-wu, thɑnkhemu ȵɑ likhemu-ŋuəȵi titɑu-ʁɑ a-ʁů-ȵi ȵisues me-le:-tɕ-ŋuəȵi sipe	INT-that-ABL Thɑnkhemu COM Likhemu-TOP tunnel-LOC DIR-throw-ADV nearly.dead NEG-exist-GEN-TOP medicine
+854	Text 6	80	244	dɑ-ɕtɕ-jə, sipe	DIR-feed-CSM medicine
+855	Text 6	80	245	dɑ-ɕtɕ-jə-ku-tu, ɦɑ-tu nə-χʂ-ȵi χaiʂə ȵi:-ep-te:-ȵɑ ɦɑlɑ ɑŋ̥u̥ə nə-χʂ-ȵi i-ɕi-ku. ɦɑ-tu ep-te:-ŋuəȵi ɦɑlɑ	DIR-feed-CSM-NAR-LNK INT-RESULT DIR-tie.up-ADV †(still.is) 3sgREFL-father-DEF:CL-COM INT together DIR-tie.up-ADV DIR-put-NAR INT-RESULT father-DEF:CL-TOP there
+856	Text 6	81	246	keʴl-jy, ʂku-ʐ pu-jy,123 ɦɑ-tsəi ʂku-ʐ	ask-ASP orangutan-talk do-ASP INT-this.manner orangutan-talk
+857	Text 6	81	247	ɦo-pu-ȵi,	DIR-do-ADV
+858	Text 6	81	248	“hüa, qɑ ɦɑlə ə-χte lɑ-hɑn tʂi	EXCL 1sg there DIR-exhort DEF:one-kind male/son
+859	Text 6	81	249	pe-kɑ:-ji,” ikə-jə-ȵi ɦɑ-kə	become-INF:PRS-CSM thus-say-ADV INT-thus
+860	Text 6	81	250	ə-χte-ku, ɦɑ-tu thɑnkhemu ȵɑ likhemu-ŋuəȵi	DIR-exhort-NAR INT-RESULT Thɑnkhemu COM Likhemu-TOP
+861	Text 6	81	251	χaiʂəχuijələjitian, ɦɑ-tsəi-ȵi ɕtɕů	†(also.recalled.a.little) INT-this.manner-ADV thought(n.)
+862	Text 6	81	252	zə-lɑ-ȵi,	DIR-come-ADV
+863	Text 6	81	253	a, ep-te:-wu ɦɑ-tsəi	EXCL father-DEF:CL-AGT INT-this.manner
+864	Text 6	81	254	ɦe-dʑi-kui, ʂku-ʐ ɦe-dʑi-ȵi “tʂi	DIR-say-NAR orangutan-talk DIR-say-ADV male/son
+865	Text 6	81	255	pe-kɑ:-ji, tʂi pe-tu ɕtɕə-p le-ȵi ləɣz	become-INF:PRS-CSM male/son become-LNK seven-year exist-ADV book
+866	Text 6	81	256	ɑ:-su-wɑ, the-wu hatʂi-p le-ȵi qɑ	DIR:INDTV-study-DTV that-ABL eleven-year exist-ADV 1sg
+867	Text 6	81	257	ta:-meʴʐ-wɑ, nai steke-le:-ŋuəȵi likhemu	DIR:INDTV-seek-DVT other behind-DEF:CL-TOP Likhemu
+868	Text 6	81	258	ə-ʂp-ȵi, likhemu-ŋuəȵi hotɕu-p le-ȵi qɑ	DIR-call-ADV Likhemu-TOP ten-year exist-ADV 1sg
+869	Text 6	81	259	ta:-meʴʐ-lə-wɑ, tʂi	DIR:INDTV-seek-come-DTV male/son
+870	Text 6	81	260	pe-tu,” ɦɑ-kə	become-LNK INT-thus
+871	Text 6	81	261	jə-kui-wɑ, ɦɑ-tu ʂku-ʐ pə-kəi. ɦɑ-tu ep-te:-ŋuəȵi ɦɑ-kə jə-kui-tɕu.	say-NAR-EMPH INT-RESULT orangutan-talk do-NAR INT-RESULT father-DEF:CL-TOP INT-thus say-NAR-PART
+872	Text 6	83	262	thɑnkhemu-ŋuəȵi, “ʔũ ȵɑ qɑ ȵiɣi bəl-lə	Thɑnkhemu-TOP 2sg COM 1sg what do-come
+873	Text 6	83	263	hɑ-ləʴ,	DIR-come:1pl
+874	Text 6	83	264	qɑ-tutʂ,”	1sg-younger.brother
+875	Text 6	83	265	jə-kui, ɦɑ-tu ɦɑ-kə jə-kui-tu. “a ʔũ ȵɑ qɑ ep meʴʐ	say-NAR INT-RESULT INT-thus say-NAR-LNK EXCL 2sg COM 1sg father seek
+876	Text 6	84	266	ləʴ-ȵi,”	come:1p-ADV
+877	Text 6	84	267	jə-kui, “ep meʴʐ	say-NAR father seek
+878	Text 6	84	268	ləʴ,” likhemu-ŋuəȵi kə-jə-kui.	come:1pl Likhemu-TOP thus-say-NAR
+879	Text 6	85	269	ɦɑ-lɑ-χui-tu,	INT-DEF:one-time-LNK
+880	Text 6	85	270	ep-te:-tu, e!	father-DEF:CL-LNK EXCL
+881	Text 6	86	271	ɦɑ-ʂəȵi-kə-tɕi-jə,	DIR-discuss-go-3pl-HS
+882	Text 6	86	272	“ta, qɑ ʔile ep	INT 1sg 2pl father
+883	Text 6	86	273	ŋuə-k-ɑ,” ikə jə-kui. ɦɑ-kə	COP-INF-1sg thus say-NAR INT-thus
+884	Text 6	87	274	jə-kui-tu,	say-NAR-LNK
+885	Text 6	87	275	ɦɑ-ʂəȵi, ɦɑ-ʂəȵi kɑ-hɑn	DIR-discuss DIR-discuss INDEF:one-kind
+886	Text 6	87	276	ŋuə-tu, meʴʂ-tɑ-s-ʁɑ-ŋuəȵi	COP-LNK next-DEF:one-day-LOC-TOP
+887	Text 6	87	277	qəti-s, ɦɑtɑ tshəntitɕhin ȵɑ	beat.to.death-NOM INT Chen.Diqing COM
+888	Text 6	87	278	thɑnkhemu, likhemu tsəzzi-ŋuəȵi ɦɑlɑ jɑutsan dʑemi	Thɑnkhemu Likhemu these.people-TOP there man.eating.demon Dʑemi
+889	Text 6	87	279	wutɕupu-le:-ŋuəȵi, χaiʂə ʐmətʂi-le:	husband-DEF:CL-TOP †(still.is) emperor-DEF:CL
+890	Text 6	87	280	ŋuə-kəi-ȵi, χaiʂə qəti-s	COP-NAR-ADV †(still.is) beat.to.death-NOM
+891	Text 6	87	281	ə-ʂ-jy, jautsan dʑemi tse:-wu χaiʂə lɑupeɕi lə qusu	DIR-release-ASP man.eating.demon Dʑemi this:CL-AGT †(still.is) †ordinary.citizens also very.many
+892	Text 6	87	282	ə-tʂən-thɑ, gueʴ ȵɑ	DIR-kill-AUX army COM
+893	Text 6	87	283	thɑ-hɑn, tshenʂə qusu tə-qɑ-ʐ-kui-wɑ. ɦɑ-tu qusu tə-qɑ-ʐ-ȵi ɦɑ-kɑ-hɑn ŋuə-kui-tu. ɦɑ-tu tshəntitɕhin-ŋuəȵi ɦɑ-tu	that:one-kind dispute very.many DIR-go-CAUS-NAR-EMPH INT-RESULT very.many DIR-go-CAUS-ADV INT-INDEF:one-kind COP-NAR-LNK INT-RESULT Chen.Diqing-TOP INT-RESULT
+894	Text 6	89	284	tijikuojautɕhiu, “soqho-ŋuəȵi tɕile ʂe	†(first.demand) tomorrow-TOP 1pl die
+895	Text 6	89	285	ʁze-jy,	must-ASP
+896	Text 6	89	286	ɦɑlɑ-ŋuəȵi, ʔũ-sətsim-le:-ŋuəȵi tɕile χaiʂə tɕɑ: mi-le:	that-TOP 2sg-wife-DEF:CL-TOP 1pl †(still.is) where:LOC person-DEF:CL
+897	Text 6	89	287	ŋuə, ɑ-ʂə u-tɕu	COP one-time DIR-see
+898	Text 6	89	288	tɕhe, quɑha-χupi lə	want face-appearance also
+899	Text 6	89	289	u-mu-tɕu-le, tɕile qəti ɦe-me-se.” ʐmətʂi-le:-tɑ-ŋuəȵi ɦɑ-kə jɑutɕhiu-tu-pu-k-kui-stu. ɦɑ-tu	DIR-NEG-see-because 1pl kill DIR-NEG-allow emperor-DEF:CL-DAT-TOP INT-thus demand-DIR-do-go-NAR-PART INT-RESULT
+900	Text 6	91	290	wutʂhu-pu-m-le-ɣlə-tɑ, ɦɑ-kə	help-do-NOM-DEF-pl-LOC INT-thus
+901	Text 6	91	291	jə-kui-tu, ɦɑ-kə	say-NAR-LNK INT-thus
+902	Text 6	91	292	jə-kui-tu, “mi χaiʂə u-tɕu	say-NAR-LNK person †(still.is) DIR-see
+903	Text 6	91	293	ɦe-se-wɑ,”	DIR-allow-EMPH
+904	Text 6	91	294	jə-kui, “khuoji təp-ȵi ʂe-ʁze-jə-u-ȵi ɑ-ʂ u-tɕu ŋuə lə	say-NAR †(is.possible) tomorrow-ADV die-must-CSM-VIS-ADV one-time DIR-see COP also
+905	Text 6	91	295	khuoji,” jə-kui-ʂə. ɦɑ-tu ʐmətʂi-le:-ŋuəȵi sətsim-le: ɦɑ-thɑ meʴʂ-tɑ-s-ʁɑ ʐmu tsu-s-tɑ-ŋuəȵi sətsim-le: tʂhetsə-quə-tɑ-ŋuəȵi	†(is.possible) say-NAR-LNK INT-RESULT emperor-DEF:CL-TOP wife-DEF:CL INT-there next-DEF:one-day-LOC meeting hold-NOM-LOC-TOP wife-DEF:CL cart-top-LOC-TOP
+906	Text 6	92	296	he-tɕhi-kəi,	DIR-bring-NAR
+907	Text 6	92	297	ɦɑ-thɑ-ŋuəȵi,	INT-there-TOP
+908	Text 6	92	298	tshəntitɕhin-ŋuəȵi, “a! otsůquɑ-ȵi-ŋuəȵi tɕile-tɕ jɑutɕhiu	Chen.Diqing-TOP EXCL morning-ADV-TOP 1pl-GEN demand
+909	Text 6	93	299	tɕiuʂə, ȵiuχuɑn-ŋuəȵi	†(that.is) bezoar-TOP
+910	Text 6	93	300	ɑ-tɕ,	one-catty
+911	Text 6	93	301	the-wu, kɑnthɑn mudʑu-ŋuəȵi ɑ-w phə	that-ABL †charcoal charcoal-TOP one-pile blow(burn)
+912	Text 6	93	302	tɕhe-wɑ, tɕile tu-jů-ȵi	want-DTV 1pl DIR-stand-ADV
+913	Text 6	93	303	ʐa:, ʔile-wu tɕile tɕhɑnpi-pɑ:-j-jə-ʂ qətia:-i	exist:PRS 2pl-AGT 1pl †shoot-do:PRS-2pl-say-LNK kill:PRS-2pl
+914	Text 6	93	304	ji,	say
+915	Text 6	93	305	ɦɑ-thu-ŋuəȵi, tɕile putu-lɑ-ŋuəȵi kɑnthɑn ɑ-w phə	INT-there-TOP 1pl front-LOC-TOP charcoal one-pile blow(burn)
+916	Text 6	93	306	tɕhe-wɑ,” jə-kui-tɕu. ɦɑ-tu χaiʂə “khuoji	want-DTV say-NAR-PART INT-RESULT †(still.is) †(is.possible)
+917	Text 6	94	307	ɦe-se,”	DIR-allow
+918	Text 6	94	308	jə-kui-ʂə, ʐmətʂi-le:-ŋuəȵi kə-jə-kui. ɦɑ-tu ȵiuχuɑn	say-NAR-LNK emperor-DEF:CL-TOP thus-say-NAR INT-RESULT bezoar
+919	Text 6	95	309	i-se-kui, ɦɑ-tu ʐmu tsu χaiʂə ŋuəȵi mi jautsan dʑemi-le: lə	DIR-burn-NAR INT-RESULT meeting hold †(still.is) TOP person man.eating.demon Dʑemi-DEF:CL also
+920	Text 6	95	310	hɑ-l-kəi, ʐmətʂi lə	DIR-come-NAR emperor also
+921	Text 6	95	311	hɑ-l-kəi, ʐmu-tsu thontʂə-tu-pů-ȵi ɦɑtɑ	DIR-come-NAR meeting-hold †notify-DIR-do-ADV INT
+922	Text 6	95	312	hɑ-lə-kui, hɑ-lə-kui-tu ɦɑlɑ	DIR-come-NAR DIR-come-NAR-LNK INT
+923	Text 6	95	313	thɑ-s-ʁɑ-tu, ɦɑ-thizzi-ŋuəȵi	that:one-day-LOC-LNK INT-3dl-TOP
+924	Text 6	95	314	tɕhanpi-pu-tɕ, ɦɑlɑ qəti qəʑdʑi-jə-kui. ɦɑ-tu qəti	†shoot-do-GEN INT kill prepare-CSM-NAR INT-RESULT kill
+925	Text 6	96	315	qəʑdʑi-jə-kui-tu, χaiʂə thɑ-hɑn	prepare-CSM-NAR-LNK †(still.is) that:one-kind
+926	Text 6	96	316	ŋuə-ku-wɑ,	COP-NAR-EMPH
+927	Text 6	96	317	ɦɑ-tu-ŋuəȵi, ɦɑ-thɑ tʂhetsə-məq iɕtɕi sə-l-ȵi ʐmətʂi-le: ȵɑ ʐmətʂi sətsim jautsan	INT-RESULT-TOP INT-there cart-top together DIR-look-ADV emperor-DEF:CL COM emperor wife man.eating.demon
+928	Text 6	96	318	dʑemi, ɦɑ-thɑ sə-l-ȵi ʐi-tu. ɦɑlɑ tshəntitɕhin-wu	Dʑemi INT-there DIR-look-LNK exist-LNK INT Chen.Diqing-AGT
+929	Text 6	97	319	ȵiuχuɑn-le-ste, kɑnthɑn-məq-tɑ ȵiuχuɑn-le-ste	bezoar-DEF-CL charcoal-top-LOC bezoar-DEF-CL
+930	Text 6	97	320	ʂə-ku-tu, ɦɑlɑ ɦɑ-tsu ʐmitʂi sətsim-le: jautsan ŋuə-ku-ʂ. jautsan-le:-ŋuəȵi dzə ɦɑ-lə-kəi-stun.	put/place-NAR-LNK INT INT-here emperor wife-DEF:CL man.eating.demon COP-NAR-LNK man.eating.demon-DEF:CL-TOP big.teeth DIR-come-NAR-PART
+931	Text 6	99	321	“ha, pəs-ŋuəȵi ʐmətʂi sətsim-le: tɕiutɕin ʂə mi-le: ŋuə-ŋuɑ? jɑutsan	EXCL today-TOP emperor wife-DEF:CL †(actually COP) person-DEF:CL COP-Q man.eating.demon
+932	Text 6	100	322	ŋuə, ʔile ɑ-ʂ	COP 2pl one-time
+933	Text 6	100	323	i-tse-i-wɑ, ɦɑ-tse:-wu lɑupeɕin ȵɑ gueʴ ȵɑ thɑ-hɑn qusu sunʂə	DIR-look-2pl-DTV INT-this:CL-AGT †ordinary.citizens COM soldier COM that:one-kind very.many loss
+934	Text 6	100	324	tə-qɑ-ʐə-ʂ, ɦɑ-tse:-ŋuəȵi ʔileile	DIR-go-CAUS-LNK INT-this:CL-TOP 2plREFL
+935	Text 6	100	325	i-tse-i-wɑ,” jə-kui-stu. ɦɑ-kə	DIR-look-2pl-DTV say-NAR-PART INT-thus
+936	Text 6	101	326	jə-kui-tu, “a! ʁɑt ŋuə”	say-NAR-LNK EXCL truly COP
+937	Text 6	102	327	jə-ȵi, “ʁɑt ŋuə” jə-j.	say-ADV truly COP say-CSM
+938	Text 6	103	328	ɦɑ-the-wu, “ʐmətʂi	INT-that-ABL emperor
+939	Text 6	103	329	nə-q̥əti, ɦɑ ʐmətʂi	DIR-kill INT emperor
+940	Text 6	103	330	taipu,	†capture
+941	Text 6	103	331	tə-ts̥əqɑ, ɦɑlə	DIR-capture INT
+942	Text 6	103	332	ɦe-me-se, ʁɑtɕhi	DIR-NEG-allow truly
+943	Text 6	103	333	ŋuə, kə ɦɑ-kə thɑuluɑn	COP thus INT-thus †discuss
+944	Text 6	103	334	ɦɑ-qə-ȵi,” jə-kui-stun. ɦɑlə	DIR-go-ADV say-NAR-PART INT
+945	Text 6	104	335	ke-ŋuə-kui-tu, ɦɑ-lɑ-χui-tu tɕiu tshəntitɕhin ȵɑ	thus-COP-NAR-LNK INT-DEF:one-time-LNK †(then) Chen.Diqing COM
+946	Text 6	104	336	thɑnkhemu, likhemu ɦɑtə tɕiu tsoqpi ȵɑ	Thɑnkhemu Likhemu INT †(then) this:family COM
+947	Text 6	104	337	phinfanlɑ, ɦɑ ʐə	†(redressed) INT affair
+948	Text 6	104	338	ɦɑ-qə-ʐə-k-wɑ, ʐə ɦɑ-qə-ʐ-ȵi ɦɑ-ke	DIR-go-CAUS-INF-EMPH affair DIR-go-CAUS-ADV INT-thus
+949	Text 6	104	339	ŋuə-tu, χaiʂə ɦɑlɑ tɕiu	COP-LNK †(still.is) INT †(then)
+950	Text 6	104	340	akha, tɕiu-lɑ lu-k. tɕəu-lɑ	slow home-LOC come-INF home-LOC
+951	Text 6	105	341	lu-kə:-tu, χaiʂə	come-INF-LNK †(still.is)
+952	Text 6	105	342	meʴχ, sətsim	pitiful wife
+953	Text 6	105	343	lɑ-hɑn, thɑnkhemu ȵɑ likhemu-tɕ mɑ: ȵɑ lɑ-hɑn meʴʐ	DEF:one-kind Thɑnkhemu COM Likhemu-GEN mama COM DEF:one-kind seek
+954	Text 6	105	344	kə-tɕi, meʴʐ	go-3pl seek
+955	Text 6	105	345	kə-tu,	go-LNK
+956	Text 6	105	346	χaiʂə, ɦɑlɑ tə-meʴʐ-ȵi dʐu-ŋuəȵi xsə-s	†(still.is) there DIR-seek-ADV guest-TOP three-day
+957	Text 6	105	347	dɑ-ɕtɕ-k-wɑ,	DIR-host/feed-INF-EMPH
+958	Text 6	105	348	tə-meʴʐ-ȵi, dʐu xsə-s	DIR-seek-ADV guest three-day
+959	Text 6	105	349	dɑ-ɕtɕə-kə:-tu, χaiʂə	DIR-host/feed-go-LNK †(still.is)
+960	Text 6	105	350	dɑ-ɕtɕ-kə-ȵi, xsə-s dɑ-ɕtɕ-ȵi xsə-s-ʁɑ tɕiu	DIR-host/feed-go-LNK three-day DIR-host/feed-ADV three-day-LOC †(then)
+961	Text 6	105	351	i-me-tɕi-pə-l, ɦɑtə ɣʐə-s-tɑ-s-ʁɑ	DIR-NEG-CON-arrive-come INT four-day-DEF:one-day-LOC
+962	Text 6	105	352	dɑ-tɕ-kə-tu, ɦɑlɑ tsi su-ɣdu:-lɑ ʐə-m ɦɑ,-kəzzi	DIR-find-go-LNK there woman DIR-left.over-LOC exist-NOM INT-INDEF:two:CL
+963	Text 6	105	353	pe-kui, ɦɑ-tu ɦɑ-ke	become-NAR INT-RESULT INT-thus
+964	Text 6	105	354	pe-kui-tu, a! ɦɑlɑ sə-xʂə-s-tɑ ʐə-m ɦɑlɑ tsəzzi-ŋuəȵi thɑnkhemu ȵɑ likhemu-tɕ mɑ: ləzzi-ŋuəȵi	become-NAR-LNK EXCL INT DIR-be.last-NOM-LOC exist-NOM INT this:two:CL-TOP Thɑnkhemu COM Likhemu-GEN mama DEF:two:CL-TOP
+965	Text 6	106	355	do-qu-kəi,	DIR-afraid-NAR
+966	Text 6	106	356	“ha!, tɕile	EXCL 1pl
+967	Text 6	106	357	tsoqpi, tɕile-ɑpə lə tse-ze jɑpəq-tɑ	this:family 1pl-grandfather also this-CL hand-LOC
+968	Text 6	106	358	die-ʂe-jy, ɦa! ʔile ep-te: lə tsoqpi ȵɑ quəquɑ-s-tɑ-ŋuəȵi	DIR-die-ASP:EVID EXCL 1pl father-DEF:CL also this:family COM fight-NOM-LOC-TOP
+969	Text 6	107	359	die-ʂe-jə-ka:-ji,	DIR-die-REP-INF:PRS-CSM
+970	Text 6	107	360	me-ʐi-jy, qɑ-tʂi-ȵɑ thɑ-hɑn	NEG-exist-ASP:EVID 1sg-son-COM that:one-kind
+971	Text 6	107	361	ho-jy-ȵi, tɕɑl kə	DIR-set.out-ADV where:LOC go
+972	Text 6	107	362	mɑ-n-jy-ɑ, χaiʂə tɕile tsoqpi jəpɑ-q ʂe ʁza:”	NEG-know-ASP-1sg †(still.is) 1pl this:family hand-top die must
+973	Text 6	107	363	tɕɑu-ʐbə-kə-ȵi, ɦɑ-ke	think.to.oneself-INF-ADV INT-thus
+974	Text 6	107	364	ʐbotɕu-kəi,	think-NAR
+975	Text 6	107	365	ɕtɕi:miq-tɑ-ŋuəȵi, ɕtɕi:miq-tɑ ɦɑ-ke ʐbotɕu kɑ-hɑn	heart-LOC-TOP heart-LOC INT-thus think INDEF:one-kind
+976	Text 6	107	366	ŋuə-kəi-tu, ɦɑlɑ ɣʐə-s-tɑ-s-ʁɑ	COP-NAR-LNK INT four-day-DEF:one-day-LOC
+977	Text 6	107	367	zə-lɑ-tu, “sə-xʂə-s-tɑ ɦɑlɑ	DIR-come-LNK DIR-be.last-NOM-LOC INT
+978	Text 6	107	368	ŋuə-tu, tsɑ ɑ-ʂ u-lu	COP-LNK here one-time DIR-come
+979	Text 6	107	369	tɕhe-wɑ,”	want-EMPH
+980	Text 6	107	370	jə-tu, ʁu	say-LNK mountain
+981	Text 6	107	371	nə-quɑ-kəi-wɑ, ʁu nə-qhuɑ-ȵi ɦɑ-kɑ-hɑn	DIR-overturn-NAR-EMPH mountain DIR-overturn-ADV INT-INDEF:one-kind
+982	Text 6	107	372	ŋuə-jə-tu, hai! me-tɕhi ɦɑ-thɑ	COP-HS-LNK EXCL NEG-want INT-there
+983	Text 6	108	373	wutʂhu-ɦo-pu, thɑnkhemu ȵɑ likhemu-tɕ ʂɑʂəu	help-DIR-do Thɑnkhemu COM Likhemu-GEN †assassin
+984	Text 6	108	374	he-ɕi-ȵi, wutʂhu-pu-m-le-ɣle he-ɕi-ȵi	DIR-send-ADV helper-do-NOM-DEF-pl DIR-send-ADV
+985	Text 6	108	375	ŋuə-tu, ɦɑlɑ “tsɑ u-lu	COP-LNK INT here DIR-come
+986	Text 6	108	376	tɕhe, sə-xʂə-s-tɑ ʐə-m ləzzi-ŋuəȵi tsɑ ɑ-ʂ i-le	want DIR-last-NOM-LOC exist-NOM DEF:two:CL-TOP here one-while DIR-bring
+987	Text 6	108	377	tɕhe-wɑ,”	want-DTV
+988	Text 6	108	378	jə-kui-wɑ, ɦɑ-tu	say-NAR-EMPH INT-RESULT
+989	Text 6	108	379	i-tɕhi-kəi,	DIR-bring-NAR
+990	Text 6	108	380	i-tɕhi-kəi-tu, ɦɑlɑ kəntɑu ɦɑlɑ fusɑn-tu-pu-ȵi fɑ	DIR-bring-NAR-LNK INT immediately INT help.up124-DIR-do-ADV clothing
+991	Text 6	108	381	tə-l̥əlɑ-kəi-wɑ, fɑ tə-l̥əlɑ-ȵiɑu kəntɑu ŋuə-ȵi ɦɑ-tsəizzi-ŋuəȵi ɦɑlɑ mɑ: ȵɑ	DIR-change-NAR-EMPH clothing DIR-change-LNK immediately COP-ADV INT-this:two:CL-TOP INT mama COM
+992	Text 6	108	382	ɦɑ-lɑ-hɑn, thɑnkhemu ȵɑ likhemu mɑ: lɑ-hɑn-ŋuəȵi fɑ tə-l̥əlɑ-ȵiɑufu kəntɑu χaiʂə ɦɑ-kə tə-bəl-kui-wɑ.	INT-DEF:one-kind Thɑnkhemu COM Likhemu mama DEF:one-kind-TOP clothing DIR-change-LNK(as.soon.as) immediately †(still.is) INT-thus DIR-do-NAR-EMPH

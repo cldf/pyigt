@@ -63,5 +63,5 @@ Collections of IGTs form a :class:`pyigt.Corpus`
     >>> c = Corpus([igt, igt])
     >>> c[0, 0, 0]
     <GlossedMorpheme morpheme=ni gloss=1SG.SUBJ>
-    >>> c.get_concepts('grammar')['APPL'][0].refs
-    [(0, 0, 3), (1, 0, 3)]
+    >>> [c[ref] for ref in c.grammar['APPL']]
+    [<GlossedMorpheme morpheme=lia gloss=APPL>, <GlossedMorpheme morpheme=lia gloss=APPL>]

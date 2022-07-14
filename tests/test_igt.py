@@ -3,67 +3,11 @@ import pathlib
 import pytest
 
 from pyigt.igt import *
-from pyigt.igt import iter_morphemes
 
 
 @pytest.fixture
 def corpus(dataset):
     return Corpus.from_cldf(dataset)
-
-
-@pytest.fixture
-def corpus_spec():
-    return CorpusSpec()
-
-
-@pytest.mark.parametrize(
-    'word,morphemes',
-    [
-        ('yerak~rak-im', 'yerak rak im'),
-        ('b<um>i~bili', 'bi um bili'),
-        ('reli<n>qu-ere', 'reliqu n ere'),
-        ('palasi=lu', 'palasi lu'),
-        ('abur-u-n', 'abur u n'),
-        ('2DU>3SG-FUT-poke', '2DU>3SG FUT poke'),
-        ('a-kolo<mu>ne=ta', 'a kolone mu ta'),
-        ('1>3-see<2>=ERG', '1>3 see 2 ERG'),
-    ]
-)
-def test_CorpusSpec_split_morphemes(word, morphemes):
-    assert ' '.join(CorpusSpec().split_morphemes(word)) == morphemes
-
-
-def test_CorpusSpec_split_morphemes_invalid():
-    assert CorpusSpec().split_morphemes('a<b-c>d') == ['a<b', 'c>d']
-
-
-def test_CorpusSpec_split_morphemes_simple():
-    assert CorpusSpec(morpheme_separator='#').split_morphemes('a#d') == ['a', 'd']
-
-
-@pytest.mark.parametrize('gg', ['ABL', '2DL', 'ZZZ'])
-def test_CorpusSpec_is_grammatical_gloss_label1(gg, corpus_spec):
-    assert corpus_spec.is_grammatical_gloss_label(gg)
-
-
-@pytest.mark.parametrize('gg', ['stone', '1Pl'])
-def test_CorpusSpec_is_grammatical_gloss_label2(gg, corpus_spec):
-    assert not corpus_spec.is_grammatical_gloss_label(gg)
-
-
-@pytest.mark.parametrize('i,o', [('something."', "something")])
-def test_CorpusSpec_strip_punctuation(i, o, corpus_spec):
-    assert corpus_spec.strip_punctuation(i) == o
-
-
-def test_CorpusSpec_grammatical_glosses(corpus_spec):
-    assert corpus_spec.grammatical_glosses('get.dark:PRS') == ['PRS']
-    assert corpus_spec.grammatical_glosses('exist:REDUP:all') == ['REDUP']
-
-
-def test_CorpusSpec_lexical_gloss(corpus_spec):
-    assert corpus_spec.lexical_gloss('get.dark:PRS') == 'get dark'
-    assert corpus_spec.lexical_gloss('exist:REDUP:all') == 'exist // all'
 
 
 def test_IGT():
@@ -130,30 +74,30 @@ def test_Corpus_get_stats(corpus):
 
     c = Corpus([IGT(id=1, phrase=['a', 'b-c'], gloss=['A'], properties={})])
     e, w, m = c.get_stats()
-    assert e == 1 and w == 2 and m == 3
+    assert e == 1 and w == 1 and m == 1
 
 
 def test_Corpus_invalid_igts():
     c = Corpus([IGT(id=1, phrase='a b-c', gloss='a b--c')])
-    assert not c.get_concepts()
+    assert not c.grammar
 
 
 def test_Corpus_concordance_invalid():
     # Non-matching word and gloss
     c = Corpus([IGT(id=1, phrase=['a'], gloss=['1', 'A'], properties={})])
-    assert not c._concordances['grammar']
+    assert not c.grammar
 
     # Non-matching morpheme and gloss
     c = Corpus([IGT(id=1, phrase=['a'], gloss=['A-B'], properties={})])
-    assert not c._concordances['grammar']
+    assert not c.grammar
 
     # Valid:
     c = Corpus([IGT(id=1, phrase=['a'], gloss=['A'], properties={})])
-    assert c._concordances['grammar']
+    assert c.grammar
 
     # Empty morpheme:
     c = Corpus([IGT(id=1, phrase=['.'], gloss=['A'], properties={})])
-    assert not c._concordances['grammar']
+    assert not c.grammar
 
 
 def test_Corpus_write_concordance(corpus, capsys):
@@ -182,13 +126,10 @@ def test_Corpus_write_concepts(corpus, capsys):
     ]
 )
 def test_Corpus_get_concepts(phrase, gloss, ctype, count, key, corpus):
-    from pyigt.lgrmorphemes import GlossedMorpheme
     if phrase and gloss:
         corpus = Corpus([IGT(phrase=phrase.split(), gloss=gloss.split())])
-    concepts = corpus.get_concepts(ctype)
-    assert len(concepts) == count
-    assert key in concepts
-    assert isinstance(corpus[list(concepts.values())[0][0].refs[0]], GlossedMorpheme)
+    assert len(getattr(corpus, ctype)) == count
+    assert key in getattr(corpus, ctype)
 
 
 def test_check_glosses(capsys):
@@ -235,11 +176,6 @@ def test_multilingual(multilingual_dataset, capsys):
     corpus.write_concepts('grammar')
     out, _ = capsys.readouterr()
     assert 'macu1259: ' in out
-
-
-def test_iter_morphemes():
-    assert list(iter_morphemes('<a>-b=c~d', split_infixes=False)) == [
-        (None, '<a>'), ('-', 'b'), ('=', 'c'), ('~', 'd')]
 
 
 def test_pkg_data():

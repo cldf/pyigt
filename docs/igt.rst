@@ -8,3 +8,6 @@ representing a single glossed phrase.
 .. autoclass:: pyigt.IGT
     :members:
     :special-members: __getitem__
+
+
+.. autoclass:: pyigt.LGRConformance

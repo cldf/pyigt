@@ -5,16 +5,14 @@ import types
 import shutil
 import typing
 import pathlib
-import argparse
 import tempfile
+import itertools
 import collections
 import unicodedata
 
 from tabulate import tabulate
 import segments
 import attr
-from clldutils.misc import nfilter
-from clldutils.lgr import ABBRS
 from csvw.dsv import UnicodeWriter, reader
 from csvw.metadata import Link
 from pycldf import Dataset
@@ -25,12 +23,12 @@ try:
 except ImportError:  # pragma: no cover
     lingpy = False
 
-from pyigt.util import expand_standard_abbr, GENERIC_ABBR_PATTERN
+from pyigt.util import expand_standard_abbr
 from pyigt.lgrmorphemes import (
-    GlossedWord, split_morphemes, MORPHEME_SEPARATORS, remove_morpheme_separators, GlossedMorpheme
+    GlossedWord, split_morphemes, remove_morpheme_separators, GlossedMorpheme
 )
 
-__all__ = ['IGT', 'Corpus', 'CorpusSpec', 'LGRConformance']
+__all__ = ['IGT', 'Corpus', 'LGRConformance']
 
 NON_OVERT_ELEMENT = '∅'
 
@@ -44,107 +42,18 @@ def with_lingpy():
 
 @enum.unique
 class LGRConformance(enum.IntEnum):
+    """
+    Conformance levels with respect to alignment of phrase and gloss of an `IGT`.
+
+    We distinguish the following levels:
+
+    - morpheme-aligned (IGT conforms to LGR Rule 2)
+    - word-aligned (IGT conforms to LGR Rule 1, but not Rule 2)
+    - unaligned (IGT does not conform to LGR Rule 1)
+    """
     MORPHEME_ALIGNED = 2
     WORD_ALIGNED = 1
     UNALIGNED = 0
-
-
-def _morpheme_and_infixes(m):
-    morpheme, infixes, infix, in_infix = [], [], [], False
-
-    if m.startswith('<'):  # pragma: no cover
-        morpheme.append('')
-
-    for c in m:
-        if c == '<':
-            in_infix = True
-            continue
-        elif c == '>' and in_infix:
-            infixes.append(''.join(infix))
-            infix = []
-            in_infix = False
-            continue
-
-        if in_infix:
-            infix.append(c)
-        else:
-            morpheme.append(c)
-
-    if in_infix:
-        return [m]
-    return [''.join(morpheme)] + infixes
-
-
-def iter_morphemes(s: typing.Union[str, None], split_infixes: bool = True):
-    """
-    Split word into morphemes following the Leipzig Glossing Rules.
-    """
-    morpheme, separator = [], None
-
-    for c in (s or ''):
-        if c in MORPHEME_SEPARATORS:
-            if split_infixes:
-                yield from _morpheme_and_infixes(''.join(morpheme))
-            else:
-                yield (separator, ''.join(morpheme))
-            morpheme = []
-            separator = c
-        else:
-            morpheme.append(c)
-
-    if split_infixes:
-        yield from _morpheme_and_infixes(''.join(morpheme))
-    else:
-        yield (separator, ''.join(morpheme))
-
-
-@attr.s
-class CorpusSpec(object):
-    punctuation = attr.ib(
-        validator=attr.validators.instance_of(list),
-        default=list(',;.”“"()'))
-    concept_replace = attr.ib(
-        validator=attr.validators.instance_of(dict),
-        default={'.': ' ', '†(': '', '†': ''})
-    paradigm_marker = attr.ib(
-        validator=attr.validators.instance_of(str),
-        default=':')
-    # A "simple" `CorpusSpec`, only recognizing one single-character morpheme separator, can be
-    # constructed by setting `morpheme_separator`.
-    morpheme_separator = attr.ib(
-        validator=attr.validators.optional(attr.validators.instance_of(str)),
-        default=None)
-    label_pattern = attr.ib(default=GENERIC_ABBR_PATTERN)
-
-    def split_morphemes(self, s, split_infixes=True):
-        if self.morpheme_separator:
-            return s.split(self.morpheme_separator)
-        return list(iter_morphemes(s, split_infixes=split_infixes))
-
-    def strip_punctuation(self, s):
-        for p in self.punctuation:
-            s = s.replace(p, '')
-        return s
-
-    def is_grammatical_gloss_label(self, s):
-        return bool((s in ABBRS) or self.label_pattern.match(s))
-
-    def clean_concept(self, c):
-        for k, v in self.concept_replace.items():
-            c = c.replace(k, v)
-        return c.strip()
-
-    def _glosses(self, concept, ctype):
-        return [
-            g for g in nfilter(self.clean_concept(cn) for cn in concept.split(self.paradigm_marker))
-            if (ctype == 'grammar' and self.is_grammatical_gloss_label(g))
-            or (ctype == 'lexicon' and not self.is_grammatical_gloss_label(g))]  # noqa: W503
-
-    def lexical_gloss(self, concept):
-        return ' // '.join(self._glosses(concept, 'lexicon'))
-
-    def grammatical_glosses(self, concept):
-        return self._glosses(concept, 'grammar')
 
 
 def parse_phrase(p):
@@ -162,8 +71,6 @@ def parse_phrase(p):
 @attr.s
 class IGT(object):
     """
-    Interlinear Glossed Text
-
     The main trait of IGT is the alignment of words and glosses. Thus, we are mostly interested
     in the two aligned "lines": the analyzed text and the glosses, rather than trying to support
     any number of tiers, and alignment based on timestamps or similar.
@@ -181,6 +88,40 @@ class IGT(object):
     :ivar abbrs: Optional `dict` providing descriptions of gloss labels used in the `IGT`.
     :ivar strict: `bool` flag signaling whether to parse the `IGT` in strict mode, i.e. requiring \
     matching morpheme separators in phrase and gloss, or not.
+
+    .. note::
+
+        **LGR Conformance**
+
+        While the main purpose of an `IGT` is providing access to its words, morphemes and glosses,
+        it also supports error/conformance checking. Thus, it is possible to initialize an `IGT`
+        with "broken" data.
+
+        .. code-block:: python
+
+            >>> from pyigt import IGT
+            >>> igt = IGT(phrase='two words', gloss='ONE.GLOSS')
+            >>> igt.conformance
+            <LGRConformance.UNALIGNED: 0>
+
+        So before processing `IGT` instances, it should be checked whether the conformance level
+        (see :class:`LGRConformance`) of the `IGT` is sufficient for the downstream requirements.
+        Otherwise, accessing properties like :meth:`IGT.glossed_words` may lead to unexpected
+        results:
+
+        .. code-block:: python
+
+            >>> igt.glossed_words  # we extract as many glossed words as possible ...
+            [<GlossedWord word=a gloss=C>]
+            >>> len(igt)
+            1
+            >>> len(igt.phrase)
+            2
+            >>> igt = IGT(phrase='multi-morph', gloss='GLOSS')
+            >>> igt.conformance
+            <LGRConformance.WORD_ALIGNED: 1>
+            >>> igt[0].glossed_morphemes  # we extract as many glossed morphemes as possible ...
+            [<GlossedMorpheme morpheme=multi gloss=GLOSS>]
     """
     phrase = attr.ib(
         validator=attr.validators.instance_of(list),
@@ -194,7 +135,6 @@ class IGT(object):
     properties = attr.ib(validator=attr.validators.instance_of(dict), default=attr.Factory(dict))
     language = attr.ib(default=None)
     translation = attr.ib(default=None)
-    spec = attr.ib(default=CorpusSpec())
     abbrs = attr.ib(validator=attr.validators.instance_of(dict), default=attr.Factory(dict))
     strict = attr.ib(default=False)
 
@@ -291,7 +231,6 @@ class IGT(object):
             properties=self.properties,
             language=self.language,
             translation=self.translation,
-            spec=self.spec,
             abbrs=self.abbrs,
             strict=self.strict,
         )
@@ -316,7 +255,6 @@ class IGT(object):
             properties=self.properties,
             language=self.language,
             translation=self.translation,
-            spec=self.spec,
             abbrs=self.abbrs,
             strict=self.strict,
         )
@@ -328,7 +266,7 @@ class IGT(object):
             for gm in gw:
                 for element in gm.gloss.elements:
                     # We disregard "I".
-                    if element != 'I' and self.spec.is_grammatical_gloss_label(str(element)):
+                    if element != 'I' and element.is_category_label:
                         if element in self.abbrs:
                             res[element] = self.abbrs[element]
                         else:
@@ -448,20 +386,25 @@ class IGT(object):
         return ' '.join(self.gloss)
 
 
-class Concordances(argparse.Namespace):
-    def __getitem__(self, item):
-        return vars(self)[item]
+def _clean_lexical_concept(s):
+    s = re.sub(r'†\(([^)]+)\)', lambda m: m.groups()[0], s)
+    return s.replace('†', '').strip()
 
 
 class Corpus(object):
     """
     A Corpus is an immutable, ordered list of `IGT` instances.
+
+    It provides access to concordance-like aggregated statistics of its texts.
+
+    :ivar monolingual: Flag signaling whether the corpus is monolingual or contains `IGT` from \
+    different object languages.
     """
-    def __init__(self, igts: typing.Iterable[IGT], spec=None, fname=None):
+    def __init__(self, igts: typing.Iterable[IGT], fname=None, clean_lexical_concept=None):
+        self.clean_lexical_concept = clean_lexical_concept or _clean_lexical_concept
         self.fname = fname
-        self.spec = spec or CorpusSpec()
         self._igts = collections.OrderedDict([(igt.id or n, igt) for n, igt in enumerate(igts)])
-        self._concordances = Concordances(
+        self._concordance = dict(
             grammar=collections.defaultdict(list),
             lexicon=collections.defaultdict(list),
             form=collections.defaultdict(list),
@@ -469,25 +412,68 @@ class Corpus(object):
         # Since changing the IGTs in the corpus is not allowed, we can compute concordances right
         # away.
         for idx, igt in self._igts.items():
-            if not igt.is_valid(strict=True):
+            if not igt.is_valid(strict=True):  # We ignore non-morpheme-aligned IGTs.
                 continue
-            for i, gw in enumerate(igt.glossed_words):
-                if not gw.is_valid:
-                    continue  # pragma: no cover
+            for i, gw in enumerate(igt):
                 for j, gm in enumerate(gw):
-                    morpheme, concept = str(gm.morpheme), str(gm.gloss)
-                    morpheme = self.spec.strip_punctuation(morpheme)
-                    if not morpheme:
+                    if not gm.form:
                         continue
+
                     ref = (idx, i, j)
                     for g in gm.grammatical_concepts:
-                        self._concordances.grammar[morpheme, g, concept, igt.language].append(ref)
-                    for g in gm.lexical_concepts:
-                        self._concordances.lexicon[morpheme, g, concept, igt.language].append(ref)
-                    if not gm.lexical_concepts:
-                        self._concordances.lexicon[morpheme, '', concept, igt.language].append(ref)
-                    self._concordances.form[morpheme, concept, concept, igt.language].append(ref)
+                        self._concordance['grammar'][g].append(ref)
+                    self._concordance['lexicon'][' // '.join(gm.lexical_concepts)].append(ref)
+                    self._concordance['form'][gm.form].append(ref)
         self.monolingual = len(set(igt.language for igt in self._igts.values())) == 1
+
+    @property
+    def grammar(self) -> typing.Dict[str, typing.List[typing.Tuple[int, int, int]]]:
+        """
+        Maps grammatical concepts to lists of occurrences.
+
+        .. code-block:: python
+
+            >>> from pyigt import Corpus, IGT
+            >>> igt = IGT(phrase="ni-c-chihui-lia in no-piltzin ce calli",
+            ...           gloss="1SG.SUBJ-3SG.OBJ-mach-APPL DET 1SG.POSS-Sohn ein Haus")
+            >>> c = Corpus([igt])
+            >>> [[c[ref] for ref in c.grammar[k]] for k in c.grammar if k.startswith('1SG')]
+            [[<GlossedMorpheme morpheme=ni gloss=1SG.SUBJ>],
+             [<GlossedMorpheme morpheme=no gloss=1SG.POSS>]]
+        """
+        return self._concordance['grammar']
+
+    @property
+    def lexicon(self) -> typing.Dict[str, typing.List[typing.Tuple[int, int, int]]]:
+        """
+        Maps lexical concepts to lists of occurrences.
+
+        .. code-block:: python
+
+            >>> from pyigt import Corpus, IGT
+            >>> igt = IGT(phrase="ni-c-chihui-lia in no-piltzin ce calli",
+            ...           gloss="1SG.SUBJ-3SG.OBJ-mach-APPL DET 1SG.POSS-Sohn ein Haus")
+            >>> c = Corpus([igt])
+            >>> [c[ref] for ref in c.lexicon['Sohn']]
+            [<GlossedMorpheme morpheme=piltzin gloss=Sohn>]
+        """
+        return self._concordance['lexicon']
+
+    @property
+    def form(self) -> typing.Dict[str, typing.List[typing.Tuple[int, int, int]]]:
+        """
+        Maps grammatical concepts to lists of occurrences.
+
+        .. code-block:: python
+
+            >>> from pyigt import Corpus, IGT
+            >>> igt = IGT(phrase="ni-c-chihui-lia in no-piltzin ce calli",
+            ...           gloss="1SG.SUBJ-3SG.OBJ-mach-APPL DET 1SG.POSS-Sohn ein Haus")
+            >>> c = Corpus([igt])
+            >>> [k for k in c.form]
+            ['ni', 'c', 'chihui', 'lia', 'in', 'no', 'piltzin', 'ce', 'calli']
+        """
+        return self._concordance['form']
 
     @staticmethod
     def get_column_names(cldf: Dataset) -> types.SimpleNamespace:
@@ -504,14 +490,13 @@ class Corpus(object):
             for k, v in lookup})
 
     @classmethod
-    def from_cldf(cls, cldf: Dataset, spec: typing.Optional[CorpusSpec] = None) -> 'Corpus':
+    def from_cldf(cls, cldf: Dataset) -> 'Corpus':
         """
         Instantiate a corpus of IGT examples from a CLDF dataset.
 
         :param cldf: a `pycldf.Dataset` instance.
         :param spec: a `CorpusSpec` instance, specifying how to interpret markup in the corpus.
         """
-        spec = spec or CorpusSpec()
         cols = cls.get_column_names(cldf)
         igts = [
             IGT(
@@ -521,21 +506,18 @@ class Corpus(object):
                 language=igt.get(cols.language),
                 translation=igt.get(cols.translation),
                 properties=igt,
-                spec=spec,
             )
             for igt in cldf['ExampleTable']]
         return cls(
             igts,
-            spec=spec,
             fname=cldf.tablegroup._fname.parent / str(cldf['ExampleTable'].url))
 
     @classmethod
-    def from_stream(cls, stream, spec=None) -> 'Corpus':
+    def from_stream(cls, stream) -> 'Corpus':
         from csvw.metadata import TableGroup
         cldf = Dataset(TableGroup(fname=pathlib.Path('tmp.json')))
         cldf.add_component('ExampleTable')
 
-        spec = spec or CorpusSpec()
         cols = cls.get_column_names(cldf)
         igts = [
             IGT(
@@ -544,15 +526,12 @@ class Corpus(object):
                 phrase=igt[cols.phrase].split('\\t'),
                 language=igt.get(cols.language),
                 properties=igt,
-                spec=spec,
             )
             for igt in reader(stream.read().splitlines(), dicts=True)]
-        return cls(igts, spec=spec)
+        return cls(igts)
 
     @classmethod
-    def from_path(cls,
-                  path: typing.Union[str, pathlib.Path],
-                  spec: typing.Optional[CorpusSpec] = None) -> 'Corpus':
+    def from_path(cls, path: typing.Union[str, pathlib.Path]) -> 'Corpus':
         """
         Instantiate a corpus from a file path.
 
@@ -563,7 +542,7 @@ class Corpus(object):
         if isinstance(path, str):
             path = pathlib.Path(path)
         if path.suffix == '.json':
-            return cls.from_cldf(Dataset.from_metadata(path), spec=spec)
+            return cls.from_cldf(Dataset.from_metadata(path))
         # We are given only an ExampleTable. Let's create the appropriate dataset:
         header = None
         for d in reader(path, dicts=True):
@@ -577,7 +556,7 @@ class Corpus(object):
         default_cols = [col.name for col in t.tableSchema.columns]
         ds.remove_columns(t, *list(set(default_cols) - set(header)))
         ds.add_columns(t, *list(set(header) - set(default_cols)))
-        return cls.from_cldf(ds, spec=spec)
+        return cls.from_cldf(ds)
 
     def __len__(self):
         return len(self._igts)
@@ -593,35 +572,47 @@ class Corpus(object):
         return self[item[0]][tuple(item[1:])]
 
     def get_stats(self):
-        wordc, morpc = 0, 0
-        for igt in self:
-            for word in igt.phrase:
-                wordc += 1
-                morpc += len(self.spec.split_morphemes(word))
-        return len(self._igts), wordc, morpc
+        return (
+            len(self),
+            sum(len(igt) for igt in self),
+            sum(sum(len(w) for w in igt) for igt in self))
 
     def get_lgr_conformance_stats(self):
         return collections.Counter([igt.conformance for igt in self])
 
     def write_concordance(self, ctype: str, filename=None):
         """
-        :param ctype: `lexicon` or `grammar`.
+        :param ctype: `lexicon` or `grammar` or `form`.
         """
+        conc = collections.defaultdict(list)
+        for c, refs in getattr(self, ctype).items():
+            for ref in refs:
+                # We want one row per unique (form, language, concept, gloss).
+                if ctype == 'form':
+                    gloss = str(self[ref].gloss)
+                    conc[c, gloss, gloss, self[ref[0]].language].append(ref)
+                else:
+                    conc[
+                        self[ref].form,
+                        self.clean_lexical_concept(c),
+                        c,
+                        self[ref[0]].language].append(ref)
+
         with UnicodeWriter(filename, delimiter='\t') as w:
             h = ['ID', 'FORM', 'GLOSS', 'GLOSS_IN_SOURCE', 'OCCURRENCE', 'REF']
             if not self.monolingual:
                 h.insert(1, 'LANGUAGE_ID')
             w.writerow(h)
-
-            for i, (k, v) in enumerate(sorted(
-                    self._concordances[ctype].items(), key=lambda x: (-len(x[1]), x[0])), start=1):
+            # We order the rows by descending frequency:
+            for i, (k, refs) in enumerate(
+                    sorted(conc.items(), key=lambda x: (-len(x[1]), x[0])), start=1):
                 c = [
                     i,
                     k[0],
                     k[1],
                     k[2],
-                    len(v),
-                    ' '.join(['{0}:{1}:{2}'.format(x, y, z) for x, y, z in v])]
+                    len(refs),
+                    ' '.join(['{}:{}:{}'.format(*ref) for ref in refs])]
                 if not self.monolingual:
                     c.insert(1, k[3])
                 w.writerow(c)
@@ -629,50 +620,32 @@ class Corpus(object):
         if not filename:
             print(w.read().decode('utf8'))
 
-    def get_concepts(self, ctype='lexicon') -> typing.Dict[str, typing.List[types.SimpleNamespace]]:
-        """
-        :param ctype: `lexicon` or `grammar`.
-        """
-        concepts = collections.defaultdict(list)
-
-        for (form, c1, c2, l), occs in self._concordances[ctype].items():
-            # get occurrence, and one example
-            assert form
-            concepts[c1].append(types.SimpleNamespace(
-                form=form, language=l, concept_in_source=c2, refs=occs))
-
-        return concepts
-
     def write_concepts(self, ctype, filename=None):
         """
         :param ctype: `lexicon` or `grammar`.
         """
-        concepts = self.get_concepts(ctype)
-        with UnicodeWriter(filename, delimiter='\t') as w:
-            w.writerow(
-                ['ID', 'ENGLISH', 'OCCURRENCE', 'CONCEPT_IN_SOURCE', 'FORMS', 'PHRASE', 'GLOSS'])
-            for i, (concept, forms) in enumerate(
-                    sorted(concepts.items(), key=lambda x: -len(x[1][0].refs)), start=1):
-                # Get the IGT containing the first occurrence listed in the concordance as example:
-                igt = self[
-                    self._concordances[ctype][
-                        forms[0].form,
-                        concept,
-                        forms[0].concept_in_source,
-                        forms[0].language,
-                    ][0][0]
-                ]
-                w.writerow([
-                    i,
-                    concept,
-                    sum([len(f.refs) for f in forms]),
-                    ' // '.join(sorted(set([f.concept_in_source for f in forms]))),
-                    ' // '.join(sorted(set([
-                        f.form if self.monolingual else '{}: {}'.format(f.language, f.form)
-                        for f in forms]))),
+        def form(ref):
+            return self[ref].form if self.monolingual else '{}: {}'.format(
+                self[ref[0]].language, self[ref].form)
+
+        conc = []
+        for c, refs in getattr(self, ctype).items():
+            if c:
+                igt = self[refs[0][0]]
+                conc.append([
+                    self.clean_lexical_concept(c),
+                    len(refs),
+                    ' // '.join(sorted(set(str(self[ref].gloss) for ref in refs))),
+                    ' // '.join(sorted(set(form(ref) for ref in refs))),
                     igt.phrase_text,
                     igt.gloss_text,
                 ])
+
+        with UnicodeWriter(filename, delimiter='\t') as w:
+            w.writerow(
+                ['ID', 'ENGLISH', 'OCCURRENCE', 'CONCEPT_IN_SOURCE', 'FORMS', 'PHRASE', 'GLOSS'])
+            for i, row in enumerate(sorted(conc, key=lambda x: -x[1]), start=1):
+                w.writerow([i] + row)
         if not filename:
             print(w.read().decode('utf8'))
 
@@ -729,21 +702,24 @@ class Corpus(object):
             ]
         }
         idx = 1
-        for ctype in ['lexicon', 'grammar']:
-            concepts = self.get_concepts(ctype=ctype)
-            concordance = self._concordances[ctype]
-            for concept, entries in concepts.items():
-                for e in entries:
-                    form, lid, cis, freq = e.form, e.language, e.concept_in_source, len(e.refs)
-                    # retrieve the concordance
-                    pidx, sA, sB = concordance[form, concept, cis, lid][0]
-                    txt = self[pidx].phrase
-                    gls = self[pidx].gloss
-                    word, fgls = self[pidx, sA].word, self[pidx, sA].gloss
+        # Iterate over unique (cleaned concept, form, language, gloss) tuples.
+        i = 0
+        for form, refs in self.form.items():
+            for (lid, gloss), morphrefs in itertools.groupby(
+                sorted(refs, key=lambda r: (self[r[0]].language, str(self[r].gloss))),
+                lambda r: (self[r[0]].language, str(self[r].gloss))
+            ):
+                morphrefs = list(morphrefs)
+                gm = self[morphrefs[0]]
+                gw = self[morphrefs[0][:2]]
+                igt = self[morphrefs[0][0]]
+                i += 1
+                concepts = \
+                    list(itertools.zip_longest(gm.lexical_concepts, [], fillvalue='lexicon')) + \
+                    list(itertools.zip_longest(gm.grammatical_concepts, [], fillvalue='grammar'))
+                for concept, ctype in concepts:
+                    concept = self.clean_lexical_concept(concept)
                     tokens = tokenize(form)
-                    references = ' '.join(
-                        ['{0}:{1}:{2}'.format(a, b, c)
-                         for a, b, c in concordance[form, concept, cis, lid]])
                     # check tokens
                     try:
                         with_lingpy().tokens2class(tokens, 'sca')
@@ -754,26 +730,20 @@ class Corpus(object):
                         D[idx] = [
                             doculect if self.monolingual else lid,
                             concept,
-                            cis,
+                            gloss,
                             ctype,
                             form,
                             tokens,
-                            freq,
-                            word,
-                            fgls,
-                            txt,
-                            gls,
-                            references]
+                            len(morphrefs),
+                            ' '.join(m.form for m in gw),
+                            ' '.join(m.gloss for m in gw),
+                            igt.phrase_text,
+                            igt.gloss_text,
+                            ' '.join('{}:{}:{}'.format(*ref) for ref in morphrefs)]
                         idx += 1
                     else:
                         print('[!] Problem with "{0}" / [{1}] [{2}] / {3} {4} {5}'.format(
-                            concept,
-                            form,
-                            tokens,
-                            pidx,
-                            sA,
-                            sB,
-                        ))
+                            concept, form, tokens, *morphrefs[0]))
         wl = with_lingpy().Wordlist(D)
 
         if lexstat:
@@ -794,8 +764,8 @@ class Corpus(object):
         clts = clts.bipa if clts else None
 
         D = {0: ['doculect', 'concept', 'ipa']}
-        for i, key in enumerate(self._concordances.form, start=1):
-            D[i] = ['dummy', key[1], key[0]]
+        for i, key in enumerate(self.form, start=1):
+            D[i] = ['dummy', str(self[self.form[key][0]].gloss), key]
         wordlist = with_lingpy().basic.wordlist.Wordlist(D)
 
         if not filename:

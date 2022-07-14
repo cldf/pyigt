@@ -18,7 +18,7 @@ import unicodedata
 
 import attr
 
-from pyigt.util import is_standard_abbr, GENERIC_ABBR_PATTERN
+from pyigt.util import is_standard_abbr, is_generic_abbr
 
 __all__ = [
     # Types of morpheme gloss elements:
@@ -72,7 +72,7 @@ class GlossElement(str):
 
     @property
     def is_category_label(self):
-        return GENERIC_ABBR_PATTERN.fullmatch(self)
+        return is_generic_abbr(self)
 
 
 class Infix(GlossElement, str):
@@ -214,6 +214,16 @@ class Morpheme(str):
     def elements(self):
         return GlossElements.from_morpheme(str(self), self.type)
 
+    @property
+    def form_and_infixes(self):
+        form, infixes = '', []
+        for ge in self.elements:
+            if isinstance(ge, Infix):
+                infixes.append(str(ge))
+            else:
+                form += str(ge)
+        return form, infixes
+
 
 @attr.s(repr=False)
 class GlossedMorpheme(object):
@@ -241,6 +251,22 @@ class GlossedMorpheme(object):
     def __repr__(self):
         return '<{} morpheme={} gloss={}>'.format(
             self.__class__.__name__, self.morpheme, self.gloss)
+
+    @property
+    def form(self) -> str:
+        """
+        Removes sentence-level markup (i.e. punctuation etc.) from `.morpheme`.
+
+        .. code-block:: python
+
+            >>> from pyigt.lgrmorphemes import GlossedMorpheme
+            >>> gm = GlossedMorpheme(morpheme='"[ab.c', gloss="abc", sep='-')
+            >>> gm.form
+            'abc'
+        """
+        return ''.join(
+            c for c in self.morpheme if
+            unicodedata.category(c) not in {'Po', 'Pf', 'Ps', 'Pd', 'Pe', 'Pi', 'Sm'})
 
     @property
     def first(self):
@@ -291,6 +317,7 @@ class GlossedMorpheme(object):
                 # Something new is starting.
                 if s:
                     yield s.replace('_', ' ')
+                    s = ''
                 if (type_ == 'lexical' and not ge.is_category_label) or \
                         (type_ == 'grammatical' and ge.is_category_label):
                     s = str(ge)
@@ -315,7 +342,6 @@ class GlossedWord(object):
     gloss = attr.ib()
     glossed_morphemes = attr.ib(default=attr.Factory(list), eq=False)
     strict = attr.ib(default=False, eq=False)
-    is_valid = attr.ib(default=True, eq=False)
 
     def __attrs_post_init__(self):
         mm, gg = split_morphemes(self.word), split_morphemes(self.gloss)
@@ -358,7 +384,7 @@ class GlossedWord(object):
         return len(self.glossed_morphemes)
 
     @property
-    def stripped_word(self) -> str:
+    def form(self) -> str:
         """
         Removes sentence-level markup and morpheme separators from `.word`.
 
@@ -366,12 +392,10 @@ class GlossedWord(object):
 
             >>> from pyigt.lgrmorphemes import GlossedWord
             >>> gw = GlossedWord(word='"An-fangs', gloss="a-b")
-            >>> gw.stripped_word
+            >>> gw.form
             'Anfangs'
         """
-        return ''.join(
-            c for c in self.word if
-            unicodedata.category(c) not in {'Po', 'Pf', 'Ps', 'Pd', 'Pe', 'Sm'})
+        return ''.join(gm.form for gm in self)
 
     @property
     def word_from_morphemes(self):
