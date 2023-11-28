@@ -3,6 +3,9 @@
 
 ## [Unreleased]
 
+- Dropped support for Python 3.7.
+- Added support for Python 3.11 and 3.12
+
 
 ## [2.0.0] - 2022-07-14
 
