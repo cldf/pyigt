@@ -4,7 +4,9 @@
 ## [Unreleased]
 
 - Dropped support for Python 3.7.
-- Added support for Python 3.11 and 3.12
+- Added support for Python 3.11 and 3.12.
+- Use the LGR CLDF dataset as conformance test suite.
+- Added a `pycldf.orm.Example` subclass to easily instantiate `IGT` objects from CLDF data.
 
 
 ## [2.0.0] - 2022-07-14

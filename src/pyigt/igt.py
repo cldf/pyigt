@@ -16,6 +16,7 @@ import attr
 from csvw.dsv import UnicodeWriter, reader
 from csvw.metadata import Link
 from pycldf import Dataset
+from pycldf import orm
 import pycldf
 
 try:
@@ -28,7 +29,7 @@ from pyigt.lgrmorphemes import (
     GlossedWord, split_morphemes, remove_morpheme_separators, GlossedMorpheme
 )
 
-__all__ = ['IGT', 'Corpus', 'LGRConformance']
+__all__ = ['IGT', 'Corpus', 'LGRConformance', 'Example']
 
 NON_OVERT_ELEMENT = '∅'
 
@@ -384,6 +385,42 @@ class IGT(object):
     @property
     def gloss_text(self) -> str:
         return ' '.join(self.gloss)
+
+
+class Example(orm.Example):
+    """
+    A custom object class to use with
+    `pycldf.orm <https://pycldf.readthedocs.io/en/latest/orm.html>`_
+
+    This class overwrite the `pycldf.orm.Example.igt` property to return an `IGT` instance rather
+    than a text string.
+
+    .. code-block:: python
+
+        >>> from pyigt import Example
+        >>> from pycldf import Dataset
+        >>> ds = Dataset.from_metadata('tests/fixtures/lgr/cldf/Generic-metadata.json')
+        >>> ex = ds.objects('ExampleTable', cls=Example)
+        >>> ex['2'].igt.gloss[1]
+        'they-OBL-GEN'
+        >>> ex['2'].igt.gloss_abbrs["OBL"]
+        'oblique'
+    """
+    @property
+    def igt(self) -> IGT:
+        tr = "'{}'".format(self.cldf.translatedText)
+        try:
+            if self.cldf.comment:
+                tr += ' ({})'.format(self.cldf.comment)
+        except AttributeError:  # pragma: no cover
+            pass
+        return IGT(
+            id=self.id,
+            gloss=self.cldf.gloss,
+            phrase=self.cldf.analyzedWord,
+            language=self.cldf.languageReference,
+            translation=tr,
+        )
 
 
 def _clean_lexical_concept(s):

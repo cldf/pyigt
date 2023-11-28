@@ -11,3 +11,6 @@ representing a single glossed phrase.
 
 
 .. autoclass:: pyigt.LGRConformance
+
+
+.. autoclass:: pyigt.Example
