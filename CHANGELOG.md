@@ -1,7 +1,7 @@
 # Changes
   
 
-## [Unreleased]
+## [2.1.0] - 2023-11-28
 
 - Dropped support for Python 3.7.
 - Added support for Python 3.11 and 3.12.
