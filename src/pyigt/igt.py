@@ -374,13 +374,12 @@ class IGT(object):
         """
         The primary text of the `IGT`, i.e. the phrase stripped off morpheme separators.
         """
-        try:
+        if self.conformance == LGRConformance.MORPHEME_ALIGNED:
             words = []
             for gw in self.glossed_words:
                 words.append(''.join(gm.morpheme for gm in gw if gm.morpheme != NON_OVERT_ELEMENT))
             return ' '.join(words)
-        except AssertionError:
-            return remove_morpheme_separators(self.phrase_text)
+        return remove_morpheme_separators(self.phrase_text)
 
     @property
     def gloss_text(self) -> str:

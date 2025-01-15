@@ -20,7 +20,7 @@ def corpus(qiang):
 
 
 def test_conformance(corpus):
-    assert corpus.get_lgr_conformance_stats()[LGRConformance.WORD_ALIGNED] == 15
+    assert corpus.get_lgr_conformance_stats()[LGRConformance.WORD_ALIGNED] == 14
 
 
 def test_concordance(corpus, qiang, tmp_path):

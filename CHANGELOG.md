@@ -1,5 +1,11 @@
 # Changes
   
+## Unreleased
+
+- Support Multi-CAST style IGts, i.e. prefixes or suffixes glossed as words, thus "words" starting
+  or ending with a morpheme separator.
+- Support for Python 3.13.
+
 
 ## [2.1.0] - 2023-11-28
 

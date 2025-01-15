@@ -353,6 +353,8 @@ class GlossedWord(object):
                 self.is_valid = False
         sep, prev = None, None
         for m, g in zip(mm, gg):
+            if not m and not g:
+                continue  # Morpheme starts or ends with separator
             if m in MORPHEME_SEPARATORS:
                 if m != g:
                     if self.strict:
@@ -363,7 +365,7 @@ class GlossedWord(object):
                         break
                 sep = m
             else:
-                assert m and g
+                assert m and g, (mm, g)
                 gm = GlossedMorpheme(m, g, sep=sep)
                 self.glossed_morphemes.append(gm)
                 if prev:

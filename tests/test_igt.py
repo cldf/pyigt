@@ -32,6 +32,24 @@ def test_IGT_conformance():
     assert IGT(phrase='a b', gloss='a').conformance == LGRConformance.UNALIGNED
     assert IGT(phrase='a b', gloss='a b-c').conformance == LGRConformance.WORD_ALIGNED
     assert IGT(phrase='a b=c', gloss='a b=c').conformance == LGRConformance.MORPHEME_ALIGNED
+    igt = IGT(
+        phrase='#   aa      -Vbe    i-      cohbo-du        mene-va-híjcya      -Vbe'.split(),
+        gloss='#  CON     -M.SG   3-      cont-CMPV       child-VBZ.have-REP      -M.SG'.split())
+    igt.check(strict=True)
+    assert igt.conformance == LGRConformance.MORPHEME_ALIGNED
+
+
+def test_IGT_primary_text():
+    igt = IGT(phrase="a b-c", gloss='a b')
+    assert igt.primary_text == "a bc"
+
+
+def test_multicast_utterance():
+    p = ['#', 'máátyo-ba', 'tuwa', 'u=', 'meenu-hi']
+    g = ['#', 'crying-CLF.object', 'dream', '2SG=', 'do-PRED']
+
+    igt = IGT(phrase=p, gloss=g)
+    assert igt.conformance == LGRConformance.MORPHEME_ALIGNED
 
 
 def test_IGT_words():
