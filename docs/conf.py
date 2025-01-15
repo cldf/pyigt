@@ -22,7 +22,7 @@ copyright = '2025, Johann-Mattis List and Robert Forkel'
 author = 'Johann-Mattis List and Robert Forkel'
 
 # The full version, including alpha/beta/rc tags
-release = '2.2.0'
+release = '2.2.1.dev0'
 
 
 # -- General configuration ---------------------------------------------------
