@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'pyigt'
-copyright = '2023, Johann-Mattis List and Robert Forkel'
+copyright = '2025, Johann-Mattis List and Robert Forkel'
 author = 'Johann-Mattis List and Robert Forkel'
 
 # The full version, including alpha/beta/rc tags
-release = '2.1.1.dev0'
+release = '2.2.0'
 
 
 # -- General configuration ---------------------------------------------------

@@ -1,6 +1,6 @@
 # Changes
   
-## Unreleased
+## [2.2.0] - 2025-01-15
 
 - Support Multi-CAST style IGts, i.e. prefixes or suffixes glossed as words, thus "words" starting
   or ending with a morpheme separator.
