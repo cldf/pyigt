@@ -34,6 +34,7 @@ def graid():
         ('predex', Referent, lambda r: r.function == 'predex'),
         ('adp', Referent, None),
         ('voc', Referent, lambda r: r.form_gloss == None),
+        ('-pro', Referent, lambda r: r.form_gloss == 'pro'),
     ]
 )
 def test_GRAID(graid, expr, type_, res):
