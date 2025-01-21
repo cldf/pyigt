@@ -23,7 +23,7 @@ class Gloss(typing.Protocol):
         """
         :return: `None` to signal that the annotation was not parsed, `Gloss` instance otherwise.
         """
-        ...
+        ...  # pragma: no cover
 
 
 @dataclasses.dataclass
@@ -56,12 +56,6 @@ class CrossIndex:
         if m:
             kw['referent_property'], kw['function'] = m.group('rp'), m.group('f')
             return cls(**kw)
-
-
-#
-# FIXME: provide a default implementation for cross indices:
-#CROSS_INDEX_PATTERN = re.compile(r'(-|=)?((l|r)v_)?pro_[a-z12]+_[a-z]+')
-#
 
 
 def update_symbols(symbols: SymbolDict,
@@ -248,7 +242,33 @@ class GRAID:
             obj = cls.from_annotation(expression, self)
             if obj:
                 return obj
-        raise ValueError('Could not parse expression: {}'.format(expression))
+        raise ValueError('Could not parse expression: {}'.format(expression))  # pragma: no cover
+
+    def parse_function(self, function, predicate=False):
+        kw = {}
+        function = function.split('_')
+        if predicate:
+            if function[0] not in self.predicative_functions:
+                raise ValueError(function)
+        else:
+            if not (function[0] in self.syntactic_functions or  # noqa: W504
+                    function[0] in self.predicative_functions):
+                raise ValueError(function)
+        kw['function'] = function.pop(0)
+        if function:
+            if predicate:
+                # GRAID doesn't support predicative function specifiers.
+                raise ValueError(function)
+            kw['function_qualifiers'] = []
+            if (kw['function'], function[0]) in self.syntactic_functions:
+                # Matches a specified function.
+                kw['function_qualifiers'].append(function.pop(0))
+            for fn in function:  # Check for generic function specifiers.
+                if fn in self.syntactic_functions or fn in self.syntactic_function_specifiers:
+                    kw['function_qualifiers'].append(fn)
+                else:
+                    raise ValueError(function)
+        return kw
 
 
 DEFAULT_PARSER = GRAID()
@@ -294,22 +314,7 @@ class Boundary:
         kw = {'qualifiers': [], 'boundary_type': marker, 'function_qualifiers': []}
         rem, _, function = annotation[len(kw["boundary_type"]):].partition(":")
         if function:
-            function = function.split('_')
-            if (len(function) > 1) and (tuple(function[:2]) in parser.syntactic_functions):
-                kw['function'] = function[0]
-                kw['function_qualifiers'].append(function[1])
-                function = function[2:]
-            elif function[0] in parser.predicative_functions or function[0] in parser.syntactic_functions:
-                kw['function'], function = function[0], function[1:]
-            else:
-                raise ValueError(annotation)
-            for fn in function:
-                if fn in parser.syntactic_function_specifiers:
-                    kw['function_qualifiers'].append(fn)
-                else:
-                    raise ValueError(annotation)
-        else:
-            kw['function'] = None
+            kw.update(parser.parse_function(function))
         if rem:
             if rem.endswith('.neg'):
                 rem = rem[:-len('.neg')]
@@ -341,8 +346,8 @@ class Boundary:
     def __str__(self):
         return '{}{}{}{}{}'.format(
             self.boundary_type,
-            '_'.join((['ds'] if self.ds else []) +
-                     ([self.clause_type] if self.clause_type else []) +
+            '_'.join((['ds'] if self.ds else []) +  # noqa: W504
+                     ([self.clause_type] if self.clause_type else []) +  # noqa: W504
                      self.qualifiers),
             '.neg' if self.neg else ('.' + self.property if self.property else ''),
             ':{}'.format(self.function) if self.function else '',
@@ -373,7 +378,7 @@ class Predicate(Expression):
             res += ':{}'.format('_'.join([self.function] + self.function_qualifiers))
         return res
 
-    def describe(self, parser):
+    def describe(self, parser):  # pragma: no cover
         res = 'form: '
         if (self.morpheme_separator, self.form_gloss) in parser.predicate_glosses:
             res += parser.predicate_glosses[(self.morpheme_separator, self.form_gloss)]
@@ -381,7 +386,7 @@ class Predicate(Expression):
             res += parser.predicate_glosses[self.form_gloss]
         if self.form_qualifiers:
             res += ' ({})'.format(
-                '; '.join(parser.form_gloss_specifiers[q] for q in  self.form_qualifiers))
+                '; '.join(parser.form_gloss_specifiers[q] for q in self.form_qualifiers))
         if self.function:
             res += '. function: {}'.format(parser.predicative_functions[self.function])
             if self.function_qualifiers:
@@ -405,38 +410,24 @@ class Predicate(Expression):
         ann, _, function = ann.partition(':')
         if any(ann.startswith(sep) for sep in parser.morpheme_separators):
             kw['morpheme_separator'], ann = ann[:1], ann[1:]
-        comps = ann.split('_')
-        if not(
-            comps[-1] in parser.predicate_glosses or tuple(comps[-2:]) in parser.predicate_glosses):
+        ann = ann.split('_')
+        if ann[0] in parser.subconstituent_markers:
+            return
+        if not (ann[-1] in parser.predicate_glosses or tuple(ann[-2:]) in parser.predicate_glosses):
+            # Don't raise an error, because this may still be parsed as valid Referent!
             return
 
+        # Now we know it's supposed to be a predicate. So parsing problems mean raising ValueError.
         if function:
-            function = function.split('_')
-            if function[0] not in parser.predicative_functions:
-                raise ValueError(annotation)
-            kw['function'] = function[0]
-            kw['function_qualifiers'] = function[1:]
-        ann = ann.split("_")
+            kw.update(parser.parse_function(function, predicate=True))
         if ann:
-            if ann[-1] not in parser.predicate_glosses:
-                raise ValueError(annotation)  # pragma: no cover
-            kw['form_gloss'] = ann[-1]
-            # FIXME: we need a fixed list of predicative function specifiers!?
-            kw['form_qualifiers'] = ann[:-1]
-            if not (ann[-1] in parser.predicate_glosses or tuple(ann[-2:]) in parser.predicate_glosses):
-                raise ValueError(annotation)  # pragma: no cover
             kw['form_gloss'] = ann.pop()
+            kw['form_qualifiers'] = []
             if ann:
                 if (ann[-1], kw['form_gloss']) in parser.predicate_glosses:
-                    kw['form_qualifiers'] = [ann.pop()]
-                for a in ann:
-                    if a in parser.form_gloss_specifiers:
-                        if 'form_qualifiers' in kw:
-                            kw['form_qualifiers'].insert(0, a)
-                        else:
-                            kw['form_qualifiers'] = [a]
-                    else:
-                        raise ValueError(annotation)
+                    kw['form_qualifiers'].append(ann.pop())
+            if ann:  # GRAID does not support further specified predicate glosses.
+                raise ValueError(annotation)
         return cls(**kw)
 
 
@@ -448,9 +439,9 @@ class Referent(Expression):
 
     def __str__(self):
         res = self.morpheme_separator or ''
-        res += '_'.join(([self.subconstituent] if self.subconstituent else []) +
-                        self.subconstituent_qualifiers +
-                        self.form_qualifiers +
+        res += '_'.join(([self.subconstituent] if self.subconstituent else []) +  # noqa: W504
+                        self.subconstituent_qualifiers +  # noqa: W504
+                        self.form_qualifiers +  # noqa: W504
                         ([self.form_gloss] if self.form_gloss else []))
         if self.property:
             res += '.{}'.format(self.property)
@@ -492,21 +483,7 @@ class Referent(Expression):
 
         ann, _, function = ann.partition(":")
         if function:
-            function = function.split('_')
-            if not (function[0] in parser.syntactic_functions or function[0] in parser.predicative_functions):
-                raise ValueError(annotation)
-            kw['function'], function = function[0], function[1:]
-            if function:
-                if len(function) == 1 and (kw['function'], function[0]) in parser.syntactic_functions:
-                    kw['function_qualifiers'], function = [function[0]], function[1:]
-                for fn in function:
-                    if fn in parser.syntactic_functions or fn in parser.syntactic_function_specifiers:
-                        if 'function_qualifiers' in kw:
-                            kw['function_qualifiers'].append(fn)
-                        else:
-                            kw['function_qualifiers'] = [fn]
-                    else:
-                        return None
+            kw.update(parser.parse_function(function))
         ann, _, property = ann.partition(".")
         if property:
             if property not in parser.referent_properties:
@@ -517,15 +494,13 @@ class Referent(Expression):
             if not (ann[-1] in parser.form_glosses or tuple(ann[-2:]) in parser.form_glosses):
                 raise ValueError(annotation)
             kw['form_gloss'] = ann.pop()
+            kw['form_qualifiers'] = []
             if ann:
                 if (ann[-1], kw['form_gloss']) in parser.form_glosses:
-                    kw['form_qualifiers'] = [ann.pop()]
+                    kw['form_qualifiers'].append(ann.pop())
                 for a in ann:
                     if a in parser.form_gloss_specifiers or a in parser.form_glosses:
-                        if 'form_qualifiers' in kw:
-                            kw['form_qualifiers'].insert(0, a)
-                        else:
-                            kw['form_qualifiers'] = [a]
+                        kw['form_qualifiers'].insert(0, a)
                     else:
                         raise ValueError(annotation)
         return cls(**kw)

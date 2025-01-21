@@ -28,6 +28,7 @@ def graid():
         ('=other', Symbol, None),
         ('vother', Predicate, None),
         ('=aux', Predicate, None),
+        ('lv', Referent, None),
         ('0.h:a', Referent, None),
         #
         ('rn_refl_pro.h:poss', Referent, None),
@@ -51,9 +52,18 @@ def test_GRAID(graid, expr, type_, res):
 @pytest.mark.parametrize(
     'kw,expr,res,exp',
     [
+        # Basic errors:
+        ({}, 'xx.1:s', None, ValueError),  # invalid form gloss
+        ({}, 'dem_v:pred', None, ValueError),  # invalid soecified verb gloss
+        ({}, 'x.x:s', None, ValueError),  # invalid referent property
+        ({}, '##rc_xx', None, ValueError),  # invalid clause boundary symbol
+        ({}, '##rc:xyz', None, ValueError),
+        ({}, '##rc.z', None, ValueError),
+        ({}, 'v:pred_dem', None, ValueError),
+        ({}, 'v:prex', None, ValueError),
         (  # Custom specified form gloss:
-            dict(form_glosses={'rel_f0': 'x', 'f0': 'y'}),
-            'rel_f0:s',
+            dict(form_glosses={'rex_f0': 'x', 'f0': 'y'}),
+            'rex_f0:s',
             lambda r: r.form_gloss == 'f0',
             None),
         (  # Custom specified form gloss does not introduce a general specifier:
@@ -73,13 +83,32 @@ def test_GRAID(graid, expr, type_, res):
             'ln_dem',
             lambda r: r.subconstituent == 'ln' and r.subconstituent_qualifiers == ['dem'],
             None),
+        (  # Custom specified function:
+            dict(subconstituent_symbols={'aux': ('x', ['lv', 'rv'])}),
+            'lv_aux',
+            lambda r: r.subconstituent == 'lv' and r.subconstituent_qualifiers == ['aux'],
+            None),
         (
             dict(clause_boundary_symbols={'dem': 'x'}),
             '#cc_dem',
             lambda r: r.qualifiers == ['dem'],
             None),
-        ({}, '##rc:xyz', None, ValueError),
-        ({}, '##rc.z', None, ValueError),
+        (
+            dict(syntactic_function_specifiers={'dem': 'x'}),
+            'pro.1:a_dem',
+            lambda r: r.function_qualifiers == ['dem'],
+            None),
+        ({}, 'pro.1:a_dem', None, ValueError),
+        (
+            dict(with_cross_index=True),
+            '-rn_pro_1_a',
+            lambda r: r.function == 'a',
+            None),
+        (
+            dict(other_symbols={'xyz': ''}),
+            '-xyz',
+            lambda r: r.symbol == 'xyz',
+            None),
     ]
 )
 def test_custom_GRAID(kw, expr, res, exp):
