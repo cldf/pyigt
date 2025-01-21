@@ -34,14 +34,15 @@ def graid():
         ('rn_refl_pro.h:poss', Referent, None),
         ('predex', Referent, lambda r: r.function == 'predex'),
         ('adp', Referent, None),
+        ('=adp', Referent, None),
         ('voc', Referent, lambda r: r.form_gloss == None),
         ('-pro', Referent, lambda r: r.form_gloss == 'pro'),
+        ('-v', Predicate, None),
     ]
 )
 def test_GRAID(graid, expr, type_, res):
     obj = graid.parse_expression(expr)
-    if isinstance(obj, Predicate):
-        assert obj.describe(graid)
+    assert obj.describe(graid)
     assert isinstance(obj, type_)
     if not res:
         assert str(obj) == expr
@@ -62,8 +63,8 @@ def test_GRAID(graid, expr, type_, res):
         ({}, 'v:pred_dem', None, ValueError),
         ({}, 'v:prex', None, ValueError),
         (  # Custom specified form gloss:
-            dict(form_glosses={'rex_f0': 'x', 'f0': 'y'}),
-            'rex_f0:s',
+            dict(form_glosses={'rex_f0': 'x', 'f0': 'y'}, form_gloss_specifiers={'abc': ''}),
+            'abc_rex_f0:s',
             lambda r: r.form_gloss == 'f0',
             None),
         (  # Custom specified form gloss does not introduce a general specifier:
@@ -89,8 +90,8 @@ def test_GRAID(graid, expr, type_, res):
             lambda r: r.subconstituent == 'lv' and r.subconstituent_qualifiers == ['aux'],
             None),
         (
-            dict(clause_boundary_symbols={'dem': 'x'}),
-            '#cc_dem',
+            dict(clause_boundary_symbols={'dem': 'x'}, syntactic_function_specifiers={'dem': 'x'}),
+            '#cc_dem:a_dem',
             lambda r: r.qualifiers == ['dem'],
             None),
         (
@@ -118,6 +119,7 @@ def test_custom_GRAID(kw, expr, res, exp):
             graid.parse_expression(expr)
     else:
         obj = graid.parse_expression(expr)
+        assert obj.describe(graid)
         assert str(obj) == expr
         if res:
             assert res(obj)
