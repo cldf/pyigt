@@ -1,4 +1,9 @@
 # Changes
+
+## unreleased
+
+- Support parsing GRAID annotations.
+
   
 ## [2.2.0] - 2025-01-15
 
