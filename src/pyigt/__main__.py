@@ -1,3 +1,6 @@
+"""
+CLI for the pyigt package.
+"""
 import sys
 import contextlib
 
@@ -7,7 +10,7 @@ from clldutils.loglib import Logging
 import pyigt.commands
 
 
-def main(args=None, catch_all=False, parsed_args=None):
+def main(args=None, catch_all=False, parsed_args=None):  # pylint: disable=C0116
     parser, subparsers = get_parser_and_subparsers('igt')
     register_subcommands(subparsers, pyigt.commands)
 

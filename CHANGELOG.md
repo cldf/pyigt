@@ -3,6 +3,8 @@
 ## unreleased
 
 - Support parsing GRAID annotations.
+- Drop py3.8 compat.
+- Removed the `Corpus.write_app` method.
 
   
 ## [2.2.0] - 2025-01-15

@@ -4,42 +4,43 @@ Module implementing the GRAID 7.0 specification.
 https://multicast.aspra.uni-bamberg.de/data/pubs/graid/Haig+Schnell2014_GRAID-manual_v7.0.pdf
 """
 import re
-import typing
+from typing import Optional, Union, Protocol, Literal, Any
 import itertools
 import collections
+from collections.abc import Iterable, Generator
 import dataclasses
 
 __all__ = ['Referent', 'Boundary', 'Predicate', 'Symbol', 'GRAID']
 
-SymbolDict = typing.Dict[typing.Union[typing.Tuple[str, str], str], str]
+SymbolDict = dict[Union[tuple[str, str], str], str]
 
 
-class Gloss(typing.Protocol):  # pragma: no cover
+class Gloss(Protocol):  # pragma: no cover
     """
     Classes passed to GRAID as `other_glosses` must implement this protocol. I.e. implement a
     classmethod `from_annotation`, which returns an instance of the class if the annotation matches
     the pattern or `None` otherwise.
     """
     @classmethod
-    def from_annotation(cls, annotation: str, parser: "GRAID" = None) -> typing.Optional["Gloss"]:
+    def from_annotation(cls, annotation: str, parser: "GRAID" = None) -> Optional["Gloss"]:
         """
         :return: `None` to signal that the annotation was not parsed, `Gloss` instance otherwise.
         """
-        ...  # pragma: no cover
 
     def __str__(self) -> str:
         """
         The full gloss, re-assembled (and possibly normalized) or as passed to `from_annotation`.
         """
+
+    def describe(self, parser: "GRAID" = None) -> dict[str, str]:  # pylint: disable=C0116
         ...
 
-    def describe(self, parser: "GRAID" = None) -> typing.Dict[str, str]:
-        ...
 
-
-def update_symbols(symbols: SymbolDict,
-                   d: SymbolDict,
-                   attaches: typing.Union[typing.Literal['left'], typing.Literal['right']] = None):
+def update_symbols(
+        symbols: SymbolDict,
+        d: SymbolDict,
+        attaches: Union[Literal['left'], Literal['right']] = None,
+) -> None:
     """
     Utility function to update GRAID symbol `dict`s.
     """
@@ -50,23 +51,23 @@ def update_symbols(symbols: SymbolDict,
             assert all(
                 isinstance(k, str) or (k[1] if attaches == 'left' else k[0]) in symbols
                 for k in symbols), (
-                'Core component of composite symbol is not a generic symbol: {}'.format(symbols))
+                f'Core component of composite symbol is not a generic symbol: {symbols}')
         else:
             symbols.update(d)
 
 
-def re_or(items: typing.Iterable[str]) -> str:
+def re_or(items: Iterable[str]) -> str:
     """
     Concatenate strings in as regular expression pattern matching any of them.
     """
     return r'|'.join(re.escape(item) for item in items if isinstance(item, str))
 
 
-class GRAID:
+class GRAID:  # pylint: disable=R0902
     """
     The GRAID 7.0 specification.
     """
-    def __init__(self,
+    def __init__(self,  # pylint: disable=R0913,R0914,R0917
                  form_glosses: SymbolDict = None,
                  form_gloss_specifiers: SymbolDict = None,
                  referent_properties: SymbolDict = None,
@@ -74,9 +75,9 @@ class GRAID:
                  syntactic_function_specifiers: SymbolDict = None,
                  predicate_glosses: SymbolDict = None,
                  clause_boundary_symbols: SymbolDict = None,
-                 subconstituent_symbols: typing.Dict[str, typing.Tuple[str, list]] = None,
+                 subconstituent_symbols: dict[str, tuple[str, list]] = None,
                  other_symbols: SymbolDict = None,
-                 other_glosses: typing.Optional[typing.List[Gloss]] = None,
+                 other_glosses: Optional[list[Gloss]] = None,
                  with_cross_index=False):
         """
         Almost all lists of symbols specified by the GRAID standard may be extended with new,
@@ -207,33 +208,35 @@ class GRAID:
         if with_cross_index:
             self.other_glosses.append(CrossIndex)
 
-    def iter_expressions(self, s) -> typing.Generator[str, None, None]:
+    def iter_expressions(self, s: str) -> Generator[str, None, None]:  # pylint: disable=C0116
         sep = None
-        for item in itertools.dropwhile(
-                lambda ss: not ss, re.split(r'({})'.format(re_or(self.morpheme_separators)), s)):
+        pattern = r'({})'.format(re_or(self.morpheme_separators))  # pylint: disable=C0209
+        for item in itertools.dropwhile(lambda ss: not ss, re.split(pattern, s)):
             if item in self.morpheme_separators:
                 sep = item
             else:
                 assert item
-                yield '{}{}'.format(sep if sep else '', item)
+                yield f"{sep if sep else ''}{item}"
                 sep = None
-        assert not sep, 'Trailing morpheme separator in gloss: {}'.format(s)
+        assert not sep, f'Trailing morpheme separator in gloss: {s}'
 
-    def __call__(self, gloss: str) \
-            -> typing.List[typing.Union[Gloss, "Boundary", "Symbol", "Predicate", "Referent"]]:
+    def __call__(
+            self,
+            gloss: str,
+    ) -> list[Union[Gloss, "Boundary", "Symbol", "Predicate", "Referent"]]:
         """
         Call a GRAID object to parse a full-word GRAID annotation.
         """
         return [self.parse_expression(exp) for exp in self.iter_expressions(gloss.strip())]
 
-    def parse_expression(self, expression):
+    def parse_expression(self, expression):  # pylint: disable=C0116
         for cls in self.other_glosses + [Symbol, Boundary, Predicate, Referent]:
             obj = cls.from_annotation(expression, self)
             if obj:
                 return obj
-        raise ValueError('Could not parse expression: {}'.format(expression))  # pragma: no cover
+        raise ValueError(f'Could not parse expression: {expression}')  # pragma: no cover
 
-    def parse_function(self, function, predicate=False):
+    def parse_function(self, function, predicate=False):  # pylint: disable=C0116
         kw = {}
         function = function.split('_')
         if predicate:
@@ -264,14 +267,19 @@ DEFAULT_PARSER = GRAID()
 
 
 @dataclasses.dataclass
-class Symbol:
+class Symbol:  # pylint: disable=C0115
     symbol: str
     morpheme_separator: str = None
 
     def __str__(self):
-        return '{}{}'.format(self.morpheme_separator or '', self.symbol)
+        return f"{self.morpheme_separator or ''}{self.symbol}"
 
-    def describe(self, parser: GRAID = None):
+    def describe(self, parser: GRAID = None) -> collections.OrderedDict[str, Any]:
+        """
+        >>> s = Symbol.from_annotation('#nc')
+        >>> s.describe()
+        OrderedDict({'#nc': 'boundary, not considered'})
+        """
         parser = parser or GRAID()
         res = collections.OrderedDict()
         if self.morpheme_separator:
@@ -280,27 +288,44 @@ class Symbol:
         return res
 
     @classmethod
-    def from_annotation(cls, ann, parser) -> typing.Optional["Symbol"]:
+    def from_annotation(  # pylint: disable=C0116
+            cls,
+            ann: str,
+            parser: GRAID = None,
+    ) -> Optional["Symbol"]:
         parser = parser or GRAID()
         kw = {}
         if any(ann.startswith(sep) for sep in parser.morpheme_separators):
             kw['morpheme_separator'], ann = ann[:1], ann[1:]
         if ann in parser.other_symbols:
             return cls(symbol=ann, **kw)
+        return None
 
 
 @dataclasses.dataclass
-class Boundary:
+class Boundary:  # pylint: disable=R0902
+    """A GRAID boundary object."""
     boundary_type: str
     clause_type: str = None
     ds: bool = False
     neg: bool = False
     property: str = None
     function: str = None
-    function_qualifiers: typing.List[str] = dataclasses.field(default_factory=list)
-    qualifiers: typing.List[str] = dataclasses.field(default_factory=list)
+    function_qualifiers: list[str] = dataclasses.field(default_factory=list)
+    qualifiers: list[str] = dataclasses.field(default_factory=list)
 
-    def describe(self, parser: GRAID = None):
+    def describe(self, parser: GRAID = None) -> dict[str, str]:
+        """
+        >>> bnd = Boundary.from_annotation('#ds_cc.neg:p')
+        >>> for k, v in bnd.describe().items():
+        ...     print(f'{k}:\t{v}')
+        ...
+        #:	boundary of dependent clause, inserted at left edge, further specified
+        ds:	direct speech
+        cc:	complement clause
+        neg:	negative polarity
+        p:	transitive object
+        """
         parser = parser or GRAID()
         res = collections.OrderedDict()
         res[self.boundary_type] = parser.boundary_markers[self.boundary_type]
@@ -322,13 +347,18 @@ class Boundary:
         return res
 
     @classmethod
-    def from_annotation(cls, annotation: str, parser=None) -> typing.Optional["Boundary"]:
+    def from_annotation(  # pylint: disable=R0912
+            cls,
+            annotation: str,
+            parser: GRAID = None,
+    ) -> Optional["Boundary"]:
+        """Initialize a boundaery instrance from an annotation string."""
         parser = parser or GRAID()
         for marker in parser.boundary_markers:
             if annotation.startswith(marker):
                 break
         else:
-            return
+            return None
 
         parser = parser or DEFAULT_PARSER
         kw = {'qualifiers': [], 'boundary_type': marker, 'function_qualifiers': []}
@@ -364,36 +394,46 @@ class Boundary:
         return cls(**kw)
 
     def __str__(self):
-        return '{}{}{}{}{}'.format(
-            self.boundary_type,
-            '_'.join((['ds'] if self.ds else []) +  # noqa: W504
-                     ([self.clause_type] if self.clause_type else []) +  # noqa: W504
-                     self.qualifiers),
-            '.neg' if self.neg else ('.' + self.property if self.property else ''),
-            ':{}'.format(self.function) if self.function else '',
-            ''.join('_' + fq for fq in self.function_qualifiers),
-        )
+        spec = ['ds'] if self.ds else []
+        spec.extend([self.clause_type] if self.clause_type else [])
+        spec.extend(self.qualifiers)
+        neg = '.neg' if self.neg else ('.' + self.property if self.property else '')
+        func = f':{self.function}' if self.function else ''
+        fqual = ''.join('_' + fq for fq in self.function_qualifiers)
+        return f'{self.boundary_type}{"_".join(spec)}{neg}{func}{fqual}'
 
 
 @dataclasses.dataclass
 class Expression:
+    """A GRAID expression."""
     form_gloss: str = None
     function: str = None
     morpheme_separator: str = None  # -, = may be leading or trailing!
-    form_qualifiers: typing.List[str] = dataclasses.field(default_factory=list)
-    function_qualifiers: typing.List[str] = dataclasses.field(default_factory=list)
+    form_qualifiers: list[str] = dataclasses.field(default_factory=list)
+    function_qualifiers: list[str] = dataclasses.field(default_factory=list)
 
 
 @dataclasses.dataclass
 class Predicate(Expression):
+    """
+    A GRAID object.
+    """
     def __str__(self):
         res = self.morpheme_separator or ''
         res += '_'.join(self.form_qualifiers + [self.form_gloss])
         if self.function:
-            res += ':{}'.format('_'.join([self.function] + self.function_qualifiers))
+            res += f":{'_'.join([self.function] + self.function_qualifiers)}"
         return res
 
     def describe(self, parser: GRAID = None):
+        """
+        >>> pred = Predicate.from_annotation('v:pred')
+        >>> for k, v in pred.describe().items():
+        ...     print(f'{k}:\t{v}')
+        ...
+        v:	verb or verb complex (cf. Section 2.5.1)
+        pred:	predicative function
+        """
         parser = parser or GRAID()
         res = collections.OrderedDict()
         if (self.morpheme_separator, self.form_gloss) in parser.predicate_glosses:
@@ -405,7 +445,7 @@ class Predicate(Expression):
             res[self.form_gloss] = parser.predicate_glosses[self.form_gloss]
 
         if self.form_qualifiers:
-            res['{}_{}'.format(self.form_qualifiers[0], self.form_gloss)] = (
+            res[f'{self.form_qualifiers[0]}_{self.form_gloss}'] = (
                 parser.predicate_glosses[(self.form_qualifiers[0], self.form_gloss)])
 
         if self.function:
@@ -415,7 +455,7 @@ class Predicate(Expression):
         return res
 
     @classmethod
-    def from_annotation(cls, annotation: str, parser=None) -> typing.Optional["Predicate"]:
+    def from_annotation(cls, annotation: str, parser=None) -> Optional["Predicate"]:
         """
         1. check morpheme separator
         2. split off function, separated by :
@@ -433,10 +473,10 @@ class Predicate(Expression):
             kw['morpheme_separator'], ann = ann[:1], ann[1:]
         ann = ann.split('_')
         if ann[0] in parser.subconstituent_markers:
-            return
+            return None
         if not (ann[-1] in parser.predicate_glosses or tuple(ann[-2:]) in parser.predicate_glosses):
             # Don't raise an error, because this may still be parsed as valid Referent!
-            return
+            return None
 
         # Now we know it's supposed to be a predicate. So parsing problems mean raising ValueError.
         if function:
@@ -454,9 +494,10 @@ class Predicate(Expression):
 
 @dataclasses.dataclass
 class Referent(Expression):
+    """A GRAID object."""
     property: str = None
     subconstituent: str = None
-    subconstituent_qualifiers: typing.List[str] = dataclasses.field(default_factory=list)
+    subconstituent_qualifiers: list[str] = dataclasses.field(default_factory=list)
 
     def __str__(self):
         res = self.morpheme_separator or ''
@@ -465,12 +506,22 @@ class Referent(Expression):
                         self.form_qualifiers +  # noqa: W504
                         ([self.form_gloss] if self.form_gloss else []))
         if self.property:
-            res += '.{}'.format(self.property)
+            res += f'.{self.property}'
         if self.function:
-            res += ':{}'.format('_'.join([self.function] + self.function_qualifiers))
+            res += f":{'_'.join([self.function] + self.function_qualifiers)}"
         return res
 
-    def describe(self, parser: GRAID = None):
+    def describe(self, parser: GRAID = None) -> dict[str, str]:
+        """
+        >>> ref = Referent.from_annotation('rn_refl_pro.h:poss')
+        >>> for k, v in ref.describe().items():
+        ...     print(f'{k}:\t{v}')
+        ...
+        rn:	NP-internal subconstituent occurring to the right of NP head
+        pro:	free pronoun in full form
+        refl:	reflexive or reciprocal pronoun, cf. Section 4.2
+        poss:	possessor
+        """
         parser = parser or GRAID()
         res = collections.OrderedDict()
         if (self.morpheme_separator, self.form_gloss) in parser.form_glosses:
@@ -488,21 +539,13 @@ class Referent(Expression):
         if self.form_gloss:
             res[self.form_gloss] = parser.form_glosses[self.form_gloss]
 
-        for i, q in enumerate(reversed(self.form_qualifiers)):
-            if i == 0:
-                if (q, self.form_gloss) in parser.form_glosses:
-                    res['{}_{}'.format(q, self.form_gloss)] = (
-                        parser.form_glosses[(q, self.form_gloss)])
-                else:
-                    res[q] = parser.form_glosses.get(q, parser.form_gloss_specifiers.get(q))
-            else:
-                res[q] = parser.form_glosses.get(q, parser.form_gloss_specifiers.get(q))
+        res.update(dict(self._describe_form_qualifiers(parser)))
 
         start = 0
         if self.function:
             if (self.function_qualifiers and  # noqa: W504
                     (self.function, self.function_qualifiers[0]) in parser.syntactic_functions):
-                res['{}_{}'.format(self.function, self.function_qualifiers[0])] = (
+                res[f'{self.function}_{self.function_qualifiers[0]}'] = (
                     parser.syntactic_functions)[(self.function, self.function_qualifiers[0])]
                 start = 1
             else:
@@ -511,6 +554,16 @@ class Referent(Expression):
         for q in self.function_qualifiers[start:]:
             res[q] = parser.syntactic_function_specifiers[q]
         return res
+
+    def _describe_form_qualifiers(self, parser) -> Generator[tuple[str, Any]]:
+        for i, q in enumerate(reversed(self.form_qualifiers)):
+            if i == 0:
+                if (q, self.form_gloss) in parser.form_glosses:
+                    yield f'{q}_{self.form_gloss}', parser.form_glosses[(q, self.form_gloss)]
+                else:
+                    yield q, parser.form_glosses.get(q, parser.form_gloss_specifiers.get(q))
+            else:
+                yield q, parser.form_glosses.get(q, parser.form_gloss_specifiers.get(q))
 
     @classmethod
     def from_annotation(cls, annotation: str, parser=None) -> "Referent":
@@ -533,40 +586,53 @@ class Referent(Expression):
         elif any(ann.startswith(scm + '_') for scm in parser.subconstituent_markers):
             kw['subconstituent'], _, ann = ann.partition('_')
         if kw.get('subconstituent') and kw['subconstituent'] in parser.subconstituent_symbols:
-            kw['subconstituent_qualifiers'] = []
-            # Consume subconstituent_symbols from the left
-            pattern = re.compile(
-                r'(?P<sym>{})(_|$)'.format(
-                    re_or(parser.subconstituent_symbols[kw['subconstituent']])))
-            m = pattern.match(ann)
-            while m:
-                kw['subconstituent_qualifiers'].append(m.group('sym'))
-                ann = ann[m.end():]
-                m = pattern.match(ann)
+            ann = cls._parse_subconstituent(parser, ann, kw)
 
         ann, _, function = ann.partition(":")
         if function:
             kw.update(parser.parse_function(function))
-        ann, _, property = ann.partition(".")
-        if property:
-            if property not in parser.referent_properties:
+        ann, _, prop = ann.partition(".")
+        if prop:
+            if prop not in parser.referent_properties:
                 raise ValueError(annotation)
-            kw['property'] = property
+            kw['property'] = prop
         if ann:
-            ann = ann.split("_")
-            if not (ann[-1] in parser.form_glosses or tuple(ann[-2:]) in parser.form_glosses):
-                raise ValueError(annotation)
-            kw['form_gloss'] = ann.pop()
-            kw['form_qualifiers'] = []
-            if ann:
-                if (ann[-1], kw['form_gloss']) in parser.form_glosses:
-                    kw['form_qualifiers'].append(ann.pop())
-                for a in ann:
-                    if a in parser.form_gloss_specifiers or a in parser.form_glosses:
-                        kw['form_qualifiers'].insert(0, a)
-                    else:
-                        raise ValueError(annotation)
+            try:
+                cls._parse_form(parser, ann, kw)
+            except ValueError:
+                raise ValueError(annotation)  # pylint: disable=W0707
+
         return cls(**kw)
+
+    @staticmethod
+    def _parse_form(parser, ann, kw):
+        ann = ann.split("_")
+        if not (ann[-1] in parser.form_glosses or tuple(ann[-2:]) in parser.form_glosses):
+            raise ValueError()
+        kw['form_gloss'] = ann.pop()
+        kw['form_qualifiers'] = []
+        if ann:
+            if (ann[-1], kw['form_gloss']) in parser.form_glosses:
+                kw['form_qualifiers'].append(ann.pop())
+            for a in ann:
+                if a in parser.form_gloss_specifiers or a in parser.form_glosses:
+                    kw['form_qualifiers'].insert(0, a)
+                else:
+                    raise ValueError()
+
+    @staticmethod
+    def _parse_subconstituent(parser, ann, kw):
+        kw['subconstituent_qualifiers'] = []
+        # Consume subconstituent_symbols from the left
+        pattern = re.compile(
+            r'(?P<sym>{})(_|$)'.format(  # pylint: disable=C0209
+                re_or(parser.subconstituent_symbols[kw['subconstituent']])))
+        m = pattern.match(ann)
+        while m:
+            kw['subconstituent_qualifiers'].append(m.group('sym'))
+            ann = ann[m.end():]
+            m = pattern.match(ann)
+        return ann
 
 
 @dataclasses.dataclass
@@ -581,19 +647,25 @@ class CrossIndex:
     morpheme_separator: str = None
 
     def __str__(self):
-        return '{}{}pro_{}_{}'.format(
+        return '{}{}pro_{}_{}'.format(  # pylint: disable=C0209
             self.morpheme_separator or '',
             self.subconstituent_marker + '_' if self.subconstituent_marker else '',
             self.referent_property,
             self.function,
         )
 
-    def describe(self, parser: GRAID = None) -> typing.Dict[str, str]:
-        parser = parser or GRAID()
+    def describe(self, parser: GRAID = None) -> dict[str, str]:  # pylint: disable=W0613,C0116
         return {'symbol': str(self)}
 
     @classmethod
-    def from_annotation(cls, ann, parser: GRAID = None) -> typing.Optional["CrossIndex"]:
+    def from_annotation(cls, ann, parser: GRAID = None) -> Optional["CrossIndex"]:
+        """
+        >>> ci = CrossIndex.from_annotation('-rn_pro_1_a')
+        >>> ci.referent_property
+        '1'
+        >>> ci.function
+        'a'
+        """
         parser = parser or GRAID()
         kw = {}
         if any(ann.startswith(sep) for sep in parser.morpheme_separators):
@@ -602,9 +674,10 @@ class CrossIndex:
             if ann.startswith(scm + '_'):
                 kw['subconstituent_marker'], ann = scm, ann[len(scm) + 1:]
         m = re.fullmatch(
-            r'pro_(?P<rp>{})_(?P<f>{})'.format(
+            r'pro_(?P<rp>{})_(?P<f>{})'.format(  # pylint: disable=C0209
                 re_or(parser.referent_properties), re_or(parser.syntactic_functions)),
             ann)
         if m:
             kw['referent_property'], kw['function'] = m.group('rp'), m.group('f')
             return cls(**kw)
+        return None  # pragma: no cover

@@ -13,10 +13,10 @@ as subclasses of :class:`GlossElement`.
 """
 import re
 import itertools
-import typing
+from typing import Optional
+import dataclasses
 import unicodedata
-
-import attr
+from collections.abc import Generator
 
 from pyigt.util import is_standard_abbr, is_generic_abbr
 
@@ -36,11 +36,14 @@ MORPHEME_SEPARATORS = [
 ]
 
 
-def split_morphemes(s):
-    return re.split('({})'.format('|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)), s or '')
+def split_morphemes(s: str) -> list[str]:
+    """Split string into morphemes."""
+    pattern = f"({'|'.join(re.escape(c) for c in MORPHEME_SEPARATORS)})"
+    return re.split(pattern, s or '')
 
 
-def remove_morpheme_separators(s):
+def remove_morpheme_separators(s: str) -> str:
+    """Remove all characters listed as morpheme separators from string."""
     return ''.join(ss for ss in split_morphemes(s) if ss not in MORPHEME_SEPARATORS)
 
 
@@ -54,24 +57,24 @@ class GlossElement(str):
     end = None
     in_gloss_only = True
 
-    def __init__(self, s):
+    def __init__(self, _):
         self.prev = None
         self.next = None
 
     def __repr__(self):
-        return '<{} "{}">'.format(
-            self.__class__.__name__, self.encode('ascii', 'replace').decode())
+        text = self.encode('ascii', 'replace').decode()
+        return f'<{self.__class__.__name__} "{text}">'
 
     @property
-    def is_agentlike_argument(self):
+    def is_agentlike_argument(self) -> bool:  # pylint: disable=C0116
         return isinstance(self.next, PatientlikeArgument)
 
     @property
-    def is_standard_abbreviation(self):
+    def is_standard_abbreviation(self) -> bool:  # pylint: disable=C0116
         return is_standard_abbr(self)
 
     @property
-    def is_category_label(self):
+    def is_category_label(self) -> bool:  # pylint: disable=C0116
         return is_generic_abbr(self)
 
 
@@ -157,7 +160,7 @@ class GlossElements(list):
         return s
 
     @staticmethod
-    def _iter_gloss_elements(s, type_):
+    def _iter_gloss_elements(s, type_) -> Generator[GlossElement, None, None]:
         classes = {GlossElement.start: GlossElement} if type_ == 'gloss' else {}
         for cls in GlossElement.__subclasses__():
             if (not cls.in_gloss_only) or type_ == 'gloss':
@@ -187,7 +190,8 @@ class GlossElements(list):
             yield cls(e)
 
     @classmethod
-    def from_morpheme(cls, s, type_):
+    def from_morpheme(cls, s: str, type_) -> 'GlossElements':
+        """Instantiate gloss elements from a string."""
         res, prev = [], None
         for ge in GlossElements._iter_gloss_elements(s, type_):
             if prev:
@@ -204,18 +208,29 @@ class Morpheme(str):
     """
     sep = '-'
 
-    def __init__(self, s):
+    def __init__(self, _):
         self.type = None
 
     def __repr__(self):
-        return '<{} "{}">'.format(self.__class__.__name__, self.encode('ascii', 'replace').decode())
+        morph = self.encode('ascii', 'replace').decode()
+        return f'<{self.__class__.__name__} "{morph}">'
 
     @property
-    def elements(self):
+    def elements(self) -> list[GlossElement]:
+        """
+        >>> m = Morpheme('a<b>c')
+        >>> m.elements
+        [<GlossElement "a">, <Infix "b">, <GlossElement "c">]
+        """
         return GlossElements.from_morpheme(str(self), self.type)
 
     @property
-    def form_and_infixes(self):
+    def form_and_infixes(self) -> tuple[str, list[str]]:
+        """
+        >>> m = Morpheme('a<b>c')
+        >>> m.form_and_infixes
+        ('ac', ['b'])
+        """
         form, infixes = '', []
         for ge in self.elements:
             if isinstance(ge, Infix):
@@ -225,8 +240,8 @@ class Morpheme(str):
         return form, infixes
 
 
-@attr.s(repr=False)
-class GlossedMorpheme(object):
+@dataclasses.dataclass
+class GlossedMorpheme:
     """
     A (morpheme, gloss) pair.
 
@@ -236,21 +251,23 @@ class GlossedMorpheme(object):
     :ivar prev: Points to the previous `GlossedMorpheme` in a word, or `None`.
     :ivar next: Points to the next `GlossedMorpheme` in a word, or `None`.
     """
-    morpheme = attr.ib()
-    gloss = attr.ib()
-    sep = attr.ib()
-    prev = attr.ib(default=None, eq=False)
-    next = attr.ib(default=None, eq=False)
+    morpheme: Morpheme
+    gloss: Morpheme
+    sep: str
+    prev: Optional['GlossedMorpheme'] = None
+    next: Optional['GlossedMorpheme'] = None
 
-    def __attrs_post_init__(self):
+    def __post_init__(self):
         self.morpheme = Morpheme(self.morpheme)
         self.morpheme.type = 'word'
         self.gloss = Morpheme(self.gloss)
         self.gloss.type = 'gloss'
 
+    def __eq__(self, other):
+        return self.morpheme == other.morpheme and self.gloss == other.gloss
+
     def __repr__(self):
-        return '<{} morpheme={} gloss={}>'.format(
-            self.__class__.__name__, self.morpheme, self.gloss)
+        return f'<{self.__class__.__name__} morpheme={self.morpheme} gloss={self.gloss}>'
 
     @property
     def form(self) -> str:
@@ -269,15 +286,17 @@ class GlossedMorpheme(object):
             unicodedata.category(c) not in {'Po', 'Pf', 'Ps', 'Pd', 'Pe', 'Pi', 'Sm'})
 
     @property
-    def first(self):
+    def first(self) -> bool:
+        """Whether the morpheme is the first in the word."""
         return not bool(self.prev)
 
     @property
-    def last(self):
+    def last(self) -> bool:
+        """Whether the morpheme is the last in the word."""
         return not bool(self.next)
 
     @property
-    def grammatical_concepts(self) -> typing.List[str]:
+    def grammatical_concepts(self) -> list[str]:
         """
         Grammatical concepts, referenced with category labels according to Rule 3, used in morpheme
         gloss.
@@ -297,7 +316,7 @@ class GlossedMorpheme(object):
         return list(self._glosses('grammatical'))
 
     @property
-    def lexical_concepts(self) -> typing.List[str]:
+    def lexical_concepts(self) -> list[str]:
         """
         Gloss elements not recognized as category labels are interpreted as lexical concepts.
 
@@ -331,26 +350,24 @@ class GlossedMorpheme(object):
             yield s.replace('_', ' ')
 
 
-@attr.s(repr=False)
-class GlossedWord(object):
+@dataclasses.dataclass
+class GlossedWord:
     """
     A (word, gloss) pair, corresponding to two aligned items from IGT according to LGR.
 
     Provides list-like access to its :class:`GlossedMorpheme` s.
     """
-    word = attr.ib()
-    gloss = attr.ib()
-    glossed_morphemes = attr.ib(default=attr.Factory(list), eq=False)
-    strict = attr.ib(default=False, eq=False)
+    word: str
+    gloss: str
+    glossed_morphemes: list[GlossedMorpheme] = dataclasses.field(default_factory=list)
+    strict: bool = False
 
-    def __attrs_post_init__(self):
+    def __post_init__(self):
         mm, gg = split_morphemes(self.word), split_morphemes(self.gloss)
         if len(mm) != len(gg):
             if self.strict:
-                raise ValueError(
-                    'Morpheme separator mismatch: {} :: {}'.format(self.word, self.gloss))
-            else:
-                self.is_valid = False
+                raise ValueError(f'Morpheme separator mismatch: {self.word} :: {self.gloss}')
+            self.is_valid = False
         sep, prev = None, None
         for m, g in zip(mm, gg):
             if not m and not g:
@@ -359,10 +376,9 @@ class GlossedWord(object):
                 if m != g:
                     if self.strict:
                         raise ValueError(
-                            'Morpheme separator mismatch: {} :: {}'.format(self.word, self.gloss))
-                    else:
-                        self.is_valid = False
-                        break
+                            f'Morpheme separator mismatch: {self.word} :: {self.gloss}')
+                    self.is_valid = False
+                    break
                 sep = m
             else:
                 assert m and g, (mm, g)
@@ -373,8 +389,11 @@ class GlossedWord(object):
                     gm.prev = prev
                 prev = gm
 
+    def __eq__(self, other):
+        return self.glossed_morphemes == other.glossed_morphemes
+
     def __repr__(self):
-        return '<{} word={} gloss={}>'.format(self.__class__.__name__, self.word, self.gloss)
+        return f'<{self.__class__.__name__} word={self.word} gloss={self.gloss}>'
 
     def __iter__(self):
         return iter(self.glossed_morphemes)
@@ -400,11 +419,21 @@ class GlossedWord(object):
         return ''.join(gm.form for gm in self)
 
     @property
-    def word_from_morphemes(self):
+    def word_from_morphemes(self) -> str:
+        """
+        >>> gw = GlossedWord('a-word', 'a.DU-gloss')
+        >>> gw.word_from_morphemes
+        'a-word'
+        """
         return ''.join(itertools.chain(
             *[(gm.sep if gm.prev else '', str(gm.morpheme.elements)) for gm in self]))
 
     @property
-    def gloss_from_morphemes(self):
+    def gloss_from_morphemes(self) -> str:
+        """
+        >>> gw = GlossedWord('a-word', 'a.DU-gloss')
+        >>> gw.gloss_from_morphemes
+        'a.DU-gloss'
+        """
         return ''.join(itertools.chain(
             *[(gm.sep if gm.prev else '', str(gm.gloss.elements)) for gm in self]))

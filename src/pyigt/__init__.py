@@ -1,3 +1,6 @@
+"""
+Functionality to read and write interlinear glossed text.
+"""
 from .igt import Corpus, IGT, LGRConformance, Example  # noqa: F401
 from .lgrmorphemes import GlossedWord, GlossedMorpheme  # noqa: F401
 

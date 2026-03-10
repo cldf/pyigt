@@ -1,20 +1,21 @@
 """
 Describe the IGTs in  a CLDF dataset
 """
-from clldutils.clilib import Table
+from clldutils.clilib import Table, add_format
 
 from pyigt.cli_util import add_corpus, get_corpus
 
 
-def register(parser):
+def register(parser):  # pylint: disable=C0116
     add_corpus(parser)
+    add_format(parser)
     parser.add_argument('--verbose', action='store_true', default=False)
 
 
-def run(args):
+def run(args):  # pylint: disable=C0116
     corpus = get_corpus(args)
 
-    with Table('type', 'count') as t:
+    with Table(args, 'type', 'count') as t:
         e, w, m = corpus.get_stats()
         t.append(['example', e])
         t.append(['word', w])

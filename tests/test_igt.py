@@ -168,18 +168,13 @@ def test_get_wordlist(corpus, tmpdir, capsys, mocker):
     assert profile_path.exists()
     corpus.get_wordlist(profile=profile)
 
-    _ = corpus.get_wordlist(lexstat=False, profile=corpus.get_profile())
+    _ = corpus.get_wordlist(
+        lingpy_settings=LingPySettings(lexstat=False),
+        profile=corpus.get_profile())
 
     mocker.patch('pyigt.igt.lingpy', None)
     with pytest.raises(ValueError):
         _ = corpus.get_wordlist()
-
-
-def test_write_app(corpus, tmpdir):
-    dest = pathlib.Path(str(tmpdir))
-    corpus.write_app(dest=dest)
-    assert dest.joinpath('script.js').exists()
-    assert dest.joinpath('index.html').exists()
 
 
 def test_multilingual(multilingual_dataset, capsys):
@@ -194,9 +189,3 @@ def test_multilingual(multilingual_dataset, capsys):
     corpus.write_concepts('grammar')
     out, _ = capsys.readouterr()
     assert 'macu1259: ' in out
-
-
-def test_pkg_data():
-    import pyigt
-
-    assert pathlib.Path(pyigt.__file__).parent.joinpath('index.html').exists()
