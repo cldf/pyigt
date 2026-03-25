@@ -1,6 +1,6 @@
 # Changes
 
-## unreleased
+## [2.3.0] - 2026-03-25
 
 - Support parsing GRAID annotations.
 - Drop py3.8 compat.
