@@ -12,6 +12,10 @@ tox -r
 ```shell
 flake8 src
 ```
+- Make sure pylint passes with a score of 10:
+```shell
+pylint src
+```
 
 - Make sure docs can be created:
 ```shell

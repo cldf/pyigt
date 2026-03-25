@@ -6,7 +6,7 @@ import re
 from pyigt.cli_util import add_corpus, get_corpus
 
 
-def register(parser):
+def register(parser):  # pylint: disable=C0116
     add_corpus(parser)
     parser.add_argument(
         'filter',
@@ -23,7 +23,7 @@ def register(parser):
     )
 
 
-def run(args):
+def run(args):  # pylint: disable=C0116
     corpus = get_corpus(args)
     filters = [f.split('=', maxsplit=1) for f in args.filter]
 
@@ -42,9 +42,9 @@ def run(args):
 
     for igt in corpus:
         if (not filters) or all(match(igt, c, p) for c, p in filters):
-            print('Example {0}:'.format(igt.id))
+            print(f'Example {igt.id}:')
             print(igt)
             print()
 
     if corpus.fname:
-        print('IGT corpus at {0}'.format(corpus.fname))
+        print(f'IGT corpus at {corpus.fname}')
